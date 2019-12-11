@@ -15,10 +15,13 @@ function block_print_document_header($title)
     ";
 }
 
-function block_print_header(){
+/**
+ * @param $class String to use optional class if wanted
+ */
+function block_print_header($class){
     echo "
     <!-- Header -->
-	<header class=\"alt\" id=\"header\">
+	<header $class id=\"header\">
 		<span class=\"logo\"><a href=\"index.html\">Brossard <span>Secteur Aquatic</span></a></span>
 		<a href=\"#menu\"><span>Menu</span></a>
 	</header>
@@ -35,12 +38,29 @@ function block_print_nav($tabs){
 		<div class=\"inner\">
 			<h2>Menu</h2>
 			<ul class=\"links\">
-				<li><a href=\"index.html\">Connexion</a></li>
+				<li><a href=\"login.php\">Connexion</a></li>
 				$tabs
 			</ul>
 			<a class=\"close\"><span>Fermer</span></a>
 		</div>
 	</nav>
+    ";
+}
+
+function block_print_banner(){
+    echo"
+    <!-- Banner -->
+					<section id=\"banner\">
+						<div class=\"inner\">
+							<h1>INTRANET DU SECTEUR AQUATIQUE DE BROSSARD</h1>
+							<div class=\"content\">
+								<p>Amet lorem ipsum pulvinar vehicula, orci et tellus gravida amet lorem tempus ante. Nam ut purus consequat nulla lacinia.</p>
+								<ul class=\"actions special\">
+									<li><a class=\"button large next\" href=\"login.php\">Connexion</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
     ";
 }
 
@@ -77,7 +97,7 @@ function block_print_copyright(){
     <!-- Copyright -->
 	<section class=\"wrapper style2 copyright\">
 		<div class=\"inner\">
-			Oeuvre In&eacute;dite &copy; <span id='current_year'></span> Intranet Du Secteur Aquatique. Projet De Fin D’Études Collégiales De <a href='https://remijonathan.com' target='_blank'>Rémi Jonathan Choquette</a> & <a href='https://www.linkedin.com/in/horia-sandu-7a7631162/' target='_blank'>Horia Cristian Sandu</a>.
+			Oeuvre In&eacute;dite &copy; <span id='current_year'></span> Intranet Du Secteur Aquatique.<br />Projet De Fin D’Études Collégiales De <a href='https://remijonathan.com' target='_blank'>Rémi Jonathan Choquette</a> & <a href='https://www.linkedin.com/in/horia-sandu-7a7631162/' target='_blank'>Horia Cristian Sandu</a>.
 		</div>
 		<script>document.getElementById(\"current_year\").innerHTML = new Date().getFullYear();</script>
 	</section>
