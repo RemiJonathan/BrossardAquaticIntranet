@@ -22,7 +22,7 @@ function block_print_header($class){
     echo "
     <!-- Header -->
 	<header $class id=\"header\">
-		<span class=\"logo\"><a href=\"index.html\">Brossard <span>Secteur Aquatic</span></a></span>
+		<span class=\"logo\"><a href=\"index.php\">Brossard <span>Secteur Aquatic</span></a></span>
 		<a href=\"#menu\"><span>Menu</span></a>
 	</header>
     ";
@@ -53,7 +53,7 @@ function block_print_banner(){
 						<div class=\"inner\">
 							<h1>INTRANET DU SECTEUR AQUATIQUE DE BROSSARD</h1>
 							<div class=\"content\">
-								<p>Amet lorem ipsum pulvinar vehicula, orci et tellus gravida amet lorem tempus ante. Nam ut purus consequat nulla lacinia.</p>
+								<p>Bienvenue sur la page d'accueil de l'intranet, pour continuer appuyer sur le boutton connexion.</p>
 								<ul class=\"actions special\">
 									<li><a class=\"button large next\" href=\"login.php\">Connexion</a></li>
 								</ul>
@@ -77,7 +77,7 @@ function block_print_main($content){
     ";
 }
 
-$connection_form = "<h3>Form</h3><form action=\"validate_connection.php\" method=\"post\">
+$connection_form = "<h3>Connexion</h3><form action=\"validate_connection.php\" method=\"post\">
 												<div class=\"row gtr-uniform\">
 													<div class=\"col-12\">
 														<input id=\"username\" name=\"username\" placeholder=\"Name\" type=\"text\" value=\"\" />
