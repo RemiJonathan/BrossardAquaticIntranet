@@ -38,7 +38,6 @@ function block_print_nav($tabs){
 		<div class=\"inner\">
 			<h2>Menu</h2>
 			<ul class=\"links\">
-				<li><a href=\"login.php\">Connexion</a></li>
 				$tabs
 			</ul>
 			<a class=\"close\"><span>Fermer</span></a>
@@ -61,6 +60,53 @@ function block_print_banner(){
 							</div>
 						</div>
 					</section>
+    ";
+}
+
+/**
+ * @param $content String use other blocks to generate the page content
+ */
+function block_print_main($content){
+    echo "
+    <!-- Main -->
+					<section class=\"wrapper style2\" id=\"main\">
+						<div class=\"inner\">
+							$content
+							</div>
+					</section>
+    ";
+}
+
+$connection_form = "<h3>Form</h3><form action=\"validate_connection.php\" method=\"post\">
+												<div class=\"row gtr-uniform\">
+													<div class=\"col-12\">
+														<input id=\"username\" name=\"username\" placeholder=\"Name\" type=\"text\" value=\"\" />
+														
+													</div>
+													<div class=\"col-12\">
+														<input id=\"password\" name=\"password\" placeholder=\"Password\" type=\"password\" value=\"\" />
+													</div>
+													
+													<!-- Break -->
+													<div class=\"col-12\">
+														<ul class=\"actions\">
+															<li><input type=\"submit\" value=\"Connexion\" /></li>
+														</ul>
+													</div>
+												</div>
+											</form>";
+
+/**
+ * Use inside block_print_main()
+ * @param $user String connected user's first name
+ * @param $notifications String notifications related to the user
+ */
+function block_print_welcome_header($user, $notifications){
+    echo "
+                            <header class=\"major special\">
+								<h1>Bienvenue $user!</h1>
+								<p>$notifications</p>
+							</header>
     ";
 }
 
