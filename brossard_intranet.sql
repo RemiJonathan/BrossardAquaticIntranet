@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 11, 2019 at 03:50 PM
+-- Generation Time: Dec 11, 2019 at 04:00 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.2.14
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `brossard intranet`
+-- Database: `brossard_intranet`
 --
 
 -- --------------------------------------------------------
