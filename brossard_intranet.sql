@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 11, 2019 at 04:00 PM
+-- Generation Time: Dec 11, 2019 at 05:11 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.2.14
 
@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `shift` (
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_fname` varchar(35) NOT NULL,
   `user_lname` varchar(35) NOT NULL,
   `user_address` varchar(35) DEFAULT NULL,
