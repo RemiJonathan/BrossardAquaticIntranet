@@ -25,10 +25,51 @@ function block_print_header(){
     ";
 }
 
+/**
+ * @param $tabs String of <li> based on the user's connection cookie
+ */
+function block_print_nav($tabs){
+    echo "
+    <!-- Nav -->
+	<nav id=\"menu\">
+		<div class=\"inner\">
+			<h2>Menu</h2>
+			<ul class=\"links\">
+				<li><a href=\"index.html\">Connexion</a></li>
+				$tabs
+			</ul>
+			<a class=\"close\"><span>Fermer</span></a>
+		</div>
+	</nav>
+    ";
+}
 
 function block_print_footer()
 {
-    echo "";
+    echo "
+    <!-- Footer -->
+					<section class=\"wrapper\" id=\"footer\">
+						<div class=\"inner\">
+							<div class=\"split\">
+								<div class=\"content\">
+									<header>
+										<h2>Reporter un probl&egrave;me</h2>
+									</header>
+									<p>Lorem ipsum dolor amet et donec convallis placerat varius. Phasellus sagittis, urna blanSapien lectus lorem tempus ut purus consequat. Sed veroeros et nisl urna lacinia lorem. Aenean at adipiscing lorem. Nunc risus augue, ullamcorper eget posuere.</p>
+									<ul class=\"actions\">
+										<li><a class=\"button next\" href=\"#\">Full Story</a></li>
+									</ul>
+								</div>
+								<ul class=\"contact-icons\">
+									<li><a class=\"icon alt fa-twitter\" href=\"#\"><span class=\"label\">twitter.com/untitled</span></a></li>
+									<li><a class=\"icon alt fa-facebook\" href=\"#\"><span class=\"label\">facebook.com/untitled</span></a></li>
+									<li><a class=\"icon alt fa-instagram\" href=\"#\"><span class=\"label\">instagram.com/untitled</span></a></li>
+									<li><a class=\"icon alt fa-envelope\" href=\"#\"><span class=\"label\">contact@untitled.tld</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+    ";
 }
 
 function block_print_copyright(){
