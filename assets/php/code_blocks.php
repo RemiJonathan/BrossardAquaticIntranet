@@ -1,5 +1,7 @@
 <?php
 
+$asset_access = "";
+
 /**
  * @param $title String will set the text at the top of the page
  */
