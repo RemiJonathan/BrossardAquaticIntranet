@@ -1,18 +1,17 @@
 <?php
 
-$asset_access = "";
-
 /**
  * @param $title String will set the text at the top of the page
+ * @param $preamble String of the link toward the root directory
  */
-function block_print_document_header($title)
+function block_print_document_header($title, $preamble)
 {
     echo "
     <head>
 		<title>$title</title>
 		<meta charset=\"utf-8\" />
 		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\" />
-		<link rel=\"stylesheet\" href=\"assets/css/main.css\" />
+		<link rel=\"stylesheet\" href=\"".$preamble."assets/css/main.css\" />
 	</head>
     ";
 }
@@ -152,15 +151,18 @@ function block_print_copyright(){
     ";
 }
 
-function block_print_scripts(){
+/**
+ * @param $preamble String of the link toward the root directory
+ */
+function block_print_scripts($preamble){
     echo"
     <!-- Scripts -->
-			<script src=\"assets/js/jquery.min.js\"></script>
-			<script src=\"assets/js/jquery.scrollex.min.js\"></script>
-			<script src=\"assets/js/jquery.scrolly.min.js\"></script>
-			<script src=\"assets/js/browser.min.js\"></script>
-			<script src=\"assets/js/breakpoints.min.js\"></script>
-			<script src=\"assets/js/util.js\"></script>
-			<script src=\"assets/js/main.js\"></script>
+			<script src=\"".$preamble."assets/js/jquery.min.js\"></script>
+			<script src=\"".$preamble."assets/js/jquery.scrollex.min.js\"></script>
+			<script src=\"".$preamble."assets/js/jquery.scrolly.min.js\"></script>
+			<script src=\"".$preamble."assets/js/browser.min.js\"></script>
+			<script src=\"".$preamble."assets/js/breakpoints.min.js\"></script>
+			<script src=\"".$preamble."assets/js/util.js\"></script>
+			<script src=\"".$preamble."assets/js/main.js\"></script>
     ";
 }
