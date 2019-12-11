@@ -1,5 +1,5 @@
 <?php
-include ("assets/php/code_blocks.php");
+include ("../assets/php/code_blocks.php");
 
 echo "<!DOCTYPE HTML><html>";
 block_print_document_header("Template");
