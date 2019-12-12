@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2019 at 08:24 PM
+-- Generation Time: Dec 12, 2019 at 10:12 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -71,6 +71,19 @@ CREATE TABLE `qualification` (
   `qualification_id` int(4) NOT NULL,
   `qual_name` varchar(35) COLLATE utf8mb4_unicode_520_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `qualification`
+--
+
+INSERT INTO `qualification` (`qualification_id`, `qual_name`) VALUES
+(1, 'SN'),
+(2, 'MSA'),
+(3, 'MS'),
+(4, 'MSU'),
+(5, 'MSN'),
+(6, 'ISA'),
+(7, 'AF');
 
 -- --------------------------------------------------------
 
@@ -449,7 +462,7 @@ ALTER TABLE `grade`
 -- AUTO_INCREMENT for table `qualification`
 --
 ALTER TABLE `qualification`
-  MODIFY `qualification_id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `qualification_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `question`
