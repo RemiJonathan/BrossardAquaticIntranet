@@ -15,11 +15,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $passwordhash = password_hash($mypassword, PASSWORD_BCRYPT, $options);
     echo $passwordhash;
 
-    $sql = "SELECT id FROM admin WHERE username = '$myusername'";
+    $sql = "SELECT user_id FROM user WHERE user_id = '$myusername'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $active = $row['active'];
     $count = mysqli_num_rows($result);
+
 
     // If result matched $myusername and $mypassword, table row must be 1 row
 
