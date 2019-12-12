@@ -25,9 +25,12 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
 }
 
 // Display the code in a readable format
-echo "<pre>";
-var_dump($empArray[0]);
-echo "</pre>";
+//Foreach employee echo name
+foreach ($empArray as $employee) {
+
+
+    echo utf8_encode($employee['1']);
+}
 
 
 
