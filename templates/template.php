@@ -6,7 +6,7 @@ echo "<!DOCTYPE HTML><html>";
 block_print_document_header("Template", PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
-block_print_header("");
+block_print_header("", PREAMBLE);
 //TODO: put logic to verify cookie and modify this
 block_print_nav("<li><a href=\"".PREAMBLE."login.php\">Connexion</a></li>");
 
