@@ -70,3 +70,5 @@ echo "    </div>";
 block_print_scripts(PREAMBLE);
 echo "	</body>";
 echo "</html>";
+
+?>
