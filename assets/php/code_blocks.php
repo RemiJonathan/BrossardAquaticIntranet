@@ -87,7 +87,7 @@ $connection_form = "<h3>Connexion</h3><form action=\"validate_connection.php\" m
 													<div class=\"col-12\">
 														<input id=\"password\" name=\"password\" placeholder=\"Password\" type=\"password\" value=\"\" />
 													</div>
-													
+													<a href=\"forgot_password.php\">Mot de passe oublié?</a>
 													<!-- Break -->
 													<div class=\"col-12\">
 														<ul class=\"actions\">

@@ -38,6 +38,7 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
  * @param string $keyspace A string of all possible characters
  *                         to select from
  * @return string
+ * @throws Exception
  */
 
 function random_str(
