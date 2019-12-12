@@ -60,14 +60,16 @@ function random_str(
 foreach ($empArray as $employee) {
 
 
-    insertNewRegUser($db,$employee[0],$employee[2],$employee[1],random_str(8));
+        insertNewRegUser($db,utf8_encode($employee[0]),random_str(8),utf8_encode($employee[2]),utf8_encode($employee[1]));
 
 
 
 
 
 
-    $content .=  random_str(8)."<br>" .$employee['0']."<br>".$employee['1']."<br>".$employee['2']."<br>";
+
+
+    $content .=  random_str(8)."<br>" .utf8_encode($employee['0'])."<br>".utf8_encode($employee['1'])."<br>".utf8_encode($employee['2'])."<br>";
 
 
 }
