@@ -94,20 +94,23 @@ $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="docu
  *
  *
  */
+// input mask is 2008-7-04
 $horiaArray = $empArray[81];
-$testStr = $horiaArray[3];
-$testStr = str_replace('-', '-01-', $testStr);
-print_r();
-echo $testStr;
+$rawDate = $horiaArray[3];
 
 
+
+$content.=parseDate($horiaArray[3]);
+
+insertNewSNQual($db,$horiaArray[0],parseDate($horiaArray[3]),$horiaArray[4],$horiaArray[5]);
+/*
 $t = strtotime("Jan 1, 1970");
 $time_input = strtotime("Dec-21");
 //$time_input = str_replace('-', '-01-', $time_input);
 
 $date_input = getDate($time_input);
 print_r($date_input);
-
+*/
 if ($horiaArray[3]!=null){
 $content.=  "SN FOUND <BR>";
 }

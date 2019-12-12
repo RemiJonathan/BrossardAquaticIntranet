@@ -8,20 +8,33 @@ function insertNewRegUser($db, $id, $pwd, $fname, $lname){
    $stmt->execute();
 
 }
-
-function insertNewSNQual($db, $user_id, $qualification_id, $qual_expiry, $requalification_note){
-
-    $conv_qual_expiry =
-
-    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_expiry, requalification_note) VALUES (?,?,?,?)");
+//insert into qualified_user values  ('800148','1',null,'2008-7-04','test1','test2');
+function insertNewSNQual($db, $user_id,  $qual_expiry, $requalification, $requalification_note){
+    $qualification_id="1";
+    $qual_emitted=null;
 
 
-    $stmt->bind_param("isss", $user_id, $qualification_id, $conv_qual_expiry, $requalification_note);
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification, notes) VALUES (?,?,?,?,?,?)");
+
+
+    $stmt->bind_param("iissss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification, $requalification_note);
 
     $stmt->execute();
 
+    echo "success";
+
 }
 
+function parseDate($rawDate){
+
+    $rawDate = strtotime(str_replace('-', '-01-', $rawDate));
+
+    $rawDate = getDate((int)$rawDate);
+
+    $finalDate =  $rawDate['year'] . "-". $rawDate['mon'] . "-". $rawDate['mday'];
+
+    return $finalDate;
+}
 
 
 
