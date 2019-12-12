@@ -96,7 +96,7 @@ block_print_header("", PREAMBLE);
 block_print_nav("<li><a href=\"".PREAMBLE."login.php\">Connexion</a></li>");
 
 //put code in content
-block_print_main($content);
+block_print_main(utf8_decode($content));
 
 block_print_copyright();
 $content .=  "    </div>";
