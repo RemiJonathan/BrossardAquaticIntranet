@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @param $title String will set the text at the top of the page
  * @param $preamble String of the link toward the root directory
@@ -19,11 +20,11 @@ function block_print_document_header($title, $preamble)
 /**
  * @param $class String to use optional class if wanted
  */
-function block_print_header($class){
+function block_print_header($class, $preamble){
     echo "
     <!-- Header -->
 	<header $class id=\"header\">
-		<span class=\"logo\"><a href=\"index.php\">Brossard <span>Secteur Aquatic</span></a></span>
+		<span class=\"logo\"><a href=\"".PREAMBLE."index.php\">Brossard <span>Secteur Aquatic</span></a></span>
 		<a href=\"#menu\"><span>Menu</span></a>
 	</header>
     ";
@@ -78,7 +79,7 @@ function block_print_main($content){
     ";
 }
 
-$connection_form = "<h3>Connexion</h3><form action=\"validate_connection.php\" method=\"post\">
+$connection_form = "<h3>Connexion</h3><form action=\"".PREAMBLE."validate_connection.php\" method=\"post\">
 												<div class=\"row gtr-uniform\">
 													<div class=\"col-12\">
 														<input id=\"username\" name=\"username\" placeholder=\"Name\" type=\"text\" value=\"\" />
@@ -87,7 +88,7 @@ $connection_form = "<h3>Connexion</h3><form action=\"validate_connection.php\" m
 													<div class=\"col-12\">
 														<input id=\"password\" name=\"password\" placeholder=\"Password\" type=\"password\" value=\"\" />
 													</div>
-													<a href=\"forgot_password.php\">Mot de passe oublié?</a>
+													<a href=\"".PREAMBLE."forgot_password.php\">Mot de passe oublié?</a>
 													<!-- Break -->
 													<div class=\"col-12\">
 														<ul class=\"actions\">
@@ -165,4 +166,18 @@ function block_print_scripts($preamble){
 			<script src=\"".$preamble."assets/js/util.js\"></script>
 			<script src=\"".$preamble."assets/js/main.js\"></script>
     ";
+}
+
+/**
+ * @param $user_id int of the user's id
+ * @param $permission_level int of required permission
+ * @return boolean see if the user has appropriate permissions
+ */
+function check_user_permissions($user_id, $permission_level){
+    $db = new mysqli(DB_SERVER,DB_USERNAME,DB_PASSWORD, DB_DATABASE);
+    $check_permission_sql = $db->query("SELECT role_id FROM user WHERE user.user_id = '$user_id';", MYSQLI_ASSOC);
+
+    $user = $check_permission_sql->fetch_array();
+
+    return  $user['role_id'] == $permission_level;
 }
