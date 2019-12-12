@@ -1,6 +1,6 @@
 <?php
 include('../assets/php/code_blocks.php');
-echo "test";
+
 
 $form_data = "<form action=\"uploadEmployeeList.php\" method=\"post\" enctype=\"multipart/form-data\">
 <br>
