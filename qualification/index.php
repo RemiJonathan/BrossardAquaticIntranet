@@ -29,7 +29,23 @@ if (isset($_SESSION['user_id'])) {
 
         }
 
+
+
         $content .= "</select></div><div class=\"col-12\"><ul class=\"actions\"><li><input value='Modifier' type='submit'></li></ul></div></div></form>";
+
+        if (isset($_POST['selected_user'])){
+            $get_user_qualifications= $db->query("SELECT * FROM qualification", MYSQLI_ASSOC);
+                $content .= "<div class=\"table-wrapper\"><form><table class=\"alt\">";
+                $content .= "<thead><tr><th></th><th>Nom</th><th>Date &Eacute;mise</th><th>Date d'Expiration</th><th>Note</th></tr></thead>";
+                $content .= "<tbody>";
+            while ($qualification = $get_user_qualifications->fetch_array()){
+                $qual_id = $qualification['qualification_id'];
+                $qual_name = $qualification['qual_name'];
+                $content .="<tr><td></td><td>$qual_name</td></tr>";
+            }
+                $content .= "</tbody></table></form></div>";
+        }
+
 
     } else {
         $content = '<h3>Vous n\'avez pas les permissions requises pour acc&egrave;der a cette page.</h3>';
