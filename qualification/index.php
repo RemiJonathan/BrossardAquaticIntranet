@@ -23,15 +23,16 @@ if (isset($_SESSION['user_id'])) {
             $user_name = $user['user_lname'] . ', ' . $user['user_fname'];
             $user_id = $user['user_id'];
 
-            if (isset($_POST['selected_user'])) $_POST['selected_user'] == $user_id ? $content .= "<option value='$user_id' selected='selected'>$user_name - $user_id</option>" : $content .= "<option value='$user_id'>$user_name - $user_id</option>";
-            else $content .= "<option value='$user_id'>$user_name - $user_id</option>";
+            if (isset($_POST['selected_user'])) {
+                $_POST['selected_user'] == $user_id ? $content .= "<option value='$user_id' selected='selected'>$user_name - $user_id</option>" : $content .= "<option value='$user_id'>$user_name - $user_id</option>";
+            }else $content .= "<option value='$user_id'>$user_name - $user_id</option>";
 
         }
 
         $content .= "</select></div><div class=\"col-12\"><ul class=\"actions\"><li><input value='Modifier' type='submit'></li></ul></div></div></form>";
 
     } else {
-        $content = '<h3>Vous n\'avez pas les permission requises pour acc&egrave;der a cette page.</h3>';
+        $content = '<h3>Vous n\'avez pas les permissions requises pour acc&egrave;der a cette page.</h3>';
     }
 
     block_print_main($content);
