@@ -9,3 +9,19 @@ function insertNewRegUser($db, $id, $pwd, $fname, $lname){
 
 }
 
+function insertNewSNQual($db, $user_id, $qualification_id, $qual_expiry, $requalification_note){
+
+    $conv_qual_expiry =
+
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_expiry, requalification_note) VALUES (?,?,?,?)");
+
+
+    $stmt->bind_param("isss", $user_id, $qualification_id, $conv_qual_expiry, $requalification_note);
+
+    $stmt->execute();
+
+}
+
+
+
+
