@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2019 at 07:07 PM
+-- Generation Time: Dec 12, 2019 at 08:24 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -81,8 +81,9 @@ CREATE TABLE `qualification` (
 CREATE TABLE `qualified_user` (
   `user_id` int(7) NOT NULL,
   `qualification_id` int(4) NOT NULL,
-  `qual_renew` date NOT NULL,
-  `qual_date_gotten` date NOT NULL
+  `qual_emitted` date DEFAULT NULL,
+  `qual_expiry` date NOT NULL,
+  `requalification_note` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -309,7 +310,8 @@ INSERT INTO `user` (`user_id`, `passphrase`, `user_fname`, `user_lname`, `user_a
 (800168, 'LthkImiI', 'Leila', 'Zaouali', NULL, NULL, 1, NULL),
 (800169, 'O0lNvSEH', 'Sabrina', 'Chan Fee', NULL, NULL, 1, NULL),
 (800170, 'AgGTZpTe', 'David', 'Larrivée', NULL, NULL, 1, NULL),
-(800171, 'sFwBIxIq', 'Yan', 'Burton ', NULL, NULL, 1, NULL);
+(800171, 'sFwBIxIq', 'Yan', 'Burton ', NULL, NULL, 1, NULL),
+(999999, 'Minad134', 'Secteur', 'Aquatique', NULL, NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
