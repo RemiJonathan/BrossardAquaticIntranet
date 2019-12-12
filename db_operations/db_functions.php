@@ -6,6 +6,6 @@ function insertNewRegUser($db, $id, $pwd, $fname, $lname){
     $stmt->bind_param("isss", $id, $pwd, $fname, $lname);
 
    $stmt->execute();
-   echo "inserted";
+
 }
 
