@@ -144,7 +144,7 @@ function block_print_copyright(){
     <!-- Copyright -->
 	<section class=\"wrapper style2 copyright\">
 		<div class=\"inner\">
-			Oeuvre In&eacute;dite &copy; <span id='current_year'></span> Intranet Du Secteur Aquatique.<br />Projet De Fin D’Études Collégiales De <a href='https://remijonathan.com' target='_blank'>Rémi Jonathan Choquette</a> & <a href='https://www.linkedin.com/in/horia-sandu-7a7631162/' target='_blank'>Horia Cristian Sandu</a>.
+			Oeuvre In&eacute;dite &copy; <span id='current_year'></span> Intranet Du Secteur Aquatique.<br />Projet De Fin d'&Eacute;tudes Coll&eacute;giales De <a href='https://remijonathan.com' target='_blank'>R&eacute;mi Jonathan Choquette</a> &amp; <a href='https://www.linkedin.com/in/horia-sandu-7a7631162/' target='_blank'>Horia Cristian Sandu</a>.
 		</div>
 		<script>document.getElementById(\"current_year\").innerHTML = new Date().getFullYear();</script>
 	</section>
