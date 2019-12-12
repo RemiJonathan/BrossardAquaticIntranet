@@ -62,20 +62,13 @@ foreach ($empArray as $employee) {
 
         insertNewRegUser($db,utf8_encode($employee[0]),random_str(8),utf8_encode($employee[2]),utf8_encode($employee[1]));
 
-
-
-
-
-
-
-
-    $content .=  random_str(8)."<br>" .utf8_encode($employee['0'])."<br>".utf8_encode($employee['1'])."<br>".utf8_encode($employee['2'])."<br>";
+   // $content .=  random_str(8)."<br>" .utf8_encode($employee['0'])."<br>".utf8_encode($employee['1'])."<br>".utf8_encode($employee['2'])."<br>";
 
 
 }
 
 
-
+$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="document_update.php">Retour</a>';
 
 
 ?>
@@ -95,7 +88,7 @@ block_print_header("", PREAMBLE);
 block_print_nav("<li><a href=\"".PREAMBLE."login.php\">Connexion</a></li>");
 
 //put code in content
-block_print_main(utf8_decode($content));
+block_print_main($content);
 
 block_print_copyright();
 $content .=  "    </div>";
