@@ -2,6 +2,15 @@
 include('../db_operations/connection.php');
 include ('../db_operations/db_functions.php');
 
+$userArray = array();
+$user_res = $db->query("SELECT user_id, user_lname, user_fname FROM user") or die($db->error);
+while ($user = $user_res->fetch_array()) {
+    $userArray[] = array("id" => $user["user_id"], "fname" => $user["user_fname"], "lname" => $user["user_lname"]);
+//echo $user["user_id"].$user["user_fname"] . $user["user_lname"]."  <br>";
+}
+
+
+
 $filename = 'uploads/list_surv_snr.csv';
 $content ="";
 // The nested array to hold all the arrays
@@ -15,14 +24,17 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
     while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
         // Each individual array is being pushed into the nested array
 
-        if (current($data) != 0) {
             array_push($snrArray, $data);
-        }
-    }
 
+    }
+    array_shift($snrArray);
     // Close the file
     fclose($h);
 }
+
+
+
+
 
 // Display the code in a readable format
 //Foreach employee $content .=  name
@@ -49,20 +61,47 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
 $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="document_update.php">Retour</a>';
 
 
-echo $snrArray[0][0];
+
 /*
- * 0 -> emp_full_name
- * 1 -> continued_service
- * 2 -> full_name
+ * 0 -> lname
+ * 1 -> fname
+ * 2 -> continued_service
+ * 3 -> hours
 
  */
-// input mask is 2008-7-04
+// input mask is 2008-07-20
+/*
+$test1 = $snrArray[5][0];
+$test1 = str_replace("\"","",$test1);
 
+$test2 = $snrArray[5][1];
+$test2 = ltrim(str_replace("\"","",$test2));
+*/
+
+
+
+
+
+
+$content.="<br>";
 foreach ($snrArray as $snr) {
 
+    $nameArray = explode(", ",$snr[0]);
+    $lname =$nameArray[0];
+    $fname =$nameArray[1];
 
+    foreach($userArray as $user){
+        if($user["lname"]==$lname && $user["fname"]==$fname){
+            //echo $user["id"]."<br>";
 
+            $origDate = $snr[1];
+            $origDate = explode("/",$origDate);
+            $finalDate = $origDate[2]."-".$origDate[0]."-".$origDate[1];
 
+            $content.= $user["id"]." ".$snr[2]." ".$finalDate."<br>";
+            insertNewSurvSnr($db,$user["id"],$snr[2],$finalDate);
+        }
+    }
 }
 
 
