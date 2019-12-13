@@ -122,6 +122,20 @@ function insertNewSurvSnr($db, $user_id, $hours, $continued_service){
 
 }
 
+function insertNewEnsSnr($db, $user_id, $hours, $continued_service){
+    $seniority_type="enseignement";
+
+
+    $stmt = $db -> prepare("INSERT INTO seniority (user_id, seniority_type, hours, continued_service) VALUES (?,?,?,?)
+");
+
+
+    $stmt->bind_param("isds", $user_id, $seniority_type, $hours, $continued_service);
+
+    $stmt->execute();
+
+}
+
 function parseDate($rawDate){
 
     $rawDate = strtotime(str_replace('-', '-01-', $rawDate));

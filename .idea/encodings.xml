@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/file_operations/db_update_emps.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/file_operations/db_update_ens_snr.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/file_operations/db_update_quals.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/file_operations/db_update_surv_snr.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/file_operations/document_update.php" charset="windows-1252" />

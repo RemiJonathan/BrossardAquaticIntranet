@@ -11,7 +11,7 @@ while ($user = $user_res->fetch_array()) {
 
 
 
-$filename = 'uploads/list_surv_snr.csv';
+$filename = 'uploads/list_ens_snr.csv';
 $content ="";
 // The nested array to hold all the arrays
 $snrArray = [];
@@ -99,7 +99,7 @@ foreach ($snrArray as $snr) {
             $finalDate = $origDate[2]."-".$origDate[0]."-".$origDate[1];
 
 
-            insertNewSurvSnr($db,$user["id"],$snr[2],$finalDate);
+            insertNewEnsSnr($db,$user["id"],$snr[2],$finalDate);
         }
     }
 }

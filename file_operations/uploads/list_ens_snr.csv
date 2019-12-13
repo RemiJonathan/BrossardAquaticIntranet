@@ -1,4 +1,5 @@
-﻿"Lajoie, Marc-Antoine",3/2/2015,2660.34
+﻿emp_name,serv_date,hours
+"Lajoie, Marc-Antoine",3/2/2015,2660.34
 "Demers, Guillaume",3/2/2015,2117.15
 "Demers, Annie-France",3/2/2015,2030.5
 "Metivier-Bédard, Jessika",3/2/2015,1931.82
@@ -8,7 +9,7 @@
 "Chabot, Éléanor",9/14/2015,1230.24
 "Ayari, Salma",5/28/2016,1035.75
 "Fortier, Jean-Michel",3/2/2015,1030.25
-"Loaiza, Paula Sofia ",5/27/2017,988.92
+"Loaiza, Paula Sofia",5/27/2017,988.92
 "Vallerand, Aude",3/2/2015,953.38
 "Willame, Margaux",3/2/2015,927
 "Alhaeik, Rasha",3/2/2015,748.83
@@ -24,7 +25,7 @@
 "Stoica, Alice",5/27/2017,545.34
 "Landry, Katerine",5/28/2016,529.25
 "Peate, Florence",12/2/2016,431.09
-"Lefebvre , Mélanie",5/27/2017,399.25
+"Lefebvre, Mélanie",5/27/2017,399.25
 "Lefebvre, Isabelle",5/28/2016,377.75
 "Lapointe, Gabrielle",9/16/2017,377.34
 "Zhang, Rose",8/31/2017,370.83
@@ -34,7 +35,7 @@
 "Diop, Peinda",2/10/2017,309.64
 "Ng Youn Chen, Audrey",8/30/2017,301
 "Cioana, Valentin",3/26/2018,292.45
-"Gagné Vincent, Mia",9/16/2017,278
+"Gagné-Vincent, Mia",9/16/2017,278
 "Sandu, Horia Cristian",5/26/2018,271
 "Banh, Yea Feng Laetitia",3/2/2015,269.08
 "Bélanger-Oudrhiri, Malika",3/2/2015,248.92
@@ -84,7 +85,7 @@
 "Zaouali, Leila",5/25/2019,0
 "Sandaev, Galit",3/14/2015,635.58
 "Bélec-Sergerie, Alexandra",5/26/2018,0
-"Van Oordt , David ",5/27/2017,0
+"Van Oordt, David",5/27/2017,0
 "Lafontaine, Frédérique",5/26/2018,173
 "Dorval, Mathieu",1/1/1970,1394.25
 "Manotas, Julian",3/28/2019,14.5
