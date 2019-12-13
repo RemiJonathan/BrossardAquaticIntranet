@@ -19,6 +19,7 @@ function block_print_document_header($title, $preamble)
 
 /**
  * @param $class String to use optional class if wanted
+ * @param $preamble String to use preamble
  */
 function block_print_header($class, $preamble){
     echo "
