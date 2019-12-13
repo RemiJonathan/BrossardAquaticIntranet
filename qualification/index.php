@@ -76,8 +76,8 @@ ORDER BY qualification_id;");
                 $requalification= $qualification['requalification_note'];
                 $note = $qualification['notes'];
 
-                if ($qual_id == 1 || $qual_id == 2) $table1_content .= "<tr><form method='post' action='save_qualification'><td>$qual_name</td><td><input type='date' value='$qual_expiry'/></td><td><input value='$requalification' maxlength='100'></td><td><input value='$note' maxlength='60'></td><td><input type='submit' value='Sauvegarder'></td></form></tr>";
-                else $table2_content .= "<tr><form method='post' action='save_qualification'><td>$qual_name</td><td><input type='date' value='$qual_emitted'/></td><td><input type='date' value='$qual_expiry'/></td><td><input value='$requalification' maxlength='100'></td><td><input type='submit' value='Sauvegarder'></td></form></tr>";
+                if ($qual_id == 1 || $qual_id == 2) $table1_content .= "<tr><form method='post' action='save_qualification'><td>$qual_name</td><td><input type='date' value='$qual_expiry'/></td><td><input  size='40' value='$requalification' maxlength='100'></td><td><input value='$note' size='30' maxlength='60'></td><td><input type='submit' value='Sauvegarder'></td></form></tr>";
+                else $table2_content .= "<tr><form method='post' action='save_qualification'><td>$qual_name</td><td><input type='date' value='$qual_emitted'/></td><td><input type='date' value='$qual_expiry'/></td><td><input size='50' value='$requalification' maxlength='100'></td><td><input type='submit' value='Sauvegarder'></td></form></tr>";
             }
             $table1_content .= "</tbody></table></div>";
             $table2_content .= "</tbody></table></div>";
