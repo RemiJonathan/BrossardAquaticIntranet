@@ -23,11 +23,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $myusername;
             header('Location: news_feed.php');
         }else{
-            $error = "Invalid Password";
+            $error = "Mot de passe invalide";
             //Todo Implement invalid credentials
+            header("Location: login.php?error=$error");
         }
     }else{
-        $error = "Invalid Username";
-
+        $error = utf8_encode("NIE invalide");
+        header("Location: login.php?error=$error");
     }
+
 }

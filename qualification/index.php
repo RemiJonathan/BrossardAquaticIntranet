@@ -4,7 +4,7 @@ include(PREAMBLE . "assets/php/code_blocks.php");
 
 
 echo "<!DOCTYPE HTML><html>";
-block_print_document_header("Acceuil", PREAMBLE);
+block_print_document_header("GESTION DE QUALIFICATIONS", PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);
@@ -23,15 +23,38 @@ if (isset($_SESSION['user_id'])) {
             $user_name = $user['user_lname'] . ', ' . $user['user_fname'];
             $user_id = $user['user_id'];
 
-            if (isset($_POST['selected_user'])) $_POST['selected_user'] == $user_id ? $content .= "<option value='$user_id' selected='selected'>$user_name - $user_id</option>" : $content .= "<option value='$user_id'>$user_name - $user_id</option>";
-            else $content .= "<option value='$user_id'>$user_name - $user_id</option>";
+            if (isset($_POST['selected_user'])) {
+                $_POST['selected_user'] == $user_id ? $content .= "<option value='$user_id' selected='selected'>$user_name - $user_id</option>" : $content .= "<option value='$user_id'>$user_name - $user_id</option>";
+            }else $content .= "<option value='$user_id'>$user_name - $user_id</option>";
 
         }
 
+
+
         $content .= "</select></div><div class=\"col-12\"><ul class=\"actions\"><li><input value='Modifier' type='submit'></li></ul></div></div></form>";
 
+        if (isset($_POST['selected_user'])){
+            $selected_user = $_POST['selected_user'];
+
+            $get_user_quals = $db->query("SELECT qualification.qualification_id, qual_name, qual_emitted, qual_expiry, requalification_note FROM qualification LEFT OUTER JOIN qualified_user on qualification.qualification_id = qualified_user.qualification_id WHERE user_id = $selected_user OR user_id IS NULL;");
+                $content .= "<div class=\"table-wrapper\"><form><table class=\"alt\">";
+                $content .= "<thead><tr><th></th><th>Nom</th><th>Date &Eacute;mise</th><th>Date d'Expiration</th><th>Note</th></tr></thead>";
+                $content .= "<tbody>";
+            while ($qualification = $get_user_quals->fetch_array()){
+                $qual_id = $qualification['qualification_id'];
+                $qual_name = $qualification['qual_name'];
+                $qual_emitted = $qualification['qual_emitted'];
+                $qual_expiry = $qualification['qual_expiry'];
+                $requalification_note = $qualification['requalification_note'];
+
+                $content .="<tr><td></td><td>$qual_name</td><td><input type='date' value='$qual_emitted'/></td> </tr>";
+            }
+                $content .= "</tbody></table></form></div>";
+        }
+
+
     } else {
-        $content = '<h3>Vous n\'avez pas les permission requises pour acc&egrave;der a cette page.</h3>';
+        $content = '<h3>Vous n\'avez pas les permissions requises pour acc&egrave;der a cette page.</h3>';
     }
 
     block_print_main($content);
