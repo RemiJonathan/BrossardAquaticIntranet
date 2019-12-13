@@ -24,7 +24,7 @@ function block_print_header($class, $preamble){
     echo "
     <!-- Header -->
 	<header $class id=\"header\">
-		<span class=\"logo\"><a href=\"".PREAMBLE."index.php\">Brossard <span>Secteur Aquatic</span></a></span>
+		<span class=\"logo\"><a href=\"".PREAMBLE."index.php\">Brossard <span>Secteur Aquatique</span></a></span>
 		<a href=\"#menu\"><span>Menu</span></a>
 	</header>
     ";
