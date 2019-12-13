@@ -27,7 +27,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             //Todo Implement invalid credentials
         }
     }else{
-        $error = "Invalid Username";
-
+        $error = utf8_encode("NIE invalide");
+        header("Location: login.php?error=$error");
     }
+
 }
