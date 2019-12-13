@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2019 at 10:12 PM
+-- Generation Time: Dec 13, 2019 at 03:43 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -83,7 +83,7 @@ INSERT INTO `qualification` (`qualification_id`, `qual_name`) VALUES
 (4, 'MSU'),
 (5, 'MSN'),
 (6, 'ISA'),
-(7, 'AF');
+(7, 'AQF');
 
 -- --------------------------------------------------------
 
@@ -96,8 +96,16 @@ CREATE TABLE `qualified_user` (
   `qualification_id` int(4) NOT NULL,
   `qual_emitted` date DEFAULT NULL,
   `qual_expiry` date NOT NULL,
-  `requalification_note` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+  `requalification_note` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `notes` varchar(60) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `qualified_user`
+--
+
+INSERT INTO `qualified_user` (`user_id`, `qualification_id`, `qual_emitted`, `qual_expiry`, `requalification_note`, `notes`) VALUES
+(800148, 1, NULL, '2020-03-01', '', '');
 
 -- --------------------------------------------------------
 
