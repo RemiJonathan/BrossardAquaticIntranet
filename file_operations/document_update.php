@@ -1,4 +1,5 @@
 <?php
+define("PREAMBLE","../");
 include('../assets/php/code_blocks.php');
 
 //TODO add veritification to check if the uploaded CSV file is actually the intended CSV
@@ -17,7 +18,7 @@ $form_data_emp_list = "<form action=\"uploadEmployeeList.php\" method=\"post\" e
 
 $form_data_snr_list = "<form action=\"uploadQualList.php\" method=\"post\" enctype=\"multipart/form-data\">
 <br>
-    <h2>____________________________________________________________________________________
+    <hr style=\"height:3px;border:none;color:#333;background-color:#333;\" />
     <br>S&eacute;lectionner fichier CSV contenant la liste de qualifications des employ&eacute;s.</h2>
     <br>
     <input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">
@@ -30,10 +31,10 @@ $form_data_snr_list = "<form action=\"uploadQualList.php\" method=\"post\" encty
 </form> ";
 
 echo "<!DOCTYPE HTML><html>";
-block_print_document_header("Template","../");
+block_print_document_header("Template",PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
-block_print_header("");
+block_print_header("","../");
 //TODO: put logic to verify cookie and modify this
 block_print_nav("<li><a href=\"login.php\">Connexion</a></li>");
 //put code in content
