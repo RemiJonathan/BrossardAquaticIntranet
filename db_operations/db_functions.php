@@ -14,17 +14,99 @@ function insertNewSNQual($db, $user_id,  $qual_expiry, $requalification, $requal
     $qual_emitted=null;
 
 
-    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification, notes) VALUES (?,?,?,?,?,?)");
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note, notes) VALUES (?,?,?,?,?,?)");
 
 
     $stmt->bind_param("iissss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification, $requalification_note);
 
     $stmt->execute();
 
-    echo "success";
+}
+
+function insertNewMSAQual($db, $user_id,  $qual_expiry, $requalification, $requalification_note){
+    $qualification_id="2";
+    $qual_emitted=null;
+
+
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note, notes) VALUES (?,?,?,?,?,?)");
+
+
+    $stmt->bind_param("iissss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification, $requalification_note);
+
+    $stmt->execute();
 
 }
 
+
+function insertNewMSQual($db, $user_id, $qual_emitted, $qual_expiry, $requalification_note){
+    $qualification_id="3";
+
+
+
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note) VALUES (?,?,?,?,?)");
+
+
+    $stmt->bind_param("iisss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification_note);
+
+    $stmt->execute();
+
+}
+
+function insertNewMSUQual($db, $user_id, $qual_emitted, $qual_expiry, $requalification_note){
+    $qualification_id="4";
+
+
+
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note) VALUES (?,?,?,?,?)");
+
+
+    $stmt->bind_param("iisss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification_note);
+
+    $stmt->execute();
+
+}
+
+function insertNewMSNQual($db, $user_id, $qual_emitted, $qual_expiry, $requalification_note){
+    $qualification_id="5";
+
+
+
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note) VALUES (?,?,?,?,?)");
+
+
+    $stmt->bind_param("iisss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification_note);
+
+    $stmt->execute();
+
+}
+
+function insertNewISAQual($db, $user_id, $qual_emitted, $qual_expiry, $requalification_note){
+    $qualification_id="6";
+
+
+
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note) VALUES (?,?,?,?,?)");
+
+
+    $stmt->bind_param("iisss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification_note);
+
+    $stmt->execute();
+
+}
+
+function insertNewAQFQual($db, $user_id, $qual_emitted, $qual_expiry, $requalification_note){
+    $qualification_id="7";
+
+
+
+    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note) VALUES (?,?,?,?,?)");
+
+
+    $stmt->bind_param("iisss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification_note);
+
+    $stmt->execute();
+
+}
 function parseDate($rawDate){
 
     $rawDate = strtotime(str_replace('-', '-01-', $rawDate));

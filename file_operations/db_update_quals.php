@@ -5,7 +5,7 @@ include ('../db_operations/db_functions.php');
 $filename = 'uploads/list_qual.csv';
 $content ="";
 // The nested array to hold all the arrays
-$empArray = [];
+$qualArray = [];
 
 // Open the file for reading
 if (($h = fopen("{$filename}", "r")) !== FALSE)
@@ -16,7 +16,7 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
         // Each individual array is being pushed into the nested array
 
         if (current($data) != 0) {
-            array_push($empArray, $data);
+            array_push($qualArray, $data);
         }
     }
 
@@ -43,15 +43,7 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
 
 
 
-foreach ($empArray as $employee) {
 
-
-     //   insertNewRegUser($db,utf8_encode($employee[0]),random_str(8),utf8_encode($employee[2]),utf8_encode($employee[1]));
-
-   // $content .=  random_str(8)."<br>" .utf8_encode($employee['0'])."<br>".utf8_encode($employee['1'])."<br>".utf8_encode($employee['2'])."<br>";
-
-
-}
 
 
 $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="document_update.php">Retour</a>';
@@ -65,7 +57,7 @@ $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="docu
  *
  * 3 -> sn_exp
  * 4 -> sn_requal
- * 5 -> sn_NOTes
+ * 5 -> sn_notes
  *
  * 6 -> msa_exp
  * 7 -> msa_requal
@@ -95,79 +87,85 @@ $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="docu
  *
  */
 // input mask is 2008-7-04
-$horiaArray = $empArray[81];
-$rawDate = $horiaArray[3];
+
+foreach ($qualArray as $qual) {
+
+    if ($qual[3]!=null){
+        insertNewSNQual($db,$qual[0],parseDate($qual[3]),$qual[4],$qual[5]);
+    }
+    else{
+        //$content.=  "SN NOT FOUND <BR>";
+    }
+
+    if ($qual[6]!=null){
+        insertNewMSAQual($db,$qual[0],parseDate($qual[6]),$qual[7],$qual[8]);
+    }
+    else{
+        //$content.=  "MSA NOT FOUND <BR>   ";
+    }
+
+    if ($qual[9]!=null){
+        insertNewMSQual($db,$qual[0],parseDate($qual[9]),parseDate($qual[10]),$qual[11]);
+    }
+    else{
+        //$content.=  "MS NOT FOUND <BR>   ";
+    }
+
+    if ($qual[12]!=null){
+        insertNewMSUQual($db,$qual[0],parseDate($qual[12]),parseDate($qual[13]),$qual[14]);
+
+    }
+    else{
+        //$content.=  "MSU NOT FOUND <BR>   ";
+    }
+
+    if ($qual[15]!=null){
+        insertNewMSNQual($db,$qual[0],parseDate($qual[15]),parseDate($qual[16]),$qual[17]);
+
+    }
+    else{
+        //$content.=  "MSN NOT FOUND <BR>   ";
+    }
+
+    if ($qual[18]!=null){
+        insertNewISAQual($db,$qual[0],parseDate($qual[18]),parseDate($qual[19]),$qual[20]);
+
+    }
+    else{
+        //$content.=  "ISA NOT FOUND <BR>   ";
+    }
+
+    if ($qual[21]!=null){
+        insertNewAQFQual($db,$qual[0],parseDate($qual[21]),parseDate($qual[22]),$qual[23]);
+
+    }
+    else{
+        //$content.=  "AQF NOT FOUND <BR>   ";
+    }
 
 
-
-$content.=parseDate($horiaArray[3]);
-
-insertNewSNQual($db,$horiaArray[0],parseDate($horiaArray[3]),$horiaArray[4],$horiaArray[5]);
+}
 /*
-$t = strtotime("Jan 1, 1970");
-$time_input = strtotime("Dec-21");
-//$time_input = str_replace('-', '-01-', $time_input);
+$qual = $qualArray[81];
+$rawDate = $qual[3];
 
-$date_input = getDate($time_input);
-print_r($date_input);
+
+$date1 = parseDate($qual[9]);
+$date2 = parseDate($qual[10]);
+
+//
+insertNewMSUQual($db,$qual[0],$date1,$date2,"requalification soon");
+insertNewMSNQual($db,$qual[0],$date1,$date2,"requalification soon");
+insertNewISAQual($db,$qual[0],$date1,$date2,"requalification soon");
+insertNewAQFQual($db,$qual[0],$date1,$date2,"requalification soon");
+
 */
-if ($horiaArray[3]!=null){
-$content.=  "SN FOUND <BR>";
-}
-else{
-    $content.=  "SN NOT FOUND <BR>";
-}
-
-if ($horiaArray[6]!=null){
-    $content.=  "MSA FOUND <BR>";
-}
-else{
-    $content.=  "MSA NOT FOUND <BR>   ";
-}
-
-if ($horiaArray[9]!=null){
-    $content.=  "MS FOUND <BR>";
-}
-else{
-    $content.=  "MS NOT FOUND <BR>   ";
-}
-
-if ($horiaArray[12]!=null){
-    $content.=  "MSU FOUND <BR>";
-}
-else{
-    $content.=  "MSU NOT FOUND <BR>   ";
-}
-
-if ($horiaArray[15]!=null){
-    $content.=  "MSN FOUND <BR>";
-}
-else{
-    $content.=  "MSN NOT FOUND <BR>   ";
-}
-
-if ($horiaArray[18]!=null){
-    $content.=  "ISA FOUND <BR>";
-}
-else{
-    $content.=  "ISA NOT FOUND <BR>   ";
-}
-
-if ($horiaArray[21]!=null){
-    $content.=  "AQF FOUND <BR>";
-}
-else{
-    $content.=  "AQF NOT FOUND <BR>   ";
-}
 
 
 
 
-/*
-foreach ($empArray[81] as $item) {
-    $content.=  $item;
-}
-*/
+
+
 
 ?>
 
