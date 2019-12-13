@@ -65,7 +65,7 @@ ORDER BY qualification_id;");
                 $qual_expiry = $qualification['qual_expiry'];
                 $requalification_note = $qualification['requalification_note'];
 
-                $content .="<tr><td></td><td>$qual_name</td><td><input type='date' value='$qual_emitted'/></td> </tr>";
+                $content .="<tr><td></td><td>$qual_name</td><td><input type='date' value='$qual_emitted'/></td><td><input type='date' value='$qual_expiry'/></td><td><input value='$requalification_note' maxlength='100'></td></tr>";
             }
                 $content .= "</tbody></table></form></div>";
         }
