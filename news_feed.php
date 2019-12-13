@@ -19,8 +19,8 @@ if(isset($_SESSION['user_id'])) {
     while ($user = $get_user_data_res->fetch_array()){
         //todo: implement user object
     $content .= "<h1>Bienvenue ".$user['user_fname']."!</h1>";
-    }
 
+    }
     block_print_main(($content));
 }else{
     block_print_nav("<li><a href='login.php'>Connexion</a></li>");
