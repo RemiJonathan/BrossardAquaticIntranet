@@ -25,18 +25,17 @@ if (isset($_SESSION['user_id'])) {
 
             if (isset($_POST['selected_user'])) {
                 $_POST['selected_user'] == $user_id ? $content .= "<option value='$user_id' selected='selected'>$user_name - $user_id</option>" : $content .= "<option value='$user_id'>$user_name - $user_id</option>";
-            }else $content .= "<option value='$user_id'>$user_name - $user_id</option>";
+            } else $content .= "<option value='$user_id'>$user_name - $user_id</option>";
 
         }
 
 
-
         $content .= "</select></div><div class=\"col-12\"><ul class=\"actions\"><li><input value='Modifier' type='submit'></li></ul></div></div></form>";
 
-        if (isset($_POST['selected_user'])){
+        if (isset($_POST['selected_user'])) {
             $selected_user = $_POST['selected_user'];
 
-            $get_user_quals = $db->query("SELECT qualification.qualification_id, qual_name, qual_emitted, qual_expiry, requalification_note
+            $get_user_quals = $db->query("SELECT qualification.qualification_id, qual_name, qual_emitted, qual_expiry, requalification_note, notes
 FROM qualified_user,
      qualification
 WHERE qualification.qualification_id = qualified_user.qualification_id
@@ -46,7 +45,8 @@ SELECT qualification.qualification_id,
        qual_name,
        NULL AS qual_emitted,
        NULL AS qual_expiry,
-       NULL AS requalification_note
+       NULL AS requalification_note,
+       NULL AS notes
 FROM qualified_user,
      qualification
 WHERE qualification.qualification_id NOT IN (SELECT qualification.qualification_id
@@ -55,19 +55,34 @@ WHERE qualification.qualification_id NOT IN (SELECT qualification.qualification_
                                              WHERE qualification.qualification_id = qualified_user.qualification_id
                                                AND user_id = $selected_user)
 ORDER BY qualification_id;");
-                $content .= "<div class=\"table-wrapper\"><form><table class=\"alt\">";
-                $content .= "<thead><tr><th></th><th>Nom</th><th>Date &Eacute;mise</th><th>Date d'Expiration</th><th>Note</th></tr></thead>";
-                $content .= "<tbody>";
-            while ($qualification = $get_user_quals->fetch_array()){
+
+
+            $table1_content = '';
+            $table2_content = '';
+
+            $table1_content .= "<div class=\"table-wrapper\"><table class=\"alt\">";
+            $table1_content .= "<thead><tr><th>Nom</th><th>Date d'Expiration</th><th>Requalification</th><th>Note</th></tr></thead>";
+            $table1_content .= "<tbody>";
+
+            $table2_content .= "<div class=\"table-wrapper\"><table class=\"alt\">";
+            $table2_content .= "<thead><tr><th>Nom</th><th>Date &Eacute;mise</th><th>Date d'Expiration</th><th>Note</th></tr></thead>";
+            $table2_content .= "<tbody>";
+
+            while ($qualification = $get_user_quals->fetch_array()) {
                 $qual_id = $qualification['qualification_id'];
                 $qual_name = $qualification['qual_name'];
                 $qual_emitted = $qualification['qual_emitted'];
                 $qual_expiry = $qualification['qual_expiry'];
-                $requalification_note = $qualification['requalification_note'];
+                $requalification= $qualification['requalification_note'];
+                $note = $qualification['notes'];
 
-                $content .="<tr><td></td><td>$qual_name</td><td><input type='date' value='$qual_emitted'/></td><td><input type='date' value='$qual_expiry'/></td><td><input value='$requalification_note' maxlength='100'></td></tr>";
+                if ($qual_id == 1 || $qual_id == 2) $table1_content .= "<tr><form method='post' action='save_qualification'><td>$qual_name</td><td><input type='date' value='$qual_expiry'/></td><td><input value='$requalification' maxlength='100'></td><td><input value='$note' maxlength='60'></td><td><input type='submit' value='Sauvegarder'></td></form></tr>";
+                else $table2_content .= "<tr><form method='post' action='save_qualification'><td>$qual_name</td><td><input type='date' value='$qual_emitted'/></td><td><input type='date' value='$qual_expiry'/></td><td><input value='$requalification' maxlength='100'></td><td><input type='submit' value='Sauvegarder'></td></form></tr>";
             }
-                $content .= "</tbody></table></form></div>";
+            $table1_content .= "</tbody></table></div>";
+            $table2_content .= "</tbody></table></div>";
+
+            $content .= $table1_content . $table2_content;
         }
 
 
