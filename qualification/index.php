@@ -36,7 +36,25 @@ if (isset($_SESSION['user_id'])) {
         if (isset($_POST['selected_user'])){
             $selected_user = $_POST['selected_user'];
 
-            $get_user_quals = $db->query("SELECT qualification.qualification_id, qual_name, qual_emitted, qual_expiry, requalification_note FROM qualification LEFT OUTER JOIN qualified_user on qualification.qualification_id = qualified_user.qualification_id WHERE user_id = $selected_user OR user_id IS NULL;");
+            $get_user_quals = $db->query("SELECT qualification.qualification_id, qual_name, qual_emitted, qual_expiry, requalification_note
+FROM qualified_user,
+     qualification
+WHERE qualification.qualification_id = qualified_user.qualification_id
+  AND user_id = $selected_user
+UNION
+SELECT qualification.qualification_id,
+       qual_name,
+       NULL AS qual_emitted,
+       NULL AS qual_expiry,
+       NULL AS requalification_note
+FROM qualified_user,
+     qualification
+WHERE qualification.qualification_id NOT IN (SELECT qualification.qualification_id
+                                             FROM qualified_user,
+                                                  qualification
+                                             WHERE qualification.qualification_id = qualified_user.qualification_id
+                                               AND user_id = $selected_user)
+ORDER BY qualification_id;");
                 $content .= "<div class=\"table-wrapper\"><form><table class=\"alt\">";
                 $content .= "<thead><tr><th></th><th>Nom</th><th>Date &Eacute;mise</th><th>Date d'Expiration</th><th>Note</th></tr></thead>";
                 $content .= "<tbody>";
