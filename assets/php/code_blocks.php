@@ -25,7 +25,7 @@ function block_print_header($class, $preamble){
     echo "
     <!-- Header -->
 	<header $class id=\"header\">
-		<span class=\"logo\"><a href=\"".PREAMBLE."index.php\">Brossard <span>Secteur Aquatique</span></a></span>
+		<span class=\"logo\"><a href=\"".$preamble."index.php\">Brossard <span>Secteur Aquatique</span></a></span>
 		<a href=\"#menu\"><span>Menu</span></a>
 	</header>
     ";
@@ -35,6 +35,28 @@ function block_print_header($class, $preamble){
  * @param $tabs String of <li> based on the user's connection cookie
  */
 function block_print_nav($tabs){
+    $user_id = -1;
+    $db = new mysqli(DB_SERVER,DB_USERNAME,DB_PASSWORD, DB_DATABASE);
+
+    if(isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+        $get_user_data_sql = "SELECT * FROM user WHERE user_id = '".$user_id."'";
+        $get_user_data_res = $db->query($get_user_data_sql);
+        $user_id = $get_user_data_res->fetch_array()['user_id'];
+    }
+
+    if (check_user_permissions($user_id, 1)){
+        //Todo: add all user tabs
+        $tabs.="<li><a href='".PREAMBLE."schedule.php'>Mon horaire</a></li>";
+
+    }else if (check_user_permissions($user_id, 2)){
+        //Todo: add all admin tabs
+        $tabs.="<li><a href='".PREAMBLE."qualification/'>GESTION DE QUALIFICATIONS</a></li>";
+
+    }else{
+        //todo: add all disconnected tabs
+
+    }
     echo "
     <!-- Nav -->
 	<nav id=\"menu\">
@@ -103,9 +125,10 @@ $connection_form = "<h3>Connexion</h3><form action=\"".PREAMBLE."validate_connec
  * Use inside block_print_main()
  * @param $user String connected user's first name
  * @param $notifications String notifications related to the user
+ * @return String
  */
 function block_print_welcome_header($user, $notifications){
-    echo "
+    return "
                             <header class=\"major special\">
 								<h1>Bienvenue $user!</h1>
 								<p>$notifications</p>

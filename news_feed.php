@@ -16,9 +16,12 @@ if(isset($_SESSION['user_id'])) {
     $get_user_data_sql = "SELECT * FROM user WHERE user_id = '".$user_id."'";
     $get_user_data_res = $db->query($get_user_data_sql);
 
+
+    $notifications = 'Test';
+
     while ($user = $get_user_data_res->fetch_array()){
         //todo: implement user object
-    $content .= "<h1>Bienvenue ".$user['user_fname']."!</h1>";
+    $content .= block_print_welcome_header($user['user_fname'], $notifications);
 
     }
     block_print_main(($content));
