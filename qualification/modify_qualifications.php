@@ -18,4 +18,4 @@ ON DUPLICATE KEY UPDATE qual_emitted        = $save_qual_emitted,
                         notes               = ".$save_note.";") or die($db->error);
 }
 
-header("Location: index.php?changed=true");
+header("Location: index.php?changed=true&selected_user=$save_user_id");
