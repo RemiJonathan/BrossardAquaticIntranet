@@ -60,11 +60,11 @@ ORDER BY qualification_id;");
             $table1_content = '';
             $table2_content = '';
 
-            $table1_content .= "<div class=\"table-wrapper\"><table class=\"alt\">";
+            $table1_content .= "<div class=\"table-wrapper\" style=\"display: none;\"><table class=\"alt\">";
             $table1_content .= "<thead><tr><th>Nom</th><th>Date d'Expiration</th><th>Requalification</th><th>Note</th></tr></thead>";
             $table1_content .= "<tbody>";
 
-            $table2_content .= "<div class=\"table-wrapper\"><table class=\"alt\">";
+            $table2_content .= "<div class=\"table-wrapper\" style=\"display: none;\"><table class=\"alt\">";
             $table2_content .= "<thead><tr><th>Nom</th><th>Date &Eacute;mise</th><th>Date d'Expiration</th><th>Note</th></tr></thead>";
             $table2_content .= "<tbody>";
 
@@ -99,6 +99,10 @@ ORDER BY qualification_id;");
 }
 block_print_copyright();
 echo "    </div>";
+
 block_print_scripts(PREAMBLE);
+echo "<script> $(document).ready(function(){
+$(\".table-wrapper\").slideDown(); 
+});</script>";
 echo "	</body>";
 echo "</html>";
