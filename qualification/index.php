@@ -55,7 +55,11 @@ WHERE qualification.qualification_id NOT IN (SELECT qualification.qualification_
                                              WHERE qualification.qualification_id = qualified_user.qualification_id
                                                AND user_id = $selected_user)
 ORDER BY qualification_id;");
+            $get_user_data = $db->query("SELECT * FROM user WHERE user_id = ".$selected_user.";");
 
+            $selected_user_data = $get_user_data->fetch_array();
+
+            $content .="<h2>".$selected_user_data['user_fname']." ".$selected_user_data['user_lname']."</h2>";
 
             $table1_content = '';
             $table2_content = '';
