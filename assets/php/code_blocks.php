@@ -51,7 +51,8 @@ function block_print_nav($tabs){
 
     }else if (check_user_permissions($user_id, 2)){
         //Todo: add all admin tabs
-        $tabs.="<li><a href='".PREAMBLE."qualification/'>GESTION DE QUALIFICATIONS</a></li>";
+        $tabs ="<li><a href='".PREAMBLE."qualification/'>QUALIFICATIONS</a></li>".$tabs;
+        $tabs = "<li><a href='".PREAMBLE."file_operations/document_update.php'>base de donn&eacute;es</a></li>".$tabs;
 
     }else{
         //todo: add all disconnected tabs

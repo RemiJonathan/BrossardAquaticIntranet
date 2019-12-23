@@ -1,6 +1,7 @@
 <?php
-include('../db_operations/connection.php');
-include ('../db_operations/db_functions.php');
+define("PREAMBLE","../");
+include (PREAMBLE."assets/php/code_blocks.php");
+include (PREAMBLE."db_operations/connection.php");
 
 $userArray = array();
 $user_res = $db->query("SELECT user_id, user_lname, user_fname FROM user") or die($db->error);

@@ -1,6 +1,7 @@
 <?php
 define("PREAMBLE","../");
-include('../assets/php/code_blocks.php');
+include (PREAMBLE."assets/php/code_blocks.php");
+include (PREAMBLE."db_operations/connection.php");
 
 //TODO add veritification to check if the uploaded CSV file is actually the intended CSV
 $form_data_emp_list = "<form action=\"uploadEmployeeList.php\" method=\"post\" enctype=\"multipart/form-data\">
@@ -66,10 +67,21 @@ block_print_document_header("Template",PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("","../");
-//TODO: put logic to verify cookie and modify this
-block_print_nav("<li><a href=\"login.php\">Connexion</a></li>");
+
+session_start();
+if(isset($_SESSION['user_id'])) {
+    block_print_nav("");
+    //TODO VALIDATE USER ACCESS
+    block_print_main($form_data_emp_list . $form_data_qual_list. $form_data_snr_list);
+}else{
+    block_print_nav("<li><a href='".PREAMBLE."login.php'>Connexion</a></li>");
+
+    block_print_main("<h2>D&eacute;sol&eacute;, la session est expir&eacute;e ou inexistante</h2>".$connection_form);
+    session_destroy();
+}
 //put code in content
-block_print_main($form_data_emp_list . $form_data_qual_list. $form_data_snr_list);
+
+
 
 block_print_copyright();
 echo "    </div>";

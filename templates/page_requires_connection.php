@@ -2,6 +2,7 @@
 define('PREAMBLE', '../');
 include (PREAMBLE."assets/php/code_blocks.php");
 include (PREAMBLE."db_operations/connection.php");
+include (PREAMBLE."db_operations/connection.php");
 
 
 echo "<!DOCTYPE HTML><html>";
@@ -11,7 +12,7 @@ echo "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);
 session_start();
 if(isset($_SESSION['user_id'])) {
-
+    block_print_nav("");
 }else{
     block_print_nav("<li><a href='".PREAMBLE."login.php'>Connexion</a></li>");
 
