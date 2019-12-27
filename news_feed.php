@@ -1,6 +1,7 @@
 <?php
 define('PREAMBLE', '');
 include (PREAMBLE."assets/php/code_blocks.php");
+include (PREAMBLE."db_operations/connection.php");
 
 echo "<!DOCTYPE HTML><html>";
 block_print_document_header("Acceuil",'');
@@ -10,14 +11,14 @@ block_print_header("", PREAMBLE);
 session_start();
 if(isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    include (PREAMBLE."db_operations/connection.php");
     block_print_nav("<li><a href='logout.php'>D&eacute;connexion</a></li>");
     $content = "";
     $get_user_data_sql = "SELECT * FROM user WHERE user_id = '".$user_id."'";
     $get_user_data_res = $db->query($get_user_data_sql);
 
 
-    $notifications = 'Test';
+    $notifications = '<iframe src="file_operations/document_update.php" width="100%" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>';
+    $notifications .= '<iframe src="qualification" width="100%" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>';
 
     while ($user = $get_user_data_res->fetch_array()){
         //todo: implement user object
@@ -34,6 +35,11 @@ if(isset($_SESSION['user_id'])) {
 block_print_copyright();
 echo "    </div>";
 block_print_scripts('');
+echo "<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+  }
+</script>";
 echo "	</body>";
 echo "</html>";
 
