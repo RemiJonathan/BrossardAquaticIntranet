@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
         $content .= "</select></div><div class=\"col-12\"><ul class=\"actions\"><li><!--<input value='Modifier' type='submit'>--></li></ul></div></div></form>";
         if(isset($_GET['changed'])) $content .= "<h4 style='color: #3dce00'>Changement sauvegard&eacute;</h4>";
         if (isset($_GET['selected_user'])) {
-            $selected_user = $_GET['selected_user'];
+             $selected_user =  $db->real_escape_string($_GET['selected_user']);
 
             $get_user_quals = $db->query("SELECT qualification.qualification_id, qual_name, qual_emitted, qual_expiry, requalification_note, notes
 FROM qualified_user,
