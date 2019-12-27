@@ -13,6 +13,7 @@ function block_print_document_header($title, $preamble)
 		<meta charset=\"utf-8\" />
 		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\" />
 		<link rel=\"stylesheet\" href=\"".$preamble."assets/css/main.css\" />
+		<link rel=\"stylesheet\" href=\"".$preamble."assets/css/tables.scss\"/>
 	</head>
     ";
 }
@@ -190,7 +191,21 @@ function block_print_scripts($preamble){
 			<script src=\"".$preamble."assets/js/browser.min.js\"></script>
 			<script src=\"".$preamble."assets/js/breakpoints.min.js\"></script>
 			<script src=\"".$preamble."assets/js/util.js\"></script>
-			<script src=\"".$preamble."assets/js/main.js\"></script>
+			<script src=\"".$preamble."assets/js/main.js\"></script>\
+			<script> 
+function getWeekNumber(d) {
+    // Copy date so don't modify original
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    // Set to nearest Thursday: current date + 4 - current day number
+    // Make Sunday's day number 7
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+    // Get first day of year
+    var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+    // Calculate full weeks to nearest Thursday
+    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+    // Return array of year and week number
+    return [d.getUTCFullYear(), weekNo];
+}</script>
     ";
 }
 
