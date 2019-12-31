@@ -36,7 +36,7 @@ if (isset($_SESSION['user_id'])) {
             $content .='<tr><th></th>';
             for ($i = 0; $i<7; $i++){
                 if (isset($_GET['week'])){
-                    $content .= "<th><small class='small'>".date('d/m', strtotime($convertedWeekString.$i))."</small></th>";
+                    $content .= "<th><small class='small'>".date('d/m/y', strtotime($convertedWeekString.$i))."</small></th>";
                 }else{
 
                 }
