@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2019 at 09:24 PM
+-- Generation Time: Jan 06, 2020 at 08:24 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -289,6 +289,7 @@ INSERT INTO `qualified_user` (`user_id`, `qualification_id`, `qual_emitted`, `qu
 (800154, 1, NULL, '2020-01-01', '', ''),
 (800154, 2, NULL, '2020-06-01', '', ''),
 (800155, 1, NULL, '2020-09-01', '', ''),
+(800155, 6, '0000-00-00', '0000-00-00', NULL, NULL),
 (800156, 1, NULL, '2020-11-01', 'CB', ''),
 (800156, 2, NULL, '2021-06-01', '', ''),
 (800157, 1, NULL, '2020-11-01', '', ''),
@@ -966,15 +967,22 @@ INSERT INTO `seniority` (`seniority_id`, `user_id`, `seniority_type`, `hours`, `
 
 CREATE TABLE `shift` (
   `shift_id` int(11) NOT NULL,
-  `assigned_user` int(11) NOT NULL,
-  `required_qual` int(11) NOT NULL,
-  `start_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `end_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `assigned_user` int(11) DEFAULT NULL,
+  `required_qual` int(11) DEFAULT NULL,
+  `start_time` time NOT NULL DEFAULT curtime(),
+  `end_time` time NOT NULL,
   `day` varchar(10) NOT NULL,
   `description` text DEFAULT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `shift`
+--
+
+INSERT INTO `shift` (`shift_id`, `assigned_user`, `required_qual`, `start_time`, `end_time`, `day`, `description`, `start_date`, `end_date`) VALUES
+(1, NULL, 1, '08:00:00', '13:00:00', 'Lundi', 'Bain Libre - Test', '2019-05-05', '2020-05-01');
 
 -- --------------------------------------------------------
 
@@ -1097,7 +1105,7 @@ INSERT INTO `user` (`user_id`, `passphrase`, `user_fname`, `user_lname`, `user_a
 (800169, 'Xx6vZxeD', 'Sabrina', 'Chan Fee', NULL, NULL, 1, NULL),
 (800170, 'lhVZTiZJ', 'David', 'Larrivée', NULL, NULL, 1, NULL),
 (800171, 'pcoi0vmb', 'Yan', 'Burton', NULL, NULL, 1, NULL),
-(999999, 'rC0Q7gB3', 'Secteur', 'Aquatique', NULL, NULL, 2, NULL);
+(999999, '$2y$10$T4MuFeyXt3I2lUsl9ruNb.yxjxGlnh2khRGVCeG1OyAnIrY4IHWKW', 'Secteur', 'Aquatique', NULL, NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -1265,7 +1273,7 @@ ALTER TABLE `seniority`
 -- AUTO_INCREMENT for table `shift`
 --
 ALTER TABLE `shift`
-  MODIFY `shift_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `shift_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`

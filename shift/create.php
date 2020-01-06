@@ -60,7 +60,7 @@ if(isset($_SESSION['user_id'])) {
         $content .= "<label>Date de fin</label>";
         $content .= "<input type='date' id='end_date' name='end_date'></div>";
 
-        $content .= "<div class=\"col-12\"><label for='description'>Description</label><textarea id=\"description\" name=\"description\" placeholder=\"Champ optionnel\" maxlength='160' rows=\"6\"></textarea></div>";
+        $content .= "<div class=\"col-12\"><label for='description'>Description</label><textarea id=\"description\" name=\"description\" placeholder=\"Bain Libre\" maxlength='160' rows=\"6\" required></textarea></div>";
 
         $content .="<div class=\"col-12\"><ul class=\"actions\"><li><input type=\"submit\" value=\"Sauvegarder\" /></li></ul></div>";
 
