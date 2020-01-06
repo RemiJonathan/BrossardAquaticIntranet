@@ -20,7 +20,7 @@ if(isset($_SESSION['user_id'])) {
         $content .= "<ul class=\"actions\"><li><a class=\"button\" href=\"../shift\">Retour</a></li></ul>";
 
         //$content .= "";
-        $content .= "<form><div class=\"row gtr-uniform\" style='display: none'>";
+        $content .= "<form method='post' action='create_shift.php'><div class=\"row gtr-uniform\" style='display: none'>";
 
         /*$content .= "<label for='type'>Type de quart</label>";
         $content .= "<select name='type' id='type'><option>Surveillance</option><option>Enseignement</option></select>";
@@ -28,7 +28,7 @@ if(isset($_SESSION['user_id'])) {
 
         //Get all qualifications
         $content .= "<div class=\"col-12\"><label for='req_qual'>Qualification requise</label>";
-        $content .= "<select name='req_qual' id='req_qual' required>";
+        $content .= "<select name='required_qual' id='req_qual' required>";
 
         $content .= "<option label='' disabled selected>";
         $all_quals_res = $db->query('SELECT * FROM qualification;');
