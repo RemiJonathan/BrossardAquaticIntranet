@@ -23,5 +23,5 @@ if (isset($_POST)) {
 
     $db->query($insert_shift_sql);
 
-    header("Location: shift/?shift_created=true");
+    header("Location: ../shift/?shift_created=true");
 }

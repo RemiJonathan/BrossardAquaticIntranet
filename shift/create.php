@@ -17,7 +17,7 @@ if(isset($_SESSION['user_id'])) {
         if(isset($_GET['status_message'])) $content.='<h3 style="color: #0F0;">'.$_GET['status_message'].'</h3>';
         $content .= "<h2>creer un quart</h2>";
 
-        $content .= "<ul class=\"actions\"><li><a class=\"button\" href=\"../shift\">Retour</a></li></ul>";
+        $content .= "<ul class=\"actions\"><li><a class=\"button\" href=\"../shift\" onclick='$(\".gtr-uniform\").slideUp()'>Retour</a></li></ul>";
 
         //$content .= "";
         $content .= "<form method='post' action='create_shift.php'><div class=\"row gtr-uniform\" style='display: none'>";
