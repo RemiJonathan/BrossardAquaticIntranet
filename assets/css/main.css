@@ -68,6 +68,10 @@ input, select, textarea {
 	appearance: none;
 }
 
+td.shift:hover{
+	border: 2px solid #000;
+}
+
 /* Basic */
 
 	@-ms-viewport {
@@ -4637,3 +4641,4 @@ input, select, textarea {
 		color: rgba(40, 40, 40, 0.5);
 		text-align: center;
 	}
+

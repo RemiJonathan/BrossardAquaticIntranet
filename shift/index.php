@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id'])) {
 
         if (!isset($_GET['week'])) $_GET['week'] = date('o-\WW');
 
-        $content .= "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><input type='week' id='week' name='week' onchange='this.form.submit()'></div></div></form>";
+        $content .= "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><input type='week' id='week' name='week' onchange='this.form.submit()'></div></div></form><form method='post' action='edit.php'><input type='button' onclick='this.form.submit()' id='modify' style='display: none;' value='Modifier'><input type='hidden' name='shift_id' id='id'></form>";
         //Table for Schedule
         $content .= "<div class='row'><div class='table-wrapper col-12'>";
 
@@ -69,14 +69,14 @@ if (isset($_SESSION['user_id'])) {
             $shift_array[$index] = $shift;
 
             $duration = round(abs($end_time - $start_time) / 60, 2);
-            $shift_array[$index]['html'] = '<td colspan="' . ($duration / 15) . '">' . $shift['description'] . '</td>';
+            $shift_array[$index]['html'] = '<td class="shift" id="' . $shift['shift_id'] . '" rowspan="' . (($duration / 15)) . '">' . $shift['description'] . '</td>';
 
             $shift_array[$index]['duration'] = $duration;
 
             $index++;
         }
 
-        print_r($shift_array);
+        //print_r($shift_array);
 
         for ($i = strtotime($table_begin); $i <= strtotime($table_end); $i += (15 * 60)) {
             $content .= "<tr>";
@@ -85,13 +85,128 @@ if (isset($_SESSION['user_id'])) {
                     case 0:
                         //Show the hour
                         if ($i % 1800 == 0) {
-                            $content .= "<th>" . date('G:i', $i) . "</th>";
+                            $content .= "<th rowspan='2'>" . date('G:i', $i) . "</th>";
                         } else {
-                            $content .= "<th><i style='color:#fff;'>15</i></th>";
+                            //$content .= "<th><i style='color:#fff;'>15</i></th>";
                         }
                         break;
+                    case 1:
+                        $number = 0;
+                        foreach ($shift_array as $shift) {
+
+                            if (strcmp($shift['day'], 'Dimanche') == 0) {
+                                if (date($shift['start_time']) == date('H:i:s', $i)) {
+                                    $content .= $shift['html'];
+                                    $number++;
+                                } else if (date($shift['end_time']) > date('H:i:s', $i) && date($shift['start_time']) < date('H:i:s', $i)) {
+                                    $number++;
+                                }
+                            }
+
+                        }
+                        if ($number == 0) $content .= "<td></td>";
+                        break;
+                    case 2:
+                        $number = 0;
+                        foreach ($shift_array as $shift) {
+
+                            if (strcmp($shift['day'], 'Lundi') == 0) {
+                                if (date($shift['start_time']) == date('H:i:s', $i)) {
+                                    $content .= $shift['html'];
+                                    $number++;
+                                } else if (date($shift['end_time']) > date('H:i:s', $i) && date($shift['start_time']) < date('H:i:s', $i)) {
+                                    $number++;
+                                }
+                            }
+
+                        }
+                        if ($number == 0) $content .= "<td></td>";
+                        break;
+                    case 3:
+                        $number = 0;
+                        foreach ($shift_array as $shift) {
+
+                            if (strcmp($shift['day'], 'Mardi') == 0) {
+                                if (date($shift['start_time']) == date('H:i:s', $i)) {
+                                    $content .= $shift['html'];
+                                    $number++;
+                                } else if (date($shift['end_time']) > date('H:i:s', $i) && date($shift['start_time']) < date('H:i:s', $i)) {
+                                    $number++;
+                                }
+                            }
+
+                        }
+                        if ($number == 0) $content .= "<td></td>";
+                        break;
+                    case 4:
+                        $number = 0;
+                        foreach ($shift_array as $shift) {
+
+                            if (strcmp($shift['day'], 'Mercredi') == 0) {
+                                if (date($shift['start_time']) == date('H:i:s', $i)) {
+                                    $content .= $shift['html'];
+                                    $number++;
+                                } else if (date($shift['end_time']) > date('H:i:s', $i) && date($shift['start_time']) < date('H:i:s', $i)) {
+                                    $number++;
+                                }
+                            }
+
+                        }
+                        if ($number == 0) $content .= "<td></td>";
+                        break;
+                    case 5:
+                        $number = 0;
+                        foreach ($shift_array as $shift) {
+
+                            if (strcmp($shift['day'], 'Jeudi') == 0) {
+                                if (date($shift['start_time']) == date('H:i:s', $i)) {
+                                    $content .= $shift['html'];
+                                    $number++;
+                                } else if (date($shift['end_time']) > date('H:i:s', $i) && date($shift['start_time']) < date('H:i:s', $i)) {
+                                    $number++;
+                                }
+                            }
+
+                        }
+                        if ($number == 0) $content .= "<td></td>";
+                        break;
+
+                    case 6:
+                        $number = 0;
+                        foreach ($shift_array as $shift) {
+
+                            if (strcmp($shift['day'], 'Vendredi') == 0) {
+                                if (date($shift['start_time']) == date('H:i:s', $i)) {
+                                    $content .= $shift['html'];
+                                    $number++;
+                                } else if (date($shift['end_time']) > date('H:i:s', $i) && date($shift['start_time']) < date('H:i:s', $i)) {
+                                    $number++;
+                                }
+                            }
+
+                        }
+                        if ($number == 0) $content .= "<td></td>";
+                        break;
+                    case 7:
+                        $number = 0;
+                        foreach ($shift_array as $shift) {
+
+                            if (strcmp($shift['day'], 'Samedi') == 0) {
+                                if (date($shift['start_time']) == date('H:i:s', $i)) {
+                                    $content .= $shift['html'];
+                                    $number++;
+                                } else if (date($shift['end_time']) > date('H:i:s', $i) && date($shift['start_time']) < date('H:i:s', $i)) {
+                                    $number++;
+                                }
+                            }
+
+                        }
+                        if ($number == 0) $content .= "<td></td>";
+                        break;
+
                     default:
                         $content .= "<td></td>";
+                        break;
 
                 }
 
@@ -129,5 +244,21 @@ if (isset($_GET['week'])) {
     echo "let result = getWeekNumber(new Date()); document.getElementById(\"week\").value = result[0]+'-W'+result[1];";
 }
 echo "</script>";
+echo "<script>
+
+
+    $('.shift').click(function() {
+      
+    
+    var elementId = $(this).attr('id');
+    console.log('Shift '+elementId+' selected.');
+    $('#modify').slideDown();
+    $('.shift').css('border', 'inherit');
+    $('#'+elementId).css('border','2px solid #000');
+    document.getElementById('id').value = elementId;
+    });
+
+
+</script>";
 echo "	</body>";
 echo "</html>";

@@ -13,15 +13,14 @@ if (isset($_POST)) {
     $day = $db->real_escape_string($_POST['weekday']);
     $start_date = $db->real_escape_string($_POST['start_date']);
     $end_date = $db->real_escape_string($_POST['end_date']);
+    $shift_id = $db->real_escape_string($_POST['shift_id']);
 
-    if (isset($_POST['description'])) {
         $description = $db->real_escape_string($_POST['description']);
-        $insert_shift_sql = "INSERT INTO shift (required_qual, start_time, end_time, day, description, start_date, end_date) VALUES ('$required_qual','$start_time','$end_time','$day','$description','$start_date','$end_date')";
-    } else {
-        $insert_shift_sql = "INSERT INTO shift (required_qual, start_time, end_time, day, start_date, end_date) VALUES  ('$required_qual','$start_time','$end_time','$day','$start_date','$end_date')";
-    }
+
+        $insert_shift_sql = "UPDATE shift SET required_qual = '$required_qual', start_time = '$start_time', end_time = '$end_time', day = '$day', description = '$description', start_date = '$start_date', end_date = '$end_date' WHERE shift_id = '$shift_id'";
+
 
     $db->query($insert_shift_sql) or die('Query Error: '.$db->error.'');
 
-    header("Location: ../shift/?shift_created=true");
+    header("Location: ../shift/?shift_updated=true");
 }

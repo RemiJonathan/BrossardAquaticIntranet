@@ -4,6 +4,7 @@ include (PREAMBLE."assets/php/code_blocks.php");
 include (PREAMBLE."db_operations/connection.php");
 
 
+
 echo "<!DOCTYPE HTML><html>";
 block_print_document_header("Gestion de quart",PREAMBLE);
 echo "<body class=\"is-preload\">";
