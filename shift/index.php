@@ -213,8 +213,8 @@ if (isset($_SESSION['user_id'])) {
             }
 
             $content .= "</tr>";
-        }
 
+        }
 
         $content .= "</tbody></table>";
 
