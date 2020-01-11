@@ -222,6 +222,7 @@ if (isset($_SESSION['user_id'])) {
             $content .= "<div class='col-4'><div class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);'>";
 
             //Put lifeguRD MANAGEMENT HERE
+            $content .= "<h5>Sauveteur</h5>";
 
             $content .= "</div></div>";
 
