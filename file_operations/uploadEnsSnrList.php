@@ -20,7 +20,7 @@ if(isset($_POST["submit"])) {
         $uploadOk = 0;
         $content .=  "<SCRIPT type='text/javascript'> //not showing me this
         alert('$message');
-        window.location.replace('schedule_creation.php');
+        window.location.replace('document_update.php');
     </SCRIPT>";
 
     }
@@ -36,7 +36,7 @@ if(isset($_POST["submit"])) {
 if ($uploadOk == 0) {
     $content .=  "<SCRIPT type='text/javascript'> //not showing me this
         alert('Erreur, fichier incorrect');
-        window.location.replace('schedule_creation.php');
+        window.location.replace('document_update.php');
     </SCRIPT>";
 // if everything is ok, try to upload file
 } else {
@@ -44,7 +44,7 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $newName)) {
         $message =  "<p>Le fichier ". basename( $_FILES["fileToUpload"]["name"]). " a &eacute;t&eacute; charg&eacute; avec succ&egrave;s.</p>";
         $content .=  basename($_FILES["fileToUpload"]["name"]);
-        $content .=  $message .'<br><a href="schedule_creation.php">Retour</a>';
+        $content .=  $message .'<br><a href="document_update.php">Retour</a>';
 
     } else {
         $content .=  "Sorry, there was an error uploading your file.";

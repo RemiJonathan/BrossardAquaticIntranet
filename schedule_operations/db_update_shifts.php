@@ -26,7 +26,7 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
     // Close the file
     fclose($h);
 }
-echo var_dump($shiftArray[389]);
+
 
 
 // Display the code in a readable format
@@ -47,20 +47,91 @@ echo var_dump($shiftArray[389]);
  */
 
 
+echo var_dump($shiftArray[389]);
 
+$found = strpos(strtolower($shiftArray[389][0]),strtolower("PrIvE"));
+if ($found!==false){
+    $content.= "found";
+}
 
+$content.= $shiftArray[389][0];
+$qualArray = getQualArray($db);
+$content.= var_dump($qualArray);
+//$content.= $qualArray[0]["qual_name"];
+$qualId="";
 foreach ($shiftArray as $shift) {
+    $qual="MSA";
+    $found = strpos(strtolower($shift[0]),strtolower("BAIN"));
+    if ($found!==false){
+        $qual="SN";
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("SN"));
+    if ($found!==false){
+        $qual="MSN";
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("PRE"));
+    if ($found!==false){
+        $qual="AQF";
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("AQUA"));
+    if ($found!==false){
+        $qual="AQF";
+    }$found = strpos(strtolower($shift[0]),strtolower("EB"));
+    if ($found!==false){
+        $qual="MS";
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("MB"));
+    if ($found!==false){
+        $qual="MS";
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("CB"));
+    if ($found!==false){
+        $qual="MS";
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("PSG"));
+    if ($found!==false){
+        $qual="MSU";
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("MSA"));
+    if ($found!==false){
+        $qual="ISA";
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("ALERTE"));
+    if ($found!==false){
+        $qual=null;
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("MCPS"));
+    if ($found!==false){
+        $qual=null;
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("MCS"));
+    if ($found!==false){
+        $qual=null;
+    }
+    $found = strpos(strtolower($shift[0]),strtolower("MASQUE"));
+    if ($found!==false){
+        $qual=null;
+    }
 
 
-        insertNewShift($db,$shift[5],$shift[6],$shift[4],$shift[0] ." GR-".$shift[1],$shift[7],$shift[8]);
+    if ($qual!= null){
+        foreach ($qualArray as $possQual){
+            if($qual == $possQual["qual_name"]){
+                $qualId = $possQual["qualification_id"];
+            }
+        }
+    }
 
-   // $content .=  random_str(8)."<br>" .utf8_encode($shift['0'])."<br>".utf8_encode($shift['1'])."<br>".utf8_encode($shift['2'])."<br>";
 
+//$content.= $shift[0]." ".$qual."<br>";
+      insertNewShift($db,$_POST["schedule"],$qualId,$shift[5],$shift[6],$shift[2],$shift[4],$shift[0] ." GR-".$shift[1],$shift[7],$shift[8]);
 
 }
 
+//$content.= var_dump($qualArray);
 
 $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
+
 
 
 ?>

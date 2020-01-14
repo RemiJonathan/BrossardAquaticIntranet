@@ -1,7 +1,9 @@
 <?php
 define("PREAMBLE","../");
-include (PREAMBLE."assets/php/code_blocks.php");
 include (PREAMBLE."db_operations/connection.php");
+include (PREAMBLE."db_operations/db_functions.php");
+include (PREAMBLE."assets/php/code_blocks.php");
+
 
 $userArray = array();
 $user_res = $db->query("SELECT user_id, user_lname, user_fname FROM user") or die($db->error);
@@ -59,7 +61,7 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
 
 
 
-$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
+$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="document_update.php">Retour</a>';
 
 
 
@@ -116,8 +118,8 @@ foreach ($snrArray as $snr) {
 
 
 <?php
-define('PREAMBLE', '../');
-include ("../assets/php/code_blocks.php");
+
+
 
 $content .=  "<!DOCTYPE HTML><html>";
 
