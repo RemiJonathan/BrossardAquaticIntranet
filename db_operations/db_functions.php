@@ -147,11 +147,23 @@ function parseDate($rawDate){
     return $finalDate;
 }
 
-function insertNewShift($db, $start_time, $end_time, $day, $description, $start_date, $end_date){
+function insertNewShift($db, $schedule_id, $required_qual, $start_time, $end_time, $location, $day, $description, $start_date, $end_date){
 
-    $stmt = $db -> prepare("INSERT INTO shift (start_time, end_time, day, description, start_date, end_date) 
-VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("ssssss", $start_time, $end_time, $day, $description, $start_date, $end_date);
+    $stmt = $db -> prepare("INSERT INTO shift (schedule_id, required_qual, start_time, 
+                   end_time, location, day, description, start_date, end_date) 
+                   VALUES (?,?,?,?,?,?,?,?,?);");
+
+    $stmt->bind_param("sssssssss", $schedule_id, $required_qual, $start_time, $end_time, $location, $day, $description, $start_date, $end_date);
+
+    $stmt->execute();
+
+}
+
+function insertNewSchedule($db, $sch_start_date, $sch_end_date, $avail_deadline, $title){
+
+    $stmt = $db -> prepare("INSERT INTO schedule (sch_start_date, sch_end_date, avail_deadline, title) VALUES (?,?,?,?)
+");
+    $stmt->bind_param("ssss", $sch_start_date, $sch_end_date, $avail_deadline, $title);
 
     $stmt->execute();
 

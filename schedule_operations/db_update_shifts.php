@@ -61,6 +61,7 @@ foreach ($shiftArray as $shift) {
 
 
 $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
+$content .= $_POST["schedule"];
 
 
 ?>
