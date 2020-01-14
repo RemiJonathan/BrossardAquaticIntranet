@@ -1,4 +1,15 @@
 <?php
+
+function getQualArray($db){
+    $qualArray = array();
+    $result = $db->query("SELECT * FROM qualification");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($qualArray,$row);
+    }
+    
+    return $qualArray;
+}
+
 function insertNewRegUser($db, $id, $pwd, $fname, $lname){
 
    $stmt = $db -> prepare("INSERT INTO user (user_id, passphrase, user_fname, user_lname) VALUES (?,?,?,?)

@@ -360,7 +360,7 @@ SN,01,PIS-AB,Sauveteur national  (AB - Sa - 16h),Samedi,16:00,19:00,2020-01-11,2
 SN,01,AB-SALLE,Sauveteur national  (AB - Sa - 16h),Samedi,19:00,21:00,2020-01-11,2020-03-14,10,J. Gauvin,16,,12,2-01-234-12-413,,A-SN,,37576,
 MSA,01,AB-SALLE,Moniteur de sécurité aquatique (AB - Sa - 13h),Samedi,13:00,15:30,2020-01-11,2020-03-14,10,J. Gauvin,15,,16,2-01-234-12-413, 359.00  $ ,A-L-MON,,37578,
 MSA,01,PIS-AB,Moniteur de sécurité aquatique (AB - Sa - 13h),Samedi,15:00,18:00,2020-01-11,2020-03-14,10,J. Gauvin,15,,16,2-01-234-12-413,,A-L-MON,,37578,
-ALERTE,SN,LT,Manuel Alerte (ALERTESN),Samedi,11:00,12:00,2020-01-11,2020-03-14,1,J. Gauvin,,,,2-01-234-11-459, 50.00  $ ,A-ALERTE,,,
+ALERTE,SN,PIS-LT,Manuel Alerte (ALERTESN),Samedi,11:00,12:00,2020-01-11,2020-03-14,1,J. Gauvin,,,,2-01-234-11-459, 50.00  $ ,A-ALERTE,,,
 MCPS,PS,LT,Manuel canadien de premiers soins (MCPSPS),Samedi,11:00,12:00,2020-01-11,2020-03-14,1,J. Gauvin,,,,2-01-234-11-459, 19.45  $ ,A-MPSG,,,
 MCS,MB,LT,Manuel canadien de sauvetage (MCSMB),Samedi,11:00,12:00,2020-01-11,2020-03-14,1,J. Gauvin,,,,2-01-234-11-459, 50.00  $ ,A-MCS,,,
 MASQUE,PS,LT,Masque de poche (MASQUEPS),Samedi,11:00,12:00,2020-01-11,2020-03-14,1,J. Gauvin,,,,2-01-234-11-459, 10.50  $ ,A-MASQUE,,,
