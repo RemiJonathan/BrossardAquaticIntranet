@@ -69,7 +69,7 @@ foreach ($empArray as $employee) {
 }
 
 
-$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="document_update.php">Retour</a>';
+$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
 
 
 ?>

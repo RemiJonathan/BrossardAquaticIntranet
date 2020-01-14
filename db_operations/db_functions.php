@@ -147,5 +147,15 @@ function parseDate($rawDate){
     return $finalDate;
 }
 
+function insertNewShift($db, $start_time, $end_time, $day, $description, $start_date, $end_date){
+
+    $stmt = $db -> prepare("INSERT INTO shift (start_time, end_time, day, description, start_date, end_date) 
+VALUES (?,?,?,?,?,?)");
+    $stmt->bind_param("ssssss", $start_time, $end_time, $day, $description, $start_date, $end_date);
+
+    $stmt->execute();
+
+}
+
 
 
