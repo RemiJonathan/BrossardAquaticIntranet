@@ -2,6 +2,7 @@
 define("PREAMBLE","../");
 include (PREAMBLE."assets/php/code_blocks.php");
 include (PREAMBLE."db_operations/connection.php");
+include (PREAMBLE."db_operations/db_functions.php");
 
 $filename = 'uploads/list_qual.csv';
 $content ="";
@@ -47,7 +48,7 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
 
 
 
-$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="document_update.php">Retour</a>';
+$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
 
 
 

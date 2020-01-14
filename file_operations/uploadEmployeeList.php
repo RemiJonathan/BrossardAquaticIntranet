@@ -1,4 +1,8 @@
 <?php
+define("PREAMBLE","../");
+
+include (PREAMBLE."db_operations/connection.php");
+
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -16,7 +20,7 @@ if(isset($_POST["submit"])) {
         $uploadOk = 0;
         $content .=  "<SCRIPT type='text/javascript'> //not showing me this
         alert('$message');
-        window.location.replace('document_update.php');
+        window.location.replace('schedule_creation.php');
     </SCRIPT>";
 
     }
@@ -32,7 +36,7 @@ if(isset($_POST["submit"])) {
 if ($uploadOk == 0) {
     $content .=  "<SCRIPT type='text/javascript'> //not showing me this
         alert('Erreur, fichier incorrect');
-        window.location.replace('document_update.php');
+        window.location.replace('schedule_creation.php');
     </SCRIPT>";
 // if everything is ok, try to upload file
 } else {
@@ -40,7 +44,7 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $newName)) {
         $message =  "<p>Le fichier ". basename( $_FILES["fileToUpload"]["name"]). " a &eacute;t&eacute; charg&eacute; avec succ&egrave;s.</p>";
         $content .=  basename($_FILES["fileToUpload"]["name"]);
-        $content .=  $message .'<br><a href="document_update.php">Retour</a>';
+        $content .=  $message .'<br><a href="schedule_creation.php">Retour</a>';
 
     } else {
         $content .=  "Sorry, there was an error uploading your file.";

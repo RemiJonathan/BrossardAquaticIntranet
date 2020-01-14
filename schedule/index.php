@@ -17,14 +17,37 @@ if (isset($_SESSION['user_id'])) {
 
         $content = "<h1>Gestion d'horaire</h1>";
         $content .= "<h2>selectionez une semaine</h2>";
-        $content .= "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><input type='week' id='week' name='week' onchange='this.form.submit()'></div></div></form>";
+        $content .= "<ul class=\"nav nav-tabs\">
+  <li class=\"nav-item\">
+    <a class=\"nav-link active\" href=\"#\">Antoine Brossard</a>
+  </li>
+  <li class=\"nav-item\">
+    <a class=\"nav-link\" href=\"#\">Complexe Aquatique</a>
+  </li>
+  <li class=\"nav-item\">
+    <a class=\"nav-link inactive\" href=\"#\">Complex Aquatique</a>
+  </li>
+</ul>";
+
         if (isset($_GET['week'])) {
             //Table for Schedule
-            $content .= "<div class='row'><div class='table-wrapper col-8'>";
+            $content .= "<br/><br/><div class='row'><div class='col-2'>
+<nav class=\"nav flex-column nav-pills\">
+  <a id='WD0' class=\"nav-link active\">Dimanche</a>
+            <a id='WD1' class=\"nav-link \">Lundi</a>
+            <a id='WD2' class=\"nav-link \">Mardi</a>
+            <a id='WD3' class=\"nav-link \">Mercredi</a>
+            <a id='WD4' class=\"nav-link \">Jeudi</a>
+            <a id='WD5' class=\"nav-link \">Vendredi</a>
+            <a id='WD6' class=\"nav-link \">Samedi</a>
+  
+</nav>
+</div><div class='table-wrapper col-8'>";
 
             $content .= "<table style='empty-cells: show' class=\"alt\">
-    <tbody>
-        <tr>
+    <tbody>";
+
+        /*$content .="<tr>
             <th style='width: 8%'></th>
             <th id='weekDay0' style='width: 12.85%'>Dimanche</th>
             <th id='weekDay1' style='width: 12.85%'>Lundi</th>
@@ -33,10 +56,10 @@ if (isset($_SESSION['user_id'])) {
             <th id='weekDay4' style='width: 12.85%'>Jeudi</th>
             <th id='weekDay5' style='width: 12.85%'>Vendredi</th>
             <th id='weekDay6' style='width: 12.85%'>Samedi</th>
-        </tr>";
+        </tr>";*/
 
             $convertedWeekString = $_GET['week'][0] . $_GET['week'][1] . $_GET['week'][2] . $_GET['week'][3] . $_GET['week'][5] . $_GET['week'][6] . $_GET['week'][7];
-            $content .= '<tr><th></th>';
+            //$content .= '<tr><th></th>';
             for ($i = 0; $i < 7; $i++) {
                 switch ($i) {
                     case 0:
@@ -46,9 +69,9 @@ if (isset($_SESSION['user_id'])) {
                         $lastday = date('y-m-d', strtotime($convertedWeekString . $i));
                         break;
                 }
-                $content .= "<th><small class='small'>" . date('d/m/y', strtotime($convertedWeekString . $i)) . "</small></th>";
+                //$content .= "<th><small class='small'>" . date('d/m/y', strtotime($convertedWeekString . $i)) . "</small></th>";
             }
-            $content .= '</tr>';
+            //$content .= '</tr>';
 
             $this_weeks_shifts_sql = "SELECT * FROM shift WHERE start_date <= '$firstday' AND end_date >= '$lastday'";
             $this_weeks_earliest_shift_sql = $this_weeks_shifts_sql . " ORDER BY start_time";
@@ -219,7 +242,7 @@ if (isset($_SESSION['user_id'])) {
 
             $content .= "</div>";
 
-            $content .= "<div class='col-4'><div class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);'>";
+            $content .= "<div class='col-2'><div class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);'>";
 
             //Put lifeguRD MANAGEMENT HERE
             $content .= "<h5>Sauveteur</h5>";

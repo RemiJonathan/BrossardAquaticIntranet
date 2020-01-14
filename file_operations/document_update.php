@@ -1,7 +1,8 @@
 <?php
 define("PREAMBLE","../");
-include (PREAMBLE."assets/php/code_blocks.php");
 include (PREAMBLE."db_operations/connection.php");
+
+include (PREAMBLE."assets/php/code_blocks.php");
 
 //TODO add veritification to check if the uploaded CSV file is actually the intended CSV
 $form_data_emp_list = "<form action=\"uploadEmployeeList.php\" method=\"post\" enctype=\"multipart/form-data\">

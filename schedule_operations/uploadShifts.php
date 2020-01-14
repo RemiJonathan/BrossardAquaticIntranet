@@ -1,8 +1,8 @@
 <?php
-
 define("PREAMBLE","../");
 
 include (PREAMBLE."db_operations/connection.php");
+
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -40,7 +40,7 @@ if ($uploadOk == 0) {
     </SCRIPT>";
 // if everything is ok, try to upload file
 } else {
-    $newName = $target_dir . 'list_qual.csv';
+    $newName = $target_dir . 'shifts_file.csv';
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $newName)) {
         $message =  "<p>Le fichier ". basename( $_FILES["fileToUpload"]["name"]). " a &eacute;t&eacute; charg&eacute; avec succ&egrave;s.</p>";
         $content .=  basename($_FILES["fileToUpload"]["name"]);

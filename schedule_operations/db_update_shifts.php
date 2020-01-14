@@ -1,21 +1,11 @@
 <?php
-define("PREAMBLE","../");
-include (PREAMBLE."assets/php/code_blocks.php");
-include (PREAMBLE."db_operations/connection.php");
+include('../db_operations/connection.php');
+include ('../db_operations/db_functions.php');
 
-$userArray = array();
-$user_res = $db->query("SELECT user_id, user_lname, user_fname FROM user") or die($db->error);
-while ($user = $user_res->fetch_array()) {
-    $userArray[] = array("id" => $user["user_id"], "fname" => $user["user_fname"], "lname" => $user["user_lname"]);
-//echo $user["user_id"].$user["user_fname"] . $user["user_lname"]."  <br>";
-}
-
-
-
-$filename = 'uploads/list_surv_snr.csv';
+$filename = 'uploads/shifts_file.csv';
 $content ="";
 // The nested array to hold all the arrays
-$snrArray = [];
+$shiftArray = [];
 
 // Open the file for reading
 if (($h = fopen("{$filename}", "r")) !== FALSE)
@@ -25,16 +15,18 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
     while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
         // Each individual array is being pushed into the nested array
 
-                array_push($snrArray, $data);
-
+        if (current($data)!="") {
+            array_push($shiftArray, $data);
+        }else{
+            break;
+        }
     }
-    array_shift($snrArray);
+    array_shift($shiftArray);
+
     // Close the file
     fclose($h);
 }
-
-
-
+echo var_dump($shiftArray[389]);
 
 
 // Display the code in a readable format
@@ -57,59 +49,18 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
 
 
 
+foreach ($shiftArray as $shift) {
 
 
-$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
+        insertNewShift($db,$shift[5],$shift[6],$shift[4],$shift[0] ." GR-".$shift[1],$shift[7],$shift[8]);
+
+   // $content .=  random_str(8)."<br>" .utf8_encode($shift['0'])."<br>".utf8_encode($shift['1'])."<br>".utf8_encode($shift['2'])."<br>";
 
 
-
-/*
- * 0 -> lname
- * 1 -> fname
- * 2 -> continued_service
- * 3 -> hours
-
- */
-// input mask is 2008-07-20
-/*
-$test1 = $snrArray[5][0];
-$test1 = str_replace("\"","",$test1);
-
-$test2 = $snrArray[5][1];
-$test2 = ltrim(str_replace("\"","",$test2));
-*/
-
-
-
-
-
-
-$content.="<br>";
-foreach ($snrArray as $snr) {
-
-    $nameArray = explode(", ",$snr[0]);
-    $lname =$nameArray[0];
-    $fname =$nameArray[1];
-
-    foreach($userArray as $user){
-        if($user["lname"]==$lname && $user["fname"]==$fname){
-            //echo $user["id"]."<br>";
-
-            $origDate = $snr[1];
-            $origDate = explode("/",$origDate);
-            $finalDate = $origDate[2]."-".$origDate[0]."-".$origDate[1];
-
-
-            insertNewSurvSnr($db,$user["id"],$snr[2],$finalDate);
-        }
-    }
 }
 
 
-
-
-
-
+$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
 
 
 ?>
