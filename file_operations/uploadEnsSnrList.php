@@ -36,7 +36,7 @@ if(isset($_POST["submit"])) {
 if ($uploadOk == 0) {
     $content .=  "<SCRIPT type='text/javascript'> //not showing me this
         alert('Erreur, fichier incorrect');
-        window.location.replace('schedule_creation.php');
+        window.location.replace('document_update.php');
     </SCRIPT>";
 // if everything is ok, try to upload file
 } else {
