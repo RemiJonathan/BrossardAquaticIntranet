@@ -1,5 +1,5 @@
 <?php
-
+//ini_set('memory_limit', 1024*1024*3);
 
 /**
  * @param $title String will set the text at the top of the page
@@ -14,7 +14,6 @@ function block_print_document_header($title, $preamble)
 		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\" />
 		<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
 		<link rel=\"stylesheet\" href=\"".$preamble."assets/css/main.css\" />
-		<link rel=\"stylesheet\" href=\"".$preamble."assets/css/tables.scss\"/>
 	</head>
     ";
 }
@@ -209,4 +208,96 @@ function check_user_permissions($user_id, $permission_level){
     $user = $check_permission_sql->fetch_array();
 
     return  $user['role_id'] == $permission_level;
+}
+
+/**
+ * @param $selectedWeekDay String
+ * @param $convertedWeekString String format YYYY-\WW
+ * @param $db
+ * @return string HTML table
+ */
+function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db){
+    $content = "";
+    $content .= "<table style='empty-cells: show; table-layout: fixed; width: 100%;' class=\"alt\">
+    <tbody>
+    <tr><th>$selectedWeekDay</th></tr>
+        ";
+
+    $content .= '<tr><th></th></tr>';
+    for ($i = 0; $i < 7; $i++) {
+        switch ($i) {
+            case 0:
+                $firstday = date('y-m-d', strtotime($convertedWeekString . $i));
+                break;
+            case 6:
+                $lastday = date('y-m-d', strtotime($convertedWeekString . $i));
+                break;
+        }
+    }
+    $this_weeks_shifts_sql = "SELECT * FROM shift WHERE start_date <= '$firstday' AND end_date >= '$lastday' AND day = '$selectedWeekDay'";
+    $this_weeks_earliest_shift_sql = $this_weeks_shifts_sql . " ORDER BY start_time";
+    $this_weeks_latest_ending_shift_sql = $this_weeks_shifts_sql . " ORDER BY end_time DESC";
+    $this_weeks_shifts_res = $db->query($this_weeks_shifts_sql." ORDER BY start_time");
+
+    $table_begin = $db->query($this_weeks_earliest_shift_sql)->fetch_array()['start_time'];
+    $table_end = $db->query($this_weeks_latest_ending_shift_sql)->fetch_array()['end_time'];
+
+
+    $index = 0;
+    $shift_array = array();
+    while ($shift = $this_weeks_shifts_res->fetch_array(MYSQLI_ASSOC)) {
+        $start_time = strtotime($shift['start_time']);
+        $end_time = strtotime($shift['end_time']);
+
+        $shift_array[$index] = $shift;
+
+        $duration = round(abs($end_time - $start_time) / 60, 2);
+        $shift_array[$index]['html'] = '<td class="shift" id="' . $shift['shift_id'] . '" rowspan="' . (($duration / 5)) . '">' . $shift['description'] . '</td>';
+
+        $shift_array[$index]['duration'] = $duration;
+
+        $index++;
+    }
+
+$counter = 0;
+    for ($i = strtotime($table_begin); $i <= strtotime($table_end); $i += (5 * 60)) {
+        $content .= "<tr>";
+        for ($j = 0; $j < 2; $j++) {
+            switch ($j) {
+                case 0:
+                    if ($i % 1800 == 0) {
+                        $content .= "<th rowspan='6'>" . date('G:i', $i) . "</th>"; $counter ++;
+                    } else {
+                        if (strtotime($table_begin) % 1800 != 0 && ($i - strtotime($table_begin) < 1800) && $counter == 0) {
+                            $content .= "<th id='".$table_begin.",".($i - strtotime($table_begin))."' rowspan='".(6-(($i % 1800)/300))."'></th>";$counter++;
+                        }else{
+                        $content .= "<th style='display: none'><i></i></th>";
+}
+                    }
+                    break;
+                default:
+                    $number = 0;
+                    foreach ($shift_array as $key => $shift) {
+
+                        if (strcmp($shift['day'], $selectedWeekDay) == 0) {
+                            if (date($shift['start_time']) == date('H:i:s', $i)) {
+                                $content .= $shift['html'];
+                                $number++;
+                            } else if (date($shift['end_time']) > date('H:i:s', $i) && date($shift['start_time']) < date('H:i:s', $i)) {
+                                $number++;
+                                $content .= "<td style='display: none'></td>";
+                            }
+                        }
+                    }
+                    break;}
+
+        }
+
+        $content .= "</tr>";
+
+    }
+
+    $content .= "</tbody></table>";
+
+    return $content;
 }

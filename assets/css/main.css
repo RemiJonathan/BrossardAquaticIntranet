@@ -3086,6 +3086,7 @@ td.shift:hover{
 		}
 
 	table th {
+		font-size: x-small;
 		color: #000000;
 	}
 
@@ -3098,7 +3099,9 @@ td.shift:hover{
 	}
 
 	table.alt tbody tr td {
+		font-size: small;
 		border-color: rgba(99, 116, 133, 0.25);
+		word-wrap:break-word
 	}
 
 /* Wrapper */
