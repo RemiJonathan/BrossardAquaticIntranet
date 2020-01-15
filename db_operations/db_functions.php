@@ -1,4 +1,28 @@
 <?php
+function getSessions($db){
+    $sessionsArray = array();
+    $result = $db->query("SELECT * FROM schedule");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($sessionsArray,$row);
+    }
+
+    return $sessionsArray;
+}
+
+function deleteSession($db, $sch_id){
+
+    $db->query("DELETE FROM schedule WHERE sch_id = $sch_id");
+
+}
+
+function updateSession($db, $sch_id, $sch_start_date, $sch_end_date, $avail_deadline, $title){
+
+        $stmt = $db -> prepare("UPDATE schedule SET  sch_start_date = ?, sch_end_date = ?, avail_deadline = ?, title = ? WHERE sch_id = ? ");
+        $stmt->bind_param("ssssi", $sch_start_date, $sch_end_date, $avail_deadline, $title, $sch_id);
+
+        $stmt->execute();
+
+}
 
 function getQualArray($db){
     $qualArray = array();

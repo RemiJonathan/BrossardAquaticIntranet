@@ -12,6 +12,7 @@ function block_print_document_header($title, $preamble)
 		<title>$title</title>
 		<meta charset=\"utf-8\" />
 		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\" />
+		<link href=\"//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\">
 		<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
 		<link rel=\"stylesheet\" href=\"".$preamble."assets/css/main.css\" />
 		<link rel=\"stylesheet\" href=\"".$preamble."assets/css/tables.scss\"/>
@@ -54,8 +55,9 @@ function block_print_nav($tabs){
     }else if (check_user_permissions($user_id, 2)){
         //Todo: add all admin tabs
         $tabs ="<li><a href='".PREAMBLE."qualification/'>Gestion de qualifications</a></li>".$tabs;
-        $tabs = "<li><a href='".PREAMBLE."file_operations/schedule_creation.php'>base de donn&eacute;es</a></li>".$tabs;
+        $tabs = "<li><a href='".PREAMBLE."file_operations/document_update.php'>base de donn&eacute;es</a></li>".$tabs;
         $tabs = "<li><a href='".PREAMBLE."shift/'>Gestion de quart</a></li>".$tabs;
+        $tabs = "<li><a href='".PREAMBLE."schedule_operations/schedule_creation.php'>Sessions</a></li>".$tabs;
         $tabs = "<li><a href='".PREAMBLE."schedule/'>Gestion d'horaire</a></li>".$tabs;
 
     }else{

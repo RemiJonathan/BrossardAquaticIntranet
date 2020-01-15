@@ -1,11 +1,14 @@
 <?php
 define("PREAMBLE","../");
 include (PREAMBLE."db_operations/connection.php");
-
+include (PREAMBLE."db_operations/db_functions.php");
 include (PREAMBLE."assets/php/code_blocks.php");
+$sessionsArray=getSessions($db);
+$form_data_schedule="";
+
 
 //TODO add option to create new semester and add files to it
-$form_data_schedule = "<form action=\"createSchedule.php\" method=\"post\" enctype=\"multipart/form-data\">
+$form_data_schedule .= "<form action=\"createSchedule.php\" method=\"post\" enctype=\"multipart/form-data\">
     <h2>Cr&eacute;er nouvel horaire</h2>
     Titre de l'horaire: <input type='text' name='title'><br>
     Date de d&eacute;but &nbsp; <input type='date' name='sch_start_date'><br><br>
@@ -45,7 +48,7 @@ $form_data_shift_list .= "</select><br>";
 $form_data_shift_list .=" <h5>Mettre &agrave; jour les quarts de travail</h5>
 
 <input type=\"submit\" value=\"Mettre &agrave; jour\" name=\"submit\">
-</form> ";
+</form><br><hr></br><a style='text-decoration:none; ' href=\"schedule_modification.php\" class=\"btn btn-primary btn-lg\" role=\"button\" aria-pressed=\"true\">Modifier Sessions</a>";
 
 
 

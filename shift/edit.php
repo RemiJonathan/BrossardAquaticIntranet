@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
         $content .= "<ul class=\"actions\"><li><a class=\"button\" href=\"../shift\" onclick='$(\".gtr-uniform\").slideUp()'>Retour</a></li></ul>";
 
         //$content .= "";
-        $content .= "<form method='post' action='update.php'><div class=\"row gtr-uniform\" style='display: none'>";
+        $content .= "<form method='post' action='delete.php'><div class=\"row gtr-uniform\" style='display: none'>";
 
         /*$content .= "<label for='type'>Type de quart</label>";
         $content .= "<select name='type' id='type'><option>Surveillance</option><option>Enseignement</option></select>";
