@@ -13,60 +13,93 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     block_print_nav("");
     if (check_user_permissions($_SESSION['user_id'], 2)) {
-        $content = "<h1>Gestion de quart</h1>";
-        if (isset($_GET['status_message'])) $content .= '<h3 style="color: #0F0;">' . $_GET['status_message'] . '</h3>';
-        $content .= "<a href='create.php'><button>Creer un quart</button></a><br/><br/>";
+
+        echo "<section class=\"wrapper style2\" id=\"main\">
+						<div class=\"inner\">";
+
+        echo "<h1>Gestion de quart</h1>";
+        if (isset($_GET['status_message'])) echo '<h3 style="color: #0F0;">' . $_GET['status_message'] . '</h3>';
+        echo "<a href='create.php'><button>Creer un quart</button></a><br/><br/>";
 
         if (!isset($_GET['week'])) $_GET['week'] = date('o-\WW');
         $convertedWeekString = $_GET['week'][0] . $_GET['week'][1] . $_GET['week'][2] . $_GET['week'][3] . $_GET['week'][5] . $_GET['week'][6] . $_GET['week'][7];
 
-        $content .= "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><input type='week' id='week' name='week' onchange='this.form.submit()'></div></div></form><form method='post' action='edit.php'><input type='button' onclick='this.form.submit()' id='modify' style='display: none;' value='Modifier'><input type='hidden' name='shift_id' id='id'></form>";
+        echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><input type='week' id='week' name='week' onchange='this.form.submit()'></div></div></form><form method='post' action='edit.php'><input type='button' onclick='this.form.submit()' id='modify' style='display: none;' value='Modifier'><input type='hidden' name='shift_id' id='id'></form>";
         //Table for Schedule
-        $content .= "<div class='row'><div class='10'>";
 
-        $content .= printWeekDayTable('Dimanche', $convertedWeekString, $db);
-
-        $content .= "</div>";
-
-        $content .= "<div class='10' style='display: none'>";
-
-        $content .= printWeekDayTable('Lundi', $convertedWeekString, $db);
-
-        $content .= "</div>";
-
-        $content .= "<div class='10'  style='display: none'>";
-
-        $content .= printWeekDayTable('Mardi', $convertedWeekString, $db);
-
-        $content .= "</div>";
-
-        $content .= "<div class='10'  style='display: none'>";
-
-        $content .= printWeekDayTable('Mercredi', $convertedWeekString, $db);
-
-        $content .= "</div>";
+        //Pills
 
 
-        /* $content .= "<div class='10'  style='display: none'>";
+        echo "<div class='row'><div class='col-2'>
 
-        $content .= printWeekDayTable('Jeudi', $convertedWeekString, $db);
+        <nav class=\"nav flex-column nav-pills\">
+        
+          <a id='WD0' class=\"nav-link active\">Dimanche</a>
+          
+                    <a id='WD1' class=\"nav-link \">Lundi</a>
+                    
+                    <a id='WD2' class=\"nav-link \">Mardi</a>
+                   
+                    <a id='WD3' class=\"nav-link \">Mercredi</a>
+                    
+                    <a id='WD4' class=\"nav-link \">Jeudi</a>
+                    
+                    <a id='WD5' class=\"nav-link \">Vendredi</a>
+                    
+                    <a id='WD6' class=\"nav-link \">Samedi</a>
+                   
+          
+          
+        </nav></div>";
+        echo "<div class='col-10'>";
 
-        $content .= "</div>";
 
-        $content .= "<div class='10' style='display: none'>";
+        echo printWeekDayTable('Dimanche', $convertedWeekString, $db);
 
-        $content .= printWeekDayTable('Vendredi', $convertedWeekString, $db);
+        echo "</div>";
+         echo "<div class='col-10'  style='display: none'>";   
 
-        $content .= "</div>";
+        echo printWeekDayTable('Lundi', $convertedWeekString, $db);
 
-        $content .= "<div class='10' style='display: none'>";
-
-        $content .= printWeekDayTable('Samedi', $convertedWeekString, $db);
-
-        $content .= "</div></div>"; */
+        echo "</div>";
 
 
-        block_print_main($content . "<div class=' 12'>");
+        echo "<div class='col-10'  style='display: none'>";
+
+        echo printWeekDayTable('Mardi', $convertedWeekString, $db);
+
+        echo "</div>";
+
+
+        echo "<div class='col-10'  style='display: none'>";
+
+        echo printWeekDayTable('Mercredi', $convertedWeekString, $db);
+
+        echo "</div>";
+
+
+        echo "<div class='col-10'  style='display: none'>";
+
+        echo printWeekDayTable('Jeudi', $convertedWeekString, $db);
+
+        echo "</div>";
+
+
+        echo "<div class='col-10' style='display: none'>";
+
+        echo printWeekDayTable('Vendredi', $convertedWeekString, $db);
+
+        echo "</div>";
+
+
+        echo "<div class='col-10' style='display: none'>";
+
+        echo printWeekDayTable('Samedi', $convertedWeekString, $db);
+
+        echo "</div></div>";
+
+        echo "</div>
+					</section>";
     } else {
         block_print_nav("<li><a href='" . PREAMBLE . "login.php'>Connexion</a></li>");
 

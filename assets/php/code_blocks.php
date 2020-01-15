@@ -269,7 +269,7 @@ $counter = 0;
                         $content .= "<th rowspan='6'>" . date('G:i', $i) . "</th>"; $counter ++;
                     } else {
                         if (strtotime($table_begin) % 1800 != 0 && ($i - strtotime($table_begin) < 1800) && $counter == 0) {
-                            $content .= "<th id='".$table_begin.",".($i - strtotime($table_begin))."' rowspan='".(6-(($i % 1800)/300))."'></th>";$counter++;
+                            $content .= "<th rowspan='".(6-(($i % 1800)/300))."'></th>";$counter++;
                         }else{
                         $content .= "<th style='display: none'></th>";
 }
