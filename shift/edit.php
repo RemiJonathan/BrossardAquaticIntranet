@@ -55,10 +55,10 @@ if (isset($_SESSION['user_id'])) {
 
 
         $content .= "<div class=\"col-6\"><label>Heure de d&eacute;but</label>";
-        $content .= "<input type='time' id='start_time' name='start_time' step='900' value='$start_time' required></div>";
+        $content .= "<input type='time' id='start_time' name='start_time' step='300' value='$start_time' required></div>";
 
         $content .= "<div class=\"col-4\"><label>Heure de fin</label>";
-        $content .= "<input type='time' id='end_time' name='end_time' step='900' value='$end_time' required></div>";
+        $content .= "<input type='time' id='end_time' name='end_time' step='300' value='$end_time' required></div>";
 
         $content .= "<div class=\"col-6\"><label>Jour de la semaine</label><div class=\"col-12\">";
         $content .= "<div class=\"col-6\"><input type='radio' name='weekday' id='weekSunday' value='Dimanche'";
