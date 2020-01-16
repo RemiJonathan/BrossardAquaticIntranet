@@ -36,6 +36,8 @@ function getQualArray($db){
 
 function insertNewRegUser($db, $id, $pwd, $fname, $lname){
 
+    $fname = trim($fname);
+    $lname = trim($lname);
    $stmt = $db -> prepare("INSERT INTO user (user_id, passphrase, user_fname, user_lname) VALUES (?,?,?,?)
 ");
     $stmt->bind_param("isss", $id, $pwd, $fname, $lname);
@@ -197,6 +199,18 @@ function deleteExistingShifts($db, $schedule_id){
 
         $result->close();
 
+}
+
+function deleteSurvList($db){
+
+        $type="surveillance";
+        $db->query("DELETE FROM seniority WHERE seniority_type = $type");
+}
+
+function deleteEnsList($db){
+
+    $type="enseignement";
+    $db->query("DELETE FROM seniority WHERE seniority_type = $type");
 }
 
 function insertNewShift($db, $schedule_id, $required_qual, $start_time, $end_time, $location, $day, $description, $start_date, $end_date){

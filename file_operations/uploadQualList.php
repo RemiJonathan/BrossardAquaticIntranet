@@ -20,7 +20,7 @@ if(isset($_POST["submit"])) {
         $uploadOk = 0;
         $content .=  "<SCRIPT type='text/javascript'> //not showing me this
         alert('$message');
-        window.location.replace('schedule_creation.php');
+        window.location.replace('document_update.php');
     </SCRIPT>";
 
     }
@@ -36,7 +36,7 @@ if(isset($_POST["submit"])) {
 if ($uploadOk == 0) {
     $content .=  "<SCRIPT type='text/javascript'> //not showing me this
         alert('Erreur, fichier incorrect');
-        window.location.replace('schedule_creation.php');
+        window.location.replace('document_update.php');
     </SCRIPT>";
 // if everything is ok, try to upload file
 } else {
@@ -55,7 +55,7 @@ if ($uploadOk == 0) {
 ?>
 
 <?php
-define('PREAMBLE', '../');
+
 include ("../assets/php/code_blocks.php");
 
 echo "<!DOCTYPE HTML><html>";

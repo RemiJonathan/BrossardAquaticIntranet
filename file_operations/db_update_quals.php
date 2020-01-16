@@ -6,6 +6,13 @@ include (PREAMBLE."db_operations/db_functions.php");
 
 $filename = 'uploads/list_qual.csv';
 $content ="";
+$message="Fichier manquant, veuillez le charger avant de tenter de mettre a jour la base de donnees";
+if(!(file_exists($filename))){
+    $content .=  "<SCRIPT type='text/javascript'> //not showing me this
+        alert('$message');
+        window.location.replace('document_update.php');
+    </SCRIPT>";
+}
 // The nested array to hold all the arrays
 $qualArray = [];
 
@@ -166,7 +173,7 @@ insertNewAQFQual($db,$qual[0],$date1,$date2,"requalification soon");
 
 
 
-
+unlink($filename);
 
 
 ?>

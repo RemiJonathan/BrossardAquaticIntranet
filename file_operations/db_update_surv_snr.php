@@ -16,6 +16,13 @@ while ($user = $user_res->fetch_array()) {
 
 $filename = 'uploads/list_surv_snr.csv';
 $content ="";
+$message="Fichier manquant, veuillez le charger avant de tenter de mettre a jour la base de donnees";
+if(!(file_exists($filename))){
+    $content .=  "<SCRIPT type='text/javascript'> //not showing me this
+        alert('$message');
+        window.location.replace('document_update.php');
+    </SCRIPT>";
+}
 // The nested array to hold all the arrays
 $snrArray = [];
 
@@ -87,11 +94,12 @@ $test2 = ltrim(str_replace("\"","",$test2));
 
 
 $content.="<br>";
+deleteSurvList($db);
 foreach ($snrArray as $snr) {
 
     $nameArray = explode(", ",$snr[0]);
-    $lname =$nameArray[0];
-    $fname =$nameArray[1];
+    $lname =trim($nameArray[0]);
+    $fname =trim($nameArray[1]);
 
     foreach($userArray as $user){
         if($user["lname"]==$lname && $user["fname"]==$fname){
@@ -106,6 +114,8 @@ foreach ($snrArray as $snr) {
         }
     }
 }
+
+unlink($filename);
 
 
 

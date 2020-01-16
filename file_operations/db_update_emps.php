@@ -4,6 +4,14 @@ include ('../db_operations/db_functions.php');
 
 $filename = 'uploads/list_emp.csv';
 $content ="";
+$message="Fichier manquant, veuillez le charger avant de tenter de mettre a jour la base de donnees";
+if(!(file_exists($filename))){
+    $content .=  "<SCRIPT type='text/javascript'> //not showing me this
+        alert('$message');
+        window.location.replace('document_update.php');
+    </SCRIPT>";
+}
+
 // The nested array to hold all the arrays
 $empArray = [];
 
@@ -61,7 +69,7 @@ function random_str(
 foreach ($empArray as $employee) {
 
 
-        insertNewRegUser($db,utf8_encode($employee[0]),random_str(8),utf8_encode($employee[2]),utf8_encode($employee[1]));
+        insertNewRegUser($db,utf8_encode($employee[0]),random_str(8),utf8_encode(trim($employee[2])),utf8_encode(trim($employee[1])));
 
    // $content .=  random_str(8)."<br>" .utf8_encode($employee['0'])."<br>".utf8_encode($employee['1'])."<br>".utf8_encode($employee['2'])."<br>";
 
@@ -71,7 +79,7 @@ foreach ($empArray as $employee) {
 
 $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="document_update.php">Retour</a>';
 
-
+unlink($filename);
 ?>
 
 
