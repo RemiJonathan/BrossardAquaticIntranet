@@ -1,9 +1,9 @@
 <?php
 define("PREAMBLE","../");
-include (PREAMBLE."assets/php/code_blocks.php");
-include (PREAMBLE."db_operations/connection.php");
+include(PREAMBLE . "assets/php/code_blocks.php");
+include(PREAMBLE . "db_operations/connection.php");
 
-include ('../db_operations/db_functions.php');
+include('../db_operations/db_functions.php');
 
 
 
@@ -14,7 +14,7 @@ $content= "<h4 align='center' '>Surveillance</h4>
 												<table class=\"alt\" id='survTable'>
 													<thead>
 														<tr>
-														    <th>Rank</th>
+														    <th>Rang</th>
 															<th>No. Employ&eacute;</th>
 															<th>Nom</th>
 															<th>Service Continu</th>
