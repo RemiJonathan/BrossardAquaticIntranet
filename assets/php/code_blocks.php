@@ -220,7 +220,7 @@ function check_user_permissions($user_id, $permission_level){
  */
 function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db){
     $content = "";
-    $content .= "<table style='empty-cells: show; table-layout: fixed; width: 100%;' class=\"alt\">
+    $content .= "<table id='$selectedWeekDay' style='empty-cells: show; table-layout: fixed; width: 100%;' class=\"alt\">
     <tbody>
     <tr><th>$selectedWeekDay</th></tr>
         ";
