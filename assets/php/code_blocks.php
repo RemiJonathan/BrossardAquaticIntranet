@@ -262,7 +262,7 @@ function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db){
     }
 
 $counter = 0;
-    for ($i = strtotime($table_begin); $i <= strtotime($table_end); $i += (5 * 60)) {
+    for ($i = strtotime($table_begin); $i < strtotime($table_end); $i += (5 * 60)) {
         $content .= "<tr>";
         for ($j = 0; $j < 2; $j++) {
             switch ($j) {

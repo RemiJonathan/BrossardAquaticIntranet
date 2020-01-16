@@ -51,48 +51,48 @@ if (isset($_SESSION['user_id'])) {
           
           
         </nav></div>";
-        echo "<div class='col-10'>";
+        echo "<div id='WD0T' class='col-10 table'>";
 
 
         echo printWeekDayTable('Dimanche', $convertedWeekString, $db);
 
         echo "</div>";
-         echo "<div class='col-10'  style='display: none'>";   
+         echo "<div id='WD1T' class='col-10 table'  style='display: none'>";
 
         echo printWeekDayTable('Lundi', $convertedWeekString, $db);
 
         echo "</div>";
 
 
-        echo "<div class='col-10'  style='display: none'>";
+        echo "<div id='WD2T' class='col-10 table'  style='display: none'>";
 
         echo printWeekDayTable('Mardi', $convertedWeekString, $db);
 
         echo "</div>";
 
 
-        echo "<div class='col-10'  style='display: none'>";
+        echo "<div id='WD3T' class='col-10 table'  style='display: none'>";
 
         echo printWeekDayTable('Mercredi', $convertedWeekString, $db);
 
         echo "</div>";
 
 
-        echo "<div class='col-10'  style='display: none'>";
+        echo "<div id='WD4T' class='col-10 table'  style='display: none;>";
 
         echo printWeekDayTable('Jeudi', $convertedWeekString, $db);
 
         echo "</div>";
 
 
-        echo "<div class='col-10' style='display: none'>";
+        echo "<div id='WD5T' class='col-10 table' style='display: none'>";
 
         echo printWeekDayTable('Vendredi', $convertedWeekString, $db);
 
         echo "</div>";
 
 
-        echo "<div class='col-10' style='display: none'>";
+        echo "<div id='WD6T' class='col-10 table' style='display: none'>";
 
         echo printWeekDayTable('Samedi', $convertedWeekString, $db);
 
@@ -131,8 +131,11 @@ echo "<script>
     var elementId = $(this).attr('id');
     console.log('Shift '+elementId+' selected.');
     $('#modify').slideDown();
-    $('.shift').css('border', 'inherit');
+    $('.shift').css('border', ''); 
+    $('.shift').css('background-color', '');
+    
     $('#'+elementId).css('border','2px solid #000');
+    $('#'+elementId).css('background-color','#4dffa5');
     document.getElementById('id').value = elementId;
     });
 
@@ -161,6 +164,19 @@ function normalizeTable() {
 }
 normalizeTable();
 }
+
+$('.nav-link').click(function() {
+    var elementId = $(this).attr('id');
+    console.log(elementId+' selected.');
+    
+    $('.nav-link').removeClass('active');
+    $('#'+elementId).addClass('active');
+    
+    $('.table').slideUp(350);
+    $('#'+elementId+'T').delay(350).slideDown(350)
+    
+    
+});
 
 </script>";
 echo "	</body>";
