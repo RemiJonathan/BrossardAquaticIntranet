@@ -20,7 +20,7 @@ if(isset($_POST["submit"])) {
         $uploadOk = 0;
         $content .=  "<SCRIPT type='text/javascript'> //not showing me this
         alert('$message');
-        window.location.replace('schedule_creation.php');
+        window.location.replace('document_update.php');
     </SCRIPT>";
 
     }
