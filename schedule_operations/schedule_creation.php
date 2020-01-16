@@ -19,7 +19,9 @@ $form_data_schedule .= "<form action=\"createSchedule.php\" method=\"post\" enct
 </form>";
 
 $form_data_shift_list = "<form action=\"uploadShifts.php\" method=\"post\" enctype=\"multipart/form-data\">
-    <h2>S&eacute;lectionner fichier CSV contenant la liste de cours de la session</h2>";
+    <h2>S&eacute;lectionner fichier CSV contenant la liste de cours de la session</h2>
+    <p>Ensuite, appuyez sur charger et enfin sur mettre &agrave; jour. ATTENTION: Si des cours existent d&eacute;j&acirc; pour la session choisie, ils seront supprim&eacute;s pour faire place aux nouveaux</p>";
+
 
 
 
@@ -42,13 +44,14 @@ while ($row = $result->fetch_assoc()) {
 
 }
 
-$form_data_shift_list .= "</select><br>";
+$form_data_shift_list .= "<h5>Mettre &agrave; jour les quarts de travail</h5><br></select><br>";
 
 
-$form_data_shift_list .=" <h5>Mettre &agrave; jour les quarts de travail</h5>
+
+$form_data_shift_list .=" 
 
 <input type=\"submit\" value=\"Mettre &agrave; jour\" name=\"submit\">
-</form><br><hr></br><a style='text-decoration:none; ' href=\"schedule_modification.php\" class=\"btn btn-primary btn-lg\" role=\"button\" aria-pressed=\"true\">Modifier Sessions</a>";
+</form><hr><a style='text-decoration:none; ' href=\"schedule_modification.php\" class=\"btn btn-primary btn-lg\" role=\"button\" aria-pressed=\"true\">Modifier Sessions</a>";
 
 
 

@@ -182,7 +182,25 @@ function parseDate($rawDate){
     return $finalDate;
 }
 
+function deleteExistingShifts($db, $schedule_id){
+
+    if ($result = $db->query("SELECT * FROM shift WHERE schedule_id = $schedule_id")) {
+        $rowAmt = $result->num_rows;
+    }
+        if ($rowAmt == 0){
+            echo "not found";
+        }
+        else{
+            $db->query("DELETE FROM shift WHERE schedule_id = $schedule_id");
+            echo "found";
+        }
+
+        $result->close();
+
+}
+
 function insertNewShift($db, $schedule_id, $required_qual, $start_time, $end_time, $location, $day, $description, $start_date, $end_date){
+
 
     $stmt = $db -> prepare("INSERT INTO shift (schedule_id, required_qual, start_time, 
                    end_time, location, day, description, start_date, end_date) 

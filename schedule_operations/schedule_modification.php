@@ -47,9 +47,9 @@ $content="<head>
                                     $content.= "<form action='update.php' method='get'><tr>";
                                         $content.= "<td><input name='sch_id' style=\"width: 3em\" type='number' min=\"" . $row['sch_id'] ."\" max=\"" . $row['sch_id'] ."\" value=\"" . $row['sch_id'] ."\">". "</td>";
                                         $content.= "<td><input name='title' type='text' value=\"" . $row['title'] ."\">". "</td>";
-                                        $content.= "<td><input name='sch_start_date' type='text' value=\"" . $row['sch_start_date'] ."\">". "</td>";
-                                        $content.= "<td><input name='sch_end_date' type='text' value=\"" . $row['sch_end_date'] ."\">". "</td>";
-                                        $content.= "<td><input name='avail_deadline' type='text' value=\"" . $row['avail_deadline'] ."\">". "</td>";
+                                        $content.= "<td><input name='sch_start_date' type='date' value=\"" . $row['sch_start_date'] ."\">". "</td>";
+                                        $content.= "<td><input name='sch_end_date' type='date' value=\"" . $row['sch_end_date'] ."\">". "</td>";
+                                        $content.= "<td><input name='avail_deadline' type='date' value=\"" . $row['avail_deadline'] ."\">". "</td>";
 
                                         $content.= "<td>";
                                             $content.= "<input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Modifier'></form><br>";

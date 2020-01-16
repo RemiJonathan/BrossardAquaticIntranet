@@ -17,7 +17,7 @@ if(isset($_GET["sch_id"])) {
 $content.=$title;
 $content.=$sch_id;
 
-//header("location:schedule_modification.php");
+header("location:schedule_modification.php");
 
 
 
