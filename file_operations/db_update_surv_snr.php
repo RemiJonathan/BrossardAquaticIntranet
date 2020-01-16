@@ -87,11 +87,12 @@ $test2 = ltrim(str_replace("\"","",$test2));
 
 
 $content.="<br>";
+deleteSurvList($db);
 foreach ($snrArray as $snr) {
 
     $nameArray = explode(", ",$snr[0]);
-    $lname =$nameArray[0];
-    $fname =$nameArray[1];
+    $lname =trim($nameArray[0]);
+    $fname =trim($nameArray[1]);
 
     foreach($userArray as $user){
         if($user["lname"]==$lname && $user["fname"]==$fname){
