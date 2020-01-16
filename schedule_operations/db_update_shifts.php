@@ -47,18 +47,17 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
  */
 
 
-echo var_dump($shiftArray[389]);
+
 
 $found = strpos(strtolower($shiftArray[389][0]),strtolower("PrIvE"));
-if ($found!==false){
-    $content.= "found";
-}
 
-$content.= $shiftArray[389][0];
+
+
 $qualArray = getQualArray($db);
 $content.= var_dump($qualArray);
-//$content.= $qualArray[0]["qual_name"];
+$content.= $qualArray[0]["qual_name"];
 $qualId="";
+deleteExistingShifts($db,$_POST["schedule"]);
 foreach ($shiftArray as $shift) {
     $qual="MSA";
     $found = strpos(strtolower($shift[0]),strtolower("BAIN"));

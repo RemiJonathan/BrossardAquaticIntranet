@@ -10,7 +10,9 @@ if(isset($_GET["sch_id"])) {
 if(isset($_POST['confirm'])){
     $id = $_POST['confirmId'];
     $content="<h2>Deleted</h2>";
+    deleteExistingShifts($db,$id);
     deleteSession($db,$id);
+    header("location:schedule_modification.php");
 
 }else{
     $content="<h2>ATTENTION: LA SUPPRESSION D'UNE SESSION EST IRR&Eacute;VERSIBLE. VOULEZ VOUS CONTINUER?</h2>
