@@ -16,9 +16,12 @@ if (isset($_SESSION['user_id'])) {
         if (!isset($_GET['week'])) $_GET['week'] = date('o-\WW');
         $convertedWeekString = $_GET['week'][0] . $_GET['week'][1] . $_GET['week'][2] . $_GET['week'][3] . $_GET['week'][5] . $_GET['week'][6] . $_GET['week'][7];
 
-        $content = "<h1>Gestion d'horaire</h1>";
-        $content .= "<h2>selectionez une semaine</h2>";
-        $content .= "<ul class=\"nav nav-tabs\">
+        echo "<section class=\"wrapper style2\" id=\"main\">
+						<div class=\"inner\">";
+        
+        echo "<h1>Gestion d'horaire</h1>";
+        echo  "<h2>selectionez une semaine</h2>";
+        echo  "<ul class=\"nav nav-tabs\">
   <li class=\"nav-item\">
     <a class=\"nav-link active\" href=\"#\">Antoine Brossard</a>
   </li>
@@ -32,79 +35,82 @@ if (isset($_SESSION['user_id'])) {
 
         if (isset($_GET['week'])) {
             //Table for Schedule
-            $content .= "<br/><br/><div class='row'><div class='col-2'>
+            echo  "<br/><br/><div class='row'><div class='col-2'>
 <nav class=\"nav flex-column nav-pills\">
-  <a id='WD0' class=\"nav-link active\">Dimanche</a>
-            <a id='WD1' class=\"nav-link \">Lundi</a>
-            <a id='WD2' class=\"nav-link \">Mardi</a>
-            <a id='WD3' class=\"nav-link \">Mercredi</a>
-            <a id='WD4' class=\"nav-link \">Jeudi</a>
-            <a id='WD5' class=\"nav-link \">Vendredi</a>
-            <a id='WD6' class=\"nav-link \">Samedi</a>
+  <a id='WD0' class=\"nav-link table active\">Dimanche</a>
+            <a id='WD1' class=\"nav-link table\">Lundi</a>
+            <a id='WD2' class=\"nav-link table\">Mardi</a>
+            <a id='WD3' class=\"nav-link table\">Mercredi</a>
+            <a id='WD4' class=\"nav-link table\">Jeudi</a>
+            <a id='WD5' class=\"nav-link table\">Vendredi</a>
+            <a id='WD6' class=\"nav-link table\">Samedi</a>
   
 </nav>
-</div><div class='table-wrapper col-8'>";
+</div>";
 
-            echo "<div id='WD0T' class='col-10 table'>";
+            echo "<div id='WD0T' class='col-7 table'>";
 
 
             echo printWeekDayTable('Dimanche', $convertedWeekString, $db);
 
             echo "</div>";
-            echo "<div id='WD1T' class='col-10 table'  style='display: none'>";
+            echo "<div id='WD1T' class='col-7 table'  style='display: none'>";
 
             echo printWeekDayTable('Lundi', $convertedWeekString, $db);
 
             echo "</div>";
 
 
-            echo "<div id='WD2T' class='col-10 table'  style='display: none'>";
+            echo "<div id='WD2T' class='col-7 table'  style='display: none'>";
 
             echo printWeekDayTable('Mardi', $convertedWeekString, $db);
 
             echo "</div>";
 
 
-            echo "<div id='WD3T' class='col-10 table'  style='display: none'>";
+            echo "<div id='WD3T' class='col-7 table'  style='display: none'>";
 
             echo printWeekDayTable('Mercredi', $convertedWeekString, $db);
 
             echo "</div>";
 
 
-            echo "<div id='WD4T' class='col-10 table'  style='display: none;>";
+            echo "<div id='WD4T' class='col-7 table'  style='display: none;'>";
 
             echo printWeekDayTable('Jeudi', $convertedWeekString, $db);
 
             echo "</div>";
 
 
-            echo "<div id='WD5T' class='col-10 table' style='display: none'>";
+            echo "<div id='WD5T' class='col-7 table' style='display: none'>";
 
             echo printWeekDayTable('Vendredi', $convertedWeekString, $db);
 
             echo "</div>";
 
 
-            echo "<div id='WD6T' class='col-10 table' style='display: none'>";
+            echo "<div id='WD6T' class='col-7 table' style='display: none'>";
 
             echo printWeekDayTable('Samedi', $convertedWeekString, $db);
             echo "</div>";
 
-            $content .= "<div class='col-2'><div class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);'>";
+            echo  "<div class='col-3'><div class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);'>";
 
             //Put lifeguRD MANAGEMENT HERE
-            $content .= "<h5>Sauveteur</h5>";
+            echo  "<h5>Sauveteur</h5>";
 
-            $content .= "</div></div>";
+            echo  "</div></div>";
 
-            $content .= "</div>";
+            echo  "</div>";
+            echo "</div>
+					</section>";
         }
     } else {
         $content = '<h3>Vous n\'avez pas les permissions requises pour acc&egrave;der a cette page.</h3>';
+        block_print_main($content);
     }
     block_print_nav("");
-    block_print_main($content);
+    
 } else {
     block_print_nav("<li><a href='" . PREAMBLE . "login.php'>Connexion</a></li>");
 
@@ -131,18 +137,46 @@ if (isset($_GET['week'])) {
 echo "</script>";
 echo "<script>
 
-    $('.nav-link').click(function() {                            
+var tables = document.getElementsByTagName('table');
+
+for (let i = 0; i < tables.length; i++){
+    let table = tables[i];
+function normalizeTable() {
+    var trs = table.getElementsByTagName('tr'), 
+        len = trs.length, max = 0, td;
+    // first we search for the longest table row in terms of # of children 
+    for (var i = len; i--;) {
+        if (trs[i].children.length > max) 
+            max = trs[i].children.length;
+    }
+    // now we can fill the other rows
+    for (var j = len; j--;) {
+        while (trs[j].children.length < max) {
+            td = document.createElement('td');
+            trs[j].appendChild(td);
+        }
+    }
+}
+normalizeTable();
+}
+
+    
+
+    $('.nav-link.table').click(function() {                            
         var elementId = $(this).attr('id');                      
         console.log(elementId+' selected.');                     
                                                                  
-        $('.nav-link').removeClass('active');                    
+        $('.nav-link.table').removeClass('active');                    
         $('#'+elementId).addClass('active');                     
                                                                  
-        $('.table').slideUp(350);                                
-        $('#'+elementId+'T').delay(350).slideDown(350)           
+        $('div.table').fadeOut(350);                                
+        $('#'+elementId+'T').delay(349).fadeIn(350)           
     });                                                          
                                                              
-
+    $('.nav-link.table').css('font-size','medium');
+    
+    $('td').css('font-size','x-small');
+    $('td').css('padding','5px');
 </script>";
 echo "	</body>";
 echo "</html>";

@@ -254,7 +254,11 @@ function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db){
         $shift_array[$index] = $shift;
 
         $duration = round(abs($end_time - $start_time) / 60, 2);
-        $shift_array[$index]['html'] = '<td class="shift" id="' . $shift['shift_id'] . '" rowspan="' . (($duration / 5)) . '">' . $shift['description'] . '</td>';
+        $shift_array[$index]['html'] = '<td class="shift" id="' . $shift['shift_id'] . '" rowspan="' . (($duration / 5)) . '">' . $shift['description'];
+
+        if (!is_null($shift['assigned_user'])) echo '<br />' . $shift['assigned_user'];
+
+        echo /*date('H:i',$start_time).' - '.date('H:i',$end_time).*/'</td>';
 
         $shift_array[$index]['duration'] = $duration;
 

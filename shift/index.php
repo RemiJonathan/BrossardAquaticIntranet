@@ -178,6 +178,8 @@ $('.nav-link').click(function() {
     
 });
 
+$('td').css('font-size','x-small');
+    $('td').css('padding','5px');
 </script>";
 echo "	</body>";
 echo "</html>";
