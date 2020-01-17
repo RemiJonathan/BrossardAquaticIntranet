@@ -4,6 +4,13 @@ include ('../db_operations/db_functions.php');
 
 $filename = 'uploads/shifts_file.csv';
 $content ="";
+$message="Fichier manquant, veuillez le charger avant de tenter de mettre a jour la base de donnees";
+if(!(file_exists($filename))){
+    $content .=  "<SCRIPT type='text/javascript'> //not showing me this
+        alert('$message');
+        window.location.replace('schedule_creation.php');
+    </SCRIPT>";
+}
 // The nested array to hold all the arrays
 $shiftArray = [];
 
@@ -49,13 +56,11 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
 
 
 
-$found = strpos(strtolower($shiftArray[389][0]),strtolower("PrIvE"));
 
 
 
 $qualArray = getQualArray($db);
-$content.= var_dump($qualArray);
-$content.= $qualArray[0]["qual_name"];
+
 $qualId="";
 deleteExistingShifts($db,$_POST["schedule"]);
 foreach ($shiftArray as $shift) {
@@ -132,7 +137,7 @@ foreach ($shiftArray as $shift) {
 $content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
 
 
-
+unlink($filename);
 ?>
 
 

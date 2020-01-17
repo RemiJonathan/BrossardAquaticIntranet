@@ -218,7 +218,7 @@ function check_user_permissions($user_id, $permission_level){
  * @param $db
  * @return string HTML table
  */
-function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db){
+function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db,$location){
     $content = "";
     $content .= "<table id='$selectedWeekDay' style='empty-cells: show; table-layout: fixed; width: 100%;' class=\"alt\">
     <tbody>
@@ -236,7 +236,7 @@ function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db){
                 break;
         }
     }
-    $this_weeks_shifts_sql = "SELECT * FROM shift WHERE start_date <= '$firstday' AND end_date >= '$lastday' AND day = '$selectedWeekDay'";
+    $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location = '$location' AND start_date <= '$firstday' AND end_date >= '$lastday' AND day = '$selectedWeekDay'";
     $this_weeks_earliest_shift_sql = $this_weeks_shifts_sql . " ORDER BY start_time";
     $this_weeks_latest_ending_shift_sql = $this_weeks_shifts_sql . " ORDER BY end_time DESC";
     $this_weeks_shifts_res = $db->query($this_weeks_shifts_sql." ORDER BY start_time");
@@ -272,7 +272,7 @@ $counter = 0;
             switch ($j) {
                 case 0:
                     if ($i % 1800 == 0) {
-                        $content .= "<th rowspan='6'>" . date('G:i', $i) . "</th>"; $counter ++;
+                        $content .= "<th  style='padding: 4em;' rowspan='6'>" . date('G:i', $i) . "</th>"; $counter ++;
                     } else {
                         if (strtotime($table_begin) % 1800 != 0 && ($i - strtotime($table_begin) < 1800) && $counter == 0) {
                             $content .= "<th rowspan='".(6-(($i % 1800)/300))."'></th>";$counter++;

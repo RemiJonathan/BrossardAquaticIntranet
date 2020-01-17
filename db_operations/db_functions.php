@@ -9,6 +9,17 @@ function getSessions($db){
     return $sessionsArray;
 }
 
+function getLocations($db){
+    $locationsArray = array();
+    $result = $db->query("SELECT location_name FROM location");
+    while ($row = mysqli_fetch_assoc($result)) {
+       array_push($locationsArray,$row["location_name"]);
+    }
+
+    return $locationsArray;
+}
+
+
 function deleteSession($db, $sch_id){
 
     $db->query("DELETE FROM schedule WHERE sch_id = $sch_id");

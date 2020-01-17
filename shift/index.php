@@ -2,6 +2,7 @@
 define('PREAMBLE', '../');
 include(PREAMBLE . "assets/php/code_blocks.php");
 include(PREAMBLE . "db_operations/connection.php");
+include(PREAMBLE . "db_operations/db_functions.php");
 
 
 echo "<!DOCTYPE HTML><html>";
@@ -23,8 +24,24 @@ if (isset($_SESSION['user_id'])) {
 
         if (!isset($_GET['week'])) $_GET['week'] = date('o-\WW');
         $convertedWeekString = $_GET['week'][0] . $_GET['week'][1] . $_GET['week'][2] . $_GET['week'][3] . $_GET['week'][5] . $_GET['week'][6] . $_GET['week'][7];
+        $locationArray = getLocations($db);
+        echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\">
+<select id='location' name='location' onchange='this.form.submit()'>";
+        foreach ($locationArray as $location){
+            if(isset($_GET['location'])){
+                if($_GET['location']==$location){
+                    echo "<option selected value='$location'>$location";
+                }
+                else{
+                    echo "<option value='$location'>$location";
+                }
+            }else{
+                echo "<option value='$location'>$location";
+            }
+        }
 
-        echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><input type='week' id='week' name='week' onchange='this.form.submit()'></div></div></form><form method='post' action='edit.php'><input type='button' onclick='this.form.submit()' id='modify' style='display: none;' value='Modifier'><input type='hidden' name='shift_id' id='id'></form>";
+
+        echo"</select></div></div></form><form method='post' action='edit.php'><input type='button' onclick='this.form.submit()' id='modify' style='display: none;' value='Modifier'><input type='hidden' name='shift_id' id='id'></form>";
         //Table for Schedule
 
         //Pills
@@ -52,49 +69,52 @@ if (isset($_SESSION['user_id'])) {
           
         </nav></div>";
         echo "<div id='WD0T' class='col-10 table'>";
+        $currentLocation = $locationArray[5];
+        if(isset($_GET['location'])){
+            $currentLocation = $_GET['location'];
+        }
 
-
-        echo printWeekDayTable('Dimanche', $convertedWeekString, $db);
+        echo printWeekDayTable('Dimanche', $convertedWeekString, $db,$currentLocation);
 
         echo "</div>";
          echo "<div id='WD1T' class='col-10 table'  style='display: none'>";
 
-        echo printWeekDayTable('Lundi', $convertedWeekString, $db);
+        echo printWeekDayTable('Lundi', $convertedWeekString, $db,$currentLocation);
 
         echo "</div>";
 
 
         echo "<div id='WD2T' class='col-10 table'  style='display: none'>";
 
-        echo printWeekDayTable('Mardi', $convertedWeekString, $db);
+        echo printWeekDayTable('Mardi', $convertedWeekString, $db,$currentLocation);
 
         echo "</div>";
 
 
         echo "<div id='WD3T' class='col-10 table'  style='display: none'>";
 
-        echo printWeekDayTable('Mercredi', $convertedWeekString, $db);
+        echo printWeekDayTable('Mercredi', $convertedWeekString, $db,$currentLocation);
 
         echo "</div>";
 
 
         echo "<div id='WD4T' class='col-10 table'  style='display: none;>";
 
-        echo printWeekDayTable('Jeudi', $convertedWeekString, $db);
+        echo printWeekDayTable('Jeudi', $convertedWeekString, $db,$currentLocation);
 
         echo "</div>";
 
 
         echo "<div id='WD5T' class='col-10 table' style='display: none'>";
 
-        echo printWeekDayTable('Vendredi', $convertedWeekString, $db);
+        echo printWeekDayTable('Vendredi', $convertedWeekString, $db,$currentLocation);
 
         echo "</div>";
 
 
         echo "<div id='WD6T' class='col-10 table' style='display: none'>";
 
-        echo printWeekDayTable('Samedi', $convertedWeekString, $db);
+        echo printWeekDayTable('Samedi', $convertedWeekString, $db,$currentLocation);
 
         echo "</div></div>";
 
