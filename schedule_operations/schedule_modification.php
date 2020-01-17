@@ -54,7 +54,8 @@ $content="<head>
                                         $content.= "<td>";
                                             $content.= "<input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Modifier'></form>";
                                     $tempId = $row['sch_id'];
-                                            $content.= "<br><br><form action='delete.php' method='get'><input type='hidden' name='sch_id' value='$tempId'><input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Supprimer'></form>";
+                                            $content.= "<br><br>" .
+                                                "<form action='delete.php' method='get'><input type='hidden' name='sch_id' value='$tempId'><input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Supprimer'></form>";
 
                                     $content.= "<form action='availability_operations/createAvailForm.php' method='get'><input type='hidden' name='sch_id' value='$tempId'><input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Disponiblit&eacute;s'></form></td>";
 
