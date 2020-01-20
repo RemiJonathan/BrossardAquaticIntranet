@@ -98,7 +98,7 @@ if (isset($_SESSION['user_id'])) {
         echo "</div>";
 
 
-        echo "<div id='WD4T' class='col-10 table'  style='display: none;>";
+        echo "<div id='WD4T' class='col-10 table'  style='display: none;'>";
 
         echo printWeekDayTable('Jeudi', $convertedWeekString, $db,$currentLocation);
 

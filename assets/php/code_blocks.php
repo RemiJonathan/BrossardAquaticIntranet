@@ -239,7 +239,7 @@ function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db,$location)
     $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location = '$location' AND start_date <= '$firstday' AND end_date >= '$lastday' AND day = '$selectedWeekDay'";
     $this_weeks_earliest_shift_sql = $this_weeks_shifts_sql . " ORDER BY start_time";
     $this_weeks_latest_ending_shift_sql = $this_weeks_shifts_sql . " ORDER BY end_time DESC";
-    $this_weeks_shifts_res = $db->query($this_weeks_shifts_sql." ORDER BY start_time");
+    $this_weeks_shifts_res = $db->query($this_weeks_shifts_sql." ORDER BY start_time ASC, end_time DESC");
 
     $table_begin = $db->query($this_weeks_earliest_shift_sql)->fetch_array()['start_time'];
     $table_end = $db->query($this_weeks_latest_ending_shift_sql)->fetch_array()['end_time'];
