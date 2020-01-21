@@ -218,7 +218,7 @@ function check_user_permissions($user_id, $permission_level){
  * @param $db
  * @return string HTML table
  */
-function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db,$location){
+function printWeekDayTable($selectedWeekDay, $schedule, $db,$location){
     $content = "";
     $content .= "<table id='$selectedWeekDay' style='empty-cells: show; table-layout: fixed; width: 100%;' class=\"alt\">
     <tbody>
@@ -226,17 +226,8 @@ function printWeekDayTable($selectedWeekDay,$convertedWeekString, $db,$location)
         ";
 
     $content .= '<tr><th></th></tr>';
-    for ($i = 0; $i < 7; $i++) {
-        switch ($i) {
-            case 0:
-                $firstday = date('y-m-d', strtotime($convertedWeekString . $i));
-                break;
-            case 6:
-                $lastday = date('y-m-d', strtotime($convertedWeekString . $i));
-                break;
-        }
-    }
-    $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location = '$location' AND start_date <= '$firstday' AND end_date >= '$lastday' AND day = '$selectedWeekDay'";
+
+    $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location = '$location' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
     $this_weeks_earliest_shift_sql = $this_weeks_shifts_sql . " ORDER BY start_time";
     $this_weeks_latest_ending_shift_sql = $this_weeks_shifts_sql . " ORDER BY end_time DESC";
     $this_weeks_shifts_res = $db->query($this_weeks_shifts_sql." ORDER BY start_time ASC, end_time DESC");

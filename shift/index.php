@@ -22,11 +22,8 @@ if (isset($_SESSION['user_id'])) {
         if (isset($_GET['status_message'])) echo '<h3 style="color: #0F0;">' . $_GET['status_message'] . '</h3>';
         echo "<a href='create.php'><button>Creer un quart</button></a><br/><br/>";
 
-        if (!isset($_GET['week'])) $_GET['week'] = date('o-\WW');
-        $convertedWeekString = $_GET['week'][0] . $_GET['week'][1] . $_GET['week'][2] . $_GET['week'][3] . $_GET['week'][5] . $_GET['week'][6] . $_GET['week'][7];
         $locationArray = getLocations($db);
-        echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\">
-<select id='location' name='location' onchange='this.form.submit()'>";
+        echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><select id='location' name='location' onchange='this.form.submit()'>";
         foreach ($locationArray as $location){
             if(isset($_GET['location'])){
                 if($_GET['location']==$location){
@@ -68,55 +65,55 @@ if (isset($_SESSION['user_id'])) {
           
           
         </nav></div>";
-        echo "<div id='WD0T' class='col-10 table'>";
+        echo "<div class='col-10'><div id='WD0T' class='col-12 table'>";
         $currentLocation = $locationArray[5];
         if(isset($_GET['location'])){
             $currentLocation = $_GET['location'];
         }
 
-        echo printWeekDayTable('Dimanche', $convertedWeekString, $db,$currentLocation);
+        echo printWeekDayTable('Dimanche', $schedule, $db,$currentLocation);
 
         echo "</div>";
-         echo "<div id='WD1T' class='col-10 table'  style='display: none'>";
+         echo "<div id='WD1T' class='col-12 table'  style='display: none'>";
 
-        echo printWeekDayTable('Lundi', $convertedWeekString, $db,$currentLocation);
-
-        echo "</div>";
-
-
-        echo "<div id='WD2T' class='col-10 table'  style='display: none'>";
-
-        echo printWeekDayTable('Mardi', $convertedWeekString, $db,$currentLocation);
+        echo printWeekDayTable('Lundi', $schedule, $db,$currentLocation);
 
         echo "</div>";
 
 
-        echo "<div id='WD3T' class='col-10 table'  style='display: none'>";
+        echo "<div id='WD2T' class='col-12 table'  style='display: none'>";
 
-        echo printWeekDayTable('Mercredi', $convertedWeekString, $db,$currentLocation);
-
-        echo "</div>";
-
-
-        echo "<div id='WD4T' class='col-10 table'  style='display: none;'>";
-
-        echo printWeekDayTable('Jeudi', $convertedWeekString, $db,$currentLocation);
+        echo printWeekDayTable('Mardi', $schedule, $db,$currentLocation);
 
         echo "</div>";
 
 
-        echo "<div id='WD5T' class='col-10 table' style='display: none'>";
+        echo "<div id='WD3T' class='col-12 table'  style='display: none'>";
 
-        echo printWeekDayTable('Vendredi', $convertedWeekString, $db,$currentLocation);
+        echo printWeekDayTable('Mercredi', $schedule, $db,$currentLocation);
 
         echo "</div>";
 
 
-        echo "<div id='WD6T' class='col-10 table' style='display: none'>";
+        echo "<div id='WD4T' class='col-12 table'  style='display: none;'>";
 
-        echo printWeekDayTable('Samedi', $convertedWeekString, $db,$currentLocation);
+        echo printWeekDayTable('Jeudi', $schedule, $db,$currentLocation);
 
-        echo "</div></div>";
+        echo "</div>";
+
+
+        echo "<div id='WD5T' class='col-12 table' style='display: none'>";
+
+        echo printWeekDayTable('Vendredi', $schedule, $db,$currentLocation);
+
+        echo "</div>";
+
+
+        echo "<div id='WD6T' class='col-12 table' style='display: none'>";
+
+        echo printWeekDayTable('Samedi', $schedule, $db,$currentLocation);
+
+        echo "</div></div></div>";
 
         echo "</div>
 					</section>";
