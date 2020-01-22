@@ -19,40 +19,38 @@ if (isset($_SESSION['user_id'])) {
 
         echo "<section class=\"wrapper style2\" id=\"main\">
 						<div class=\"inner\">";
-        
+
         echo "<h1>Gestion d'horaire</h1>";
-        echo  "<h2>selectionez une semaine</h2>";
-        echo  "<ul class=\"nav nav-tabs\">
-  <li class=\"nav-item\">
-    <a class=\"nav-link active\" href=\"#\">Antoine Brossard</a>
-  </li>
-  <li class=\"nav-item\">
-    <a class=\"nav-link\" href=\"#\">Complexe Aquatique</a>
-  </li>
-  <li class=\"nav-item\">
-    <a class=\"nav-link inactive\" href=\"#\">Complex Aquatique</a>
-  </li>
-</ul>";
+
         $locationArray = getLocations($db);
-        echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><select id='location' name='location' onchange='this.form.submit()'>";
-        foreach ($locationArray as $location){
-            if(isset($_GET['location'])){
-                if($_GET['location']==$location){
-                    echo "<option selected value='$location'>$location";
+        echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><ul class=\"nav nav-tabs\">";
+        $counter = 0;
+        foreach ($locationArray as $location) {
+            if (isset($_GET['location'])) {
+                if ($_GET['location'] == $location) {
+                    echo "<li class=\"nav-item\">
+    <a class=\"nav-link active pool\" href=\"?location=$location\">$location</a></li>";
+                } else {
+                    echo "<li class=\"nav-item\">
+    <a class=\"nav-link pool\" href=\"?location=$location\">$location</a></li>";
                 }
-                else{
-                    echo "<option value='$location'>$location";
+            } else {
+                if ($counter == 0){
+                    $_GET['location'] = $location;
+                    echo "<li class=\"nav-item\">
+    <a class=\"nav-link pool active\" href=\"?location=$location\">$location</a></li>";
+                }else {
+                    echo "<li class=\"nav-item\">
+    <a class=\"nav-link pool\" href=\"?location=$location\">$location</a></li>";
                 }
-            }else{
-                echo "<option value='$location'>$location";
             }
         }
 
-        echo "</select></div></div></form>";
+        echo "</ul></div></div></form>";
 
         if (isset($_GET['week'])) {
             //Table for Schedule
-            echo  "<br/><br/><div class='row'><div class='col-2'>
+            echo "<br/><br/><div class='row'><div class='col-2'>
 <nav class=\"nav flex-column nav-pills\">
   <a id='WD0' class=\"nav-link table active\">Dimanche</a>
             <a id='WD1' class=\"nav-link table\">Lundi</a>
@@ -65,64 +63,66 @@ if (isset($_SESSION['user_id'])) {
 </nav>
 </div>";
 
-            echo "<div class='col-7'><div id='WD0T' class='col-12 table'>";
+            echo "<div class='col-7'><div id='WD0T' class='col-12 table' style='display: none'>";
             $currentLocation = $locationArray[5];
-            if(isset($_GET['location'])){
+            if (isset($_GET['location'])) {
                 $currentLocation = $_GET['location'];
             }
 
-            echo printWeekDayTable('Dimanche', $schedule, $db,$currentLocation);
+            $schedule = 1;
+
+            echo printWeekDayTable('Dimanche', $schedule, $db, $currentLocation);
 
             echo "</div>";
             echo "<div id='WD1T' class='col-12 table'  style='display: none'>";
 
-            echo printWeekDayTable('Lundi', $schedule, $db,$currentLocation);
+            echo printWeekDayTable('Lundi', $schedule, $db, $currentLocation);
 
             echo "</div>";
 
 
             echo "<div id='WD2T' class='col-12 table'  style='display: none'>";
 
-            echo printWeekDayTable('Mardi', $schedule, $db,$currentLocation);
+            echo printWeekDayTable('Mardi', $schedule, $db, $currentLocation);
 
             echo "</div>";
 
 
             echo "<div id='WD3T' class='col-12 table'  style='display: none'>";
 
-            echo printWeekDayTable('Mercredi', $schedule, $db,$currentLocation);
+            echo printWeekDayTable('Mercredi', $schedule, $db, $currentLocation);
 
             echo "</div>";
 
 
             echo "<div id='WD4T' class='col-12 table'  style='display: none;'>";
 
-            echo printWeekDayTable('Jeudi', $schedule, $db,$currentLocation);
+            echo printWeekDayTable('Jeudi', $schedule, $db, $currentLocation);
 
             echo "</div>";
 
 
             echo "<div id='WD5T' class='col-12 table' style='display: none'>";
 
-            echo printWeekDayTable('Vendredi', $schedule, $db,$currentLocation);
+            echo printWeekDayTable('Vendredi', $schedule, $db, $currentLocation);
 
             echo "</div>";
 
 
             echo "<div id='WD6T' class='col-12 table' style='display: none'>";
 
-            echo printWeekDayTable('Samedi', $schedule, $db,$currentLocation);
+            echo printWeekDayTable('Samedi', $schedule, $db, $currentLocation);
 
             echo "</div></div>";
 
-            echo  "<div class='col-3'><div class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);'>";
+            echo "<div class='col-3'><div class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);'>";
 
             //Put lifeguRD MANAGEMENT HERE
-            echo  "<h5>Sauveteur</h5>";
+            echo "<h5>Sauveteur</h5>";
 
-            echo  "</div></div>";
+            echo "</div></div>";
 
-            echo  "</div>";
+            echo "</div>";
             echo "</div>
 					</section>";
         }
@@ -131,7 +131,7 @@ if (isset($_SESSION['user_id'])) {
         block_print_main($content);
     }
     block_print_nav("");
-    
+
 } else {
     block_print_nav("<li><a href='" . PREAMBLE . "login.php'>Connexion</a></li>");
 
@@ -198,6 +198,17 @@ normalizeTable();
     
     $('td').css('font-size','x-small');
     $('td').css('padding','5px');
+    
+    $('.nav-link.pool').click(function() {
+           $('div.table').slideUp(350);
+           $('.nav-link.table').removeClass('active');                    
+           $('#WD0').addClass('active');   
+    });
+    
+    $(document).ready(function() {
+        $('#WD0T').slideDown(350); 
+    });
+    
 </script>";
 echo "	</body>";
 echo "</html>";
