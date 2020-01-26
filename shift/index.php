@@ -18,33 +18,60 @@ if (isset($_SESSION['user_id'])) {
         echo "<section class=\"wrapper style2\" id=\"main\">
 						<div class=\"inner\">";
 
-        echo "<h1>Gestion de quart</h1>";
-        if (isset($_GET['status_message'])) echo '<h3 style="color: #0F0;">' . $_GET['status_message'] . '</h3>';
-        echo "<a href='create.php'><button>Creer un quart</button></a><br/><br/>";
 
-        $locationArray = getLocations($db);
-        echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><select id='location' name='location' onchange='this.form.submit()'>";
-        foreach ($locationArray as $location){
-            if(isset($_GET['location'])){
-                if($_GET['location']==$location){
-                    echo "<option selected value='$location'>$location";
-                }
-                else{
+        echo "<h1>Gestion de quart</h1>";
+        $result = $db->query("SELECT * FROM schedule;");
+        $form_data_shift_list = "Session: <form method='post'><select onchange='this.form.submit()' name='schedule'>";
+
+        $form_data_shift_list .= '<option selected disabled> -- Choisissez une session -- </option>';
+        if (isset($_POST['schedule'])) $_SESSION['current_session_schedule'] = $_POST['schedule'];
+
+        while ($row = $result->fetch_assoc()) {
+
+            $id = $row['sch_id'];
+            $name = $row['title'];
+            if ($_SESSION['current_session_schedule']) {
+                if ($id == $_SESSION['current_session_schedule']) $form_data_shift_list .= '<option selected value="' . $id . '">' . $name . '</option>';
+                else $form_data_shift_list .= '<option value="' . $id . '">' . $name . '</option>';
+            } else $form_data_shift_list .= '<option value="' . $id . '">' . $name . '</option>';
+
+        }
+        $form_data_shift_list .= '</select></form>';
+
+        echo $form_data_shift_list;
+
+        if (isset($_GET['status_message'])) echo '<h3 style="color: #0F0;">' . $_GET['status_message'] . '</h3>';
+
+
+        if (isset($_SESSION['current_session_schedule'])) {
+
+            $schedule = $_SESSION['current_session_schedule'];
+
+            echo "<a href='create.php?session=$schedule'><button>Creer un quart</button></a><br/><br/>";
+
+
+            $locationArray = getLocations($db);
+            echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><select id='location' name='location' onclose='this.form.submit()'>";
+            foreach ($locationArray as $location) {
+                if (isset($_GET['location'])) {
+                    if ($_GET['location'] == $location) {
+                        echo "<option selected value='$location'>$location";
+                    } else {
+                        echo "<option value='$location'>$location";
+                    }
+                } else {
                     echo "<option value='$location'>$location";
                 }
-            }else{
-                echo "<option value='$location'>$location";
             }
-        }
 
 
-        echo"</select></div></div></form><form method='post' action='edit.php'><input type='button' onclick='this.form.submit()' id='modify' style='display: none;' value='Modifier'><input type='hidden' name='shift_id' id='id'></form>";
-        //Table for Schedule
+            echo "</select></div></div></form><form method='post' action='edit.php'><input type='button' onclick='this.form.submit()' id='modify' style='display: none;' value='Modifier'><input type='hidden' name='shift_id' id='id'></form>";
+            //Table for Schedule
 
-        //Pills
+            //Pills
 
 
-        echo "<div class='row'><div class='col-2'>
+            echo "<div class='row'><div class='col-2'>
 
         <nav class=\"nav flex-column nav-pills\">
         
@@ -65,56 +92,56 @@ if (isset($_SESSION['user_id'])) {
           
           
         </nav></div>";
-        echo "<div class='col-10'><div id='WD0T' class='col-12 table'>";
-        $currentLocation = $locationArray[5];
-        if(isset($_GET['location'])){
-            $currentLocation = $_GET['location'];
+            echo "<div class='col-10'><div id='WD0T' class='col-12 table'>";
+            $currentLocation = $locationArray[5];
+            if (isset($_GET['location'])) {
+                $currentLocation = $_GET['location'];
+            }
+
+            echo printWeekDayTable('Dimanche', $schedule, $db, $currentLocation);
+
+            echo "</div>";
+            echo "<div id='WD1T' class='col-12 table'  style='display: none'>";
+
+            echo printWeekDayTable('Lundi', $schedule, $db, $currentLocation);
+
+            echo "</div>";
+
+
+            echo "<div id='WD2T' class='col-12 table'  style='display: none'>";
+
+            echo printWeekDayTable('Mardi', $schedule, $db, $currentLocation);
+
+            echo "</div>";
+
+
+            echo "<div id='WD3T' class='col-12 table'  style='display: none'>";
+
+            echo printWeekDayTable('Mercredi', $schedule, $db, $currentLocation);
+
+            echo "</div>";
+
+
+            echo "<div id='WD4T' class='col-12 table'  style='display: none;'>";
+
+            echo printWeekDayTable('Jeudi', $schedule, $db, $currentLocation);
+
+            echo "</div>";
+
+
+            echo "<div id='WD5T' class='col-12 table' style='display: none'>";
+
+            echo printWeekDayTable('Vendredi', $schedule, $db, $currentLocation);
+
+            echo "</div>";
+
+
+            echo "<div id='WD6T' class='col-12 table' style='display: none'>";
+
+            echo printWeekDayTable('Samedi', $schedule, $db, $currentLocation);
+
+            echo "</div></div></div>";
         }
-
-        echo printWeekDayTable('Dimanche', $schedule, $db,$currentLocation);
-
-        echo "</div>";
-         echo "<div id='WD1T' class='col-12 table'  style='display: none'>";
-
-        echo printWeekDayTable('Lundi', $schedule, $db,$currentLocation);
-
-        echo "</div>";
-
-
-        echo "<div id='WD2T' class='col-12 table'  style='display: none'>";
-
-        echo printWeekDayTable('Mardi', $schedule, $db,$currentLocation);
-
-        echo "</div>";
-
-
-        echo "<div id='WD3T' class='col-12 table'  style='display: none'>";
-
-        echo printWeekDayTable('Mercredi', $schedule, $db,$currentLocation);
-
-        echo "</div>";
-
-
-        echo "<div id='WD4T' class='col-12 table'  style='display: none;'>";
-
-        echo printWeekDayTable('Jeudi', $schedule, $db,$currentLocation);
-
-        echo "</div>";
-
-
-        echo "<div id='WD5T' class='col-12 table' style='display: none'>";
-
-        echo printWeekDayTable('Vendredi', $schedule, $db,$currentLocation);
-
-        echo "</div>";
-
-
-        echo "<div id='WD6T' class='col-12 table' style='display: none'>";
-
-        echo printWeekDayTable('Samedi', $schedule, $db,$currentLocation);
-
-        echo "</div></div></div>";
-
         echo "</div>
 					</section>";
     } else {
