@@ -55,9 +55,9 @@ function block_print_nav($tabs){
         //Todo: add all admin tabs
         $tabs ="<li><a href='".PREAMBLE."qualification/'>Gestion de qualifications</a></li>".$tabs;
         $tabs = "<li><a href='".PREAMBLE."file_operations/document_update.php'>base de donn&eacute;es</a></li>".$tabs;
-        $tabs = "<li><a href='".PREAMBLE."shift/'>Gestion de quart</a></li>".$tabs;
-        $tabs = "<li><a href='".PREAMBLE."schedule_operations/schedule_creation.php'>Sessions</a></li>".$tabs;
-        $tabs = "<li><a href='".PREAMBLE."schedule/'>Gestion d'horaire</a></li>".$tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "shift/'>Gestion de quart</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/schedule_modification.php'>Sessions</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "schedule/'>Gestion d'horaire</a></li>" . $tabs;
 
     }else{
         //todo: add all disconnected tabs
