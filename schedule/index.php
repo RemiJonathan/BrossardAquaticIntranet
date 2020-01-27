@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
             if (isset($_GET['week'])) {
                 //Table for Schedule
                 echo "<br/><br/><div class='row'><div class='col-2'>
-<nav class=\"nav flex-column nav-pills\">
+<nav class=\"nav flex-column nav-pills\" style='position: sticky; top: 150px;'>
   <a id='WD0' class=\"nav-link table active\">Dimanche</a>
             <a id='WD1' class=\"nav-link table\">Lundi</a>
             <a id='WD2' class=\"nav-link table\">Mardi</a>
@@ -141,7 +141,7 @@ if (isset($_SESSION['user_id'])) {
 
                 echo "</div></div>";
 
-                echo "<div class='col-3'><div class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);'>";
+                echo "<div class='col-3'><div id='lifeguard_block' class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);position: sticky; top: 150px;'>";
 
                 //Put lifeguRD MANAGEMENT HERE
                 echo "<h5>Sauveteur</h5>";
@@ -151,7 +151,16 @@ if (isset($_SESSION['user_id'])) {
 
                 echo "<div class=\"col-12\">";
 
+                echo"<ol class=\"list-group\">";
 
+                echo"<li class='list-group-item list-group-item-action active'>Test record</li>";
+                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
+                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
+                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
+                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
+                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
+
+                echo "</ol>";
 
                 echo "</div>";
 
@@ -245,6 +254,7 @@ normalizeTable();
         $('#WD0T').slideDown(350); 
     });
     
+  
 </script>";
 echo "	</body>";
 echo "</html>";

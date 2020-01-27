@@ -55,7 +55,7 @@ if ($uploadOk == 0) {
 ?>
 
 <?php
-define('PREAMBLE', '../');
+
 include ("../assets/php/code_blocks.php");
 
 echo "<!DOCTYPE HTML><html>";
