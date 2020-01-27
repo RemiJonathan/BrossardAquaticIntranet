@@ -146,6 +146,15 @@ if (isset($_SESSION['user_id'])) {
                 //Put lifeguRD MANAGEMENT HERE
                 echo "<h5>Sauveteur</h5>";
 
+                echo "<div class=\"col-12\"><input id='enseignement' name=\"seniority_type\" type=\"radio\"><label for=\"enseignement\">Enseignement</label></div>";
+                echo "<div class=\"col-12\"><input id='surveillance' name=\"seniority_type\" type=\"radio\"><label for=\"surveillance\">Surveillance</label></div>";
+
+                echo "<div class=\"col-12\">";
+
+
+
+                echo "</div>";
+
                 echo "</div></div>";
 
                 echo "</div>";
