@@ -8,6 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $myusername = mysqli_real_escape_string($db,$_POST['username']);
     $mypassword = mysqli_real_escape_string($db,$_POST['password']);
+    $currentUrl = $_POST['currentUrl'];
 
     $sql = "SELECT user_id, passphrase FROM user WHERE user_id = '$myusername'";
     $result = $db->query($sql);
@@ -21,7 +22,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if($count == 1){
         if(password_verify($mypassword,$active_passphrase)){
             $_SESSION['user_id'] = $myusername;
+            if (substr($currentUrl."",-9) == 'login.php')
             header('Location: news_feed.php');
+            else header('Location: '.$currentUrl);
         }else{
             $error = "Mot de passe invalide";
             //Todo Implement invalid credentials

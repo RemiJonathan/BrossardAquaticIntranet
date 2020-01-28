@@ -116,7 +116,8 @@ $connection_form = "<h3>Connexion</h3><form action=\"".PREAMBLE."validate_connec
 													</div>
 													<div class=\"col-12\">
 														<input id=\"password\" name=\"password\" placeholder=\"Password\" type=\"password\" value=\"\" />
-													</div>
+													</div><input type='hidden' name='currentUrl' id='currentUrl'>
+													
 													<a href=\"".PREAMBLE."forgot_password.php\">Mot de passe oublié?</a>
 													<!-- Break -->
 													<div class=\"col-12\">
@@ -195,6 +196,9 @@ function block_print_scripts($preamble){
 			<script src=\"".$preamble."assets/js/breakpoints.min.js\"></script>
 			<script src=\"".$preamble."assets/js/util.js\"></script>
 			<script src=\"".$preamble."assets/js/main.js\"></script>
+			<script>$(document).ready(function (){
+			$('#currentUrl').val(window.location.href);
+			});</script>
     ";
 }
 
