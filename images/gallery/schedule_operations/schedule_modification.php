@@ -74,7 +74,7 @@ $content="<head>
 
                     // Close connection
                     $db->close();
-                   $content.="</div></div><br><a style='' href=\"schedule_creation.php\" >Retour</a></div></div>";
+$content .= "</div></div><br><button><a style='text-decoration:none;' href=\"schedule_creation.php\" >Cr&eacute;er Nouvelle Session</a></button></div></div>";
 
 
 

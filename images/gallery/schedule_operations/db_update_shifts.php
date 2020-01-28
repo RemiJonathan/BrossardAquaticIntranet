@@ -6,7 +6,7 @@ $filename = 'uploads/shifts_file.csv';
 $content ="";
 $message="Fichier manquant, veuillez le charger avant de tenter de mettre a jour la base de donnees";
 if(!(file_exists($filename))){
-    $content .=  "<SCRIPT type='text/javascript'> //not showing me this
+    $content .= "<SCRIPT type='text/javascript'> 
         alert('$message');
         window.location.replace('schedule_creation.php');
     </SCRIPT>";

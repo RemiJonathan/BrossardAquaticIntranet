@@ -55,9 +55,9 @@ function block_print_nav($tabs){
         //Todo: add all admin tabs
         $tabs ="<li><a href='".PREAMBLE."qualification/'>Gestion de qualifications</a></li>".$tabs;
         $tabs = "<li><a href='".PREAMBLE."file_operations/document_update.php'>base de donn&eacute;es</a></li>".$tabs;
-        $tabs = "<li><a href='".PREAMBLE."shift/'>Gestion de quart</a></li>".$tabs;
-        $tabs = "<li><a href='".PREAMBLE."schedule_operations/schedule_creation.php'>Sessions</a></li>".$tabs;
-        $tabs = "<li><a href='".PREAMBLE."schedule/'>Gestion d'horaire</a></li>".$tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "shift/'>Gestion de quart</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/schedule_modification.php'>Sessions</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "schedule/'>Gestion d'horaire</a></li>" . $tabs;
 
     }else{
         //todo: add all disconnected tabs
@@ -116,7 +116,8 @@ $connection_form = "<h3>Connexion</h3><form action=\"".PREAMBLE."validate_connec
 													</div>
 													<div class=\"col-12\">
 														<input id=\"password\" name=\"password\" placeholder=\"Password\" type=\"password\" value=\"\" />
-													</div>
+													</div><input type='hidden' name='currentUrl' id='currentUrl'>
+													
 													<a href=\"".PREAMBLE."forgot_password.php\">Mot de passe oublié?</a>
 													<!-- Break -->
 													<div class=\"col-12\">
@@ -195,6 +196,9 @@ function block_print_scripts($preamble){
 			<script src=\"".$preamble."assets/js/breakpoints.min.js\"></script>
 			<script src=\"".$preamble."assets/js/util.js\"></script>
 			<script src=\"".$preamble."assets/js/main.js\"></script>
+			<script>$(document).ready(function (){
+			$('#currentUrl').val(window.location.href);
+			});</script>
     ";
 }
 

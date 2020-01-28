@@ -18,7 +18,7 @@ if(isset($_POST["submit"])) {
     } else {
         $message = "Fichier manquant ou incorrect (Doit être de type CSV)";
         $uploadOk = 0;
-        $content .=  "<SCRIPT type='text/javascript'> //not showing me this
+        $content .= "<SCRIPT type='text/javascript'> 
         alert('$message');
         window.location.replace('schedule_creation.php');
     </SCRIPT>";
@@ -34,7 +34,7 @@ if(isset($_POST["submit"])) {
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    $content .=  "<SCRIPT type='text/javascript'> //not showing me this
+    $content .= "<SCRIPT type='text/javascript'> 
         alert('Erreur, fichier incorrect');
         window.location.replace('schedule_creation.php');
     </SCRIPT>";

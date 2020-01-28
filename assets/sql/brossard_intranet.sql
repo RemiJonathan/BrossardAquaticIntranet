@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2020 at 06:00 PM
+-- Generation Time: Jan 27, 2020 at 09:49 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -99,14 +99,16 @@ CREATE TABLE `qualification` (
 -- Dumping data for table `qualification`
 --
 
-INSERT INTO `qualification` (`qualification_id`, `qual_name`) VALUES
-(1, 'SN'),
-(2, 'MSA'),
-(3, 'MS'),
-(4, 'MSU'),
-(5, 'MSN'),
-(6, 'ISA'),
-(7, 'AQF');
+INSERT INTO `qualification` (`qualification_id`, `qual_name`)
+VALUES (1, 'SN'),
+       (2, 'MSA'),
+       (3, 'MS'),
+       (4, 'MSU'),
+       (5, 'MSN'),
+       (6, 'ISA'),
+       (7, 'AQF'),
+       (8, 'SN + MSA'),
+       (9, 'SN + AQF');
 
 -- --------------------------------------------------------
 
@@ -114,9 +116,10 @@ INSERT INTO `qualification` (`qualification_id`, `qual_name`) VALUES
 -- Table structure for table `qualified_user`
 --
 
-CREATE TABLE `qualified_user` (
-  `user_id` int(7) NOT NULL,
-  `qualification_id` int(4) NOT NULL,
+CREATE TABLE `qualified_user`
+(
+    `user_id`            int(7) NOT NULL,
+    `qualification_id`   int(4) NOT NULL,
   `qual_emitted` date DEFAULT NULL,
   `qual_expiry` date NOT NULL,
   `requalification_note` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
@@ -1130,7 +1133,8 @@ INSERT INTO `shift` (`shift_id`, `schedule_id`, `required_qual`, `start_time`, `
 (1557, 1, 2, '08:00:00', '08:30:00', 'PIS-LT', 'Samedi', 'PRIVE GR-60', '2020-01-11', '2020-03-21', NULL),
 (1558, 1, 2, '08:00:00', '08:30:00', 'PIS-LT', 'Samedi', 'PRIVE GR-61', '2020-01-11', '2020-03-21', NULL),
 (1559, 1, 2, '08:00:00', '08:30:00', 'PIS-LT', 'Samedi', 'PRIVE GR-62', '2020-01-11', '2020-03-21', NULL),
-(1560, 1, 2, '11:30:00', '12:00:00', 'PIS-LT', 'Samedi', 'PRIVE GR-63', '2020-01-11', '2020-03-21', NULL);
+(1560, 1, 2, '11:30:00', '12:00:00', 'PIS-LT', 'Samedi', 'PRIVE GR-63', '2020-01-11', '2020-03-21', NULL),
+(1562, NULL, 2, '08:00:00', '15:00:00', NULL, 'Dimanche', 'Chef', '2019-12-31', '2020-04-30', NULL);
 
 -- --------------------------------------------------------
 
@@ -1138,9 +1142,10 @@ INSERT INTO `shift` (`shift_id`, `schedule_id`, `required_qual`, `start_time`, `
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
-  `passphrase` varchar(60) NOT NULL,
+CREATE TABLE `user`
+(
+    `user_id`       int(11)     NOT NULL,
+    `passphrase`    varchar(60) NOT NULL,
   `user_fname` varchar(35) NOT NULL,
   `user_lname` varchar(35) NOT NULL,
   `user_address` varchar(70) DEFAULT NULL,
@@ -1394,19 +1399,20 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT for table `grade`
 --
 ALTER TABLE `grade`
-  MODIFY `grade_id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `grade_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `qualification`
 --
 ALTER TABLE `qualification`
-  MODIFY `qualification_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+    MODIFY `qualification_id` int(4) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 10;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `quiz`
@@ -1424,19 +1430,22 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `seniority`
 --
 ALTER TABLE `seniority`
-  MODIFY `seniority_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
+    MODIFY `seniority_id` int(11) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 281;
 
 --
 -- AUTO_INCREMENT for table `shift`
 --
 ALTER TABLE `shift`
-  MODIFY `shift_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1562;
+    MODIFY `shift_id` int(11) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 1563;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000000;
+    MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 1000000;
 
 --
 -- Constraints for dumped tables

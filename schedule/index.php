@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id'])) {
 
             $id = $row['sch_id'];
             $name = $row['title'];
-            if ($_SESSION['current_session_schedule']) {
+            if (isset($_SESSION['current_session_schedule'])) {
                 if ($id == $_SESSION['current_session_schedule']) $form_data_shift_list .= '<option selected value="' . $id . '">' . $name . '</option>';
                 else $form_data_shift_list .= '<option value="' . $id . '">' . $name . '</option>';
             } else $form_data_shift_list .= '<option value="' . $id . '">' . $name . '</option>';
