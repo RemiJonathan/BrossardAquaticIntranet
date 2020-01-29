@@ -4,12 +4,29 @@ include(PREAMBLE . "db_operations/connection.php");
 include(PREAMBLE . "db_operations/db_functions.php");
 
 include(PREAMBLE . "assets/php/code_blocks.php");
+$qualArray = getQualArray($db);
+$optionStringForQuals = "";
+foreach ($qualArray as $qual) {
 
+    $optionStringForQuals .= "<option value='" . $qual['qualification_id'] . "'>" . $qual['qual_name'] . "</option>";
+}
 $sessionsArray = getSessions($db);
+$current_sch = $_GET["sch_id"];
 $form_data_schedule = "";
+$form_data_schedule1 = "";
 $content = "";
 $content .= "<script type='text/javascript'>
 
+function deleteRow(row) {
+row.closest('tr').remove();
+
+}
+
+function addRow(row) {
+    var htmlString = '<tr>' + row.closest('tr').html() + '</tr>';
+   
+row.closest('tr').after(htmlString);
+}
 
 window.onload = function() {
     $('#summer_avail_form').hide();
@@ -39,7 +56,10 @@ if (!(isset($_GET["sch_id"]))) {
 }
 $content .= "<h2>Formulaire de disponibilit&eacute;s</h2><button id='summerButton' onclick=\"summerForm()\">Reg/&Eacute;t&eacute;</button><br><br>";
 //TODO add option to create new semester and add files to it
-$form_data_schedule .= "<form action=\"create_form_info.php\" id=\"reg_avail_form\" method=\"get\" enctype=\"multipart/form-data\">
+$form_data_schedule .= "<form action=\"create_form_info.php\" id=\"reg_avail_form\" method=\"get\" enctype=\"multipart/form-data\">";
+
+$form_data_schedule .= "<input type='hidden' name='sch_id' value='$current_sch'>
+  
     <h2>R&eacute;gulier</h2>
     <h5>Titre de l'horaire:</h5> <input placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
     <h5>Date limite:</h5> <input type='date' name='deadline'><br><br>
@@ -76,22 +96,1634 @@ Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du
 <h3>Blocs Horaire</h3>
 
 <table id='block_table'>
-    <tr>
-        <th>Jour</th>
-        <th>Heures</th>
-        <th>Qualif.</th>
-        <th>Cat&eacute;gorie</th>
-    </tr>
-    <tr>
-    
-    </tr>
+<tr>
+<th>Jour</th>
+<th>Heures</th>
+<th>Qualif.</th>
+<th>Cat&eacute;gorie</th>
+<th>Action</th>
+<th></th>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='13:15' name='start_time[]' required>
+<input type='time' value='16:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<o<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+
+
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:45' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi' selected>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='05:30' name='start_time[]' required>
+<input type='time' value='07:15' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi' selected>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='19:45' name='start_time[]' required>
+<input type='time' value='21:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi' selected>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='20:45' name='start_time[]' required>
+<input type='time' value='22:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi' selected>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='20:45' name='start_time[]' required>
+<input type='time' value='22:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>";
+
+$form_data_schedule .= "
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi' selected>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='05:15' name='start_time[]' required>
+<input type='time' value='07:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi' selected>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:45' name='start_time[]' required>
+<input type='time' value='20:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi' selected>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='20:45' name='start_time[]' required>
+<input type='time' value='22:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi' selected>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='05:30' name='start_time[]' required>
+<input type='time' value='07:15' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi' selected>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='19:15' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi' selected>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='12:45' name='start_time[]' required>
+<input type='time' value='17:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi' selected>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:45' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche' selected>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='08:00' name='start_time[]' required>
+<input type='time' value='11:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>";
+
+$form_data_schedule .= "
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche' selected>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='11:00' name='start_time[]' required>
+<input type='time' value='13:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche' selected>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='15:30' name='start_time[]' required>
+<input type='time' value='18:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi' selected>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:00' name='start_time[]' required>
+<input type='time' value='20:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi' selected>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:30' name='start_time[]' required>
+<input type='time' value='20:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi' selected>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='16:00' name='start_time[]' required>
+<input type='time' value='17:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi' selected>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:00' name='start_time[]' required>
+<input type='time' value='20:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi' selected>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='19:00' name='start_time[]' required>
+<input type='time' value='20:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi' selected>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='20:00' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>";
+
+$form_data_schedule .= "
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi' selected>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:00' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi' selected>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='20:30' name='start_time[]' required>
+<input type='time' value='22:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi' selected>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='20:00' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi' selected>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='16:00' name='start_time[]' required>
+<input type='time' value='17:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi' selected>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:00' name='start_time[]' required>
+<input type='time' value='20:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi' selected>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='19:00' name='start_time[]' required>
+<input type='time' value='20:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi' selected>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='20:00' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi' selected>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='20:00' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>";
+
+$form_data_schedule .= "
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi' selected>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:00' name='start_time[]' required>
+<input type='time' value='19:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi' selected>Vendredi</option>
+<option  value='Samedi'>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='19:00' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi' selected>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='08:00' name='start_time[]' required>
+<input type='time' value='11:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi' selected>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='11:00' name='start_time[]' required>
+<input type='time' value='13:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi' selected>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='13:00' name='start_time[]' required>
+<input type='time' value='15:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi' selected>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='13:15' name='start_time[]' required>
+<input type='time' value='17:30' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi' selected>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='13:00' name='start_time[]' required>
+<input type='time' value='18:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<select name='day[]'> 
+<option  value='Dimanche'>Dimanche</option>
+<option  value='Lundi'>Lundi</option>
+<option  value='Mardi'>Mardi</option>
+<option  value='Mercredi'>Mercredi</option>
+<option  value='Jeudi'>Jeudi</option>
+<option  value='Vendredi'>Vendredi</option>
+<option  value='Samedi' selected>Samedi</option>
+</select>   
+</td>
+<td style='width:30%;'>
+<input type='time' value='16:00' name='start_time[]' required>
+<input type='time' value='21:00' name='end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr></table>";
+
+$form_data_schedule1 .= "
+
+<h4>Blocs Sp&eacute;ciaux</h4>
+<table>
+<tr>
+<th>Dates</th>
+<th>Heures</th>
+<th>Qualif.</th>
+<th>Cat&eacute;gorie</th>
+<th>Action</th>
+<th></th>
+</tr>
+
+
+<tr>
+<td style='width:20%;'>
+   
+<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date' value='2020-04-05' name='spec_start_date[]'>
+
+
+</td>
+<td style='width:30%;'>
+<input type='time' value='08:00' name='spec_start_time[]' required>
+<input type='time' value='17:00' name='spec_end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)' selected>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+<tr>
+<td style='width:20%;'>
+   
+<input type='date' value='2020-03-31' name='spec_start_date[]'><br>au<br><input type='date' value='2020-03-31' name='spec_start_date[]'>
+
+
+</td>
+<td style='width:30%;'>
+<input type='time' value='18:00' name='spec_start_time[]' required>
+<input type='time' value='19:00' name='spec_end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='required_qual[]'>
+.$optionStringForQuals.
+</select>
+</td>
+<td>
+<select name='block_cat[]'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)' selected>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>
+
+
 </table>
-
  <br><input type=\"submit\" value=\"Publier\" name=\"submit\">
+ </form>";
 
-</form>
-
-
+$form_data_schedule1 .= "
 <form action=\"create_form_info.php\" id=\"summer_avail_form\" method=\"post\" enctype=\"multipart/form-data\">
     <h2>Estival</h2>
     Titre de l'horaire: <input placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
@@ -121,7 +1753,7 @@ session_start();
 if (isset($_SESSION['user_id'])) {
     block_print_nav("");
     //TODO VALIDATE USER ACCESS
-    block_print_main($content . $form_data_schedule);
+    block_print_main($content . $form_data_schedule . $form_data_schedule1);
 } else {
     block_print_nav("<li><a href='" . PREAMBLE . "login.php'>Connexion</a></li>");
 
