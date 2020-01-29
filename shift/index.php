@@ -15,8 +15,7 @@ if (isset($_SESSION['user_id'])) {
     block_print_nav("");
     if (check_user_permissions($_SESSION['user_id'], 2)) {
 
-        echo "<section class=\"wrapper style2\" id=\"main\">
-						<div class=\"inner\">";
+        echo "<section class=\"wrapper style2\" id=\"main\"><div class=\"inner\">";
 
 
         echo "<h1>Gestion de quart</h1>";
@@ -51,7 +50,7 @@ if (isset($_SESSION['user_id'])) {
 
 
             $locationArray = getLocations($db);
-            echo "<form><div class=\"row gtr-uniform\"><div class=\"col-12\"><select id='location' name='location' onclose='this.form.submit()'>";
+            echo "<form method='get'><div class=\"row gtr-uniform\"><div class=\"col-12\"><select id='location' name='location' onchange='this.form.submit()'>";
             foreach ($locationArray as $location) {
                 if (isset($_GET['location'])) {
                     if ($_GET['location'] == $location) {
@@ -142,8 +141,7 @@ if (isset($_SESSION['user_id'])) {
 
             echo "</div></div></div>";
         }
-        echo "</div>
-					</section>";
+
     } else {
         block_print_nav("<li><a href='" . PREAMBLE . "login.php'>Connexion</a></li>");
 
@@ -156,6 +154,7 @@ if (isset($_SESSION['user_id'])) {
     block_print_main("<h2>D&eacute;sol&eacute;, la session est expir&eacute;e ou inexistante</h2>" . $connection_form);
     session_destroy();
 }
+echo "</div></section>";
 block_print_copyright();
 echo "    </div>";
 block_print_scripts(PREAMBLE);

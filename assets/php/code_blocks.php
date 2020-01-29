@@ -317,3 +317,24 @@ $counter = 0;
 
     return $content;
 }
+
+/**
+ * @param $seniority_type
+ * @param $db
+ */
+function print_seniority_dropdown($seniority_type, $db){
+    $get_seniority_sql = "SELECT * FROM seniority LEFT OUTER JOIN user u on seniority.user_id = u.user_id WHERE seniority_type = '$seniority_type' ORDER BY hours DESC, continued_service;";
+    $get_seniorty_res = $db->query($get_seniority_sql);
+
+    echo"<ol class=\"list-group $seniority_type\" style='max-height: 250px; overflow-y:scroll; display: none'>";
+
+    while ($user = $get_seniorty_res->fetch_array(MYSQLI_ASSOC)){
+        echo"<li class='list-group-item list-group-item-action' style='font-size: small; '>";
+        //echo $user['user_id']."<br />";
+        echo $user['user_fname']." ".$user['user_lname'];
+        echo "<br /><strong>" .$user['hours']."</strong>";
+        echo"</li>";
+    }
+
+    echo "</ol>";
+}
