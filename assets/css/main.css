@@ -1,11 +1,7 @@
 @import url(font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Oswald:600");
 
-/*
-	Standout by Pixelarity
-	pixelarity.com | hello@pixelarity.com
-	License: pixelarity.com/license
-*/
+
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -67,9 +63,14 @@ input::-moz-focus-inner {
 
 input, select, textarea {
 	-moz-appearance: none;
-	-webkit-appearance: none;
+	/*-webkit-appearance: none;*/
 	-ms-appearance: none;
 	appearance: none;
+}
+
+td.shift:hover{
+	border: 0px solid #000;
+	background: #00ff7e;
 }
 
 /* Basic */
@@ -2237,69 +2238,69 @@ input, select, textarea {
 		padding: 0.75rem 1rem;
 	}
 
-	input[type="checkbox"],
-	input[type="radio"] {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-		display: block;
-		float: left;
-		margin-right: -2rem;
-		opacity: 0;
-		width: 1rem;
-		z-index: -1;
-	}
+input[type="checkbox"],
+input[type="radio"] {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	display: block;
+	float: left;
+	margin-right: -2rem;
+	opacity: 0;
+	width: 1rem;
+	z-index: -1;
+}
 
-		input[type="checkbox"] + label,
-		input[type="radio"] + label {
-			text-decoration: none;
-			cursor: pointer;
-			display: inline-block;
-			font-size: 1rem;
-			font-weight: 300;
-			padding-left: 2.55rem;
-			padding-right: 0.75rem;
-			position: relative;
-		}
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+	text-decoration: none;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1rem;
+	font-weight: 300;
+	padding-left: 2.55rem;
+	padding-right: 0.75rem;
+	position: relative;
+}
 
-			input[type="checkbox"] + label:before,
-			input[type="radio"] + label:before {
-				-moz-osx-font-smoothing: grayscale;
-				-webkit-font-smoothing: antialiased;
-				font-family: FontAwesome;
-				font-style: normal;
-				font-weight: normal;
-				text-transform: none !important;
-			}
+input[type="checkbox"] + label:before,
+input[type="radio"] + label:before {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: none !important;
+}
 
-			input[type="checkbox"] + label:before,
-			input[type="radio"] + label:before {
-				border-radius: 10px;
-				border: solid 1px;
-				content: '';
-				display: inline-block;
-				height: 1.8rem;
-				left: 0;
-				line-height: 1.725rem;
-				position: absolute;
-				text-align: center;
-				top: 0;
-				width: 1.8rem;
-			}
+input[type="checkbox"] + label:before,
+input[type="radio"] + label:before {
+	border-radius: 10px;
+	border: solid 1px;
+	content: '';
+	display: inline-block;
+	height: 1.8rem;
+	left: 0;
+	line-height: 1.725rem;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 1.8rem;
+}
 
-		input[type="checkbox"]:checked + label:before,
-		input[type="radio"]:checked + label:before {
-			content: '\f00c';
-		}
+input[type="checkbox"]:checked + label:before,
+input[type="radio"]:checked + label:before {
+	content: '\f00c';
+}
 
-	input[type="checkbox"] + label:before {
-		border-radius: 10px;
-	}
+input[type="checkbox"] + label:before {
+	border-radius: 10px;
+}
 
-	input[type="radio"] + label:before {
-		border-radius: 100%;
-	}
+input[type="radio"] + label:before {
+	border-radius: 100%;
+}
 
 	::-webkit-input-placeholder {
 		opacity: 1.0;
@@ -3085,6 +3086,7 @@ input, select, textarea {
 		}
 
 	table th {
+		font-size: x-small;
 		color: #000000;
 	}
 
@@ -3097,7 +3099,9 @@ input, select, textarea {
 	}
 
 	table.alt tbody tr td {
+		font-size: small;
 		border-color: rgba(99, 116, 133, 0.25);
+		word-wrap:break-word
 	}
 
 /* Wrapper */
@@ -4641,3 +4645,4 @@ input, select, textarea {
 		color: rgba(40, 40, 40, 0.5);
 		text-align: center;
 	}
+

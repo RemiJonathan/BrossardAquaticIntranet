@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="MySQL - brossard_intranet@localhost" uuid="6ee4b8a5-8a45-4651-a599-80b8ce3847d3">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/brossard_intranet</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="@localhost" uuid="6d5bd0c2-d978-49f3-864e-e12c11eee997">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="brossard_intranet@localhost" uuid="59fa96a2-f285-4313-8bb1-f5489897a948">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/brossard_intranet</jdbc-url>
+    </data-source>
+  </component>
+</project>
