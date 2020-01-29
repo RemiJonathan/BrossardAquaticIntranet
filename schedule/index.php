@@ -151,24 +151,15 @@ if (isset($_SESSION['user_id'])) {
 
                 echo "<div class=\"col-12\">";
 
-                echo"<ol class=\"list-group\">";
-
-                echo"<li class='list-group-item list-group-item-action active'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-
-                echo "</ol>";
+                print_seniority_dropdown('surveillance',$db);
+                print_seniority_dropdown('enseignement',$db);
 
                 echo "</div>";
 
                 echo "</div></div>";
 
                 echo "</div>";
-                echo "</div>
-					</section>";
+
             }
         }
     } else {
@@ -183,6 +174,8 @@ if (isset($_SESSION['user_id'])) {
     block_print_main("<h2>D&eacute;sol&eacute;, la session est expir&eacute;e ou inexistante</h2>" . $connection_form);
     session_destroy();
 }
+echo "</div>
+					</section>";
 block_print_copyright();
 echo "    </div>";
 block_print_scripts(PREAMBLE);
@@ -252,6 +245,12 @@ normalizeTable();
     
     $(document).ready(function() {
         $('#WD0T').slideDown(350); 
+    });
+    
+    $('input').click(function() {
+      let elementId = $(this).attr('id');
+      $('.list-group').slideUp(350);                                
+        $('.list-group.'+elementId).delay(349).slideDown(350); 
     });
     
   
