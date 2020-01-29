@@ -44,13 +44,13 @@ $form_data_schedule .= "<form action=\"create_form_info.php\" id=\"reg_avail_for
     <h5>Titre de l'horaire:</h5> <input placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
     <h5>Date limite:</h5> <input type='date' name='deadline'><br><br>
     <h5>Information G&eacute;n&eacute;rales </h5>
-    <textarea  name='gen_info'>Les cours de natation se d&eacute;rouleront du 6 janvier au 15 mars 2020 (10 sem.). Rel&acirc;che &agrave; LT SEUL. le 1er-2-3 f&eacute;vrier (reprise les 16-21-22 mars)
+    <textarea   rows='9'   name='gen_info'>Les cours de natation se d&eacute;rouleront du 6 janvier au 15 mars 2020 (10 sem.). Rel&acirc;che &agrave; LT SEUL. le 1er-2-3 f&eacute;vrier (reprise les 16-21-22 mars)
     
     Les cours de mise en forme se d&eacute;rouleront du 6 janvier au 19 mars (11 sem.). 
     
     Les bains libres se d&eacute;rouleront du dimanche 5 janvier au vendredi 3 avril.</textarea><br>
     <h5>R&eacute;unions et entrainements</h5>
-    <textarea  name='meet_info'>R&eacute;union des chefs moniteurs
+    <textarea  rows='9' name='meet_info'>R&eacute;union des chefs moniteurs
 Jeudi 19 d&eacute;cembre : 18 h &agrave; 20 h --- H&ocirc;tel de Ville
 
 R&eacute;union et entra&icirc;nement des moniteurs (MS, MSN, MSA, Aquaforme)
@@ -60,7 +60,7 @@ R&eacute;union du personnel aquatique (TOUS)
 Vendredi 3 janvier : 10 h &agrave; 11 h --- Piscine Antoine-Brossard - Les absences doivent &ecirc;tre justifi&eacute;es avant le 20 d&eacute;cembre 2019
 </textarea><br>
   <h5>Consignes</h5>
-    <textarea  name='guidelines'>
+    <textarea     rows='9'  name='guidelines'>
 En cas de d&eacute;sistement, l'employ&eacute; doit remettre une preuve d&eacute;montrant un conflit d'horaire entre les disponibilit&eacute;s soumises et son horaire scolaire non connu au moment du d&eacute;p&ocirc;t des disponibilit&eacute;s OU remettre un billet m&eacute;dical qui ordonne un arr&ecirc;t de travail balis&eacute; par une date de d&eacute;but et date de fin.
 Lorsque deux comp&eacute;tences sont n&eacute;cessaires pour le m&ecirc;me bloc, l'anciennet&eacute; sera &eacute;tablie en fonction de la comp&eacute;tence en rouge.
 Vous devez s&eacute;lectionner des blocs pr&eacute; &eacute;tablis (blocs indissociables) complets. 
@@ -73,8 +73,24 @@ RAPPELS
 Maximum 2 remplacements par quart de travail pour l'enseignement;
 Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du 6 au 12 janvier) et au cours de remise des carnets (semaine du 9 au 15 mars + 21-22 mars pour LT). SVP indiquez vos indisponibilit&eacute;s s'il y a lieu.
 </textarea><br>
+<h3>Blocs Horaire</h3>
+
+<table id='block_table'>
+    <tr>
+        <th>Jour</th>
+        <th>Heures</th>
+        <th>Qualif.</th>
+        <th>Cat&eacute;gorie</th>
+    </tr>
+    <tr>
+    
+    </tr>
+</table>
+
  <br><input type=\"submit\" value=\"Publier\" name=\"submit\">
+
 </form>
+
 
 <form action=\"create_form_info.php\" id=\"summer_avail_form\" method=\"post\" enctype=\"multipart/form-data\">
     <h2>Estival</h2>
@@ -91,6 +107,7 @@ Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du
     <br><br>
     <input type=\"submit\" value=\"Cr&eacute;er\" name=\"submit\">
 </form>
+
 ";
 
 echo "<!DOCTYPE HTML><html>";

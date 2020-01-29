@@ -214,14 +214,27 @@ function deleteExistingShifts($db, $schedule_id){
 
 function deleteSurvList($db){
 
-        $type="surveillance";
-        $db->query("DELETE FROM seniority WHERE seniority_type = $type");
+    $type = "surveillance";
+
+    $query = $db->query("DELETE FROM seniority WHERE seniority_type = '$type';");
+
+    if ($query) {
+        echo "successful";
+    } else {
+        echo "not successful";
+    }
 }
 
-function deleteEnsList($db){
+function deleteEnsList($db)
+{
 
-    $type="enseignement";
-    $db->query("DELETE FROM seniority WHERE seniority_type = $type");
+    $type = "enseignement";
+    $query = $db->query("DELETE FROM seniority WHERE seniority_type = '$type';");
+    if ($query) {
+        echo "successful";
+    } else {
+        echo "not successful";
+    }
 }
 
 function insertNewShift($db, $schedule_id, $required_qual, $start_time, $end_time, $location, $day, $description, $start_date, $end_date){
