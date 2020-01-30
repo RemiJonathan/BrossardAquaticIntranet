@@ -55,7 +55,8 @@ if ($result = $db->query($sql)) {
             $content .= "<br><br>" .
                 "<form action='delete.php' method='get'><input type='hidden' name='sch_id' value='$tempId'><input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Supprimer'></form>";
 
-            $content .= "<form action='availability_operations/createAvailForm.php' method='get'><input type='hidden' name='sch_id' value='$tempId'><input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Disponiblit&eacute;s'></form></td>";
+            $content .= "<form action='availability_operations/createAvailForm.php' method='get'><input type='hidden' name='sch_id' value='$tempId'><input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Disponiblit&eacute;s'></form>";
+            $content .= "<form action='schedule_add_shift.php' method='get'><input type='hidden' name='sch_id' value='$tempId'><input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Quarts'></form></td>";
 
             $content .= "</tr>";
         }

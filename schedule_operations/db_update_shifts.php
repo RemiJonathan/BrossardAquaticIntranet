@@ -55,7 +55,7 @@ if (($h = fopen("{$filename}", "r")) !== FALSE) {
 $qualArray = getQualArray($db);
 
 $qualId = "";
-deleteExistingShifts($db, $_POST["schedule"]);
+deleteExistingShifts($db, $_POST["sch_id"]);
 foreach ($shiftArray as $shift) {
     $qual = "MSA";
     $found = strpos(strtolower($shift[0]), strtolower("BAIN"));
@@ -122,13 +122,13 @@ foreach ($shiftArray as $shift) {
 
 
 //$content.= $shift[0]." ".$qual."<br>";
-    insertNewShift($db, $_POST["schedule"], $qualId, $shift[5], $shift[6], $shift[2], $shift[4], $shift[0] . " GR-" . $shift[1], $shift[7], $shift[8]);
+    insertNewShift($db, $_POST["sch_id"], $qualId, $shift[5], $shift[6], $shift[2], $shift[4], $shift[0] . " GR-" . $shift[1], $shift[7], $shift[8]);
 
 }
 
 //$content.= var_dump($qualArray);
 
-$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_creation.php">Retour</a>';
+$content .= '<br><br><br><p>Mise &aacute; jour effectu&eacute;e</p><a href="schedule_modification.php">Retour</a>';
 
 
 unlink($filename);
