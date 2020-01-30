@@ -26,12 +26,13 @@ function deleteSession($db, $sch_id){
 
 }
 
-function updateSession($db, $sch_id, $sch_start_date, $sch_end_date, $avail_deadline, $title){
+function updateSession($db, $sch_id, $sch_start_date, $sch_end_date, $title)
+{
 
-        $stmt = $db -> prepare("UPDATE schedule SET  sch_start_date = ?, sch_end_date = ?, avail_deadline = ?, title = ? WHERE sch_id = ? ");
-        $stmt->bind_param("ssssi", $sch_start_date, $sch_end_date, $avail_deadline, $title, $sch_id);
+    $stmt = $db->prepare("UPDATE schedule SET  sch_start_date = ?, sch_end_date = ?,  title = ? WHERE sch_id = ? ");
+    $stmt->bind_param("sssi", $sch_start_date, $sch_end_date, $title, $sch_id);
 
-        $stmt->execute();
+    $stmt->execute();
 
 }
 

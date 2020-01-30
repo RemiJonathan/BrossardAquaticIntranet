@@ -34,7 +34,7 @@ $form_data_schedule .= "<form action=\"createSchedule.php\" method=\"post\" enct
     Titre de l'horaire: <input type='text' name='title'><br>
     Date de d&eacute;but &nbsp; <input type='date' name='sch_start_date'><br><br>
     Date de fin &nbsp; <input type='date' name='sch_end_date'><br><br>
-    <br><br>
+    
     <input type=\"submit\" value=\"Cr&eacute;er\" name=\"submit\">
 </form>";
 

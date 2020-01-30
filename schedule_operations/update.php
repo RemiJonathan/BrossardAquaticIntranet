@@ -10,9 +10,9 @@ if (isset($_GET["sch_id"])) {
     $title = $_GET["title"];
     $sch_start_date = $_GET["sch_start_date"];
     $sch_end_date = $_GET["sch_end_date"];
-    $avail_deadline = $_GET["avail_deadline"];
 
-    updateSession($db, $sch_id, $sch_start_date, $sch_end_date, $avail_deadline, $title);
+
+    updateSession($db, $sch_id, $sch_start_date, $sch_end_date, $title);
 }
 $content .= $title;
 $content .= $sch_id;

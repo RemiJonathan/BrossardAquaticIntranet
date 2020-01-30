@@ -36,7 +36,7 @@ if ($result = $db->query($sql)) {
         $content .= "<th>Session</th>";
         $content .= "<th>Date de d&eacute;but</th>";
         $content .= "<th>Date de fin</th>";
-        $content .= "<th>Date limite pour disponibilit&eacute;s</th>";
+
         $content .= "<th>Action</th>";
 
         $content .= "</tr>";
@@ -48,7 +48,6 @@ if ($result = $db->query($sql)) {
             $content .= "<td><input name='title' type='text' value=\"" . $row['title'] . "\">" . "</td>";
             $content .= "<td><input name='sch_start_date' type='date' value=\"" . $row['sch_start_date'] . "\">" . "</td>";
             $content .= "<td><input name='sch_end_date' type='date' value=\"" . $row['sch_end_date'] . "\">" . "</td>";
-            $content .= "<td><input name='avail_deadline' type='date' value=\"" . $row['avail_deadline'] . "\">" . "</td>";
 
             $content .= "<td>";
             $content .= "<input style='width:100%;font-size:9px;padding:2px;' type='submit' value='Modifier'></form>";
