@@ -1652,21 +1652,21 @@ $form_data_schedule1 .= "
 <tr>
 <td style='width:20%;'>
    
-<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date' value='2020-04-05' name='spec_start_date[]'>
+<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date' value='2020-04-05' name='spec_end_date[]'>
 
 
 </td>
 <td style='width:30%;'>
-<input type='time' value='08:00' name='spec_start_time[]' required>
+<input type='time' value='08:00' name='spec_start_time[]' required>&nbsp;&agrave;&nbsp;
 <input type='time' value='17:00' name='spec_end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='spec_required_qual[]'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='spec_block_cat[]'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1682,41 +1682,8 @@ $form_data_schedule1 .= "
     <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
     </td>
 </td>
-</tr>
-<tr>
-<td style='width:20%;'>
-   
-<input type='date' value='2020-03-31' name='spec_start_date[]'><br>au<br><input type='date' value='2020-03-31' name='spec_start_date[]'>
+</tr>   
 
-
-</td>
-<td style='width:30%;'>
-<input type='time' value='18:00' name='spec_start_time[]' required>
-<input type='time' value='19:00' name='spec_end_time[]' required>
-</td>
-<td style='width:15%;'>
-<select name='required_qual[]'>
-.$optionStringForQuals.
-</select>
-</td>
-<td>
-<select name='block_cat[]'>
-<option  value='Surveillance'>Surveillance</option>
-<option  value='Enseignement'>Enseignement</option>
-<option  value='Entrainement du Personnel (MS / MSN)' selected>Entrainement du Personnel (MS / MSN)</option>
-<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
-<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
-<option  value='Autre'>Autre</option>
-</select>
-</td>
-
-<td>
-<p onclick='deleteRow($(this))'><b>Supp.</b></p>
-    <td>
-    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
-    </td>
-</td>
-</tr>
 
 
 </table>
@@ -1726,7 +1693,7 @@ $form_data_schedule1 .= "
 $form_data_schedule1 .= "
 <form action=\"create_form_info.php\" id=\"summer_avail_form\" method=\"post\" enctype=\"multipart/form-data\">
     <h2>Estival</h2>
-    Titre de l'horaire: <input placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
+    Titre de l'horaire: <input required placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
     Date limite: <input type='date' name='deadline'><br><br>
     Information G&eacute;n&eacute;rales &nbsp; 
     <textarea  name='gen_info'>Les cours de natation se d&eacute;rouleront du 6 janvier au 15 mars 2020 (10 sem.). Rel&acirc;che &agrave; LT SEUL. le 1er-2-3 f&eacute;vrier (reprise les 16-21-22 mars)

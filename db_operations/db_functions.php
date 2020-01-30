@@ -250,11 +250,12 @@ function insertNewShift($db, $schedule_id, $required_qual, $start_time, $end_tim
 
 }
 
-function insertNewSchedule($db, $sch_start_date, $sch_end_date, $avail_deadline, $title){
+function insertNewSchedule($db, $sch_start_date, $sch_end_date, $title)
+{
 
-    $stmt = $db -> prepare("INSERT INTO schedule (sch_start_date, sch_end_date, avail_deadline, title) VALUES (?,?,?,?)
+    $stmt = $db->prepare("INSERT INTO schedule (sch_start_date, sch_end_date,  title) VALUES (?,?,?)
 ");
-    $stmt->bind_param("ssss", $sch_start_date, $sch_end_date, $avail_deadline, $title);
+    $stmt->bind_param("sss", $sch_start_date, $sch_end_date, $title);
 
     $stmt->execute();
 

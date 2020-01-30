@@ -1,4 +1,5 @@
 <?php
+session_start();
 define("PREAMBLE", "../../");
 include(PREAMBLE . "db_operations/connection.php");
 include(PREAMBLE . "db_operations/db_functions.php");
@@ -15,7 +16,15 @@ $content .= $_GET['guidelines'] . '<br><br>';
 var_dump($_GET['day']);
 var_dump($_GET['start_time']);
 var_dump($_GET['end_time']);
+var_dump($_GET['required_qual']);
 var_dump($_GET['block_cat']);
+
+var_dump($_GET['spec_start_date']);
+var_dump($_GET['spec_end_date']);
+var_dump($_GET['spec_start_time']);
+var_dump($_GET['spec_end_time']);
+var_dump($_GET['spec_required_qual']);
+var_dump($_GET['spec_block_cat']);
 
 
 echo "<!DOCTYPE HTML><html>";
@@ -24,7 +33,7 @@ echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", "../");
 
-session_start();
+
 
 if (isset($_SESSION['user_id'])) {
     block_print_nav("");

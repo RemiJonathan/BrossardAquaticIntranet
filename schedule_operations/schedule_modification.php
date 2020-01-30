@@ -73,7 +73,7 @@ if ($result = $db->query($sql)) {
 
 // Close connection
 $db->close();
-$content .= " Cr&eacute;er Nouvelle Session</a></button></div></div>";
+$content .= "<a href='schedule_creation.php' >Cr&eacute;er Nouvelle Session</a></div></div>";
 
 
 //TODO add option to create new semester and add files to it

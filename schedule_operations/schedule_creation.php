@@ -1,3 +1,24 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+
+@horiasandu1
+RemiJonathan
+/
+BrossardAquaticIntranet
+Private
+1
+01
+Code Issues 0 Pull requests 0 Actions Projects 0 Wiki Security Insights
+BrossardAquaticIntranet/schedule_operations/schedule_creation.php
+@horiasandu1 horiasandu1 Finished subsystem to assign shifts to specific sessions
+fb75218 13 days ago
+88 lines (57 sloc)  2.86 KB
+
 <?php
 define("PREAMBLE", "../");
 include(PREAMBLE . "db_operations/connection.php");
@@ -8,10 +29,16 @@ $form_data_schedule = "";
 
 
 //TODO add option to create new semester and add files to it
-$form_data_schedule .= ">
-</form>\"";
+$form_data_schedule .= "<form action=\"createSchedule.php\" method=\"post\" enctype=\"multipart/form-data\">
+    <h2>Cr&eacute;er nouvel horaire</h2>
+    Titre de l'horaire: <input type='text' name='title'><br>
+    Date de d&eacute;but &nbsp; <input type='date' name='sch_start_date'><br><br>
+    Date de fin &nbsp; <input type='date' name='sch_end_date'><br><br>
+    <br><br>
+    <input type=\"submit\" value=\"Cr&eacute;er\" name=\"submit\">
+</form>";
 
-$form_data_shift_list = ">
+$form_data_shift_list = "<form action=\"uploadShifts.php\" method=\"post\" enctype=\"multipart/form-data\">
     <h2>S&eacute;lectionner fichier CSV contenant la liste de cours de la session</h2>
     <p>Ensuite, appuyez sur charger et enfin sur mettre &agrave; jour. ATTENTION: Si des cours existent d&eacute;j&acirc; pour la session choisie, ils seront supprim&eacute;s pour faire place aux nouveaux</p>";
 
@@ -19,7 +46,9 @@ $form_data_shift_list = ">
 $result = $db->query("select sch_id, title from schedule");
 
 
-$form_data_shift_list .= ">
+$form_data_shift_list .= "<input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">
+    <br><br>
+    <input type=\"submit\" value=\"Charger\" name=\"submit\">
 </form><form action='db_update_shifts.php' method='post' enctype='multipart/form-data'>";
 
 $form_data_shift_list .= "Session: <select name='schedule'>";
@@ -35,7 +64,9 @@ while ($row = $result->fetch_assoc()) {
 $form_data_shift_list .= "<h5>Mettre &agrave; jour les quarts de travail</h5><br></select><br>";
 
 
-$form_data_shift_list .= ">Modifier Sessions</a>\"";
+$form_data_shift_list .= " 
+<input type=\"submit\" value=\"Mettre &agrave; jour\" name=\"submit\">
+</form><hr><a style='text-decoration:none; ' href=\"schedule_modification.php\" class=\"btn btn-primary btn-lg\" role=\"button\" aria-pressed=\"true\">Modifier Sessions</a>";
 
 
 echo "<!DOCTYPE HTML><html>";
@@ -66,3 +97,15 @@ echo "</html>";
 
 
 ?>
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

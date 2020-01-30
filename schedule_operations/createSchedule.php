@@ -14,12 +14,12 @@ include(PREAMBLE . "assets/php/code_blocks.php");
 $content = "<!DOCTYPE HTML><html>";
 
 
-if ($_POST["title"] == null || $_POST["sch_start_date"] == null || $_POST["sch_end_date"] == null || $_POST["avail_deadline"] == null) {
+if ($_POST["title"] == null || $_POST["sch_start_date"] == null || $_POST["sch_end_date"] == null) {
     $content .= "Erreur: Un titre doit exister (Exemple: Hiver 2020) et les trois dates doivent exister ";
 
     $content .= '<br><a href="schedule_creation.php">Retour</a>';
 } else {
-    insertNewSchedule($db, $_POST["sch_start_date"], $_POST["sch_end_date"], $_POST["avail_deadline"], $_POST["title"]);
+    insertNewSchedule($db, $_POST["sch_start_date"], $_POST["sch_end_date"], $_POST["title"]);
     $content .= "Horaire g&eacute;n&eacute;r&eacute; avec succ&egrave;s";
 
     $content .= '<br><a href="schedule_creation.php">Retour</a>';
