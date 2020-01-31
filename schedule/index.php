@@ -95,7 +95,7 @@ if (isset($_SESSION['user_id'])) {
                     $currentLocation = $_GET['location'];
                 }
 
-                $schedule = 1;
+
 
                 echo printWeekDayTable('Dimanche', $schedule, $db, $currentLocation);
 

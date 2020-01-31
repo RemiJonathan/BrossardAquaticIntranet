@@ -236,10 +236,10 @@ function printWeekDayTable($selectedWeekDay, $schedule, $db,$location){
 
     switch ($location){
         case 'LT':
-            $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location = 'LT' OR location = 'LT-SALLE' OR location = 'PIS-LT' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
+            $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location REGEXP 'LT|LT-SALLE|PIS-LT' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
             break;
         case 'AB':
-            $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location = 'AB' OR location = 'AB-SALLE' OR location = 'PIS-AB' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
+            $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location REGEXP 'AB|AB-SALLE|PIS-AB' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
             break;
         default:
             $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location = '$location' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
@@ -250,6 +250,9 @@ function printWeekDayTable($selectedWeekDay, $schedule, $db,$location){
     $this_weeks_earliest_shift_sql = $this_weeks_shifts_sql . " ORDER BY start_time";
     $this_weeks_latest_ending_shift_sql = $this_weeks_shifts_sql . " ORDER BY end_time DESC";
     $this_weeks_shifts_res = $db->query($this_weeks_shifts_sql." ORDER BY start_time ASC, end_time DESC");
+
+    echo "<!--$this_weeks_shifts_sql ORDER BY start_time ASC, end_time DESC-->";
+
 
     $table_begin = $db->query($this_weeks_earliest_shift_sql)->fetch_array()['start_time'];
     $table_end = $db->query($this_weeks_latest_ending_shift_sql)->fetch_array()['end_time'];
