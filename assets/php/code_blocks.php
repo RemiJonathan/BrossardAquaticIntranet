@@ -332,7 +332,8 @@ function print_seniority_dropdown($seniority_type, $db){
     echo"<ol class=\"list-group $seniority_type\" style='max-height: 250px; overflow-y:scroll; display: none'>";
 
     while ($user = $get_seniorty_res->fetch_array(MYSQLI_ASSOC)){
-        echo"<li class='list-group-item list-group-item-action' style='font-size: small; '>";
+        $id = 'user'.$user['user_id'];
+        echo"<li id='$id' class='list-group-item list-group-item-action' style='font-size: small; '>";
         //echo $user['user_id']."<br />";
         echo $user['user_fname']." ".$user['user_lname'];
         echo "<br /><strong>" .$user['hours']."</strong>";

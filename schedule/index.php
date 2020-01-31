@@ -149,6 +149,8 @@ if (isset($_SESSION['user_id'])) {
                 echo "<div class=\"col-12\"><input id='enseignement' name=\"seniority_type\" type=\"radio\"><label for=\"enseignement\">Enseignement</label></div>";
                 echo "<div class=\"col-12\"><input id='surveillance' name=\"seniority_type\" type=\"radio\"><label for=\"surveillance\">Surveillance</label></div>";
 
+                echo "<div class=\"col-12\"><span id='selectedHours'></span></div>";
+
                 echo "<div class=\"col-12\">";
 
                 print_seniority_dropdown('surveillance',$db);
@@ -245,15 +247,52 @@ normalizeTable();
     
     $(document).ready(function() {
         $('#WD0T').slideDown(350); 
+        $('#selectedHours').text('0 heures');
     });
     
     $('input').click(function() {
       let elementId = $(this).attr('id');
-      $('.list-group').slideUp(350);                                
+      $('.list-group').slideUp(350);   
+      $('.list-group-item.list-group-item-action.active').removeClass('active');
         $('.list-group.'+elementId).delay(349).slideDown(350); 
     });
     
+  $('.list-group-item.list-group-item-action').click(function() {
+      
+        $('.list-group-item.list-group-item-action.active').removeClass('active');
+      $(this).addClass('active');
+      var userID = $('.list-group-item.list-group-item-action.active').attr('id');
+       $('.shift.selected').css('background','grey');
+        $('.'+userID).css('background','lightseagreen');
+        let hours = 0 ;
+        $('.'+userID).each(function() {
+      hours += parseInt($(this).attr('rowspan'));
+      if (hours === 0) $('#selectedHours').text('0 heures');
+      $('#selectedHours').text((hours/12) + ' heures');
+    });
+    });
   
+  $('td.shift').click(function() {
+     var userID = $('.list-group-item.list-group-item-action.active').attr('id');
+     var elementId = $(this).attr('id');
+     
+     $(this).removeClass();
+     $(this).addClass('shift');
+     $(this).addClass(userID);
+     if(userID !== undefined) $(this).addClass('selected');
+    console.log('Shift '+elementId+' assigned to '+ userID);
+    $('.shift.selected').css('background','grey');
+    $('.'+userID).css('background','lightseagreen');
+    let hours = 0 ;
+    $('.'+userID).each(function() {
+      hours += parseInt($(this).attr('rowspan'));
+      $('#selectedHours').text((hours/12) + ' heures');
+    });
+    
+    
+  });
+  
+    
 </script>";
 echo "	</body>";
 echo "</html>";
