@@ -262,7 +262,7 @@ function insertNewSchedule($db, $sch_start_date, $sch_end_date, $title)
 
 }
 
-function insertAvailBlocks($db, $sch_id, $title, $deadline, $gen_info, $meet_info, $guidelines)
+function insertAvailInstructions($db, $sch_id, $title, $deadline, $gen_info, $meet_info, $guidelines)
 {
     $db->query("DELETE FROM availability_instructions WHERE sch_id = $sch_id");
 
@@ -272,6 +272,39 @@ function insertAvailBlocks($db, $sch_id, $title, $deadline, $gen_info, $meet_inf
     $stmt->execute();
 
 }
+
+function deleteAvailBlocks($db, $sch_id)
+{
+    $db->query("DELETE FROM availability_blocks WHERE sch_id = $sch_id");
+}
+
+function deleteSpecAvailBlocks($db, $sch_id)
+{
+    $db->query("DELETE FROM spec_availability_blocks WHERE sch_id = $sch_id");
+}
+
+
+function insertAvailBlocks($db, $sch_id, $day, $start_time, $end_time, $required_qual, $category)
+{
+
+    $stmt = $db->prepare("INSERT INTO availability_blocks (sch_id, day, start_time, end_time, required_qual, category) VALUES (?,?,?,?,?,?)");
+    $stmt->bind_param("isssis", $sch_id, $day, $start_time, $end_time, $required_qual, $category);
+
+    $stmt->execute();
+
+
+}
+
+function insertSpecAvailBlocks($db, $sch_id, $start_date, $end_date, $start_time, $end_time, $required_qual, $block_cat)
+{
+
+    $stmt = $db->prepare("INSERT INTO spec_availability_blocks (sch_id, start_date, end_date, start_time, end_time, required_qual, block_cat) VALUES (?,?,?,?,?,?,?)
+");
+    $stmt->bind_param("issssis", $sch_id, $start_date, $end_date, $start_time, $end_time, $required_qual, $block_cat);
+
+    $stmt->execute();
+}
+
 
 
 

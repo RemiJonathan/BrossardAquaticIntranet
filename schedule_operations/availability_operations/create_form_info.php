@@ -29,7 +29,19 @@ $spec_end_timeArray = $_GET['spec_end_time'];
 $spec_required_qualArray = $_GET['spec_required_qual'];
 $spec_block_catArray = $_GET['spec_block_cat'];
 
-insertAvailBlocks($db, $sch_id, $title, $deadline, $gen_info, $meet_info, $guidelines);
+insertAvailInstructions($db, $sch_id, $title, $deadline, $gen_info, $meet_info, $guidelines);
+
+deleteAvailBlocks($db, $sch_id);
+deleteSpecAvailBlocks($db, $sch_id);
+
+for ($i = 0; $i < count($dayArray); $i++) {
+    insertAvailBlocks($db, $sch_id, $dayArray[$i], $start_timeArray[$i], $end_timeArray[$i], $required_qualArray[$i], $block_catArray[$i]);
+}
+
+for ($i = 0; $i < count($spec_start_dateArray); $i++) {
+    insertSpecAvailBlocks($db, $sch_id, $spec_start_dateArray[$i], $spec_end_dateArray[$i], $spec_start_timeArray[$i], $spec_end_timeArray[$i], $spec_required_qualArray[$i], $spec_block_catArray[$i]);
+}
+
 $content .= "<h1>Confirmation</h1>";
 $content .= "<b>Titre: </b>" . $title;
 $content .= "<br><b>Date Limite: </b>" . nl2br($deadline) . '<br>';
@@ -50,15 +62,7 @@ for ($i = 0; $i < count($spec_start_dateArray); $i++) {
 $spec_start_timeArray[$i]-$spec_end_timeArray[$i]&nbsp;
 $spec_required_qualArray[$i]&nbsp;$spec_block_catArray[$i]<br><br><button><a href='../schedule_modification.php'>Retour</a></button>";
 }
-/*
-$content.="<br><form method='get' action='create_form_info.php'>
-<input type='hidden' name='title' value='$title'>
-<input type='hidden' name='deadline' value='$deadline'>
-<input type='submit' name='submitButton'>
-</form>
-";
 
-*/
 echo "<!DOCTYPE HTML><html>";
 block_print_document_header("Template", PREAMBLE);
 echo "<body class=\"is-preload\">";
