@@ -1651,10 +1651,7 @@ $form_data_schedule1 .= "
 
 <tr>
 <td style='width:20%;'>
-   
 <input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date' value='2020-04-05' name='spec_end_date[]'>
-
-
 </td>
 <td style='width:30%;'>
 <input type='time' value='08:00' name='spec_start_time[]' required>&nbsp;&agrave;&nbsp;
@@ -1675,7 +1672,6 @@ $form_data_schedule1 .= "
 <option  value='Autre'>Autre</option>
 </select>
 </td>
-
 <td>
 <p onclick='deleteRow($(this))'><b>Supp.</b></p>
     <td>
@@ -1686,21 +1682,24 @@ $form_data_schedule1 .= "
 
 
 
+
+
 </table>
  <br><input type=\"submit\" value=\"Publier\" name=\"submit\">
  </form>";
 
 $form_data_schedule1 .= "
 <form action=\"create_form_info.php\" id=\"summer_avail_form\" method=\"post\" enctype=\"multipart/form-data\">
+    
     <h2>Estival</h2>
-    Titre de l'horaire: <input required placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
+    Titre de l'horaire: <input placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
     Date limite: <input type='date' name='deadline'><br><br>
     Information G&eacute;n&eacute;rales &nbsp; 
     <textarea  name='gen_info'>Les cours de natation se d&eacute;rouleront du 6 janvier au 15 mars 2020 (10 sem.). Rel&acirc;che &agrave; LT SEUL. le 1er-2-3 f&eacute;vrier (reprise les 16-21-22 mars)
-    
+    <pre>
     Les cours de mise en forme se d&eacute;rouleront du 6 janvier au 19 mars (11 sem.). 
     
-    Les bains libres se d&eacute;rouleront du dimanche 5 janvier au vendredi 3 avril.</textarea><br><br>
+    Les bains libres se d&eacute;rouleront du dimanche 5 janvier au vendredi 3 avril.</pre></textarea><br><br>
     Date de fin &nbsp; <input type='date' name='sch_end_date'><br><br>
     Date limite pour la remise des disponibilit&eacute;s &nbsp; <input type='date' name='avail_deadline'>
     <br><br>

@@ -262,5 +262,16 @@ function insertNewSchedule($db, $sch_start_date, $sch_end_date, $title)
 
 }
 
+function insertAvailBlocks($db, $sch_id, $title, $deadline, $gen_info, $meet_info, $guidelines)
+{
+    $db->query("DELETE FROM availability_instructions WHERE sch_id = $sch_id");
+
+    $stmt = $db->prepare("INSERT INTO availability_instructions (sch_id, title, deadline, gen_info, meet_info, guidelines) VALUES (?,?,?,?,?,?)");
+    $stmt->bind_param("isssss", $sch_id, $title, $deadline, $gen_info, $meet_info, $guidelines);
+
+    $stmt->execute();
+
+}
+
 
 
