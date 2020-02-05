@@ -153,7 +153,7 @@ if (isset($_SESSION['user_id'])) {
 
                 echo "</div>";
 
-                echo "<br /><div class=\"col-12\"><form><div id='hiddenInputs'></div><ul class=\"actions\"><li><input style='display: none' type='submit' id='hiddenSave' value='sauvegarder'></li></ul></form></div></div></div>";
+                echo "<br /><div class=\"col-12\"><form action='save_schedule.php' method='post'><div id='hiddenInputs'></div><ul class=\"actions\"><li><input style='display: none' type='submit' id='hiddenSave' value='sauvegarder'></li></ul></form></div></div></div>";
 
                 echo "</div>";
 
