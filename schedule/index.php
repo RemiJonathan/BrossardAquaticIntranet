@@ -260,12 +260,65 @@ echo "<script>
         var userID = $('.list-group-item.list-group-item-action.active').attr('id');
         $('.shift.selected').css('background', 'LightGray');
         $('.' + userID).css('background', '#99FFFF');
+        
         let hours = 0;
-        $('.' + userID).each(function () {
-            hours += parseInt($(this).attr('rowspan'));
-            if (hours === 0) $('#selectedHours').text('0 heures');
-            $('#selectedHours').text((hours / 12) + ' heures');
+        let lowest = new Date('1970-1-1 23:59');
+        let highest = new Date('1970-1-1 00:00');
+        
+        let hoursString = '';
+        
+        $('table').each(function () {
+            let tableId = $(this).attr('id');
+
+            let start = new Date();
+            let end = new Date();
+
+            $('#' + tableId + ' .' + userID).each(function () {
+
+                start = new Date('1970-1-1 ' + $(this).data('start'));
+                //console.log(start);
+                end = new Date('1970-1-1 ' + $(this).data('end'));
+                //console.log(end);
+
+
+                if (start < lowest) lowest = start;
+                if (end > highest) highest = end;
+
+                //$('.shift[class*=\' end\']\"').class();
+
+                $('#hiddenSave').slideDown();
+
+                //Add the shift to the list to save
+
+            });
+
+
+            hours = ((highest - lowest) / 1000 / 60 / 60);
+
+            //console.log(lowest +'-'+highest+' | '+hours+'h');
+
+            let totalMinutes = (hours * 60);
+
+            let trueHours = Math.floor(totalMinutes / 60);
+            let minutes = Math.floor(totalMinutes % 60);
+
+            
+            if (hours > 0) {
+                
+                console.log($(this).attr('id'));
+                console.log(hoursString);
+                
+                hoursString +='<li>'+tableId+ ': '+ trueHours + ' heures ';    
+            if (minutes !== 0) hoursString += minutes + ' minutes';
+                hoursString +='</li>';
+
+            }
+            lowest = new Date('1970-1-1 23:59');
+            highest = new Date('1970-1-1 00:00');
         });
+        //TODO: Change the way total time is calculated
+
+        $('#selectedHours').html(hoursString);
     });
     $('.shift.selected').css('background', 'LightGray');
     $('td.shift').click(function () {

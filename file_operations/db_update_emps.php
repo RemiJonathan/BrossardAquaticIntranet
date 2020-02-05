@@ -67,9 +67,15 @@ function random_str(
 
 
 foreach ($empArray as $employee) {
+    $mypassword = random_str(8);
+
+//Encrypt password
+    $options = ['cost' => 10];
+    $passwordhash = password_hash($mypassword, PASSWORD_BCRYPT, $options);
 
 
-        insertNewRegUser($db,utf8_encode($employee[0]),random_str(8),utf8_encode(trim($employee[2])),utf8_encode(trim($employee[1])));
+        insertNewRegUser($db,utf8_encode($employee[0]),$passwordhash,utf8_encode(trim($employee[2])),utf8_encode(trim($employee[1])));
+
 
    // $content .=  random_str(8)."<br>" .utf8_encode($employee['0'])."<br>".utf8_encode($employee['1'])."<br>".utf8_encode($employee['2'])."<br>";
 
