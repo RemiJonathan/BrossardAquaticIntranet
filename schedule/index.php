@@ -144,7 +144,7 @@ if (isset($_SESSION['user_id'])) {
                 echo "<div class=\"col-12\"><input id='enseignement' name=\"seniority_type\" type=\"radio\"><label for=\"enseignement\">Enseignement</label></div>";
                 echo "<div class=\"col-12\"><input id='surveillance' name=\"seniority_type\" type=\"radio\"><label for=\"surveillance\">Surveillance</label></div>";
 
-                echo "<div class=\"col-12\"><span id='selectedHours'></span></div>";
+                echo "<div class=\"col-12\"><span id='selectedHours' style='font-size: small'></span></div>";
 
                 echo "<div class=\"col-12\">";
 
@@ -271,17 +271,23 @@ echo "<script>
     $('td.shift').click(function () {
         var userID = $('.list-group-item.list-group-item-action.active').attr('id');
         var elementId = $(this).attr('id');
-
+        let hoursString = '';
         $(this).removeClass();
         $(this).addClass('shift');
         $(this).addClass(userID);
-        if (userID !== undefined) $(this).addClass('selected');
+        if (userID !== undefined){ 
+            $(this).addClass('selected');
+            $('#hiddenInputs').append('<input type=\'hidden\' name=\'shift[]\' value=\''+elementId+'\'/><input type=\'hidden\' name=\'user[]\' value=\''+userID.substring(4)+'\'/>');
+            console.log('Added '+ '<input type=\'hidden\' name=\'shift[]\' value=\''+elementId+'\'/><input type=\'hidden\' name=\'user[]\' value=\''+userID.substring(4)+'\'/>')
+        }
         console.log('Shift ' + elementId + ' assigned to ' + userID);
         $('.shift.selected').css('background', 'LightGray');
         $('.' + userID).css('background', '#FF99FF');
+        
         let hours = 0;
         let lowest = new Date('1970-1-1 23:59');
         let highest = new Date('1970-1-1 00:00');
+        
         $('table').each(function () {
             let tableId = $(this).attr('id');
 
@@ -317,14 +323,15 @@ echo "<script>
             let trueHours = Math.floor(totalMinutes / 60);
             let minutes = Math.floor(totalMinutes % 60);
 
-            let hoursString = '';
-            hoursString = trueHours + ' heures ';
-            if (minutes !== 0) hoursString += minutes + ' minutes';
-
+            
             if (hours > 0) {
-                $('#selectedHours').text(hoursString);
+                
                 console.log($(this).attr('id'));
                 console.log(hoursString);
+                
+                hoursString +='<li>'+tableId+ ': '+ trueHours + ' heures ';    
+            if (minutes !== 0) hoursString += minutes + ' minutes';
+                hoursString +='</li>';
 
             }
             lowest = new Date('1970-1-1 23:59');
@@ -332,7 +339,7 @@ echo "<script>
         });
         //TODO: Change the way total time is calculated
 
-
+        $('#selectedHours').html(hoursString);
     });
 
 

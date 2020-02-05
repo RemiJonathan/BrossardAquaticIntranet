@@ -278,7 +278,7 @@ function printWeekDayTable($selectedWeekDay, $schedule, $db, $location)
         $duration = round(abs($end_time - $start_time) / 60, 2);
         $shift_array[$index]['html'] = '<td class="shift';
         if (!is_null($shift['assigned_user'])) $shift_array[$index]['html'] .= ' user' . $shift['assigned_user'] . ' selected';
-        $shift_array[$index]['html'] .= '" rowspan="' . (($duration / 5)) . '" data-start="'.$shift['start_time'].'" data-end="'.$shift['end_time'].'">' . $shift['description'];
+        $shift_array[$index]['html'] .= '" rowspan="' . (($duration / 5)) . '" data-start="'.$shift['start_time'].'" data-end="'.$shift['end_time'].'" id="'.$shift['shift_id'].'">' . $shift['description'];
 
         //if (!is_null($shift['assigned_user'])) echo '<br />' . $shift['assigned_user'];
 
