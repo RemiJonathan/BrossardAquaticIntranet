@@ -130,7 +130,8 @@ $connection_form = "<h3>Connexion</h3><form action=\"" . PREAMBLE . "validate_co
 														</ul>
 													</div>
 												</div>
-											</form>";
+											</form>
+											<script>window.history.replaceState({}, document.title, location.pathname );</script>";
 
 /**
  * Use inside block_print_main()
