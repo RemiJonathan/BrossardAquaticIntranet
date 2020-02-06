@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2020 at 01:41 AM
+-- Generation Time: Feb 05, 2020 at 11:46 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -42,11 +42,109 @@ CREATE TABLE `article` (
 -- Table structure for table `availabilities`
 --
 
-CREATE TABLE `availabilities` (
-  `shift_id` int(7) NOT NULL,
-  `user_id` int(7) NOT NULL,
-  `user_is_available` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+CREATE TABLE `availabilities`
+(
+    `shift_id`          int(7)     NOT NULL,
+    `user_id`           int(7)     NOT NULL,
+    `user_is_available` tinyint(1) NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_520_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `availability_blocks`
+--
+
+CREATE TABLE `availability_blocks`
+(
+    `block_id`      int(11) NOT NULL,
+    `sch_id`        int(11) NOT NULL,
+    `day`           varchar(30) DEFAULT NULL,
+    `start_time`    time        DEFAULT NULL,
+    `end_time`      time        DEFAULT NULL,
+    `required_qual` int(11)     DEFAULT NULL,
+    `category`      varchar(30) DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+--
+-- Dumping data for table `availability_blocks`
+--
+
+INSERT INTO `availability_blocks` (`block_id`, `sch_id`, `day`, `start_time`, `end_time`, `required_qual`, `category`)
+VALUES (955, 1, 'Dimanche', '13:15:00', '16:30:00', 1, 'Surveillance'),
+       (956, 1, 'Dimanche', '13:15:00', '16:30:00', 4, 'Enseignement'),
+       (957, 1, 'Dimanche', '18:45:00', '21:00:00', 1, 'Surveillance'),
+       (958, 1, 'Lundi', '05:30:00', '07:15:00', 1, 'Surveillance'),
+       (959, 1, 'Lundi', '19:45:00', '21:30:00', 1, 'Surveillance'),
+       (960, 1, 'Mardi', '20:45:00', '22:30:00', 1, 'Surveillance'),
+       (961, 1, 'Mardi', '20:45:00', '22:30:00', 1, 'Surveillance'),
+       (962, 1, 'Mercredi', '05:15:00', '07:00:00', 1, 'Surveillance'),
+       (963, 1, 'Mercredi', '18:45:00', '20:30:00', 1, 'Surveillance'),
+       (964, 1, 'Jeudi', '20:45:00', '22:30:00', 1, 'Surveillance'),
+       (965, 1, 'Vendredi', '05:30:00', '07:15:00', 1, 'Surveillance'),
+       (966, 1, 'Vendredi', '19:15:00', '21:00:00', 1, 'Surveillance'),
+       (967, 1, 'Samedi', '12:45:00', '17:00:00', 1, 'Surveillance'),
+       (968, 1, 'Samedi', '18:45:00', '21:00:00', 1, 'Surveillance'),
+       (969, 1, 'Dimanche', '08:00:00', '11:00:00', 1, 'Enseignement'),
+       (970, 1, 'Dimanche', '11:00:00', '13:30:00', 1, 'Enseignement'),
+       (971, 1, 'Dimanche', '15:30:00', '18:30:00', 1, 'Enseignement'),
+       (972, 1, 'Lundi', '18:00:00', '20:00:00', 1, 'Enseignement'),
+       (973, 1, 'Lundi', '18:30:00', '20:30:00', 1, 'Enseignement'),
+       (974, 1, 'Mardi', '16:00:00', '17:00:00', 1, 'Enseignement'),
+       (975, 1, 'Mardi', '18:00:00', '20:00:00', 1, 'Enseignement'),
+       (976, 1, 'Mardi', '19:00:00', '20:30:00', 1, 'Enseignement'),
+       (977, 1, 'Mardi', '20:00:00', '21:00:00', 1, 'Enseignement'),
+       (978, 1, 'Mercredi', '18:00:00', '21:00:00', 1, 'Enseignement'),
+       (979, 1, 'Mercredi', '20:30:00', '22:30:00', 1, 'Enseignement'),
+       (980, 1, 'Mercredi', '20:00:00', '21:00:00', 1, 'Enseignement'),
+       (981, 1, 'Jeudi', '16:00:00', '17:00:00', 1, 'Enseignement'),
+       (982, 1, 'Jeudi', '18:00:00', '20:00:00', 1, 'Enseignement'),
+       (983, 1, 'Jeudi', '19:00:00', '20:30:00', 1, 'Enseignement'),
+       (984, 1, 'Jeudi', '20:00:00', '21:00:00', 1, 'Enseignement'),
+       (985, 1, 'Jeudi', '20:00:00', '21:00:00', 1, 'Enseignement'),
+       (986, 1, 'Vendredi', '18:00:00', '19:30:00', 1, 'Enseignement'),
+       (987, 1, 'Vendredi', '19:00:00', '21:00:00', 1, 'Enseignement'),
+       (988, 1, 'Samedi', '08:00:00', '11:00:00', 1, 'Enseignement'),
+       (989, 1, 'Samedi', '13:15:00', '17:30:00', 1, 'Enseignement'),
+       (990, 1, 'Samedi', '16:00:00', '21:00:00', 1, 'Enseignement'),
+       (991, 1, 'Samedi', '16:00:00', '21:00:00', 1, 'Enseignement'),
+       (992, 1, 'Samedi', '13:00:00', '18:00:00', 1, 'Enseignement'),
+       (993, 1, 'Samedi', '13:00:00', '18:00:00', 1, 'Enseignement'),
+       (994, 1, 'Samedi', '13:00:00', '18:00:00', 1, 'Enseignement');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `availability_instructions`
+--
+
+CREATE TABLE `availability_instructions`
+(
+    `sch_id`     int(11)     NOT NULL,
+    `title`      varchar(30) NOT NULL,
+    `deadline`   date        NOT NULL,
+    `gen_info`   longtext DEFAULT NULL,
+    `meet_info`  longtext DEFAULT NULL,
+    `guidelines` longtext DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+--
+-- Dumping data for table `availability_instructions`
+--
+
+INSERT INTO `availability_instructions` (`sch_id`, `title`, `deadline`, `gen_info`, `meet_info`, `guidelines`)
+VALUES (1, 'Hiver 2021', '2020-02-21',
+        'Les cours de natation se dérouleront du 6 janvier au 15 mars 2020 (10 sem.). Relâche à LT SEUL. le 1er-2-3 février (reprise les 16-21-22 mars)\r\n    \r\n    Les cours de mise en forme se dérouleront du 6 janvier au 19 mars (11 sem.). \r\n    \r\n    Les bains libres se dérouleront du dimanche 5 janvier au vendredi 3 avril.',
+        'Réunion des chefs moniteurs\r\nJeudi 19 décembre : 18 h à 20 h --- Hôtel de Ville\r\n\r\nRéunion et entraînement des moniteurs (MS, MSN, MSA, Aquaforme)\r\nVendredi 3 janvier : 11 h à 13 h --- Piscine Antoine-Brossard - Les absences doivent être justifiées avant le 20 décembre 2019\r\n\r\nRéunion du personnel aquatique (TOUS) \r\nVendredi 3 janvier : 10 h à 11 h --- Piscine Antoine-Brossard - Les absences doivent être justifiées avant le 20 décembre 2019\r\n',
+        'En cas de désistement, l\'employé doit remettre une preuve démontrant un conflit d\'horaire entre les disponibilités soumises et son horaire scolaire non connu au moment du dépôt des disponibilités OU remettre un billet médical qui ordonne un arrêt de travail balisé par une date de début et date de fin.\r\nLorsque deux compétences sont nécessaires pour le même bloc, l\'ancienneté sera établie en fonction de la compétence en rouge.\r\nVous devez sélectionner des blocs pré établis (blocs indissociables) complets. \r\nVous pouvez sélectionner plus d\'un bloc par jour.\r\nVous devez indiquer un nombre maximum d\'heures souhaitées. Le minimum est à titre indicatif.\r\nVous devez avoir vos cartes de compétences à jour et valides pour obtenir un horaire.\r\nLes préférences sont à titre indicatif. La division aquatique ne s\'engage pas à les respecter.  \r\n\r\nRAPPELS\r\nMaximum 2 remplacements par quart de travail pour l\'enseignement;\r\nLes moniteurs de natation doivent étre disponibles au cours 1 (semaine du 6 au 12 janvier) et au cours de remise des carnets (semaine du 9 au 15 mars + 21-22 mars pour LT). SVP indiquez vos indisponibilités s\'il y a lieu.\r\n'),
+       (2, 'Automne 2020', '2020-02-09',
+        'Les cours de natation se dérouleront du 6 janvier au 15 mars 2020 (10 sem.). Relâche à LT SEUL. le 1er-2-3 février (reprise les 16-21-22 mars)\r\n    \r\n    Les cours de mise en forme se dérouleront du 6 janvier au 19 mars (11 sem.). \r\n    \r\n    Les bains libres se dérouleront du dimanche 5 janvier au vendredi 3 avril.',
+        'Réunion des chefs moniteurs\r\nJeudi 19 décembre : 18 h à 20 h --- Hôtel de Ville\r\n\r\nRéunion et entraînement des moniteurs (MS, MSN, MSA, Aquaforme)\r\nVendredi 3 janvier : 11 h à 13 h --- Piscine Antoine-Brossard - Les absences doivent être justifiées avant le 20 décembre 2019\r\n\r\nRéunion du personnel aquatique (TOUS) \r\nVendredi 3 janvier : 10 h à 11 h --- Piscine Antoine-Brossard - Les absences doivent être justifiées avant le 20 décembre 2019\r\n',
+        'En cas de désistement, l\'employé doit remettre une preuve démontrant un conflit d\'horaire entre les disponibilités soumises et son horaire scolaire non connu au moment du dépôt des disponibilités OU remettre un billet médical qui ordonne un arrêt de travail balisé par une date de début et date de fin.\r\nLorsque deux compétences sont nécessaires pour le même bloc, l\'ancienneté sera établie en fonction de la compétence en rouge.\r\nVous devez sélectionner des blocs pré établis (blocs indissociables) complets. \r\nVous pouvez sélectionner plus d\'un bloc par jour.\r\nVous devez indiquer un nombre maximum d\'heures souhaitées. Le minimum est à titre indicatif.\r\nVous devez avoir vos cartes de compétences à jour et valides pour obtenir un horaire.\r\nLes préférences sont à titre indicatif. La division aquatique ne s\'engage pas à les respecter.  \r\n\r\nRAPPELS\r\nMaximum 2 remplacements par quart de travail pour l\'enseignement;\r\nLes moniteurs de natation doivent étre disponibles au cours 1 (semaine du 6 au 12 janvier) et au cours de remise des carnets (semaine du 9 au 15 mars + 21-22 mars pour LT). SVP indiquez vos indisponibilités s\'il y a lieu.\r\n');
 
 -- --------------------------------------------------------
 
@@ -54,11 +152,12 @@ CREATE TABLE `availabilities` (
 -- Table structure for table `grade`
 --
 
-CREATE TABLE `grade` (
-  `grade_id` int(11) NOT NULL,
-  `quiz_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `result` decimal(6,2) DEFAULT 0.00
+CREATE TABLE `grade`
+(
+    `grade_id` int(11) NOT NULL,
+    `quiz_id`  int(11) NOT NULL,
+    `user_id`  int(11) NOT NULL,
+    `result`   decimal(6, 2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -76,13 +175,13 @@ CREATE TABLE `location` (
 --
 
 INSERT INTO `location` (`location_name`) VALUES
-('AB'),
-('AB-SALLE'),
-('GHB'),
-('LT'),
-('LT-SALLE'),
-('PIS-AB'),
-('PIS-LT');
+                                             ('AB'),
+                                             ('AB-SALLE'),
+                                             ('GHB'),
+                                             ('LT'),
+                                             ('LT-SALLE'),
+                                             ('PIS-AB'),
+                                             ('PIS-LT');
 
 -- --------------------------------------------------------
 
@@ -135,11 +234,12 @@ CREATE TABLE `qualified_user`
 -- Dumping data for table `qualified_user`
 --
 
-INSERT INTO `qualified_user` (`user_id`, `qualification_id`, `qual_emitted`, `qual_expiry`, `requalification_note`, `notes`) VALUES
-(722888, 1, NULL, '2019-06-01', 'EXP DEC 2019', ''),
-(722888, 2, NULL, '2020-12-01', '', ''),
-(750045, 1, NULL, '2020-07-01', '', ''),
-(758300, 1, NULL, '2019-12-01', '', ''),
+INSERT INTO `qualified_user` (`user_id`, `qualification_id`, `qual_emitted`, `qual_expiry`, `requalification_note`,
+                              `notes`)
+VALUES (722888, 1, NULL, '2019-06-01', 'EXP DEC 2019', ''),
+       (722888, 2, NULL, '2020-12-01', '', ''),
+       (750045, 1, NULL, '2020-07-01', '', ''),
+       (758300, 1, NULL, '2019-12-01', '', ''),
 (758300, 2, NULL, '2020-12-01', '', ''),
 (800001, 1, NULL, '2019-12-01', '', ''),
 (800001, 2, NULL, '2020-01-01', '', ''),
@@ -397,9 +497,8 @@ CREATE TABLE `role` (
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`role_id`, `role_name`, `role_is_admin`) VALUES
-(1, 'user', 0),
-(2, 'admin', 1);
+INSERT INTO `role` (`role_id`, `role_name`, `role_is_admin`) VALUES (1, 'user', 0),
+                                                                    (2, 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -407,11 +506,12 @@ INSERT INTO `role` (`role_id`, `role_name`, `role_is_admin`) VALUES
 -- Table structure for table `schedule`
 --
 
-CREATE TABLE `schedule` (
-                            `sch_id`         int(7) NOT NULL,
-                            `sch_start_date` date   NOT NULL,
-                            `sch_end_date`   date   NOT NULL,
-                            `title`          varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+CREATE TABLE `schedule`
+(
+    `sch_id`         int(7) NOT NULL,
+    `sch_start_date` date   NOT NULL,
+    `sch_end_date`   date   NOT NULL,
+    `title`          varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_520_ci;
@@ -448,192 +548,192 @@ CREATE TABLE `seniority`
 --
 
 INSERT INTO `seniority` (`seniority_id`, `user_id`, `seniority_type`, `hours`, `continued_service`, `seniority_loss`)
-VALUES (845, 800017, 'surveillance', 3033.92, '2015-03-02', NULL),
-       (846, 800029, 'surveillance', 2599.42, '2015-03-02', NULL),
-       (847, 800039, 'surveillance', 2466.09, '2015-03-02', NULL),
-       (848, 800038, 'surveillance', 2248.09, '2015-03-02', NULL),
-       (849, 800001, 'surveillance', 1989.34, '2015-03-02', NULL),
-       (850, 800057, 'surveillance', 1892.66, '2015-05-27', NULL),
-       (851, 800027, 'surveillance', 1846.08, '2015-03-02', NULL),
-       (852, 800014, 'surveillance', 1799.08, '2015-03-02', NULL),
-       (853, 800004, 'surveillance', 1680.50, '2015-03-28', NULL),
-       (854, 800079, 'surveillance', 1511.75, '2016-05-28', NULL),
-       (855, 800032, 'surveillance', 1427.25, '2015-03-28', NULL),
-       (856, 800009, 'surveillance', 1315.25, '2015-03-02', NULL),
-       (857, 800048, 'surveillance', 1264.76, '2015-05-27', NULL),
-       (858, 800003, 'surveillance', 1264.17, '2015-03-28', NULL),
-       (859, 800018, 'surveillance', 1245.42, '2015-03-28', NULL),
-       (860, 800062, 'surveillance', 1216.42, '2015-05-27', NULL),
-       (861, 800010, 'surveillance', 1171.33, '2015-03-14', NULL),
-       (862, 800023, 'surveillance', 1098.92, '2015-03-28', NULL),
-       (863, 800015, 'surveillance', 1069.38, '2015-03-28', NULL),
-       (864, 800090, 'surveillance', 1065.22, '2017-01-06', NULL),
-       (865, 800059, 'surveillance', 1059.91, '2015-05-27', NULL),
-       (866, 800081, 'surveillance', 1038.25, '2016-05-28', NULL),
-       (867, 800078, 'surveillance', 1008.50, '2016-05-28', NULL),
-       (868, 800022, 'surveillance', 930.01, '2015-03-28', NULL),
-       (869, 800040, 'surveillance', 904.17, '2015-03-14', NULL),
-       (870, 800116, 'surveillance', 899.00, '2017-05-27', NULL),
-       (871, 800100, 'surveillance', 850.83, '2017-05-27', NULL),
-       (872, 800088, 'surveillance', 846.75, '2017-01-06', NULL),
-       (873, 800108, 'surveillance', 826.58, '2017-05-27', NULL),
-       (874, 800021, 'surveillance', 782.09, '2015-03-28', NULL),
-       (875, 800089, 'surveillance', 733.50, '2017-01-06', NULL),
-       (876, 800111, 'surveillance', 699.75, '2017-05-27', NULL),
-       (877, 800104, 'surveillance', 685.67, '2017-05-27', NULL),
-       (878, 800099, 'surveillance', 640.00, '2017-05-27', NULL),
-       (879, 800073, 'surveillance', 617.17, '2015-09-14', NULL),
-       (880, 800126, 'surveillance', 605.00, '2017-09-16', NULL),
-       (881, 800127, 'surveillance', 590.13, '2017-09-16', NULL),
-       (882, 800083, 'surveillance', 570.08, '2016-07-05', NULL),
-       (883, 800093, 'surveillance', 553.83, '2017-02-27', NULL),
-       (884, 800105, 'surveillance', 501.33, '2017-05-27', NULL),
-       (885, 800114, 'surveillance', 480.17, '2017-05-27', NULL),
-       (886, 800041, 'surveillance', 473.00, '2015-03-17', NULL),
-       (887, 800109, 'surveillance', 457.25, '2017-05-27', NULL),
-       (888, 800124, 'surveillance', 438.92, '2017-09-16', NULL),
-       (889, 800097, 'surveillance', 428.00, '2017-05-27', NULL),
-       (890, 800142, 'surveillance', 408.88, '2018-05-26', NULL),
-       (891, 800091, 'surveillance', 393.75, '2017-01-06', NULL),
-       (892, 800118, 'surveillance', 337.26, '2017-05-27', NULL),
-       (893, 800107, 'surveillance', 306.59, '2017-05-27', NULL),
-       (894, 800149, 'surveillance', 299.17, '2018-05-26', NULL),
-       (895, 800077, 'surveillance', 275.17, '2016-05-28', NULL),
-       (896, 800128, 'surveillance', 250.92, '2018-01-11', NULL),
-       (897, 800139, 'surveillance', 238.67, '2018-05-26', NULL),
-       (898, 800049, 'surveillance', 235.50, '2015-05-27', NULL),
-       (899, 800148, 'surveillance', 205.60, '2018-05-26', NULL),
-       (900, 800120, 'surveillance', 200.17, '2017-08-31', NULL),
-       (901, 800130, 'surveillance', 195.67, '2018-03-26', NULL),
-       (902, 800137, 'surveillance', 186.75, '2018-05-26', NULL),
-       (903, 800101, 'surveillance', 185.00, '2017-05-27', NULL),
-       (904, 800168, 'surveillance', 168.25, '2019-05-25', NULL),
-       (905, 800153, 'surveillance', 164.00, '2019-03-28', NULL),
-       (906, 800113, 'surveillance', 129.17, '2017-05-27', NULL),
-       (907, 800131, 'surveillance', 106.42, '2018-03-26', NULL),
-       (908, 800158, 'surveillance', 104.17, '2019-05-25', NULL),
-       (909, 800167, 'surveillance', 97.00, '2019-05-25', NULL),
-       (910, 800136, 'surveillance', 90.66, '2018-05-26', NULL),
-       (911, 800042, 'surveillance', 65.50, '2015-03-24', NULL),
-       (912, 800164, 'surveillance', 61.25, '2019-05-25', NULL),
-       (913, 758300, 'surveillance', 43.25, '2019-05-25', NULL),
-       (914, 800132, 'surveillance', 37.00, '2018-05-26', NULL),
-       (915, 800135, 'surveillance', 35.00, '2018-05-26', NULL),
-       (916, 800157, 'surveillance', 33.33, '2019-05-25', NULL),
-       (917, 800160, 'surveillance', 26.50, '2019-05-25', NULL),
-       (918, 800161, 'surveillance', 25.42, '2019-05-25', NULL),
-       (919, 800165, 'surveillance', 24.50, '2019-05-25', NULL),
-       (920, 800166, 'surveillance', 23.75, '2019-05-25', NULL),
-       (921, 800092, 'surveillance', 23.50, '2017-02-27', NULL),
-       (922, 800151, 'surveillance', 14.50, '2019-03-28', NULL),
-       (923, 800156, 'surveillance', 11.25, '2019-05-25', NULL),
-       (924, 800122, 'surveillance', 10.50, '2017-08-30', NULL),
-       (925, 800155, 'surveillance', 7.25, '2019-05-25', NULL),
-       (926, 750045, 'surveillance', 5.25, '2019-05-25', NULL),
-       (927, 800152, 'surveillance', 2.00, '2019-03-28', NULL),
-       (928, 800033, 'surveillance', 0.00, '2019-01-17', NULL),
-       (929, 800037, 'surveillance', 214.25, '2015-03-14', NULL),
-       (930, 800117, 'surveillance', 698.50, '2017-05-27', NULL),
-       (931, 800145, 'surveillance', 217.67, '2018-05-26', NULL),
-       (932, 722888, 'surveillance', 922.50, '2015-01-24', NULL),
-       (933, 800133, 'surveillance', 38.42, '2018-05-26', NULL),
-       (934, 800154, 'surveillance', 7.25, '2019-03-28', NULL),
-       (935, 800169, 'surveillance', 0.00, '2019-09-05', NULL),
-       (936, 800170, 'surveillance', 0.00, '2019-09-17', NULL),
-       (937, 800171, 'surveillance', 0.00, '2019-10-18', NULL),
-       (938, 800086, 'surveillance', 0.00, '2019-10-30', NULL),
-       (1031, 800018, 'enseignement', 2660.34, '2015-03-02', NULL),
-       (1032, 800010, 'enseignement', 2117.15, '2015-03-02', NULL),
-       (1033, 800009, 'enseignement', 2030.50, '2015-03-02', NULL),
-       (1034, 800022, 'enseignement', 1577.00, '2015-03-02', NULL),
-       (1035, 800014, 'enseignement', 1333.33, '2015-03-02', NULL),
-       (1036, 800021, 'enseignement', 1293.50, '2015-03-28', NULL),
-       (1037, 800073, 'enseignement', 1230.24, '2015-09-14', NULL),
-       (1038, 800077, 'enseignement', 1035.75, '2016-05-28', NULL),
-       (1039, 800015, 'enseignement', 1030.25, '2015-03-02', NULL),
-       (1040, 800107, 'enseignement', 988.92, '2017-05-27', NULL),
-       (1041, 800041, 'enseignement', 953.38, '2015-03-02', NULL),
-       (1042, 800042, 'enseignement', 927.00, '2015-03-02', NULL),
-       (1043, 800001, 'enseignement', 748.83, '2015-03-02', NULL),
-       (1044, 800059, 'enseignement', 741.50, '2015-05-27', NULL),
-       (1045, 800090, 'enseignement', 671.25, '2016-12-21', NULL),
-       (1046, 800093, 'enseignement', 669.50, '2017-02-10', NULL),
-       (1047, 800023, 'enseignement', 645.00, '2015-03-02', NULL),
-       (1048, 800101, 'enseignement', 643.00, '2017-05-27', NULL),
-       (1049, 800078, 'enseignement', 634.92, '2016-05-28', NULL),
-       (1050, 800118, 'enseignement', 626.25, '2017-05-27', NULL),
-       (1051, 800089, 'enseignement', 607.50, '2016-12-15', NULL),
-       (1052, 800130, 'enseignement', 559.50, '2018-03-26', NULL),
-       (1053, 800113, 'enseignement', 545.34, '2017-05-27', NULL),
-       (1054, 800079, 'enseignement', 529.25, '2016-05-28', NULL),
-       (1055, 800088, 'enseignement', 431.09, '2016-12-02', NULL),
-       (1056, 800105, 'enseignement', 399.25, '2017-05-27', NULL),
-       (1057, 800083, 'enseignement', 377.75, '2016-05-28', NULL),
-       (1058, 800127, 'enseignement', 377.34, '2017-09-16', NULL),
-       (1059, 800120, 'enseignement', 370.83, '2017-08-31', NULL),
-       (1060, 800091, 'enseignement', 324.25, '2016-12-21', NULL),
-       (1061, 800017, 'enseignement', 315.25, '2015-03-02', NULL),
-       (1062, 800126, 'enseignement', 310.92, '2017-09-16', NULL),
-       (1063, 800092, 'enseignement', 309.64, '2017-02-10', NULL),
-       (1064, 800122, 'enseignement', 301.00, '2017-08-30', NULL),
-       (1065, 800131, 'enseignement', 292.45, '2018-03-26', NULL),
-       (1066, 800124, 'enseignement', 278.00, '2017-09-16', NULL),
-       (1067, 800148, 'enseignement', 271.00, '2018-05-26', NULL),
-       (1068, 800004, 'enseignement', 248.92, '2015-03-02', NULL),
-       (1069, 800057, 'enseignement', 248.25, '2015-05-27', NULL),
-       (1070, 800142, 'enseignement', 237.75, '2018-05-26', NULL),
-       (1071, 800116, 'enseignement', 231.17, '2017-05-27', NULL),
-       (1072, 800097, 'enseignement', 226.75, '2017-05-27', NULL),
-       (1073, 800040, 'enseignement', 206.84, '2015-03-02', NULL),
-       (1074, 800038, 'enseignement', 204.75, '2015-03-02', NULL),
-       (1075, 800139, 'enseignement', 203.42, '2018-05-26', NULL),
-       (1076, 800100, 'enseignement', 186.00, '2017-05-27', NULL),
-       (1077, 800039, 'enseignement', 183.25, '2015-03-02', NULL),
-       (1078, 800136, 'enseignement', 159.25, '2018-05-26', NULL),
-       (1079, 800128, 'enseignement', 94.50, '2018-01-11', NULL),
-       (1080, 800029, 'enseignement', 85.00, '2015-03-02', NULL),
-       (1081, 800109, 'enseignement', 66.25, '2017-05-27', NULL),
-       (1082, 800149, 'enseignement', 60.45, '2018-05-26', NULL),
-       (1083, 800153, 'enseignement', 59.50, '2019-03-28', NULL),
-       (1084, 800137, 'enseignement', 40.00, '2018-05-26', NULL),
-       (1085, 800135, 'enseignement', 33.50, '2018-05-26', NULL),
-       (1086, 800161, 'enseignement', 21.50, '2019-05-25', NULL),
-       (1087, 800152, 'enseignement', 19.00, '2019-03-28', NULL),
-       (1088, 800156, 'enseignement', 15.95, '2019-05-25', NULL),
-       (1089, 800081, 'enseignement', 12.50, '2016-05-28', NULL),
-       (1090, 800166, 'enseignement', 11.00, '2019-05-25', NULL),
-       (1091, 800151, 'enseignement', 9.00, '2019-03-28', NULL),
-       (1092, 800114, 'enseignement', 9.00, '2017-05-27', NULL),
-       (1093, 800132, 'enseignement', 8.25, '2018-05-26', NULL),
-       (1094, 800167, 'enseignement', 7.00, '2019-05-25', NULL),
-       (1095, 800032, 'enseignement', 2.75, '2015-03-02', NULL),
-       (1096, 800048, 'enseignement', 1.00, '2015-05-27', NULL),
-       (1097, 800062, 'enseignement', 0.50, '2015-05-27', NULL),
-       (1098, 800049, 'enseignement', 0.00, '2015-05-27', NULL),
-       (1099, 800155, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1100, 800157, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1101, 800158, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1102, 750045, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1103, 800099, 'enseignement', 0.00, '2017-05-27', NULL),
-       (1104, 800160, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1105, 800104, 'enseignement', 0.00, '2017-05-27', NULL),
-       (1106, 800108, 'enseignement', 0.00, '2017-05-27', NULL),
-       (1107, 758300, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1108, 800033, 'enseignement', 0.00, '2019-01-17', NULL),
-       (1109, 800164, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1110, 800111, 'enseignement', 0.00, '2017-05-27', NULL),
-       (1111, 800165, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1112, 800168, 'enseignement', 0.00, '2019-05-25', NULL),
-       (1113, 800037, 'enseignement', 635.58, '2015-03-14', NULL),
-       (1114, 800133, 'enseignement', 0.00, '2018-05-26', NULL),
-       (1115, 800117, 'enseignement', 0.00, '2017-05-27', NULL),
-       (1116, 800145, 'enseignement', 173.00, '2018-05-26', NULL),
-       (1117, 722888, 'enseignement', 1394.25, '1970-01-01', NULL),
-       (1118, 800154, 'enseignement', 14.50, '2019-03-28', NULL),
-       (1119, 800169, 'enseignement', 0.00, '2019-09-05', NULL),
-       (1120, 800170, 'enseignement', 0.00, '2019-09-17', NULL),
-       (1121, 800171, 'enseignement', 0.00, '2019-10-18', NULL),
-       (1122, 800086, 'enseignement', 0.00, '2019-10-30', NULL);
+VALUES (1123, 800017, 'surveillance', 3033.92, '2015-03-02', NULL),
+       (1124, 800029, 'surveillance', 2599.42, '2015-03-02', NULL),
+       (1125, 800039, 'surveillance', 2466.09, '2015-03-02', NULL),
+       (1126, 800038, 'surveillance', 2248.09, '2015-03-02', NULL),
+       (1127, 800001, 'surveillance', 1989.34, '2015-03-02', NULL),
+       (1128, 800057, 'surveillance', 1892.66, '2015-05-27', NULL),
+       (1129, 800027, 'surveillance', 1846.08, '2015-03-02', NULL),
+       (1130, 800014, 'surveillance', 1799.08, '2015-03-02', NULL),
+       (1131, 800004, 'surveillance', 1680.50, '2015-03-28', NULL),
+       (1132, 800079, 'surveillance', 1511.75, '2016-05-28', NULL),
+       (1133, 800032, 'surveillance', 1427.25, '2015-03-28', NULL),
+       (1134, 800009, 'surveillance', 1315.25, '2015-03-02', NULL),
+       (1135, 800048, 'surveillance', 1264.76, '2015-05-27', NULL),
+       (1136, 800003, 'surveillance', 1264.17, '2015-03-28', NULL),
+       (1137, 800018, 'surveillance', 1245.42, '2015-03-28', NULL),
+       (1138, 800062, 'surveillance', 1216.42, '2015-05-27', NULL),
+       (1139, 800010, 'surveillance', 1171.33, '2015-03-14', NULL),
+       (1140, 800023, 'surveillance', 1098.92, '2015-03-28', NULL),
+       (1141, 800015, 'surveillance', 1069.38, '2015-03-28', NULL),
+       (1142, 800090, 'surveillance', 1065.22, '2017-01-06', NULL),
+       (1143, 800059, 'surveillance', 1059.91, '2015-05-27', NULL),
+       (1144, 800081, 'surveillance', 1038.25, '2016-05-28', NULL),
+       (1145, 800078, 'surveillance', 1008.50, '2016-05-28', NULL),
+       (1146, 800022, 'surveillance', 930.01, '2015-03-28', NULL),
+       (1147, 800040, 'surveillance', 904.17, '2015-03-14', NULL),
+       (1148, 800116, 'surveillance', 899.00, '2017-05-27', NULL),
+       (1149, 800100, 'surveillance', 850.83, '2017-05-27', NULL),
+       (1150, 800088, 'surveillance', 846.75, '2017-01-06', NULL),
+       (1151, 800108, 'surveillance', 826.58, '2017-05-27', NULL),
+       (1152, 800021, 'surveillance', 782.09, '2015-03-28', NULL),
+       (1153, 800089, 'surveillance', 733.50, '2017-01-06', NULL),
+       (1154, 800111, 'surveillance', 699.75, '2017-05-27', NULL),
+       (1155, 800104, 'surveillance', 685.67, '2017-05-27', NULL),
+       (1156, 800099, 'surveillance', 640.00, '2017-05-27', NULL),
+       (1157, 800073, 'surveillance', 617.17, '2015-09-14', NULL),
+       (1158, 800126, 'surveillance', 605.00, '2017-09-16', NULL),
+       (1159, 800127, 'surveillance', 590.13, '2017-09-16', NULL),
+       (1160, 800083, 'surveillance', 570.08, '2016-07-05', NULL),
+       (1161, 800093, 'surveillance', 553.83, '2017-02-27', NULL),
+       (1162, 800105, 'surveillance', 501.33, '2017-05-27', NULL),
+       (1163, 800114, 'surveillance', 480.17, '2017-05-27', NULL),
+       (1164, 800041, 'surveillance', 473.00, '2015-03-17', NULL),
+       (1165, 800109, 'surveillance', 457.25, '2017-05-27', NULL),
+       (1166, 800124, 'surveillance', 438.92, '2017-09-16', NULL),
+       (1167, 800097, 'surveillance', 428.00, '2017-05-27', NULL),
+       (1168, 800142, 'surveillance', 408.88, '2018-05-26', NULL),
+       (1169, 800091, 'surveillance', 393.75, '2017-01-06', NULL),
+       (1170, 800118, 'surveillance', 337.26, '2017-05-27', NULL),
+       (1171, 800107, 'surveillance', 306.59, '2017-05-27', NULL),
+       (1172, 800149, 'surveillance', 299.17, '2018-05-26', NULL),
+       (1173, 800077, 'surveillance', 275.17, '2016-05-28', NULL),
+       (1174, 800128, 'surveillance', 250.92, '2018-01-11', NULL),
+       (1175, 800139, 'surveillance', 238.67, '2018-05-26', NULL),
+       (1176, 800049, 'surveillance', 235.50, '2015-05-27', NULL),
+       (1177, 800148, 'surveillance', 205.60, '2018-05-26', NULL),
+       (1178, 800120, 'surveillance', 200.17, '2017-08-31', NULL),
+       (1179, 800130, 'surveillance', 195.67, '2018-03-26', NULL),
+       (1180, 800137, 'surveillance', 186.75, '2018-05-26', NULL),
+       (1181, 800101, 'surveillance', 185.00, '2017-05-27', NULL),
+       (1182, 800168, 'surveillance', 168.25, '2019-05-25', NULL),
+       (1183, 800153, 'surveillance', 164.00, '2019-03-28', NULL),
+       (1184, 800113, 'surveillance', 129.17, '2017-05-27', NULL),
+       (1185, 800131, 'surveillance', 106.42, '2018-03-26', NULL),
+       (1186, 800158, 'surveillance', 104.17, '2019-05-25', NULL),
+       (1187, 800167, 'surveillance', 97.00, '2019-05-25', NULL),
+       (1188, 800136, 'surveillance', 90.66, '2018-05-26', NULL),
+       (1189, 800042, 'surveillance', 65.50, '2015-03-24', NULL),
+       (1190, 800164, 'surveillance', 61.25, '2019-05-25', NULL),
+       (1191, 758300, 'surveillance', 43.25, '2019-05-25', NULL),
+       (1192, 800132, 'surveillance', 37.00, '2018-05-26', NULL),
+       (1193, 800135, 'surveillance', 35.00, '2018-05-26', NULL),
+       (1194, 800157, 'surveillance', 33.33, '2019-05-25', NULL),
+       (1195, 800160, 'surveillance', 26.50, '2019-05-25', NULL),
+       (1196, 800161, 'surveillance', 25.42, '2019-05-25', NULL),
+       (1197, 800165, 'surveillance', 24.50, '2019-05-25', NULL),
+       (1198, 800166, 'surveillance', 23.75, '2019-05-25', NULL),
+       (1199, 800092, 'surveillance', 23.50, '2017-02-27', NULL),
+       (1200, 800151, 'surveillance', 14.50, '2019-03-28', NULL),
+       (1201, 800156, 'surveillance', 11.25, '2019-05-25', NULL),
+       (1202, 800122, 'surveillance', 10.50, '2017-08-30', NULL),
+       (1203, 800155, 'surveillance', 7.25, '2019-05-25', NULL),
+       (1204, 750045, 'surveillance', 5.25, '2019-05-25', NULL),
+       (1205, 800152, 'surveillance', 2.00, '2019-03-28', NULL),
+       (1206, 800033, 'surveillance', 0.00, '2019-01-17', NULL),
+       (1207, 800037, 'surveillance', 214.25, '2015-03-14', NULL),
+       (1208, 800117, 'surveillance', 698.50, '2017-05-27', NULL),
+       (1209, 800145, 'surveillance', 217.67, '2018-05-26', NULL),
+       (1210, 722888, 'surveillance', 922.50, '2015-01-24', NULL),
+       (1211, 800133, 'surveillance', 38.42, '2018-05-26', NULL),
+       (1212, 800154, 'surveillance', 7.25, '2019-03-28', NULL),
+       (1213, 800169, 'surveillance', 0.00, '2019-09-05', NULL),
+       (1214, 800170, 'surveillance', 0.00, '2019-09-17', NULL),
+       (1215, 800171, 'surveillance', 0.00, '2019-10-18', NULL),
+       (1216, 800086, 'surveillance', 0.00, '2019-10-30', NULL),
+       (1309, 800018, 'enseignement', 2660.34, '2015-03-02', NULL),
+       (1310, 800010, 'enseignement', 2117.15, '2015-03-02', NULL),
+       (1311, 800009, 'enseignement', 2030.50, '2015-03-02', NULL),
+       (1312, 800022, 'enseignement', 1577.00, '2015-03-02', NULL),
+       (1313, 800014, 'enseignement', 1333.33, '2015-03-02', NULL),
+       (1314, 800021, 'enseignement', 1293.50, '2015-03-28', NULL),
+       (1315, 800073, 'enseignement', 1230.24, '2015-09-14', NULL),
+       (1316, 800077, 'enseignement', 1035.75, '2016-05-28', NULL),
+       (1317, 800015, 'enseignement', 1030.25, '2015-03-02', NULL),
+       (1318, 800107, 'enseignement', 988.92, '2017-05-27', NULL),
+       (1319, 800041, 'enseignement', 953.38, '2015-03-02', NULL),
+       (1320, 800042, 'enseignement', 927.00, '2015-03-02', NULL),
+       (1321, 800001, 'enseignement', 748.83, '2015-03-02', NULL),
+       (1322, 800059, 'enseignement', 741.50, '2015-05-27', NULL),
+       (1323, 800090, 'enseignement', 671.25, '2016-12-21', NULL),
+       (1324, 800093, 'enseignement', 669.50, '2017-02-10', NULL),
+       (1325, 800023, 'enseignement', 645.00, '2015-03-02', NULL),
+       (1326, 800101, 'enseignement', 643.00, '2017-05-27', NULL),
+       (1327, 800078, 'enseignement', 634.92, '2016-05-28', NULL),
+       (1328, 800118, 'enseignement', 626.25, '2017-05-27', NULL),
+       (1329, 800089, 'enseignement', 607.50, '2016-12-15', NULL),
+       (1330, 800130, 'enseignement', 559.50, '2018-03-26', NULL),
+       (1331, 800113, 'enseignement', 545.34, '2017-05-27', NULL),
+       (1332, 800079, 'enseignement', 529.25, '2016-05-28', NULL),
+       (1333, 800088, 'enseignement', 431.09, '2016-12-02', NULL),
+       (1334, 800105, 'enseignement', 399.25, '2017-05-27', NULL),
+       (1335, 800083, 'enseignement', 377.75, '2016-05-28', NULL),
+       (1336, 800127, 'enseignement', 377.34, '2017-09-16', NULL),
+       (1337, 800120, 'enseignement', 370.83, '2017-08-31', NULL),
+       (1338, 800091, 'enseignement', 324.25, '2016-12-21', NULL),
+       (1339, 800017, 'enseignement', 315.25, '2015-03-02', NULL),
+       (1340, 800126, 'enseignement', 310.92, '2017-09-16', NULL),
+       (1341, 800092, 'enseignement', 309.64, '2017-02-10', NULL),
+       (1342, 800122, 'enseignement', 301.00, '2017-08-30', NULL),
+       (1343, 800131, 'enseignement', 292.45, '2018-03-26', NULL),
+       (1344, 800124, 'enseignement', 278.00, '2017-09-16', NULL),
+       (1345, 800148, 'enseignement', 271.00, '2018-05-26', NULL),
+       (1346, 800004, 'enseignement', 248.92, '2015-03-02', NULL),
+       (1347, 800057, 'enseignement', 248.25, '2015-05-27', NULL),
+       (1348, 800142, 'enseignement', 237.75, '2018-05-26', NULL),
+       (1349, 800116, 'enseignement', 231.17, '2017-05-27', NULL),
+       (1350, 800097, 'enseignement', 226.75, '2017-05-27', NULL),
+       (1351, 800040, 'enseignement', 206.84, '2015-03-02', NULL),
+       (1352, 800038, 'enseignement', 204.75, '2015-03-02', NULL),
+       (1353, 800139, 'enseignement', 203.42, '2018-05-26', NULL),
+       (1354, 800100, 'enseignement', 186.00, '2017-05-27', NULL),
+       (1355, 800039, 'enseignement', 183.25, '2015-03-02', NULL),
+       (1356, 800136, 'enseignement', 159.25, '2018-05-26', NULL),
+       (1357, 800128, 'enseignement', 94.50, '2018-01-11', NULL),
+       (1358, 800029, 'enseignement', 85.00, '2015-03-02', NULL),
+       (1359, 800109, 'enseignement', 66.25, '2017-05-27', NULL),
+       (1360, 800149, 'enseignement', 60.45, '2018-05-26', NULL),
+       (1361, 800153, 'enseignement', 59.50, '2019-03-28', NULL),
+       (1362, 800137, 'enseignement', 40.00, '2018-05-26', NULL),
+       (1363, 800135, 'enseignement', 33.50, '2018-05-26', NULL),
+       (1364, 800161, 'enseignement', 21.50, '2019-05-25', NULL),
+       (1365, 800152, 'enseignement', 19.00, '2019-03-28', NULL),
+       (1366, 800156, 'enseignement', 15.95, '2019-05-25', NULL),
+       (1367, 800081, 'enseignement', 12.50, '2016-05-28', NULL),
+       (1368, 800166, 'enseignement', 11.00, '2019-05-25', NULL),
+       (1369, 800151, 'enseignement', 9.00, '2019-03-28', NULL),
+       (1370, 800114, 'enseignement', 9.00, '2017-05-27', NULL),
+       (1371, 800132, 'enseignement', 8.25, '2018-05-26', NULL),
+       (1372, 800167, 'enseignement', 7.00, '2019-05-25', NULL),
+       (1373, 800032, 'enseignement', 2.75, '2015-03-02', NULL),
+       (1374, 800048, 'enseignement', 1.00, '2015-05-27', NULL),
+       (1375, 800062, 'enseignement', 0.50, '2015-05-27', NULL),
+       (1376, 800049, 'enseignement', 0.00, '2015-05-27', NULL),
+       (1377, 800155, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1378, 800157, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1379, 800158, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1380, 750045, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1381, 800099, 'enseignement', 0.00, '2017-05-27', NULL),
+       (1382, 800160, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1383, 800104, 'enseignement', 0.00, '2017-05-27', NULL),
+       (1384, 800108, 'enseignement', 0.00, '2017-05-27', NULL),
+       (1385, 758300, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1386, 800033, 'enseignement', 0.00, '2019-01-17', NULL),
+       (1387, 800164, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1388, 800111, 'enseignement', 0.00, '2017-05-27', NULL),
+       (1389, 800165, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1390, 800168, 'enseignement', 0.00, '2019-05-25', NULL),
+       (1391, 800037, 'enseignement', 635.58, '2015-03-14', NULL),
+       (1392, 800133, 'enseignement', 0.00, '2018-05-26', NULL),
+       (1393, 800117, 'enseignement', 0.00, '2017-05-27', NULL),
+       (1394, 800145, 'enseignement', 173.00, '2018-05-26', NULL),
+       (1395, 722888, 'enseignement', 1394.25, '1970-01-01', NULL),
+       (1396, 800154, 'enseignement', 14.50, '2019-03-28', NULL),
+       (1397, 800169, 'enseignement', 0.00, '2019-09-05', NULL),
+       (1398, 800170, 'enseignement', 0.00, '2019-09-17', NULL),
+       (1399, 800171, 'enseignement', 0.00, '2019-10-18', NULL),
+       (1400, 800086, 'enseignement', 0.00, '2019-10-30', NULL);
 
 -- --------------------------------------------------------
 
@@ -645,12 +745,12 @@ CREATE TABLE `shift`
 (
     `shift_id`      int(11)     NOT NULL,
     `schedule_id`   int(11)              DEFAULT NULL,
-    `required_qual` int(11) DEFAULT NULL,
+    `required_qual` int(11)              DEFAULT NULL,
     `start_time`    time        NOT NULL DEFAULT curtime(),
     `end_time`      time        NOT NULL,
-    `location`      varchar(30) DEFAULT NULL,
+    `location`      varchar(30)          DEFAULT NULL,
     `day`           varchar(10) NOT NULL,
-    `description`   text DEFAULT NULL,
+    `description`   text                 DEFAULT NULL,
     `start_date`    date        NOT NULL,
     `end_date`      date        NOT NULL,
     `assigned_user` int(11)              DEFAULT NULL
@@ -1057,6 +1157,35 @@ VALUES (4683, 2, 2, '09:00:00', '09:25:00', 'PIS-AB', 'Dimanche', 'ETOILE GR-01'
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `spec_availability_blocks`
+--
+
+CREATE TABLE `spec_availability_blocks`
+(
+    `block_id`      int(11)     NOT NULL,
+    `sch_id`        int(11)     NOT NULL,
+    `start_date`    date        NOT NULL,
+    `end_date`      date        NOT NULL,
+    `start_time`    time        NOT NULL,
+    `end_time`      time        NOT NULL,
+    `required_qual` int(11)     NOT NULL,
+    `block_cat`     varchar(30) NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+--
+-- Dumping data for table `spec_availability_blocks`
+--
+
+INSERT INTO `spec_availability_blocks` (`block_id`, `sch_id`, `start_date`, `end_date`, `start_time`, `end_time`,
+                                        `required_qual`, `block_cat`)
+VALUES (2, 1, '2020-04-04', '2020-04-05', '08:00:00', '17:00:00', 1, 'Premiers Soins General (MSU)'),
+       (3, 1, '2020-04-04', '2020-04-05', '08:00:00', '17:00:00', 1, 'Premiers Soins General (MSU)'),
+       (4, 1, '2020-04-04', '2020-04-05', '08:00:00', '17:00:00', 1, 'Premiers Soins General (MSU)');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -1077,109 +1206,111 @@ CREATE TABLE `user`
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `passphrase`, `user_fname`, `user_lname`, `user_address`, `user_dob`, `role_id`, `user_start_date`) VALUES
-(722888, 'C5ER0Iz4', 'Mathieu', 'Dorval', NULL, NULL, 1, NULL),
-(750045, 'OBdY7tLl', 'Édouard', 'Ducharme', NULL, NULL, 1, NULL),
-(758300, 'I4GZ62O4', 'Nathan', 'Ng', NULL, NULL, 1, NULL),
-(800001, 'duOz1j4h', 'Rasha', 'Alhaeik', NULL, NULL, 1, NULL),
-(800003, '4gXpm3pw', 'Laetitia', 'Banh', NULL, NULL, 1, NULL),
-(800004, 'dfvSvIvn', 'Malika', 'Bélanger-Oudrhiri', NULL, NULL, 1, NULL),
-(800009, 'knxkGlCy', 'Annie-France', 'Demers', NULL, NULL, 1, NULL),
-(800010, 'AkMEWnnE', 'Guillaume', 'Demers', NULL, NULL, 1, NULL),
-(800014, 'O54pCOJz', 'Marie-Alexandre', 'Forest', NULL, NULL, 1, NULL),
-(800015, 'B3zbz74S', 'Jean-Michel', 'Fortier', NULL, NULL, 1, NULL),
-(800017, 'IoSLBGCj', 'Vincent', 'Henry', NULL, NULL, 1, NULL),
-(800018, '4ryhWYxw', 'Marc-Antoine', 'Lajoie', NULL, NULL, 1, NULL),
-(800021, '9x6IeyLG', 'Amélie', 'Tiphane', NULL, NULL, 1, NULL),
-(800022, 'DfMWBJip', 'Josianne', 'Larrivée', NULL, NULL, 1, NULL),
-(800023, 'L6sIMF3N', 'Béatrice', 'Laurin', NULL, NULL, 1, NULL),
-(800027, 'HDYNDtIP', 'Jessika', 'Métivier-Bédard', NULL, NULL, 1, NULL),
-(800029, 'Qd8BiICK', 'Ariane', 'Moquin Joubert', NULL, NULL, 1, NULL),
-(800032, 'ZSNs9CNG', 'Félix-Antoine', 'Pelletier', NULL, NULL, 1, NULL),
-(800033, 'IdrfRAet', 'Amélie', 'Poiré', NULL, NULL, 1, NULL),
-(800036, 'zZlWsj1i', 'Mélissa', 'Roch-Lanouette', NULL, NULL, 1, NULL),
-(800037, 'LB3X6l0U', 'Galit', 'Sandaev', NULL, NULL, 1, NULL),
-(800038, 'K99TxVEW', 'Aaruthra', 'Thirumal', NULL, NULL, 1, NULL),
-(800039, 'FIsqKOQp', 'Maxime', 'Trottier', NULL, NULL, 1, NULL),
-(800040, 'XGAz2E6X', 'Caroline', 'Turgeon', NULL, NULL, 1, NULL),
-(800041, 'r5Yy8iVx', 'Aude', 'Vallerand', NULL, NULL, 1, NULL),
-(800042, 'ptDXb6aw', 'Margaux', 'Willame', NULL, NULL, 1, NULL),
-(800045, 'lKcLyHfr', 'Jonathan', 'Miron', NULL, NULL, 1, NULL),
-(800048, 'KwM2pxJi', 'Jack', 'Allen', NULL, NULL, 1, NULL),
-(800049, 'xbGj68Dd', 'Maxime', 'Berger', NULL, NULL, 1, NULL),
-(800054, 'HUFFCerL', 'David', 'Do', NULL, NULL, 1, NULL),
-(800057, '2L5Vd7zB', 'Alexandre', 'Gagné', NULL, NULL, 1, NULL),
-(800059, 'yap6N0Qo', 'Hélène', 'Hoffman-Chrétien', NULL, NULL, 1, NULL),
-(800062, 'fbGcA0ss', 'Tiffany', 'Nguyen', NULL, NULL, 1, NULL),
-(800073, 'eEKyI4bo', 'Éléanor', 'Chabot', NULL, NULL, 1, NULL),
-(800077, 'bqr5DBSl', 'Salma', 'Ayari', NULL, NULL, 1, NULL),
-(800078, 'exvKXfg1', 'Érik', 'Farkas', NULL, NULL, 1, NULL),
-(800079, 'Her255kN', 'Katerine', 'Landry', NULL, NULL, 1, NULL),
-(800081, 'ZfcnYu8Z', 'Charles-Olivier', 'Moreau', NULL, NULL, 1, NULL),
-(800083, 'sHyoaPkQ', 'Isabelle', 'Lefebvre', NULL, NULL, 1, NULL),
-(800086, 'Xqzpvto3', 'Salomë', 'Plourde', NULL, NULL, 1, NULL),
-(800088, 'Duw475yT', 'Florence', 'Peate', NULL, NULL, 1, NULL),
-(800089, 'GAyrMv1L', 'Roxanne', 'Landry', NULL, NULL, 1, NULL),
-(800090, 'eoqWHxYG', 'Mario', 'Ivanov', NULL, NULL, 1, NULL),
-(800091, 'sP1kMlKq', 'Claudia', 'Burton', NULL, NULL, 1, NULL),
-(800092, 'NSh3KH6z', 'Peinda', 'Diop', NULL, NULL, 1, NULL),
-(800093, 'SxOdaFXH', 'Marc-André', 'Gosselin', NULL, NULL, 1, NULL),
-(800095, 'YDT0mQvD', 'Célia', 'Kingsbury', NULL, NULL, 1, NULL),
-(800097, 'xWJ9yCbA', 'Ana Maria', 'Cotocea', NULL, NULL, 1, NULL),
-(800099, '38Lcyr5E', 'William', 'Ducharme', NULL, NULL, 1, NULL),
-(800100, '54hRIj71', 'Pascale', 'Fillion', NULL, NULL, 1, NULL),
-(800101, 'DE5JyNyv', 'Ana Elise', 'Jivan', NULL, NULL, 1, NULL),
-(800104, '1dXB8u2e', 'Louis', 'Lafrance-Savard', NULL, NULL, 1, NULL),
-(800105, 'sBYUSwsc', 'Mélanie', 'Lefebvre', NULL, NULL, 1, NULL),
-(800107, 'Zj2QGy1E', 'Paula Sofia', 'Loaiza', NULL, NULL, 1, NULL),
-(800108, 'CeXCDjZ0', 'Louis-Charles', 'Marquis', NULL, NULL, 1, NULL),
-(800109, 'wnRDLanJ', 'Chaimaa', 'Ouizzane', NULL, NULL, 1, NULL),
-(800111, 'odhVblue', 'Vincent', 'Provost', NULL, NULL, 1, NULL),
-(800113, 'buHUHQG8', 'Alice', 'Stoica', NULL, NULL, 1, NULL),
-(800114, 'RI6BYag7', 'Laurence', 'Thériault-Lapointe', NULL, NULL, 1, NULL),
-(800116, 'FXI22sT5', 'Sandrine', 'Trinh', NULL, NULL, 1, NULL),
-(800117, 'tnLWgt2j', 'David', 'Van Oordt', NULL, NULL, 1, NULL),
-(800118, '9qdDDNDH', 'Ivy', 'Zou', NULL, NULL, 1, NULL),
-(800120, 'wL2rFMcV', 'Rose', 'Zhang', NULL, NULL, 1, NULL),
-(800122, 'IA1JVTPN', 'Audrey', 'Ng Youn Chen', NULL, NULL, 1, NULL),
-(800124, 'CGZMhL7e', 'Mia', 'Gagné-Vincent', NULL, NULL, 1, NULL),
-(800126, 'lJ9C2Y6w', 'Karel', 'Grégoire', NULL, NULL, 1, NULL),
-(800127, 'RHHK9vAw', 'Gabrielle', 'Lapointe', NULL, NULL, 1, NULL),
-(800128, 'P6Gq2Cmo', 'Ariane', 'Lalancette', NULL, NULL, 1, NULL),
-(800130, 'ZSn8k6Fs', 'William', 'Belbin', NULL, NULL, 1, NULL),
-(800131, 'Bcgj04Nq', 'Valentin', 'Cioana', NULL, NULL, 1, NULL),
-(800132, 'ggNeojMQ', 'Jean-Christophe', 'Bélair', NULL, NULL, 1, NULL),
-(800133, 'C9m0IVl3', 'Alexandra', 'Bélec-Sergerie', NULL, NULL, 1, NULL),
-(800134, 'bTvdLR3K', 'Anaïs', 'Berlinger-Lavoie', NULL, NULL, 1, NULL),
-(800135, '81IJWTI6', 'Jannick', 'Bonenfant', NULL, NULL, 1, NULL),
-(800136, '0b2jeZFQ', 'Najee', 'Cadet', NULL, NULL, 1, NULL),
-(800137, 'YzVnq7kQ', 'Marie-Rose', 'Chabot', NULL, NULL, 1, NULL),
-(800139, 'CBcu29LG', 'Patrick', 'Cimpean', NULL, NULL, 1, NULL),
-(800142, 'wWTL54GW', 'Victoria', 'Derome', NULL, NULL, 1, NULL),
-(800145, 'm7lDW9jf', 'Frédérique', 'Lafontaine', NULL, NULL, 1, NULL),
-(800148, 'X43ByRok', 'Horia Cristian', 'Sandu', NULL, NULL, 1, NULL),
-(800149, 'FjekHuc8', 'Nicolas', 'Vu', NULL, NULL, 1, NULL),
-(800151, 'hpxr57r3', 'Rayan', 'Achouri', NULL, NULL, 1, NULL),
-(800152, 'tPqqyWes', 'Alexis', 'Côté', NULL, NULL, 1, NULL),
-(800153, 'nAiWszkv', 'Marc-Antoine', 'Tremblay', NULL, NULL, 1, NULL),
-(800154, 'WfIrTVo8', 'Julian', 'Manotas', NULL, NULL, 1, NULL),
-(800155, 'qBkwsCa9', 'Antoine', 'Boulanger', NULL, NULL, 1, NULL),
-(800156, '4p1zMIzq', 'David', 'Cioana', NULL, NULL, 1, NULL),
-(800157, 'gi1L92Uo', 'Nicolas', 'Comsulea', NULL, NULL, 1, NULL),
-(800158, 'Bd4YufXm', 'Clara', 'Dragon', NULL, NULL, 1, NULL),
-(800160, 'JknFzI9R', 'Nikol', 'Georgieva', NULL, NULL, 1, NULL),
-(800161, 'Xhmh8s5o', 'Éric Stefan', 'Gojan', NULL, NULL, 1, NULL),
-(800164, 'lHxfIpyr', 'Hubert', 'Provost', NULL, NULL, 1, NULL),
-(800165, 'zAFdI4na', 'Chloé', 'Prugne', NULL, NULL, 1, NULL),
-(800166, 'dBHK7nNa', 'Nina', 'Tan', NULL, NULL, 1, NULL),
-(800167, 'XudhkZVW', 'Alison', 'Vo', NULL, NULL, 1, NULL),
-(800168, 'oNtsIbjp', 'Leila', 'Zaouali', NULL, NULL, 1, NULL),
-(800169, 'r5agb0m6', 'Sabrina', 'Chan Fee', NULL, NULL, 1, NULL),
-(800170, '5CwgLDhQ', 'David', 'Larrivée', NULL, NULL, 1, NULL),
-(800171, 'ye1Iw2aN', 'Yan', 'Burton', NULL, NULL, 1, NULL),
-(900001, 'ukJqq94J', 'Fiana', 'Chang', NULL, NULL, 1, NULL),
-(900002, 'Izej4O4k', 'Jean-Félix', 'Desbiens', NULL, NULL, 1, NULL),
-(999999, '$2y$10$.7f.clAEtOlAzWyL14BWq.x5HaPzAJ3M0HIMq.6V4NkhvGetUMJly', 'Secteur', 'Aquatique', NULL, NULL, 2, NULL);
+INSERT INTO `user` (`user_id`, `passphrase`, `user_fname`, `user_lname`, `user_address`, `user_dob`, `role_id`,
+                    `user_start_date`)
+VALUES (722888, 'rndKf13E', 'Mathieu', 'Dorval', NULL, NULL, 1, NULL),
+       (750045, 'ytvoKiPi', 'Édouard', 'Ducharme', NULL, NULL, 1, NULL),
+       (758300, 'WNatcZYY', 'Nathan', 'Ng', NULL, NULL, 1, NULL),
+       (800001, 'poEQzmL3', 'Rasha', 'Alhaeik', NULL, NULL, 1, NULL),
+       (800003, '2TJFMBgx', 'Laetitia', 'Banh', NULL, NULL, 1, NULL),
+       (800004, 'II10psjZ', 'Malika', 'Bélanger-Oudrhiri', NULL, NULL, 1, NULL),
+       (800009, 'VY9J6JHD', 'Annie-France', 'Demers', NULL, NULL, 1, NULL),
+       (800010, 'XlM3SmP5', 'Guillaume', 'Demers', NULL, NULL, 1, NULL),
+       (800014, 'e6hMIBr0', 'Marie-Alexandre', 'Forest', NULL, NULL, 1, NULL),
+       (800015, 'yyj7SgQ7', 'Jean-Michel', 'Fortier', NULL, NULL, 1, NULL),
+       (800017, 'EgivOI31', 'Vincent', 'Henry', NULL, NULL, 1, NULL),
+       (800018, 'yb41DEAR', 'Marc-Antoine', 'Lajoie', NULL, NULL, 1, NULL),
+       (800021, 'QBlGvcBw', 'Amélie', 'Tiphane', NULL, NULL, 1, NULL),
+       (800022, 'nO5A5goa', 'Josianne', 'Larrivée', NULL, NULL, 1, NULL),
+       (800023, '4gfM8j7c', 'Béatrice', 'Laurin', NULL, NULL, 1, NULL),
+       (800027, 'ewPPouAy', 'Jessika', 'Métivier-Bédard', NULL, NULL, 1, NULL),
+       (800029, 'HbdMAMPT', 'Ariane', 'Moquin Joubert', NULL, NULL, 1, NULL),
+       (800032, '4ePd9laz', 'Félix-Antoine', 'Pelletier', NULL, NULL, 1, NULL),
+       (800033, 'Roq4ywWH', 'Amélie', 'Poiré', NULL, NULL, 1, NULL),
+       (800036, 'VUcAZ5JP', 'Mélissa', 'Roch-Lanouette', NULL, NULL, 1, NULL),
+       (800037, 's9vDxMA2', 'Galit', 'Sandaev', NULL, NULL, 1, NULL),
+       (800038, 'PI1QmxZ0', 'Aaruthra', 'Thirumal', NULL, NULL, 1, NULL),
+       (800039, 'lf8eNQWw', 'Maxime', 'Trottier', NULL, NULL, 1, NULL),
+       (800040, 'RITaotkU', 'Caroline', 'Turgeon', NULL, NULL, 1, NULL),
+       (800041, 'bLMnCX2J', 'Aude', 'Vallerand', NULL, NULL, 1, NULL),
+       (800042, 'tTtei8lt', 'Margaux', 'Willame', NULL, NULL, 1, NULL),
+       (800045, 'mQDHELtm', 'Jonathan', 'Miron', NULL, NULL, 1, NULL),
+       (800048, 'oAnxUy0z', 'Jack', 'Allen', NULL, NULL, 1, NULL),
+       (800049, 'Rf4b2U1Z', 'Maxime', 'Berger', NULL, NULL, 1, NULL),
+       (800054, 'zfWAJ856', 'David', 'Do', NULL, NULL, 1, NULL),
+       (800057, 'A7eWbL4o', 'Alexandre', 'Gagné', NULL, NULL, 1, NULL),
+       (800059, 'AnDvCHOM', 'Hélène', 'Hoffman-Chrétien', NULL, NULL, 1, NULL),
+       (800062, 'PwUOfpm8', 'Tiffany', 'Nguyen', NULL, NULL, 1, NULL),
+       (800073, 'ZVjsZbSY', 'Éléanor', 'Chabot', NULL, NULL, 1, NULL),
+       (800077, 'DltbrT9d', 'Salma', 'Ayari', NULL, NULL, 1, NULL),
+       (800078, 'ALbBUunt', 'Érik', 'Farkas', NULL, NULL, 1, NULL),
+       (800079, 'nbLOvT0P', 'Katerine', 'Landry', NULL, NULL, 1, NULL),
+       (800081, 'alXIrFby', 'Charles-Olivier', 'Moreau', NULL, NULL, 1, NULL),
+       (800083, 'FhFNl9S2', 'Isabelle', 'Lefebvre', NULL, NULL, 1, NULL),
+       (800086, 'H5cqWi6r', 'Salomë', 'Plourde', NULL, NULL, 1, NULL),
+       (800088, 'hplIIX9t', 'Florence', 'Peate', NULL, NULL, 1, NULL),
+       (800089, 'eK7mXPZo', 'Roxanne', 'Landry', NULL, NULL, 1, NULL),
+       (800090, 'Hwpr4nUB', 'Mario', 'Ivanov', NULL, NULL, 1, NULL),
+       (800091, '6Cf4hpfS', 'Claudia', 'Burton', NULL, NULL, 1, NULL),
+       (800092, 'tUjVcCf5', 'Peinda', 'Diop', NULL, NULL, 1, NULL),
+       (800093, 'TWzaXiE1', 'Marc-André', 'Gosselin', NULL, NULL, 1, NULL),
+       (800095, 'PPIQbf2S', 'Célia', 'Kingsbury', NULL, NULL, 1, NULL),
+       (800097, 'AeyEdAPd', 'Ana Maria', 'Cotocea', NULL, NULL, 1, NULL),
+       (800099, 'V3jclrRR', 'William', 'Ducharme', NULL, NULL, 1, NULL),
+       (800100, 'SCRhAVIm', 'Pascale', 'Fillion', NULL, NULL, 1, NULL),
+       (800101, 'zpUb6Ido', 'Ana Elise', 'Jivan', NULL, NULL, 1, NULL),
+       (800104, 'sqmGgr18', 'Louis', 'Lafrance-Savard', NULL, NULL, 1, NULL),
+       (800105, 'Wd9aSCDl', 'Mélanie', 'Lefebvre', NULL, NULL, 1, NULL),
+       (800107, 'XP9nRTEQ', 'Paula Sofia', 'Loaiza', NULL, NULL, 1, NULL),
+       (800108, 'lphjaJjB', 'Louis-Charles', 'Marquis', NULL, NULL, 1, NULL),
+       (800109, '70HyRk9C', 'Chaimaa', 'Ouizzane', NULL, NULL, 1, NULL),
+       (800111, 'QLi1jJTh', 'Vincent', 'Provost', NULL, NULL, 1, NULL),
+       (800113, 'O6ir41wk', 'Alice', 'Stoica', NULL, NULL, 1, NULL),
+       (800114, 'RrmBjkee', 'Laurence', 'Thériault-Lapointe', NULL, NULL, 1, NULL),
+       (800116, 'xswTfbuc', 'Sandrine', 'Trinh', NULL, NULL, 1, NULL),
+       (800117, 'qEHqrLUR', 'David', 'Van Oordt', NULL, NULL, 1, NULL),
+       (800118, 'NV3aC4nL', 'Ivy', 'Zou', NULL, NULL, 1, NULL),
+       (800120, '9pkg2En2', 'Rose', 'Zhang', NULL, NULL, 1, NULL),
+       (800122, 'jfECSZEP', 'Audrey', 'Ng Youn Chen', NULL, NULL, 1, NULL),
+       (800124, 'gRnlZU0E', 'Mia', 'Gagné-Vincent', NULL, NULL, 1, NULL),
+       (800126, 'QBXQewUq', 'Karel', 'Grégoire', NULL, NULL, 1, NULL),
+       (800127, '4ksYd8aM', 'Gabrielle', 'Lapointe', NULL, NULL, 1, NULL),
+       (800128, 'RybKKiiX', 'Ariane', 'Lalancette', NULL, NULL, 1, NULL),
+       (800130, 'Ww2DLuJu', 'William', 'Belbin', NULL, NULL, 1, NULL),
+       (800131, 'J1579daW', 'Valentin', 'Cioana', NULL, NULL, 1, NULL),
+       (800132, 'JBSAeISv', 'Jean-Christophe', 'Bélair', NULL, NULL, 1, NULL),
+       (800133, 'TItyqS7F', 'Alexandra', 'Bélec-Sergerie', NULL, NULL, 1, NULL),
+       (800134, 'EGbhrWTf', 'Anaïs', 'Berlinger-Lavoie', NULL, NULL, 1, NULL),
+       (800135, 'HBi6zSNi', 'Jannick', 'Bonenfant', NULL, NULL, 1, NULL),
+       (800136, 'gQW7IAad', 'Najee', 'Cadet', NULL, NULL, 1, NULL),
+       (800137, 'qmcDkVoF', 'Marie-Rose', 'Chabot', NULL, NULL, 1, NULL),
+       (800139, 'FOCNGmsN', 'Patrick', 'Cimpean', NULL, NULL, 1, NULL),
+       (800142, 't3yYZNwm', 'Victoria', 'Derome', NULL, NULL, 1, NULL),
+       (800145, 'Dmrx0TA0', 'Frédérique', 'Lafontaine', NULL, NULL, 1, NULL),
+       (800148, '0LQMaqM6', 'Horia Cristian', 'Sandu', NULL, NULL, 1, NULL),
+       (800149, 'OmD048lq', 'Nicolas', 'Vu', NULL, NULL, 1, NULL),
+       (800151, 'e9QgkYyC', 'Rayan', 'Achouri', NULL, NULL, 1, NULL),
+       (800152, 'GgqE6yXe', 'Alexis', 'Côté', NULL, NULL, 1, NULL),
+       (800153, 'TgTF5vSQ', 'Marc-Antoine', 'Tremblay', NULL, NULL, 1, NULL),
+       (800154, '9PlkZssV', 'Julian', 'Manotas', NULL, NULL, 1, NULL),
+       (800155, 'g0X1Ky0k', 'Antoine', 'Boulanger', NULL, NULL, 1, NULL),
+       (800156, 'WVI9U1K3', 'David', 'Cioana', NULL, NULL, 1, NULL),
+       (800157, 'v5VpZwbv', 'Nicolas', 'Comsulea', NULL, NULL, 1, NULL),
+       (800158, 'UC453Axw', 'Clara', 'Dragon', NULL, NULL, 1, NULL),
+       (800160, 'xAbKRRrU', 'Nikol', 'Georgieva', NULL, NULL, 1, NULL),
+       (800161, 'F3b0Xv7J', 'Éric Stefan', 'Gojan', NULL, NULL, 1, NULL),
+       (800164, 'p9vVWdLI', 'Hubert', 'Provost', NULL, NULL, 1, NULL),
+       (800165, 'pf0jWdq4', 'Chloé', 'Prugne', NULL, NULL, 1, NULL),
+       (800166, 'lbbCJOqF', 'Nina', 'Tan', NULL, NULL, 1, NULL),
+       (800167, 'wMmZRnYw', 'Alison', 'Vo', NULL, NULL, 1, NULL),
+       (800168, '1iUehqEd', 'Leila', 'Zaouali', NULL, NULL, 1, NULL),
+       (800169, 'JAaNloEP', 'Sabrina', 'Chan Fee', NULL, NULL, 1, NULL),
+       (800170, 'tN0QdD5o', 'David', 'Larrivée', NULL, NULL, 1, NULL),
+       (800171, 'fsWmQw6T', 'Yan', 'Burton', NULL, NULL, 1, NULL),
+       (900001, 'mXKCvXmZ', 'Fiana', 'Chang', NULL, NULL, 1, NULL),
+       (900002, '5R0YRhtZ', 'Jean-Félix', 'Desbiens', NULL, NULL, 1, NULL),
+       (999999, '$2y$10$0JzSuqZnFw6rGYgpranjf.NWzB3Iys0S6XVgaNGZlgZH6Pj46LrNC', 'Secteur', 'Aquatique', NULL, NULL, 2,
+        NULL);
 
 -- --------------------------------------------------------
 
@@ -1187,9 +1318,10 @@ INSERT INTO `user` (`user_id`, `passphrase`, `user_fname`, `user_lname`, `user_a
 -- Table structure for table `user_semester_specs`
 --
 
-CREATE TABLE `user_semester_specs` (
-  `user_id` int(7) NOT NULL,
-  `min_hours` int(2) NOT NULL,
+CREATE TABLE `user_semester_specs`
+(
+    `user_id`      int(7) NOT NULL,
+    `min_hours`    int(2) NOT NULL,
   `max_hours` int(2) NOT NULL,
   `max_weekday` int(11) NOT NULL,
   `max_weekend` int(11) NOT NULL,
@@ -1205,23 +1337,37 @@ CREATE TABLE `user_semester_specs` (
 -- Indexes for table `article`
 --
 ALTER TABLE `article`
-  ADD PRIMARY KEY (`article_id`),
-  ADD KEY `FK_article_user` (`user_id`);
+    ADD PRIMARY KEY (`article_id`),
+    ADD KEY `FK_article_user` (`user_id`);
 
 --
 -- Indexes for table `availabilities`
 --
 ALTER TABLE `availabilities`
-  ADD PRIMARY KEY (`shift_id`,`user_id`),
-  ADD KEY `FK_avail_user` (`user_id`);
+    ADD PRIMARY KEY (`shift_id`, `user_id`),
+    ADD KEY `FK_avail_user` (`user_id`);
+
+--
+-- Indexes for table `availability_blocks`
+--
+ALTER TABLE `availability_blocks`
+    ADD PRIMARY KEY (`block_id`),
+    ADD KEY `availability_blocks_qualification_qualification_id_fk` (`required_qual`),
+    ADD KEY `availability_blocks_schedule_sch_id_fk` (`sch_id`);
+
+--
+-- Indexes for table `availability_instructions`
+--
+ALTER TABLE `availability_instructions`
+    ADD PRIMARY KEY (`sch_id`);
 
 --
 -- Indexes for table `grade`
 --
 ALTER TABLE `grade`
-  ADD PRIMARY KEY (`grade_id`),
-  ADD KEY `FK_grade_quiz` (`quiz_id`),
-  ADD KEY `FK_grade_user` (`user_id`);
+    ADD PRIMARY KEY (`grade_id`),
+    ADD KEY `FK_grade_quiz` (`quiz_id`),
+    ADD KEY `FK_grade_user` (`user_id`);
 
 --
 -- Indexes for table `location`
@@ -1285,24 +1431,32 @@ ALTER TABLE `seniority`
 -- Indexes for table `shift`
 --
 ALTER TABLE `shift`
-  ADD PRIMARY KEY (`shift_id`),
-  ADD KEY `FK_shift_user` (`assigned_user`),
-  ADD KEY `FK_shift_qualification` (`required_qual`),
-  ADD KEY `FK_shift_schedule` (`schedule_id`);
+    ADD PRIMARY KEY (`shift_id`),
+    ADD KEY `FK_shift_user` (`assigned_user`),
+    ADD KEY `FK_shift_qualification` (`required_qual`),
+    ADD KEY `FK_shift_schedule` (`schedule_id`);
+
+--
+-- Indexes for table `spec_availability_blocks`
+--
+ALTER TABLE `spec_availability_blocks`
+    ADD PRIMARY KEY (`block_id`),
+    ADD KEY `spec_availability_blocks_qualification_qualification_id_fk` (`required_qual`),
+    ADD KEY `spec_availability_blocks_schedule_sch_id_fk` (`sch_id`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_user_id_uindex` (`user_id`),
-  ADD KEY `FK_user_role` (`role_id`);
+    ADD PRIMARY KEY (`user_id`),
+    ADD UNIQUE KEY `user_user_id_uindex` (`user_id`),
+    ADD KEY `FK_user_role` (`role_id`);
 
 --
 -- Indexes for table `user_semester_specs`
 --
 ALTER TABLE `user_semester_specs`
-  ADD PRIMARY KEY (`user_id`);
+    ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1313,6 +1467,13 @@ ALTER TABLE `user_semester_specs`
 --
 ALTER TABLE `article`
     MODIFY `article_id` int(7) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `availability_blocks`
+--
+ALTER TABLE `availability_blocks`
+    MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 995;
 
 --
 -- AUTO_INCREMENT for table `grade`
@@ -1351,7 +1512,7 @@ ALTER TABLE `schedule`
 --
 ALTER TABLE `seniority`
     MODIFY `seniority_id` int(11) NOT NULL AUTO_INCREMENT,
-    AUTO_INCREMENT = 1123;
+    AUTO_INCREMENT = 1401;
 
 --
 -- AUTO_INCREMENT for table `shift`
@@ -1359,6 +1520,13 @@ ALTER TABLE `seniority`
 ALTER TABLE `shift`
     MODIFY `shift_id` int(11) NOT NULL AUTO_INCREMENT,
     AUTO_INCREMENT = 5073;
+
+--
+-- AUTO_INCREMENT for table `spec_availability_blocks`
+--
+ALTER TABLE `spec_availability_blocks`
+    MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 5;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -1381,49 +1549,69 @@ ALTER TABLE `article`
 -- Constraints for table `availabilities`
 --
 ALTER TABLE `availabilities`
-  ADD CONSTRAINT `FK_avail_shift` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`),
-  ADD CONSTRAINT `FK_avail_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+    ADD CONSTRAINT `FK_avail_shift` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`),
+    ADD CONSTRAINT `FK_avail_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `availability_blocks`
+--
+ALTER TABLE `availability_blocks`
+    ADD CONSTRAINT `availability_blocks_qualification_qualification_id_fk` FOREIGN KEY (`required_qual`) REFERENCES `qualification` (`qualification_id`),
+    ADD CONSTRAINT `availability_blocks_schedule_sch_id_fk` FOREIGN KEY (`sch_id`) REFERENCES `schedule` (`sch_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `availability_instructions`
+--
+ALTER TABLE `availability_instructions`
+    ADD CONSTRAINT `availability_instructions_schedule_sch_id_fk` FOREIGN KEY (`sch_id`) REFERENCES `schedule` (`sch_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `grade`
 --
 ALTER TABLE `grade`
-  ADD CONSTRAINT `FK_grade_quiz` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`),
-  ADD CONSTRAINT `FK_grade_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+    ADD CONSTRAINT `FK_grade_quiz` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`),
+    ADD CONSTRAINT `FK_grade_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `qualified_user`
 --
 ALTER TABLE `qualified_user`
-  ADD CONSTRAINT `FK_qualfied_user_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `FK_qualified_user_qualification` FOREIGN KEY (`qualification_id`) REFERENCES `qualification` (`qualification_id`);
+    ADD CONSTRAINT `FK_qualfied_user_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+    ADD CONSTRAINT `FK_qualified_user_qualification` FOREIGN KEY (`qualification_id`) REFERENCES `qualification` (`qualification_id`);
 
 --
 -- Constraints for table `response`
 --
 ALTER TABLE `response`
-  ADD CONSTRAINT `FK_response_question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`),
-  ADD CONSTRAINT `FK_response_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+    ADD CONSTRAINT `FK_response_question` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`),
+    ADD CONSTRAINT `FK_response_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `seniority`
 --
 ALTER TABLE `seniority`
-  ADD CONSTRAINT `FK_seniority_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+    ADD CONSTRAINT `FK_seniority_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `shift`
 --
 ALTER TABLE `shift`
-  ADD CONSTRAINT `FK_shift_qualification` FOREIGN KEY (`required_qual`) REFERENCES `qualification` (`qualification_id`),
-  ADD CONSTRAINT `FK_shift_schedule` FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`sch_id`),
-  ADD CONSTRAINT `FK_shift_user` FOREIGN KEY (`assigned_user`) REFERENCES `user` (`user_id`);
+    ADD CONSTRAINT `FK_shift_qualification` FOREIGN KEY (`required_qual`) REFERENCES `qualification` (`qualification_id`),
+    ADD CONSTRAINT `FK_shift_schedule` FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`sch_id`) ON DELETE CASCADE,
+    ADD CONSTRAINT `FK_shift_user` FOREIGN KEY (`assigned_user`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `spec_availability_blocks`
+--
+ALTER TABLE `spec_availability_blocks`
+    ADD CONSTRAINT `spec_availability_blocks_qualification_qualification_id_fk` FOREIGN KEY (`required_qual`) REFERENCES `qualification` (`qualification_id`),
+    ADD CONSTRAINT `spec_availability_blocks_schedule_sch_id_fk` FOREIGN KEY (`sch_id`) REFERENCES `schedule` (`sch_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `FK_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
+    ADD CONSTRAINT `FK_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 
 --
 -- Constraints for table `user_semester_specs`

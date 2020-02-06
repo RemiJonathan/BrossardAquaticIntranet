@@ -12,7 +12,7 @@ block_print_header("", PREAMBLE);
 block_print_nav("<li><a href=\"login.php\">Connexion</a></li>");
 $error_message = '';
 if(isset($_GET['error'])) $error_message .= "<h4 style='color: #ff0060'>".$_GET['error']."</h4>";
-block_print_main("".$connection_form.$error_message);
+block_print_main("".$connection_form."".$error_message);
 
 block_print_copyright();
 echo "    </div>";

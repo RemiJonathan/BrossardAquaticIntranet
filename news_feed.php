@@ -17,8 +17,7 @@ if(isset($_SESSION['user_id'])) {
     $get_user_data_res = $db->query($get_user_data_sql);
 
 
-    $notifications = '<iframe src="file_operations/schedule_creation.php" width="100%" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>';
-    $notifications .= '<iframe src="qualification" width="100%" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>';
+    $notifications='';
 
     while ($user = $get_user_data_res->fetch_array()){
         //todo: implement user object
