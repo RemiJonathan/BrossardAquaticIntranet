@@ -50,8 +50,9 @@ function block_print_nav($tabs)
     }
 
     if (check_user_permissions($user_id, 1)) {
-        //Todo: add all user tabs
-        $tabs .= "<li><a href='" . PREAMBLE . "schedule.php'>Mon horaire</a></li>";
+        //Todo: add all user tabs myprofile
+        $tabs = "<li><a href='" . PREAMBLE . "schedule.php'>Mon horaire</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "myprofile/'>Mon profil</a></li>" . $tabs;
 
     } else if (check_user_permissions($user_id, 2)) {
         //Todo: add all admin tabs
