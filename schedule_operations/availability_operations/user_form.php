@@ -19,7 +19,7 @@ $currentInstruc = "";
 $simpleQualArray = array();
 $labelCounter = 1;
 $specLabelCounter = 1;
-var_dump($specAvailBlocks);
+
 
 foreach ($qualArray as $qual) {
     $simpleQualArray[] = $qual['qual_name'];
@@ -51,8 +51,9 @@ if (isset($_POST['sch_id'])) {
         $content .= "
         
   
-        <div class='col-12' style='height: 150em'>
-        <form method='db_insert_avails.php'>
+        <div class='col-12' >
+        <form action='db_insert_avails.php' method='post'>
+        <input type='hidden' value=" . $_POST['sch_id'] . ">
         <div class='col-6' style='float:left'><h2>SURVEILLANCE</h2>
         
         <table class='table-striped table-bordered'>
@@ -247,6 +248,14 @@ if (isset($_POST['sch_id'])) {
 
 
         $content .= "</table>";
+        $content .= "<table><tr>
+                <th colspan='4' style='font-size: 110%;text-align: center;'>Nombre d'heures souhait&eacute;<br></th></tr>
+                <tr><th colspan='4' style='font-size: 110%;text-align: center;'>Maximum<br></th></tr>
+                <tr><td style='text-align: center;'><input type='number' min='0' name='maxHours'> </td></tr>
+              
+</tr>
+
+</table>";
         $content .= "</div>";
         $content .= "
         <div class='col-6' style='float:right'><h2>Enseignement</h2>
@@ -273,7 +282,8 @@ if (isset($_POST['sch_id'])) {
                 $labelCounter++;
             }
         }
-        $content .= "</table></div></form></div>";
+        $content .= "</table></div><br><input type='submit' style='width:100%' value='Envoyer'>
+</form></div>";
 
 
     } else {
