@@ -21,13 +21,15 @@ $required_qualArray = $_GET['required_qual'];
 $block_catArray = $_GET['block_cat'];
 
 //info for special shifts
+if (isset($_GET['spec_start_date'])) {
+    $spec_start_dateArray = $_GET['spec_start_date'];
+    $spec_end_dateArray = $_GET['spec_end_date'];
+    $spec_start_timeArray = $_GET['spec_start_time'];
+    $spec_end_timeArray = $_GET['spec_end_time'];
+    $spec_required_qualArray = $_GET['spec_required_qual'];
+    $spec_block_catArray = $_GET['spec_block_cat'];
+}
 
-$spec_start_dateArray = $_GET['spec_start_date'];
-$spec_end_dateArray = $_GET['spec_end_date'];
-$spec_start_timeArray = $_GET['spec_start_time'];
-$spec_end_timeArray = $_GET['spec_end_time'];
-$spec_required_qualArray = $_GET['spec_required_qual'];
-$spec_block_catArray = $_GET['spec_block_cat'];
 
 insertAvailInstructions($db, $sch_id, $title, $deadline, $gen_info, $meet_info, $guidelines);
 
@@ -37,9 +39,10 @@ deleteSpecAvailBlocks($db, $sch_id);
 for ($i = 0; $i < count($dayArray); $i++) {
     insertAvailBlocks($db, $sch_id, $dayArray[$i], $start_timeArray[$i], $end_timeArray[$i], $required_qualArray[$i], $block_catArray[$i]);
 }
-
-for ($i = 0; $i < count($spec_start_dateArray); $i++) {
-    insertSpecAvailBlocks($db, $sch_id, $spec_start_dateArray[$i], $spec_end_dateArray[$i], $spec_start_timeArray[$i], $spec_end_timeArray[$i], $spec_required_qualArray[$i], $spec_block_catArray[$i]);
+if (isset($_GET['spec_start_date'])) {
+    for ($i = 0; $i < count($spec_start_dateArray); $i++) {
+        insertSpecAvailBlocks($db, $sch_id, $spec_start_dateArray[$i], $spec_end_dateArray[$i], $spec_start_timeArray[$i], $spec_end_timeArray[$i], $spec_required_qualArray[$i], $spec_block_catArray[$i]);
+    }
 }
 
 $content .= "<h1>Confirmation</h1>";
@@ -55,12 +58,13 @@ for ($i = 0; $i < count($dayArray); $i++) {
     $content .= "$dayArray[$i]&nbsp;$start_timeArray[$i]-$end_timeArray[$i]&nbsp;
 $required_qualArray[$i]&nbsp;$block_catArray[$i]<br>";
 }
-
-$content .= "<br><h2>Blocs sp&eacute;ciaux</h2>";
-for ($i = 0; $i < count($spec_start_dateArray); $i++) {
-    $content .= "$spec_start_dateArray[$i]-$spec_end_dateArray[$i]&nbsp;
+if (isset($_GET['spec_start_date'])) {
+    $content .= "<br><h2>Blocs sp&eacute;ciaux</h2>";
+    for ($i = 0; $i < count($spec_start_dateArray); $i++) {
+        $content .= "$spec_start_dateArray[$i]-$spec_end_dateArray[$i]&nbsp;
 $spec_start_timeArray[$i]-$spec_end_timeArray[$i]&nbsp;
 $spec_required_qualArray[$i]&nbsp;$spec_block_catArray[$i]<br>";
+    }
 }
 $content .= "<br><br><button><a href='../schedule_modification.php'>Retour</a></button>";
 echo "<!DOCTYPE HTML><html>";

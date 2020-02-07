@@ -1479,7 +1479,7 @@ $form_data_schedule .= "
 <input type='time' value='17:00' name='spec_end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]' class='qual_sel'>
+<select name='spec_required_qual[]' class='qual_sel'>
 $optionStringForQuals
 </select>
 </td>
@@ -1502,14 +1502,14 @@ $optionStringForQuals
 </tr>   
 <tr>
 <td style='width:20%;'>
-<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date' value='2020-04-05' name='spec_end_date[]'>
+<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date'  name='spec_end_date[]'>
 </td>
 <td style='width:30%;'>
 <input type='time' value='08:00' name='spec_start_time[]' required>&nbsp;&agrave;&nbsp;
 <input type='time' value='17:00' name='spec_end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]' class='qual_sel'>
+<select name='spec_required_qual[]' class='qual_sel'>
 $optionStringForQuals
 </select>
 </td>
@@ -1532,14 +1532,14 @@ $optionStringForQuals
 </tr>  
 <tr>
 <td style='width:20%;'>
-<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date' value='2020-04-05' name='spec_end_date[]'>
+<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date'  name='spec_end_date[]'>
 </td>
 <td style='width:30%;'>
 <input type='time' value='08:00' name='spec_start_time[]' required>&nbsp;&agrave;&nbsp;
 <input type='time' value='17:00' name='spec_end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]' class='qual_sel'>
+<select name='spec_required_qual[]' class='qual_sel'>
 $optionStringForQuals
 </select>
 </td>
