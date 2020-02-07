@@ -36,34 +36,76 @@ function updateSession($db, $sch_id, $sch_start_date, $sch_end_date, $title)
 
 }
 
-function getQualArray($db){
+function getQualArray($db)
+{
     $qualArray = array();
     $result = $db->query("SELECT * FROM qualification");
     while ($row = mysqli_fetch_assoc($result)) {
-        array_push($qualArray,$row);
+        array_push($qualArray, $row);
     }
-    
+
     return $qualArray;
 }
 
-function insertNewRegUser($db, $id, $pwd, $fname, $lname){
+function getEmpNumsArray($db)
+{
+    $empArray = getEmpArray($db);
+    $empNumArray = array();
+
+    foreach ($empArray as $emp) {
+        $empNumArray[] = $emp['user_id'];
+    }
+
+    return $empNumArray;
+}
+
+
+function getEmpArray($db)
+{
+    $empArray = array();
+    $result = $db->query("SELECT * FROM user");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($empArray, $row);
+    }
+
+    return $empArray;
+}
+
+function updateUser($db, $id, $pwd, $fname, $lname, $email)
+{
 
     $fname = trim($fname);
     $lname = trim($lname);
-   $stmt = $db -> prepare("INSERT INTO user (user_id, passphrase, user_fname, user_lname) VALUES (?,?,?,?)
-");
-    $stmt->bind_param("isss", $id, $pwd, $fname, $lname);
+    $email = trim($email);
+    $stmt = $db->prepare("UPDATE user SET  passphrase = ?, user_fname = ?, user_lname = ?, email = ? WHERE user_id = ?");
+    $stmt->bind_param("ssssi", $pwd, $fname, $lname, $email, $id);
 
-   $stmt->execute();
+    $stmt->execute();
 
 }
+
+function insertNewRegUser($db, $id, $pwd, $fname, $lname, $email)
+{
+
+    $fname = trim($fname);
+    $lname = trim($lname);
+    $email = trim($email);
+    $stmt = $db->prepare("INSERT INTO user (user_id, passphrase, user_fname, user_lname, email) VALUES (?,?,?,?,?)
+");
+    $stmt->bind_param("issss", $id, $pwd, $fname, $lname, $email);
+
+    $stmt->execute();
+
+}
+
 //insert into qualified_user values  ('800148','1',null,'2008-7-04','test1','test2');
-function insertNewSNQual($db, $user_id,  $qual_expiry, $requalification, $requalification_note){
-    $qualification_id="1";
-    $qual_emitted=null;
+function insertNewSNQual($db, $user_id, $qual_expiry, $requalification, $requalification_note)
+{
+    $qualification_id = "1";
+    $qual_emitted = null;
 
 
-    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note, notes) VALUES (?,?,?,?,?,?)");
+    $stmt = $db->prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note, notes) VALUES (?,?,?,?,?,?)");
 
 
     $stmt->bind_param("iissss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification, $requalification_note);
