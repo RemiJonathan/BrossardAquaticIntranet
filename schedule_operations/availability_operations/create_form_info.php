@@ -60,9 +60,9 @@ $content .= "<br><h2>Blocs sp&eacute;ciaux</h2>";
 for ($i = 0; $i < count($spec_start_dateArray); $i++) {
     $content .= "$spec_start_dateArray[$i]-$spec_end_dateArray[$i]&nbsp;
 $spec_start_timeArray[$i]-$spec_end_timeArray[$i]&nbsp;
-$spec_required_qualArray[$i]&nbsp;$spec_block_catArray[$i]<br><br><button><a href='../schedule_modification.php'>Retour</a></button>";
+$spec_required_qualArray[$i]&nbsp;$spec_block_catArray[$i]<br>";
 }
-
+$content .= "<br><br><button><a href='../schedule_modification.php'>Retour</a></button>";
 echo "<!DOCTYPE HTML><html>";
 block_print_document_header("Template", PREAMBLE);
 echo "<body class=\"is-preload\">";
