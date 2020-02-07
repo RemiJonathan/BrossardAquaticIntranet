@@ -29,6 +29,9 @@ row.closest('tr').after(htmlString);
 }
 
 window.onload = function() {
+
+    
+    
     $('#summer_avail_form').hide();
 $( \"#summerButton\" ).click(function() {
 if($('#reg_avail_form').is(':visible')){
@@ -39,9 +42,10 @@ if($('#reg_avail_form').is(':visible')){
     $('#reg_avail_form').show('slow');
 }
 });
+
+
+
 }
-
-
 
  
 </script>";
@@ -54,7 +58,7 @@ if (!(isset($_GET["sch_id"]))) {
         window.location.replace('../schedule_modification.php');
     </SCRIPT>";
 }
-$content .= "<h2>Formulaire de disponibilit&eacute;s</h2><button id='summerButton' onclick=\"summerForm()\">Reg/&Eacute;t&eacute;</button><br><br>";
+$content .= "<h2>Formulaire de disponibilit&eacute;s</h2><button id='summerButton' \">Reg/&Eacute;t&eacute;</button><br><br>";
 //TODO add option to create new semester and add files to it
 $form_data_schedule .= "<form action=\"create_form_info.php\" id=\"reg_avail_form\" method=\"get\" enctype=\"multipart/form-data\">";
 
@@ -97,11 +101,11 @@ Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du
 
 <table id='block_table'>
 <tr>
-<th>Jour</th>
-<th>Heures</th>
-<th>Qualif.</th>
-<th>Cat&eacute;gorie</th>
-<th>Action</th>
+<th style='font-size:140%'>Jour</th>
+<th style='font-size:140%'>Heures</th>
+<th style='font-size:140%'>Qualif.</th>
+<th style='font-size:140%'>Cat&eacute;gorie</th>
+<th style='font-size:140%'>Action</th>
 <th></th>
 </tr>
 <tr>
@@ -122,7 +126,7 @@ Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du
 <input type='time' value='16:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' >
 .$optionStringForQuals.
 </select>
 </td>
@@ -164,7 +168,7 @@ Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qualClass'>
 .$optionStringForQuals.
 </select>
 </td>

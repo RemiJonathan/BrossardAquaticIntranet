@@ -347,6 +347,50 @@ function insertSpecAvailBlocks($db, $sch_id, $start_date, $end_date, $start_time
     $stmt->execute();
 }
 
+function getAvailInstructions($db)
+{
+    $instrucArray = array();
+    $result = $db->query("SELECT * FROM availability_instructions");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($instrucArray, $row);
+    }
 
+    return $instrucArray;
+}
+
+function getAvailBlocks($db)
+{
+    $blocksArray = array();
+    $result = $db->query("SELECT * FROM availability_blocks");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($blocksArray, $row);
+    }
+
+    return $blocksArray;
+}
+
+
+function getSpecAvailBlocks($db)
+{
+    $blocksArray = array();
+    $result = $db->query("SELECT * FROM spec_availability_blocks");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($blocksArray, $row);
+    }
+
+    return $blocksArray;
+}
+
+
+function getSchedules($db)
+{
+    $scheduleArray = array();
+    $result = $db->query("SELECT * FROM schedule");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($scheduleArray, $row);
+    }
+
+    return $scheduleArray;
+}
 
 

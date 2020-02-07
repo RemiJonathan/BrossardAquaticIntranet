@@ -51,11 +51,14 @@ function block_print_nav($tabs)
 
     if (check_user_permissions($user_id, 1)) {
         //Todo: add all user tabs myprofile
-        $tabs = "<li><a href='" . PREAMBLE . "schedule.php'>Mon horaire</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/availability_operations/user_form.php'>Disponibilit&eacute;s</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "myprofile/'>Mon profil</a></li>" . $tabs;
+
 
     } else if (check_user_permissions($user_id, 2)) {
         //Todo: add all admin tabs
+        $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "qualification/'>Gestion de qualifications</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "file_operations/document_update.php'>base de donn&eacute;es</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "shift/'>Gestion de quart</a></li>" . $tabs;
