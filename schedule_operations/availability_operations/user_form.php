@@ -8,6 +8,8 @@ $sch_id = "";
 if (isset($_POST['sch_id'])) {
     $sch_id = $_POST['sch_id'];
 }
+
+
 $qualArray = getQualArray($db);
 $availInstruc = getAvailInstructions($db);
 $availBlocks = getAvailBlocks($db);
@@ -18,8 +20,12 @@ $dispoFound = false;
 $currentInstruc = "";
 $simpleQualArray = array();
 $labelCounter = 1;
-$specLabelCounter = 1;
-
+$enlabelCounter = 1;
+session_start();
+if (!(isset($_SESSION['user_id']))) {
+    session_destroy();
+    header("location:login.php");
+}
 
 foreach ($qualArray as $qual) {
     $simpleQualArray[] = $qual['qual_name'];
@@ -53,7 +59,8 @@ if (isset($_POST['sch_id'])) {
   
         <div class='col-12' >
         <form action='db_insert_avails.php' method='post'>
-        <input type='hidden' value=" . $_POST['sch_id'] . ">
+        <input type='hidden' name='sch_id' value=" . $_POST['sch_id'] . ">
+        <input type='hidden' name='user_id' value=" . $_SESSION['user_id'] . ">
         <div class='col-6' style='float:left'><h2>SURVEILLANCE</h2>
         
         <table class='table-striped table-bordered'>
@@ -83,7 +90,7 @@ if (isset($_POST['sch_id'])) {
         $content .= "<table class='table-striped table-bordered'>";
         foreach ($specAvailBlocks as $block) {
             if ($block['block_cat'] == "Premiers Soins General (MSU)") {
-                $specLabel = "label" . $specLabelCounter;
+                $completeLabel = "label" . $labelCounter;
                 $content .= "<input type='hidden' value=" . $block['block_id'] . ">";
 
                 $startDate = strftime("%A", strtotime($block['start_date']));
@@ -128,12 +135,12 @@ if (isset($_POST['sch_id'])) {
                 $content .= "<tr><td>" . $startDate . " et " . $endDate . "</td>
 <td>" . date("d/m/y", strtotime($block['start_date'])) . "<br>-<br>" . date("d/m/y", strtotime($block['end_date'])) . "</td>
 <td>" . date("H:i", strtotime($block['start_time'])) . "<br>-<br>" . date("H:i", strtotime($block['end_time'])) . "</td>
- <td> <input id='$specLabel' name=\"isAvailSpec[]\" type=\"checkbox\" value='" . $block['block_id'] . "'><label for='$specLabel'></label></td>
+ <td> <input id='$completeLabel' name=\"isAvailSpec[]\" type=\"checkbox\" value='" . $block['block_id'] . "'><label for='$completeLabel'></label></td>
 
 
 
 </tr>";
-
+                $labelCounter++;
             }
             $content .= "</table>";
         }
@@ -141,7 +148,7 @@ if (isset($_POST['sch_id'])) {
         $content .= "<table class='table-striped table-bordered'>";
         foreach ($specAvailBlocks as $block) {
             if ($block['block_cat'] == "Entrainement des MSA (Chef MSA / ISA)") {
-                $specLabel = "label" . $specLabelCounter;
+                $completeLabel = "label" . $labelCounter;
                 $content .= "<input type='hidden' value=" . $block['block_id'] . ">";
 
                 $startDate = strftime("%A", strtotime($block['start_date']));
@@ -186,14 +193,14 @@ if (isset($_POST['sch_id'])) {
                 $content .= "<tr><td>" . $startDate . "</td>
 <td>" . date("d/m/y", strtotime($block['start_date'])) . "</td>
 <td>" . date("H:i", strtotime($block['start_time'])) . "<br>-<br>" . date("H:i", strtotime($block['end_time'])) . "</td>
- <td> <input id='$specLabel' name=\"isAvailSpec[]\" type=\"checkbox\" value='" . $block['block_id'] . "'><label for='$specLabel'></label></td>
+ <td> <input id='$completeLabel' name=\"isAvailSpec[]\" type=\"checkbox\" value='" . $block['block_id'] . "'><label for='$completeLabel'></label></td>
  </tr>
 ";
-
+                $labelCounter++;
             }
 
             if ($block['block_cat'] == "Entrainement du Personnel (MS / MSN)") {
-                $specLabel = "label" . $specLabelCounter;
+                $completeLabel = "label" . $labelCounter;
                 $content .= "<input type='hidden' value=" . $block['block_id'] . ">";
 
                 $startDate = strftime("%A", strtotime($block['start_date']));
@@ -238,11 +245,12 @@ if (isset($_POST['sch_id'])) {
                 $content .= "<tr><td>" . $startDate . "</td>
 <td>" . date("d/m/y", strtotime($block['start_date'])) . "</td>
 <td>" . date("H:i", strtotime($block['start_time'])) . "<br>-<br>" . date("H:i", strtotime($block['end_time'])) . "</td>
- <td> <input id='$specLabel' name=\"isAvailSpec[]\" type=\"checkbox\" value='" . $block['block_id'] . "'><label for='$specLabel'></label></td>
+ <td> <input id='$completeLabel' name=\"isAvailSpec[]\" type=\"checkbox\" value='" . $block['block_id'] . "'><label for='$completeLabel'></label></td>
  </tr>
 ";
 
             }
+            $labelCounter++;
 
         }
 
@@ -251,11 +259,17 @@ if (isset($_POST['sch_id'])) {
         $content .= "<table><tr>
                 <th colspan='4' style='font-size: 110%;text-align: center;'>Nombre d'heures souhait&eacute;<br></th></tr>
                 <tr><th colspan='4' style='font-size: 110%;text-align: center;'>Maximum<br></th></tr>
-                <tr><td style='text-align: center;'><input type='number' min='0' name='maxHours'> </td></tr>
+                <tr><td style='text-align: center;'><input  required value ='0' type='number' min='0' name='maxHours'> </td></tr>
               
 </tr>
 
-</table>";
+</table>
+<h5>Commentaires</h5>
+<textarea placeholder='Les pr&eacute;f&eacute;rences sont &agrave; titre indicatif. La division aquatique ne s&apos;engage pas &agrave; les respecter.  ' name='comments' maxlength='300'></textarea><br><input type='radio' id='avail1' name='availType' value='avail' checked><label for='avail1'>Disponible pour un horaire r&eacute;gulier</label>
+<input type='radio' id='avail2' name='availType' value='availForReplacements'><label for='avail2'>Disponible pour des remplacements</label>
+<input type='radio' id='avail3' name='availType' value='unavail'><label for='avail3'>Non Disponible</label>
+";
+
         $content .= "</div>";
         $content .= "
         <div class='col-6' style='float:right'><h2>Enseignement</h2>
@@ -282,7 +296,10 @@ if (isset($_POST['sch_id'])) {
                 $labelCounter++;
             }
         }
-        $content .= "</table></div><br><input type='submit' style='width:100%' value='Envoyer'>
+        $content .= "</table></div><br>
+<br><br>
+<input type='submit' style='width:100%' value='Envoyer'>
+
 </form></div>";
 
 
@@ -305,7 +322,7 @@ block_print_document_header("Acceuil", PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);
-session_start();
+
 
 block_print_nav("<li></li>");
 block_print_main($content);
