@@ -24,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $myusername;
             if (substr($currentUrl."",-9) == 'login.php')
             header('Location: news_feed.php');
+
             else header('Location: '.$currentUrl);
         }else{
             $error = "Mot de passe invalide";
