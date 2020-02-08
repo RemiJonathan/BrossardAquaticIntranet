@@ -1,9 +1,11 @@
 <?php
+//ATTENTION: THIS FILE WILL BEGIN TO HAVE UNDETECDABLE ERRORS IF IT GETS TOO LONG
 define("PREAMBLE", "../../");
 include(PREAMBLE . "db_operations/connection.php");
 include(PREAMBLE . "db_operations/db_functions.php");
 
 include(PREAMBLE . "assets/php/code_blocks.php");
+block_print_scripts(PREAMBLE);
 $qualArray = getQualArray($db);
 $optionStringForQuals = "";
 foreach ($qualArray as $qual) {
@@ -29,6 +31,25 @@ row.closest('tr').after(htmlString);
 }
 
 window.onload = function() {
+var cat = document.getElementsByClassName('cat_sel');
+var qual = document.getElementsByClassName('qual_sel');
+ 
+  for (i = 0; i < cat.length; i++) {
+     if(cat[i].value =='Enseignement'){
+      qual[i].selectedIndex=1;
+     }
+     if(cat[i].value =='Entrainement du Personnel (MS / MSN)'){
+      qual[i].selectedIndex=2;
+     }
+     if(cat[i].value =='Entrainement des MSA (Chef MSA / ISA)'){
+      qual[i].selectedIndex=1;
+     }
+     if(cat[i].value =='Premiers Soins General (MSU)'){
+      qual[i].selectedIndex=3;
+     }
+}
+  
+
     $('#summer_avail_form').hide();
 $( \"#summerButton\" ).click(function() {
 if($('#reg_avail_form').is(':visible')){
@@ -37,11 +58,13 @@ if($('#reg_avail_form').is(':visible')){
 }else{
     $('#summer_avail_form').hide('slow');
     $('#reg_avail_form').show('slow');
+
 }
 });
+
+
+
 }
-
-
 
  
 </script>";
@@ -54,9 +77,9 @@ if (!(isset($_GET["sch_id"]))) {
         window.location.replace('../schedule_modification.php');
     </SCRIPT>";
 }
-$content .= "<h2>Formulaire de disponibilit&eacute;s</h2><button id='summerButton' onclick=\"summerForm()\">Reg/&Eacute;t&eacute;</button><br><br>";
+$content .= "<h2>Formulaire de disponibilit&eacute;s</h2><button id='summerButton' \">Reg/&Eacute;t&eacute;</button><br><br>";
 //TODO add option to create new semester and add files to it
-$form_data_schedule .= "<form action=\"create_form_info.php\" id=\"reg_avail_form\" method=\"get\" enctype=\"multipart/form-data\">";
+$form_data_schedule .= "<form action=\"create_form_info.php\" id=\"reg_avail_form\" method=\"get\" enctype=\"multipart/form-data\" >";
 
 $form_data_schedule .= "<input type='hidden' name='sch_id' value='$current_sch'>
   
@@ -94,98 +117,12 @@ Maximum 2 remplacements par quart de travail pour l'enseignement;
 Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du 6 au 12 janvier) et au cours de remise des carnets (semaine du 9 au 15 mars + 21-22 mars pour LT). SVP indiquez vos indisponibilit&eacute;s s'il y a lieu.
 </textarea><br>
 <h3>Blocs Horaire</h3>
-
-<table id='block_table'>
-<tr>
-<th>Jour</th>
-<th>Heures</th>
-<th>Qualif.</th>
-<th>Cat&eacute;gorie</th>
-<th>Action</th>
-<th></th>
-</tr>
-<tr>
-<td style='width:20%;'>
-   
-<select name='day[]'> 
-<option  value='Dimanche'>Dimanche</option>
-<option  value='Lundi'>Lundi</option>
-<option  value='Mardi'>Mardi</option>
-<option  value='Mercredi'>Mercredi</option>
-<option  value='Jeudi'>Jeudi</option>
-<option  value='Vendredi'>Vendredi</option>
-<option  value='Samedi'>Samedi</option>
-</select>   
-</td>
-<td style='width:30%;'>
-<input type='time' value='13:15' name='start_time[]' required>
-<input type='time' value='16:30' name='end_time[]' required>
-</td>
-<td style='width:15%;'>
-<select name='required_qual[]'>
-.$optionStringForQuals.
-</select>
-</td>
-<td>
-<select name='block_cat[]'>
-<option  value='Surveillance'>Surveillance</option>
-<option  value='Enseignement'>Enseignement</option>
-<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
-<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
-<o<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
-<option  value='Autre'>Autre</option>
-</select>
-</td>
-
-<td>
-<p onclick='deleteRow($(this))'><b>Supp.</b></p>
-    <td>
-    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
-    </td>
-</td>
+<div style='display: inline-block;
+    overflow-y: scroll;
+    max-height:600px;'>
+<table id='block_table' >
 
 
-</tr>
-<tr>
-<td style='width:20%;'>
-   
-<select name='day[]'> 
-<option  value='Dimanche'>Dimanche</option>
-<option  value='Lundi'>Lundi</option>
-<option  value='Mardi'>Mardi</option>
-<option  value='Mercredi'>Mercredi</option>
-<option  value='Jeudi'>Jeudi</option>
-<option  value='Vendredi'>Vendredi</option>
-<option  value='Samedi'>Samedi</option>
-</select>   
-</td>
-<td style='width:30%;'>
-<input type='time' value='18:45' name='start_time[]' required>
-<input type='time' value='21:00' name='end_time[]' required>
-</td>
-<td style='width:15%;'>
-<select name='required_qual[]'>
-.$optionStringForQuals.
-</select>
-</td>
-<td>
-<select name='block_cat[]'>
-<option  value='Surveillance'>Surveillance</option>
-<option  value='Enseignement'>Enseignement</option>
-<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
-<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
-<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
-<option  value='Autre'>Autre</option>
-</select>
-</td>
-
-<td>
-<p onclick='deleteRow($(this))'><b>Supp.</b></p>
-    <td>
-    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
-    </td>
-</td>
-</tr>
 <tr>
 <td style='width:20%;'>
    
@@ -204,14 +141,14 @@ Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du
 <input type='time' value='07:15' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
-<option  value='Enseignement'>Enseignement</option>
+<option  value='Enseignement '>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
 <option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
 <option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
@@ -226,46 +163,8 @@ Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du
     </td>
 </td>
 </tr>
-<tr>
-<td style='width:20%;'>
-   
-<select name='day[]'> 
-<option  value='Dimanche'>Dimanche</option>
-<option  value='Lundi' selected>Lundi</option>
-<option  value='Mardi'>Mardi</option>
-<option  value='Mercredi'>Mercredi</option>
-<option  value='Jeudi'>Jeudi</option>
-<option  value='Vendredi'>Vendredi</option>
-<option  value='Samedi'>Samedi</option>
-</select>   
-</td>
-<td style='width:30%;'>
-<input type='time' value='19:45' name='start_time[]' required>
-<input type='time' value='21:30' name='end_time[]' required>
-</td>
-<td style='width:15%;'>
-<select name='required_qual[]'>
-.$optionStringForQuals.
-</select>
-</td>
-<td>
-<select name='block_cat[]'>
-<option  value='Surveillance'>Surveillance</option>
-<option  value='Enseignement'>Enseignement</option>
-<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
-<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
-<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
-<option  value='Autre'>Autre</option>
-</select>
-</td>
 
-<td>
-<p onclick='deleteRow($(this))'><b>Supp.</b></p>
-    <td>
-    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
-    </td>
-</td>
-</tr>
+
 <tr>
 <td style='width:20%;'>
    
@@ -284,52 +183,12 @@ Les moniteurs de natation doivent &eacute;tre disponibles au cours 1 (semaine du
 <input type='time' value='22:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
-<option  value='Surveillance'>Surveillance</option>
-<option  value='Enseignement'>Enseignement</option>
-<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
-<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
-<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
-<option  value='Autre'>Autre</option>
-</select>
-</td>
-
-<td>
-<p onclick='deleteRow($(this))'><b>Supp.</b></p>
-    <td>
-    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
-    </td>
-</td>
-</tr>
-<tr>
-<td style='width:20%;'>
-   
-<select name='day[]'> 
-<option  value='Dimanche'>Dimanche</option>
-<option  value='Lundi'>Lundi</option>
-<option  value='Mardi' selected>Mardi</option>
-<option  value='Mercredi'>Mercredi</option>
-<option  value='Jeudi'>Jeudi</option>
-<option  value='Vendredi'>Vendredi</option>
-<option  value='Samedi'>Samedi</option>
-</select>   
-</td>
-<td style='width:30%;'>
-<input type='time' value='20:45' name='start_time[]' required>
-<input type='time' value='22:30' name='end_time[]' required>
-</td>
-<td style='width:15%;'>
-<select name='required_qual[]'>
-.$optionStringForQuals.
-</select>
-</td>
-<td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement'>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -366,12 +225,12 @@ $form_data_schedule .= "
 <input type='time' value='07:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement'>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -406,12 +265,12 @@ $form_data_schedule .= "
 <input type='time' value='20:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement'>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -446,12 +305,12 @@ $form_data_schedule .= "
 <input type='time' value='22:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement'>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -486,12 +345,12 @@ $form_data_schedule .= "
 <input type='time' value='07:15' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement'>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -508,46 +367,7 @@ $form_data_schedule .= "
     </td>
 </td>
 </tr>
-<tr>
-<td style='width:20%;'>
-   
-<select name='day[]'> 
-<option  value='Dimanche'>Dimanche</option>
-<option  value='Lundi'>Lundi</option>
-<option  value='Mardi'>Mardi</option>
-<option  value='Mercredi'>Mercredi</option>
-<option  value='Jeudi'>Jeudi</option>
-<option  value='Vendredi' selected>Vendredi</option>
-<option  value='Samedi'>Samedi</option>
-</select>   
-</td>
-<td style='width:30%;'>
-<input type='time' value='19:15' name='start_time[]' required>
-<input type='time' value='21:00' name='end_time[]' required>
-</td>
-<td style='width:15%;'>
-<select name='required_qual[]'>
-.$optionStringForQuals.
-</select>
-</td>
-<td>
-<select name='block_cat[]'>
-<option  value='Surveillance'>Surveillance</option>
-<option  value='Enseignement'>Enseignement</option>
-<option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
-<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
-<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
-<option  value='Autre'>Autre</option>
-</select>
-</td>
 
-<td>
-<p onclick='deleteRow($(this))'><b>Supp.</b></p>
-    <td>
-    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
-    </td>
-</td>
-</tr>
 <tr>
 <td style='width:20%;'>
    
@@ -566,12 +386,12 @@ $form_data_schedule .= "
 <input type='time' value='17:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement'>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -606,12 +426,12 @@ $form_data_schedule .= "
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement'>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -646,12 +466,12 @@ $form_data_schedule .= "
 <input type='time' value='11:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -688,12 +508,12 @@ $form_data_schedule .= "
 <input type='time' value='13:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -728,12 +548,12 @@ $form_data_schedule .= "
 <input type='time' value='18:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -768,12 +588,12 @@ $form_data_schedule .= "
 <input type='time' value='20:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -808,12 +628,12 @@ $form_data_schedule .= "
 <input type='time' value='20:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -848,12 +668,12 @@ $form_data_schedule .= "
 <input type='time' value='17:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -888,12 +708,12 @@ $form_data_schedule .= "
 <input type='time' value='20:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -928,12 +748,12 @@ $form_data_schedule .= "
 <input type='time' value='20:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -968,12 +788,12 @@ $form_data_schedule .= "
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1010,12 +830,12 @@ $form_data_schedule .= "
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1050,12 +870,12 @@ $form_data_schedule .= "
 <input type='time' value='22:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1090,12 +910,12 @@ $form_data_schedule .= "
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1130,12 +950,12 @@ $form_data_schedule .= "
 <input type='time' value='17:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1170,12 +990,12 @@ $form_data_schedule .= "
 <input type='time' value='20:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1210,12 +1030,12 @@ $form_data_schedule .= "
 <input type='time' value='20:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1250,12 +1070,12 @@ $form_data_schedule .= "
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1290,12 +1110,12 @@ $form_data_schedule .= "
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1332,12 +1152,12 @@ $form_data_schedule .= "
 <input type='time' value='19:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1372,12 +1192,12 @@ $form_data_schedule .= "
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1412,12 +1232,12 @@ $form_data_schedule .= "
 <input type='time' value='11:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1452,12 +1272,12 @@ $form_data_schedule .= "
 <input type='time' value='13:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1492,12 +1312,12 @@ $form_data_schedule .= "
 <input type='time' value='15:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1532,12 +1352,12 @@ $form_data_schedule .= "
 <input type='time' value='17:30' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1572,12 +1392,12 @@ $form_data_schedule .= "
 <input type='time' value='18:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1612,12 +1432,12 @@ $form_data_schedule .= "
 <input type='time' value='21:00' name='end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='required_qual[]'>
+<select name='required_qual[]' class='qual_sel'>
 .$optionStringForQuals.
 </select>
 </td>
 <td>
-<select name='block_cat[]'>
+<select name='block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
 <option  value='Enseignement' selected>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
@@ -1633,10 +1453,11 @@ $form_data_schedule .= "
     <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
     </td>
 </td>
-</tr></table>";
+</tr></table></div>";
 
-$form_data_schedule1 .= "
+$form_data_schedule .= "
 
+<br><br>
 <h4>Blocs Sp&eacute;ciaux</h4>
 <table>
 <tr>
@@ -1658,14 +1479,14 @@ $form_data_schedule1 .= "
 <input type='time' value='17:00' name='spec_end_time[]' required>
 </td>
 <td style='width:15%;'>
-<select name='spec_required_qual[]'>
-.$optionStringForQuals.
+<select name='spec_required_qual[]' class='qual_sel'>
+$optionStringForQuals
 </select>
 </td>
 <td>
-<select name='spec_block_cat[]'>
+<select name='spec_block_cat[]' class='cat_sel'>
 <option  value='Surveillance'>Surveillance</option>
-<option  value='Enseignement' selected>Enseignement</option>
+<option  value='Enseignement'>Enseignement</option>
 <option  value='Entrainement du Personnel (MS / MSN)'>Entrainement du Personnel (MS / MSN)</option>
 <option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
 <option  value='Premiers Soins General (MSU)' selected>Premiers Soins General (MSU)</option>
@@ -1679,6 +1500,66 @@ $form_data_schedule1 .= "
     </td>
 </td>
 </tr>   
+<tr>
+<td style='width:20%;'>
+<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date'  name='spec_end_date[]'>
+</td>
+<td style='width:30%;'>
+<input type='time' value='08:00' name='spec_start_time[]' required>&nbsp;&agrave;&nbsp;
+<input type='time' value='17:00' name='spec_end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='spec_required_qual[]' class='qual_sel'>
+$optionStringForQuals
+</select>
+</td>
+<td>
+<select name='spec_block_cat[]' class='cat_sel'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option  value='Entrainement du Personnel (MS / MSN)' selected>Entrainement du Personnel (MS / MSN)</option>
+<option  value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>  
+<tr>
+<td style='width:20%;'>
+<input type='date' value='2020-04-04' name='spec_start_date[]'><br>au<br><input type='date'  name='spec_end_date[]'>
+</td>
+<td style='width:30%;'>
+<input type='time' value='08:00' name='spec_start_time[]' required>&nbsp;&agrave;&nbsp;
+<input type='time' value='17:00' name='spec_end_time[]' required>
+</td>
+<td style='width:15%;'>
+<select name='spec_required_qual[]' class='qual_sel'>
+$optionStringForQuals
+</select>
+</td>
+<td>
+<select name='spec_block_cat[]' class='cat_sel'>
+<option  value='Surveillance'>Surveillance</option>
+<option  value='Enseignement'>Enseignement</option>
+<option    value='Entrainement du Personnel (MS / MSN) '>Entrainement du Personnel (MS / MSN)</option>
+<option  selected value='Entrainement des MSA (Chef MSA / ISA)'>Entrainement des MSA (Chef MSA / ISA)</option>
+<option  value='Premiers Soins General (MSU)'>Premiers Soins General (MSU)</option>
+<option  value='Autre'>Autre</option>
+</select>
+</td>
+<td>
+<p onclick='deleteRow($(this))'><b>Supp.</b></p>
+    <td>
+    <p onclick='addRow($(this))'><b>Ajouter Apr&egrave;s</b></p>
+    </td>
+</td>
+</tr>  
 
 
 
@@ -1688,7 +1569,7 @@ $form_data_schedule1 .= "
  <br><input type=\"submit\" value=\"Publier\" name=\"submit\">
  </form>";
 
-$form_data_schedule1 .= "
+$form_data_schedule .= "
 <form action=\"create_form_info.php\" id=\"summer_avail_form\" method=\"post\" enctype=\"multipart/form-data\">
     
     <h2>Estival</h2>
@@ -1731,7 +1612,7 @@ if (isset($_SESSION['user_id'])) {
 
 block_print_copyright();
 echo "    </div>";
-block_print_scripts(PREAMBLE);
+
 echo "	</body>";
 echo "</html>";
 

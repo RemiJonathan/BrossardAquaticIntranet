@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $currentUrl = $_POST['currentUrl'];
 
     $sql = "SELECT user_id, passphrase FROM user WHERE user_id = '$myusername'";
-    $result = $db->query($sql);
+
 
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -24,6 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $myusername;
             if (substr($currentUrl."",-9) == 'login.php')
             header('Location: news_feed.php');
+
             else header('Location: '.$currentUrl);
         }else{
             $error = "Mot de passe invalide";
@@ -31,7 +32,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: login.php?error=$error");
         }
     }else{
-        $error = utf8_encode("NIE invalide");
+        echo "count" . $count;
+        $error = utf8_encode("NIE invalsadide$count");
         header("Location: login.php?error=$error");
     }
 

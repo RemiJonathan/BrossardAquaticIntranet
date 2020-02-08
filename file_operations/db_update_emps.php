@@ -64,20 +64,23 @@ function random_str(
     }
     return $str;
 }
-$file_data=array();
-
+$file_data = array();
+$existingEmpArray = getEmpNumsArray($db);
 foreach ($empArray as $key => $employee) {
 
 
-        $mypassword = random_str("8");
+    $mypassword = random_str("8");
 
 //Encrypt password
     $options = ['cost' => 10];
+
     $passwordhash = password_hash($mypassword, PASSWORD_BCRYPT, $options);
-
-        insertNewRegUser($db,utf8_encode($employee[0]),$passwordhash,utf8_encode(trim($employee[2])),utf8_encode(trim($employee[1])));
-
-   // $content .=  random_str(8)."<br>" .utf8_encode($employee['0'])."<br>".utf8_encode($employee['1'])."<br>".utf8_encode($employee['2'])."<br>";
+    if (in_array($employee[0], $existingEmpArray)) {
+        updateUser($db, utf8_encode($employee[0]), $passwordhash, utf8_encode(trim($employee[2])), utf8_encode(trim($employee[1])), $employee[3]);
+    } else {
+        insertNewRegUser($db, utf8_encode($employee[0]), $passwordhash, utf8_encode(trim($employee[2])), utf8_encode(trim($employee[1])), $employee[3]);
+    }
+    // $content .=  random_str(8)."<br>" .utf8_encode($employee['0'])."<br>".utf8_encode($employee['1'])."<br>".utf8_encode($employee['2'])."<br>";
 
     $file_data[$key]['user_id'] = $employee[0];
     $file_data[$key]['password'] = $mypassword;
