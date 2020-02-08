@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $currentUrl = $_POST['currentUrl'];
 
     $sql = "SELECT user_id, passphrase FROM user WHERE user_id = '$myusername'";
-    $result = $db->query($sql);
+
 
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
