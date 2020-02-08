@@ -3,6 +3,7 @@ define('PREAMBLE', '../../');
 include(PREAMBLE . "assets/php/code_blocks.php");
 include(PREAMBLE . "db_operations/connection.php");
 include(PREAMBLE . "db_operations/db_functions.php");
+date_default_timezone_set('America/Toronto');
 $sch_id = "";
 $user_id = "";
 $content = "";
@@ -40,7 +41,6 @@ if ($availType == 'avail') {
 }
 $userAvailabilities = getUserAvailabilities($db, $user_id, $sch_id);
 $specUserAvailabilities = getSpecUserAvailabilities($db, $user_id, $sch_id);
-//echo var_dump(getAvailBlock($db,$userAvailabilities[0]['block_id']));
 
 $frenchAvailType = "";
 
@@ -69,6 +69,9 @@ if ($availType != 'avail') {
     }
 }
 $content .= "<br><br><h4>Blocs Sp&eacute;ciaux</h4>";
+if (sizeof($specUserAvailabilities) == 0) {
+    $content .= "<i>Aucun</i>";
+}
 foreach ($specUserAvailabilities as $avail) {
     $endDate = "";
     if ($endDate != null) {
@@ -80,6 +83,12 @@ foreach ($specUserAvailabilities as $avail) {
     $block = getSpecAvailBlock($db, $avail['block_id']);
     $content .= "<li>" . $block['start_date'] . $endDate . " " . date("H:i", strtotime($block['start_time'])) . "-" . date("H:i", strtotime($block['end_time'])) . " en tant que " . getQual($db, $block['required_qual'])['qual_name'] . " pour " . $block['block_cat'] . "</li>";
 }
+
+$content .= "<br><br><div class=\"alert alert-danger\" role=\"alert\">
+  Pour modifier le formulaire de disponibilit&eacute;, simplement en soumettre un autre.<br><br>
+  <b>ATTENTION: CHAQUE MODIFICATION ENTRA&Icirc;NE LA SUPPRESSION DU FORMLUAIRE PR&Eacute;C&Eacute;DENT ET LA DATE DE SOUMISSION SERA CHANG&Eacute;E.</b><br><br>
+  <b>POUR TOUT CHANGEMENT APR&Egrave;S LA DATE DE REMISE, VEUILLEZ VOUS ADRESSER AUX SUPERVISEURS PAR COURRIEL POUR &Eacute;VITER UN RETARD.</b>
+</div><br><br><a href='" . PREAMBLE . "myprofile/'>Retour</a>";
 
 
 echo "<!DOCTYPE HTML><html>";

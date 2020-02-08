@@ -265,7 +265,7 @@ if (isset($_POST['sch_id'])) {
 
 </table>
 <h5>Commentaires</h5>
-<textarea placeholder='Les pr&eacute;f&eacute;rences sont &agrave; titre indicatif. La division aquatique ne s&apos;engage pas &agrave; les respecter.  ' name='comments' maxlength='300'></textarea><br><input type='radio' id='avail1' name='availType' value='avail' checked><label for='avail1'>Disponible pour un horaire r&eacute;gulier</label>
+<textarea placeholder='Les pr&eacute;f&eacute;rences sont &agrave; titre indicatif. La division aquatique ne s&apos;engage pas &agrave; les respecter.  ' name='comments' maxlength='300'></textarea><br><input type='radio' id='avail1' name='availType' value='avail' selected><label for='avail1'>Disponible pour un horaire r&eacute;gulier</label>
 <input type='radio' id='avail2' name='availType' value='availForReplacements'><label for='avail2'>Disponible pour des remplacements</label>
 <input type='radio' id='avail3' name='availType' value='unavail'><label for='avail3'>Non Disponible</label>
 ";
