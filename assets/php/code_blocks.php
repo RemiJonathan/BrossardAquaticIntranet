@@ -40,7 +40,7 @@ function block_print_header($class, $preamble)
 function block_print_nav($tabs)
 {
     $user_id = -1;
-    $db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
@@ -221,11 +221,10 @@ function block_print_scripts($preamble)
  */
 function check_user_permissions($user_id, $permission_level)
 {
+    $db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $check_permission_sql = $db->query("SELECT role_id FROM user WHERE user.user_id = '$user_id';", MYSQLI_ASSOC);
 
-    $db = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-    $check_permission_sql = mysqli_query($db, "SELECT role_id FROM user WHERE user.user_id = '$user_id';", MYSQLI_ASSOC);
-    $user = mysqli_fetch_array($check_permission_sql, MYSQLI_ASSOC);
-
+    $user = $check_permission_sql->fetch_array();
 
     return $user['role_id'] == $permission_level;
 }
