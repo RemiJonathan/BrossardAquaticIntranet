@@ -11,6 +11,7 @@ define('DB_DATABASE', 'brossard_intranet');
 $db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 if ($db->connect_error) {
+    echo DB_SERVER . DB_USERNAME . DB_PASSWORD . DB_DATABASE;
     echo "Connection failed: $db->connect_error";
     exit;
 }
