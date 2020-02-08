@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2020 at 11:46 PM
+-- Generation Time: Feb 08, 2020 at 02:37 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -29,12 +29,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `article` (
-  `article_id` int(7) NOT NULL,
-  `article_date` date NOT NULL,
-  `user_id` int(7) NOT NULL,
-  `article_title` varchar(90) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `article_content` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+                           `article_id`      int(7)                                     NOT NULL,
+                           `article_date`    date                                       NOT NULL,
+                           `user_id`         int(7)                                     NOT NULL,
+                           `article_title`   varchar(90) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+                           `article_content` mediumtext COLLATE utf8mb4_unicode_520_ci  NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
@@ -44,12 +46,23 @@ CREATE TABLE `article` (
 
 CREATE TABLE `availabilities`
 (
-    `shift_id`          int(7)     NOT NULL,
-    `user_id`           int(7)     NOT NULL,
-    `user_is_available` tinyint(1) NOT NULL
+    `block_id` int(7)  NOT NULL,
+    `user_id`  int(7)  NOT NULL,
+    `sch_id`   int(11) NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `availabilities`
+--
+
+INSERT INTO `availabilities` (`block_id`, `user_id`, `sch_id`)
+VALUES (1769, 800148, 1),
+       (1770, 800148, 1),
+       (1788, 800148, 1),
+       (1789, 800148, 1),
+       (1778, 800148, 2);
 
 -- --------------------------------------------------------
 
@@ -74,46 +87,39 @@ CREATE TABLE `availability_blocks`
 --
 
 INSERT INTO `availability_blocks` (`block_id`, `sch_id`, `day`, `start_time`, `end_time`, `required_qual`, `category`)
-VALUES (955, 1, 'Dimanche', '13:15:00', '16:30:00', 1, 'Surveillance'),
-       (956, 1, 'Dimanche', '13:15:00', '16:30:00', 4, 'Enseignement'),
-       (957, 1, 'Dimanche', '18:45:00', '21:00:00', 1, 'Surveillance'),
-       (958, 1, 'Lundi', '05:30:00', '07:15:00', 1, 'Surveillance'),
-       (959, 1, 'Lundi', '19:45:00', '21:30:00', 1, 'Surveillance'),
-       (960, 1, 'Mardi', '20:45:00', '22:30:00', 1, 'Surveillance'),
-       (961, 1, 'Mardi', '20:45:00', '22:30:00', 1, 'Surveillance'),
-       (962, 1, 'Mercredi', '05:15:00', '07:00:00', 1, 'Surveillance'),
-       (963, 1, 'Mercredi', '18:45:00', '20:30:00', 1, 'Surveillance'),
-       (964, 1, 'Jeudi', '20:45:00', '22:30:00', 1, 'Surveillance'),
-       (965, 1, 'Vendredi', '05:30:00', '07:15:00', 1, 'Surveillance'),
-       (966, 1, 'Vendredi', '19:15:00', '21:00:00', 1, 'Surveillance'),
-       (967, 1, 'Samedi', '12:45:00', '17:00:00', 1, 'Surveillance'),
-       (968, 1, 'Samedi', '18:45:00', '21:00:00', 1, 'Surveillance'),
-       (969, 1, 'Dimanche', '08:00:00', '11:00:00', 1, 'Enseignement'),
-       (970, 1, 'Dimanche', '11:00:00', '13:30:00', 1, 'Enseignement'),
-       (971, 1, 'Dimanche', '15:30:00', '18:30:00', 1, 'Enseignement'),
-       (972, 1, 'Lundi', '18:00:00', '20:00:00', 1, 'Enseignement'),
-       (973, 1, 'Lundi', '18:30:00', '20:30:00', 1, 'Enseignement'),
-       (974, 1, 'Mardi', '16:00:00', '17:00:00', 1, 'Enseignement'),
-       (975, 1, 'Mardi', '18:00:00', '20:00:00', 1, 'Enseignement'),
-       (976, 1, 'Mardi', '19:00:00', '20:30:00', 1, 'Enseignement'),
-       (977, 1, 'Mardi', '20:00:00', '21:00:00', 1, 'Enseignement'),
-       (978, 1, 'Mercredi', '18:00:00', '21:00:00', 1, 'Enseignement'),
-       (979, 1, 'Mercredi', '20:30:00', '22:30:00', 1, 'Enseignement'),
-       (980, 1, 'Mercredi', '20:00:00', '21:00:00', 1, 'Enseignement'),
-       (981, 1, 'Jeudi', '16:00:00', '17:00:00', 1, 'Enseignement'),
-       (982, 1, 'Jeudi', '18:00:00', '20:00:00', 1, 'Enseignement'),
-       (983, 1, 'Jeudi', '19:00:00', '20:30:00', 1, 'Enseignement'),
-       (984, 1, 'Jeudi', '20:00:00', '21:00:00', 1, 'Enseignement'),
-       (985, 1, 'Jeudi', '20:00:00', '21:00:00', 1, 'Enseignement'),
-       (986, 1, 'Vendredi', '18:00:00', '19:30:00', 1, 'Enseignement'),
-       (987, 1, 'Vendredi', '19:00:00', '21:00:00', 1, 'Enseignement'),
-       (988, 1, 'Samedi', '08:00:00', '11:00:00', 1, 'Enseignement'),
-       (989, 1, 'Samedi', '13:15:00', '17:30:00', 1, 'Enseignement'),
-       (990, 1, 'Samedi', '16:00:00', '21:00:00', 1, 'Enseignement'),
-       (991, 1, 'Samedi', '16:00:00', '21:00:00', 1, 'Enseignement'),
-       (992, 1, 'Samedi', '13:00:00', '18:00:00', 1, 'Enseignement'),
-       (993, 1, 'Samedi', '13:00:00', '18:00:00', 1, 'Enseignement'),
-       (994, 1, 'Samedi', '13:00:00', '18:00:00', 1, 'Enseignement');
+VALUES (1769, 1, 'Lundi', '05:30:00', '07:15:00', 1, 'Surveillance'),
+       (1770, 1, 'Mardi', '20:45:00', '22:30:00', 1, 'Surveillance'),
+       (1771, 1, 'Mercredi', '05:15:00', '07:00:00', 1, 'Surveillance'),
+       (1772, 1, 'Mercredi', '18:45:00', '20:30:00', 1, 'Surveillance'),
+       (1773, 1, 'Jeudi', '20:45:00', '22:30:00', 1, 'Surveillance'),
+       (1774, 1, 'Vendredi', '05:30:00', '07:15:00', 1, 'Surveillance'),
+       (1775, 1, 'Samedi', '12:45:00', '17:00:00', 1, 'Surveillance'),
+       (1776, 1, 'Samedi', '18:45:00', '21:00:00', 1, 'Surveillance'),
+       (1777, 1, 'Dimanche', '08:00:00', '11:00:00', 2, 'Enseignement'),
+       (1778, 1, 'Dimanche', '11:00:00', '13:30:00', 2, 'Enseignement'),
+       (1779, 1, 'Dimanche', '15:30:00', '18:30:00', 2, 'Enseignement'),
+       (1780, 1, 'Lundi', '18:00:00', '20:00:00', 2, 'Enseignement'),
+       (1781, 1, 'Lundi', '18:30:00', '20:30:00', 2, 'Enseignement'),
+       (1782, 1, 'Mardi', '16:00:00', '17:00:00', 2, 'Enseignement'),
+       (1783, 1, 'Mardi', '18:00:00', '20:00:00', 2, 'Enseignement'),
+       (1784, 1, 'Mardi', '19:00:00', '20:30:00', 2, 'Enseignement'),
+       (1785, 1, 'Mardi', '20:00:00', '21:00:00', 2, 'Enseignement'),
+       (1786, 1, 'Mercredi', '18:00:00', '21:00:00', 2, 'Enseignement'),
+       (1787, 1, 'Mercredi', '20:30:00', '22:30:00', 2, 'Enseignement'),
+       (1788, 1, 'Mercredi', '20:00:00', '21:00:00', 2, 'Enseignement'),
+       (1789, 1, 'Jeudi', '16:00:00', '17:00:00', 2, 'Enseignement'),
+       (1790, 1, 'Jeudi', '18:00:00', '20:00:00', 2, 'Enseignement'),
+       (1791, 1, 'Jeudi', '19:00:00', '20:30:00', 2, 'Enseignement'),
+       (1792, 1, 'Jeudi', '20:00:00', '21:00:00', 2, 'Enseignement'),
+       (1793, 1, 'Jeudi', '20:00:00', '21:00:00', 2, 'Enseignement'),
+       (1794, 1, 'Vendredi', '18:00:00', '19:30:00', 2, 'Enseignement'),
+       (1795, 1, 'Vendredi', '19:00:00', '21:00:00', 2, 'Enseignement'),
+       (1796, 1, 'Samedi', '08:00:00', '11:00:00', 2, 'Enseignement'),
+       (1797, 1, 'Samedi', '11:00:00', '13:00:00', 2, 'Enseignement'),
+       (1798, 1, 'Samedi', '13:00:00', '15:30:00', 2, 'Enseignement'),
+       (1799, 1, 'Samedi', '13:15:00', '17:30:00', 2, 'Enseignement'),
+       (1800, 1, 'Samedi', '13:00:00', '18:00:00', 2, 'Enseignement'),
+       (1801, 1, 'Samedi', '16:00:00', '21:00:00', 2, 'Enseignement');
 
 -- --------------------------------------------------------
 
@@ -137,7 +143,7 @@ CREATE TABLE `availability_instructions`
 --
 
 INSERT INTO `availability_instructions` (`sch_id`, `title`, `deadline`, `gen_info`, `meet_info`, `guidelines`)
-VALUES (1, 'Hiver 2021', '2020-02-21',
+VALUES (1, 'Hiver', '2020-02-27',
         'Les cours de natation se dérouleront du 6 janvier au 15 mars 2020 (10 sem.). Relâche à LT SEUL. le 1er-2-3 février (reprise les 16-21-22 mars)\r\n    \r\n    Les cours de mise en forme se dérouleront du 6 janvier au 19 mars (11 sem.). \r\n    \r\n    Les bains libres se dérouleront du dimanche 5 janvier au vendredi 3 avril.',
         'Réunion des chefs moniteurs\r\nJeudi 19 décembre : 18 h à 20 h --- Hôtel de Ville\r\n\r\nRéunion et entraînement des moniteurs (MS, MSN, MSA, Aquaforme)\r\nVendredi 3 janvier : 11 h à 13 h --- Piscine Antoine-Brossard - Les absences doivent être justifiées avant le 20 décembre 2019\r\n\r\nRéunion du personnel aquatique (TOUS) \r\nVendredi 3 janvier : 10 h à 11 h --- Piscine Antoine-Brossard - Les absences doivent être justifiées avant le 20 décembre 2019\r\n',
         'En cas de désistement, l\'employé doit remettre une preuve démontrant un conflit d\'horaire entre les disponibilités soumises et son horaire scolaire non connu au moment du dépôt des disponibilités OU remettre un billet médical qui ordonne un arrêt de travail balisé par une date de début et date de fin.\r\nLorsque deux compétences sont nécessaires pour le même bloc, l\'ancienneté sera établie en fonction de la compétence en rouge.\r\nVous devez sélectionner des blocs pré établis (blocs indissociables) complets. \r\nVous pouvez sélectionner plus d\'un bloc par jour.\r\nVous devez indiquer un nombre maximum d\'heures souhaitées. Le minimum est à titre indicatif.\r\nVous devez avoir vos cartes de compétences à jour et valides pour obtenir un horaire.\r\nLes préférences sont à titre indicatif. La division aquatique ne s\'engage pas à les respecter.  \r\n\r\nRAPPELS\r\nMaximum 2 remplacements par quart de travail pour l\'enseignement;\r\nLes moniteurs de natation doivent étre disponibles au cours 1 (semaine du 6 au 12 janvier) et au cours de remise des carnets (semaine du 9 au 15 mars + 21-22 mars pour LT). SVP indiquez vos indisponibilités s\'il y a lieu.\r\n'),
@@ -158,7 +164,9 @@ CREATE TABLE `grade`
     `quiz_id`  int(11) NOT NULL,
     `user_id`  int(11) NOT NULL,
     `result`   decimal(6, 2) DEFAULT 0.00
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
@@ -166,22 +174,24 @@ CREATE TABLE `grade`
 -- Table structure for table `location`
 --
 
-CREATE TABLE `location` (
-  `location_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `location`
+(
+    `location_name` varchar(30) NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 --
 -- Dumping data for table `location`
 --
 
-INSERT INTO `location` (`location_name`) VALUES
-                                             ('AB'),
-                                             ('AB-SALLE'),
-                                             ('GHB'),
-                                             ('LT'),
-                                             ('LT-SALLE'),
-                                             ('PIS-AB'),
-                                             ('PIS-LT');
+INSERT INTO `location` (`location_name`)
+VALUES ('AB'),
+       ('AB-SALLE'),
+       ('GHB'),
+       ('LT'),
+       ('LT-SALLE'),
+       ('PIS-AB'),
+       ('PIS-LT');
 
 -- --------------------------------------------------------
 
@@ -209,8 +219,8 @@ VALUES (1, 'SN'),
        (5, 'MSN'),
        (6, 'ISA'),
        (7, 'AQF'),
-       (8, 'SN + MSA'),
-       (9, 'SN + AQF');
+       (8, 'MSA + SN'),
+       (9, 'AQF + SN');
 
 -- --------------------------------------------------------
 
@@ -240,16 +250,16 @@ VALUES (722888, 1, NULL, '2019-06-01', 'EXP DEC 2019', ''),
        (722888, 2, NULL, '2020-12-01', '', ''),
        (750045, 1, NULL, '2020-07-01', '', ''),
        (758300, 1, NULL, '2019-12-01', '', ''),
-(758300, 2, NULL, '2020-12-01', '', ''),
-(800001, 1, NULL, '2019-12-01', '', ''),
-(800001, 2, NULL, '2020-01-01', '', ''),
-(800001, 7, '2015-03-01', '1970-01-01', '', NULL),
-(800003, 1, NULL, '2021-09-01', '', ''),
-(800003, 2, NULL, '2019-12-01', '', ''),
-(800003, 7, '2012-08-01', '1970-01-01', '', NULL),
-(800004, 1, NULL, '2021-06-01', '', ''),
-(800004, 3, '2017-09-01', '2019-09-01', '', NULL),
-(800004, 7, '2015-03-01', '1970-01-01', '', NULL),
+       (758300, 2, NULL, '2020-12-01', '', ''),
+       (800001, 1, NULL, '2019-12-01', '', ''),
+       (800001, 2, NULL, '2020-01-01', '', ''),
+       (800001, 7, '2015-03-01', '1970-01-01', '', NULL),
+       (800003, 1, NULL, '2021-09-01', '', ''),
+       (800003, 2, NULL, '2019-12-01', '', ''),
+       (800003, 7, '2012-08-01', '1970-01-01', '', NULL),
+       (800004, 1, NULL, '2021-06-01', '', ''),
+       (800004, 3, '2017-09-01', '2019-09-01', '', NULL),
+       (800004, 7, '2015-03-01', '1970-01-01', '', NULL),
 (800009, 1, NULL, '2020-02-01', '', ''),
 (800009, 2, NULL, '2020-12-01', '', ''),
 (800010, 1, NULL, '2019-12-01', '', ''),
@@ -487,18 +497,23 @@ CREATE TABLE `response` (
 -- Table structure for table `role`
 --
 
-CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL,
-  `role_name` varchar(40) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `role_is_admin` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ROW_FORMAT=COMPACT;
+CREATE TABLE `role`
+(
+    `role_id`       int(11)                                    NOT NULL,
+    `role_name`     varchar(40) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+    `role_is_admin` tinyint(1)                                 NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_520_ci
+  ROW_FORMAT = COMPACT;
 
 --
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`role_id`, `role_name`, `role_is_admin`) VALUES (1, 'user', 0),
-                                                                    (2, 'admin', 1);
+INSERT INTO `role` (`role_id`, `role_name`, `role_is_admin`)
+VALUES (1, 'user', 0),
+       (2, 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -1157,6 +1172,29 @@ VALUES (4683, 2, 2, '09:00:00', '09:25:00', 'PIS-AB', 'Dimanche', 'ETOILE GR-01'
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `spec_availabilities`
+--
+
+CREATE TABLE `spec_availabilities`
+(
+    `block_id` int(11) NOT NULL,
+    `user_id`  int(11) NOT NULL,
+    `sch_id`   int(11) DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+--
+-- Dumping data for table `spec_availabilities`
+--
+
+INSERT INTO `spec_availabilities` (`block_id`, `user_id`, `sch_id`)
+VALUES (38, 800148, 1),
+       (39, 800148, 1),
+       (40, 800148, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `spec_availability_blocks`
 --
 
@@ -1165,11 +1203,11 @@ CREATE TABLE `spec_availability_blocks`
     `block_id`      int(11)     NOT NULL,
     `sch_id`        int(11)     NOT NULL,
     `start_date`    date        NOT NULL,
-    `end_date`      date        NOT NULL,
+    `end_date`      date DEFAULT NULL,
     `start_time`    time        NOT NULL,
     `end_time`      time        NOT NULL,
     `required_qual` int(11)     NOT NULL,
-    `block_cat`     varchar(30) NOT NULL
+    `block_cat`     varchar(60) NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
@@ -1179,9 +1217,9 @@ CREATE TABLE `spec_availability_blocks`
 
 INSERT INTO `spec_availability_blocks` (`block_id`, `sch_id`, `start_date`, `end_date`, `start_time`, `end_time`,
                                         `required_qual`, `block_cat`)
-VALUES (2, 1, '2020-04-04', '2020-04-05', '08:00:00', '17:00:00', 1, 'Premiers Soins General (MSU)'),
-       (3, 1, '2020-04-04', '2020-04-05', '08:00:00', '17:00:00', 1, 'Premiers Soins General (MSU)'),
-       (4, 1, '2020-04-04', '2020-04-05', '08:00:00', '17:00:00', 1, 'Premiers Soins General (MSU)');
+VALUES (38, 1, '2020-04-04', '2020-04-05', '08:00:00', '17:00:00', 4, 'Premiers Soins General (MSU)'),
+       (39, 1, '2020-04-04', '0000-00-00', '08:00:00', '17:00:00', 3, 'Entrainement du Personnel (MS / MSN)'),
+       (40, 1, '2020-04-04', '0000-00-00', '08:00:00', '17:00:00', 2, 'Entrainement des MSA (Chef MSA / ISA)');
 
 -- --------------------------------------------------------
 
@@ -1191,14 +1229,14 @@ VALUES (2, 1, '2020-04-04', '2020-04-05', '08:00:00', '17:00:00', 1, 'Premiers S
 
 CREATE TABLE `user`
 (
-    `user_id`         int(11)     NOT NULL,
-    `passphrase`      varchar(60) NOT NULL,
-    `user_fname`      varchar(35) NOT NULL,
-    `user_lname`      varchar(35) NOT NULL,
-    `user_address`    varchar(70)          DEFAULT NULL,
-    `user_dob`        date                 DEFAULT NULL,
-    `role_id`         int(7)      NOT NULL DEFAULT 1,
-    `user_start_date` date                 DEFAULT NULL
+    `user_id`      int(11)     NOT NULL,
+    `passphrase`   varchar(60) NOT NULL,
+    `user_fname`   varchar(35) NOT NULL,
+    `user_lname`   varchar(35) NOT NULL,
+    `email`        varchar(60)          DEFAULT NULL,
+    `user_address` varchar(70)          DEFAULT NULL,
+    `role_id`      int(7)      NOT NULL DEFAULT 1,
+    `user_dob`     date                 DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -1206,128 +1244,233 @@ CREATE TABLE `user`
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `passphrase`, `user_fname`, `user_lname`, `user_address`, `user_dob`, `role_id`,
-                    `user_start_date`)
-VALUES (722888, 'rndKf13E', 'Mathieu', 'Dorval', NULL, NULL, 1, NULL),
-       (750045, 'ytvoKiPi', 'Édouard', 'Ducharme', NULL, NULL, 1, NULL),
-       (758300, 'WNatcZYY', 'Nathan', 'Ng', NULL, NULL, 1, NULL),
-       (800001, 'poEQzmL3', 'Rasha', 'Alhaeik', NULL, NULL, 1, NULL),
-       (800003, '2TJFMBgx', 'Laetitia', 'Banh', NULL, NULL, 1, NULL),
-       (800004, 'II10psjZ', 'Malika', 'Bélanger-Oudrhiri', NULL, NULL, 1, NULL),
-       (800009, 'VY9J6JHD', 'Annie-France', 'Demers', NULL, NULL, 1, NULL),
-       (800010, 'XlM3SmP5', 'Guillaume', 'Demers', NULL, NULL, 1, NULL),
-       (800014, 'e6hMIBr0', 'Marie-Alexandre', 'Forest', NULL, NULL, 1, NULL),
-       (800015, 'yyj7SgQ7', 'Jean-Michel', 'Fortier', NULL, NULL, 1, NULL),
-       (800017, 'EgivOI31', 'Vincent', 'Henry', NULL, NULL, 1, NULL),
-       (800018, 'yb41DEAR', 'Marc-Antoine', 'Lajoie', NULL, NULL, 1, NULL),
-       (800021, 'QBlGvcBw', 'Amélie', 'Tiphane', NULL, NULL, 1, NULL),
-       (800022, 'nO5A5goa', 'Josianne', 'Larrivée', NULL, NULL, 1, NULL),
-       (800023, '4gfM8j7c', 'Béatrice', 'Laurin', NULL, NULL, 1, NULL),
-       (800027, 'ewPPouAy', 'Jessika', 'Métivier-Bédard', NULL, NULL, 1, NULL),
-       (800029, 'HbdMAMPT', 'Ariane', 'Moquin Joubert', NULL, NULL, 1, NULL),
-       (800032, '4ePd9laz', 'Félix-Antoine', 'Pelletier', NULL, NULL, 1, NULL),
-       (800033, 'Roq4ywWH', 'Amélie', 'Poiré', NULL, NULL, 1, NULL),
-       (800036, 'VUcAZ5JP', 'Mélissa', 'Roch-Lanouette', NULL, NULL, 1, NULL),
-       (800037, 's9vDxMA2', 'Galit', 'Sandaev', NULL, NULL, 1, NULL),
-       (800038, 'PI1QmxZ0', 'Aaruthra', 'Thirumal', NULL, NULL, 1, NULL),
-       (800039, 'lf8eNQWw', 'Maxime', 'Trottier', NULL, NULL, 1, NULL),
-       (800040, 'RITaotkU', 'Caroline', 'Turgeon', NULL, NULL, 1, NULL),
-       (800041, 'bLMnCX2J', 'Aude', 'Vallerand', NULL, NULL, 1, NULL),
-       (800042, 'tTtei8lt', 'Margaux', 'Willame', NULL, NULL, 1, NULL),
-       (800045, 'mQDHELtm', 'Jonathan', 'Miron', NULL, NULL, 1, NULL),
-       (800048, 'oAnxUy0z', 'Jack', 'Allen', NULL, NULL, 1, NULL),
-       (800049, 'Rf4b2U1Z', 'Maxime', 'Berger', NULL, NULL, 1, NULL),
-       (800054, 'zfWAJ856', 'David', 'Do', NULL, NULL, 1, NULL),
-       (800057, 'A7eWbL4o', 'Alexandre', 'Gagné', NULL, NULL, 1, NULL),
-       (800059, 'AnDvCHOM', 'Hélène', 'Hoffman-Chrétien', NULL, NULL, 1, NULL),
-       (800062, 'PwUOfpm8', 'Tiffany', 'Nguyen', NULL, NULL, 1, NULL),
-       (800073, 'ZVjsZbSY', 'Éléanor', 'Chabot', NULL, NULL, 1, NULL),
-       (800077, 'DltbrT9d', 'Salma', 'Ayari', NULL, NULL, 1, NULL),
-       (800078, 'ALbBUunt', 'Érik', 'Farkas', NULL, NULL, 1, NULL),
-       (800079, 'nbLOvT0P', 'Katerine', 'Landry', NULL, NULL, 1, NULL),
-       (800081, 'alXIrFby', 'Charles-Olivier', 'Moreau', NULL, NULL, 1, NULL),
-       (800083, 'FhFNl9S2', 'Isabelle', 'Lefebvre', NULL, NULL, 1, NULL),
-       (800086, 'H5cqWi6r', 'Salomë', 'Plourde', NULL, NULL, 1, NULL),
-       (800088, 'hplIIX9t', 'Florence', 'Peate', NULL, NULL, 1, NULL),
-       (800089, 'eK7mXPZo', 'Roxanne', 'Landry', NULL, NULL, 1, NULL),
-       (800090, 'Hwpr4nUB', 'Mario', 'Ivanov', NULL, NULL, 1, NULL),
-       (800091, '6Cf4hpfS', 'Claudia', 'Burton', NULL, NULL, 1, NULL),
-       (800092, 'tUjVcCf5', 'Peinda', 'Diop', NULL, NULL, 1, NULL),
-       (800093, 'TWzaXiE1', 'Marc-André', 'Gosselin', NULL, NULL, 1, NULL),
-       (800095, 'PPIQbf2S', 'Célia', 'Kingsbury', NULL, NULL, 1, NULL),
-       (800097, 'AeyEdAPd', 'Ana Maria', 'Cotocea', NULL, NULL, 1, NULL),
-       (800099, 'V3jclrRR', 'William', 'Ducharme', NULL, NULL, 1, NULL),
-       (800100, 'SCRhAVIm', 'Pascale', 'Fillion', NULL, NULL, 1, NULL),
-       (800101, 'zpUb6Ido', 'Ana Elise', 'Jivan', NULL, NULL, 1, NULL),
-       (800104, 'sqmGgr18', 'Louis', 'Lafrance-Savard', NULL, NULL, 1, NULL),
-       (800105, 'Wd9aSCDl', 'Mélanie', 'Lefebvre', NULL, NULL, 1, NULL),
-       (800107, 'XP9nRTEQ', 'Paula Sofia', 'Loaiza', NULL, NULL, 1, NULL),
-       (800108, 'lphjaJjB', 'Louis-Charles', 'Marquis', NULL, NULL, 1, NULL),
-       (800109, '70HyRk9C', 'Chaimaa', 'Ouizzane', NULL, NULL, 1, NULL),
-       (800111, 'QLi1jJTh', 'Vincent', 'Provost', NULL, NULL, 1, NULL),
-       (800113, 'O6ir41wk', 'Alice', 'Stoica', NULL, NULL, 1, NULL),
-       (800114, 'RrmBjkee', 'Laurence', 'Thériault-Lapointe', NULL, NULL, 1, NULL),
-       (800116, 'xswTfbuc', 'Sandrine', 'Trinh', NULL, NULL, 1, NULL),
-       (800117, 'qEHqrLUR', 'David', 'Van Oordt', NULL, NULL, 1, NULL),
-       (800118, 'NV3aC4nL', 'Ivy', 'Zou', NULL, NULL, 1, NULL),
-       (800120, '9pkg2En2', 'Rose', 'Zhang', NULL, NULL, 1, NULL),
-       (800122, 'jfECSZEP', 'Audrey', 'Ng Youn Chen', NULL, NULL, 1, NULL),
-       (800124, 'gRnlZU0E', 'Mia', 'Gagné-Vincent', NULL, NULL, 1, NULL),
-       (800126, 'QBXQewUq', 'Karel', 'Grégoire', NULL, NULL, 1, NULL),
-       (800127, '4ksYd8aM', 'Gabrielle', 'Lapointe', NULL, NULL, 1, NULL),
-       (800128, 'RybKKiiX', 'Ariane', 'Lalancette', NULL, NULL, 1, NULL),
-       (800130, 'Ww2DLuJu', 'William', 'Belbin', NULL, NULL, 1, NULL),
-       (800131, 'J1579daW', 'Valentin', 'Cioana', NULL, NULL, 1, NULL),
-       (800132, 'JBSAeISv', 'Jean-Christophe', 'Bélair', NULL, NULL, 1, NULL),
-       (800133, 'TItyqS7F', 'Alexandra', 'Bélec-Sergerie', NULL, NULL, 1, NULL),
-       (800134, 'EGbhrWTf', 'Anaïs', 'Berlinger-Lavoie', NULL, NULL, 1, NULL),
-       (800135, 'HBi6zSNi', 'Jannick', 'Bonenfant', NULL, NULL, 1, NULL),
-       (800136, 'gQW7IAad', 'Najee', 'Cadet', NULL, NULL, 1, NULL),
-       (800137, 'qmcDkVoF', 'Marie-Rose', 'Chabot', NULL, NULL, 1, NULL),
-       (800139, 'FOCNGmsN', 'Patrick', 'Cimpean', NULL, NULL, 1, NULL),
-       (800142, 't3yYZNwm', 'Victoria', 'Derome', NULL, NULL, 1, NULL),
-       (800145, 'Dmrx0TA0', 'Frédérique', 'Lafontaine', NULL, NULL, 1, NULL),
-       (800148, '0LQMaqM6', 'Horia Cristian', 'Sandu', NULL, NULL, 1, NULL),
-       (800149, 'OmD048lq', 'Nicolas', 'Vu', NULL, NULL, 1, NULL),
-       (800151, 'e9QgkYyC', 'Rayan', 'Achouri', NULL, NULL, 1, NULL),
-       (800152, 'GgqE6yXe', 'Alexis', 'Côté', NULL, NULL, 1, NULL),
-       (800153, 'TgTF5vSQ', 'Marc-Antoine', 'Tremblay', NULL, NULL, 1, NULL),
-       (800154, '9PlkZssV', 'Julian', 'Manotas', NULL, NULL, 1, NULL),
-       (800155, 'g0X1Ky0k', 'Antoine', 'Boulanger', NULL, NULL, 1, NULL),
-       (800156, 'WVI9U1K3', 'David', 'Cioana', NULL, NULL, 1, NULL),
-       (800157, 'v5VpZwbv', 'Nicolas', 'Comsulea', NULL, NULL, 1, NULL),
-       (800158, 'UC453Axw', 'Clara', 'Dragon', NULL, NULL, 1, NULL),
-       (800160, 'xAbKRRrU', 'Nikol', 'Georgieva', NULL, NULL, 1, NULL),
-       (800161, 'F3b0Xv7J', 'Éric Stefan', 'Gojan', NULL, NULL, 1, NULL),
-       (800164, 'p9vVWdLI', 'Hubert', 'Provost', NULL, NULL, 1, NULL),
-       (800165, 'pf0jWdq4', 'Chloé', 'Prugne', NULL, NULL, 1, NULL),
-       (800166, 'lbbCJOqF', 'Nina', 'Tan', NULL, NULL, 1, NULL),
-       (800167, 'wMmZRnYw', 'Alison', 'Vo', NULL, NULL, 1, NULL),
-       (800168, '1iUehqEd', 'Leila', 'Zaouali', NULL, NULL, 1, NULL),
-       (800169, 'JAaNloEP', 'Sabrina', 'Chan Fee', NULL, NULL, 1, NULL),
-       (800170, 'tN0QdD5o', 'David', 'Larrivée', NULL, NULL, 1, NULL),
-       (800171, 'fsWmQw6T', 'Yan', 'Burton', NULL, NULL, 1, NULL),
-       (900001, 'mXKCvXmZ', 'Fiana', 'Chang', NULL, NULL, 1, NULL),
-       (900002, '5R0YRhtZ', 'Jean-Félix', 'Desbiens', NULL, NULL, 1, NULL),
-       (999999, '$2y$10$0JzSuqZnFw6rGYgpranjf.NWzB3Iys0S6XVgaNGZlgZH6Pj46LrNC', 'Secteur', 'Aquatique', NULL, NULL, 2,
-        NULL);
+INSERT INTO `user` (`user_id`, `passphrase`, `user_fname`, `user_lname`, `email`, `user_address`, `role_id`, `user_dob`)
+VALUES (722888, '$2y$10$OPN0a4vh38WCxESiNRMch.D1vDA8svIrCgLinAHpwomfepRSCay6G', 'Mathieu', 'Dorval',
+        'dorvalmat@gmail.com', NULL, 1, NULL),
+       (750045, '$2y$10$DQJS7rRU8CjKwZn80CB84uIWMe7Sk1H2YZFRw2CFe3eDlDjMJmOBu', 'Édouard', 'Ducharme',
+        'edouard.ducharme@videotron.ca', NULL, 1, NULL),
+       (758300, '$2y$10$EVz9x5WWyMehrtA6lbvvRueMUbcSR3GQcSCqjdTvOegl85jmPz8RG', 'Nathan', 'Ng', '1.audrey.ng@gmail.com',
+        NULL, 1, NULL),
+       (800001, '$2y$10$/uMmzy1Lq.VvMv5YDYB9IuL.XWDZPjSyq0V.a3RQuHc7GDvFiyyP2', 'Rasha', 'Alhaeik',
+        'rashaalhaeik@hotmail.com', NULL, 1, NULL),
+       (800003, '$2y$10$xqcI2oSWLBRGO0JKrpgipeQ710z9VDe5ulGs6fj2HJVHAMk13RPMC', 'Laetitia', 'Banh',
+        'laetitia.banh@hotmail.com', NULL, 1, NULL),
+       (800004, '$2y$10$5XBDBuIiDCWH6fg6Dbq1iuP0AZUUuLMU0MdZreynqy7jkqZUNNnpS', 'Malika', 'Bélanger-Oudrhiri',
+        'metalikab@gmail.com', NULL, 1, NULL),
+       (800009, '$2y$10$QSW.cXSRmFErWLPY8i188.cSqY2rgCxmkE5S5Xw09HrBZ0v30jIQS', 'Annie-France', 'Demers',
+        'annie.france.demers@gmail.com', NULL, 1, NULL),
+       (800010, '$2y$10$7iPU5AD0JkyfE00NJX8YOepvEoBrNL0vyRqHuvqm/EkYYznL7sV9W', 'Guillaume', 'Demers',
+        'guillaume.demers.1@gmail.com', NULL, 1, NULL),
+       (800014, '$2y$10$JjFsXWnPMf8mlRS5yvZe2u7Pd4k6tjCaq.dQQq/1FqsQ21I/h1eiC', 'Marie-Alexandre', 'Forest',
+        'alexforest2@hotmail.com', NULL, 1, NULL),
+       (800015, '$2y$10$ig9mldk1kQDNzplS54eMJeS7J3KDHpIwk8y2hUgEZSyiqIyQXH116', 'Jean-Michel', 'Fortier',
+        'jm.fortier@hotmail.com', NULL, 1, NULL),
+       (800017, '$2y$10$pDFn1DNlsld6vJs1ciMiLe/6NKY9SgHbndQWTUZW4/zb2lZedbNTW', 'Vincent', 'Henry',
+        'vincenthenryh@gmail.com', NULL, 1, NULL),
+       (800018, '$2y$10$DZXMUSttC1gwJEKNc7Ygve9Rz8n72XwWMUcTsMpTaQEUqETpnTfze', 'Marc-Antoine', 'Lajoie',
+        'marc_lajoie_30@hotmail.com', NULL, 1, NULL),
+       (800021, '$2y$10$J7GqQj7N3jEq9cV9LCLa1eFqMPLTyKRYUEYMINrnE1kb/FQAQ1MTm', 'Amélie', 'Tiphane',
+        'amelie.tiphane@gmail.com', NULL, 1, NULL),
+       (800022, '$2y$10$ftH5OTTbgA2tagzzNK/jquB43isHshkbpyayv4G6.KP7THBjmkOyS', 'Josianne', 'Larrivée',
+        'josiannelarrivee@gmail.com', NULL, 1, NULL),
+       (800023, '$2y$10$o7T5usac1070DNIje/8Je.SVxqRd2ZdH0pWqDr91Eg4Xhie0UFsL.', 'Béatrice', 'Laurin',
+        'beatrice.laurin@gmail.com', NULL, 1, NULL),
+       (800027, '$2y$10$CMmJZuI3hlBAnxpMV2VTcOkS9rz9uRJ3v3brGh.FpgWIw2Ky2ot7a', 'Jessika', 'Métivier-Bédard',
+        'jessy1432@hotmail.com', NULL, 1, NULL),
+       (800029, '$2y$10$qayNr6eEE1j9Sm10vVn0teOlJbddCKANUh.dqy3m9XxR2v.oN0/mm', 'Ariane', 'Moquin Joubert',
+        'ari.m.joub@hotmail.com', NULL, 1, NULL),
+       (800032, '$2y$10$Lqsn10UuLeXNLqZjlu/1bO3XxAI0MKaWFymGCtDbaFqMSEyqBtRn6', 'Félix-Antoine', 'Pelletier',
+        'felix_p96@hotmail.com', NULL, 1, NULL),
+       (800033, '$2y$10$qpzx7VubcfOSiI/GniVmL.NRDwkilmbCSjX4PfR3Rt09/sD8uF1zy', 'Amélie', 'Poiré', '', NULL, 1, NULL),
+       (800036, '$2y$10$AQfOGwPxF0SOe5I9v6SnkumR7ikEHu9hWlGU90twi0S1k2v4dYgiC', 'Mélissa', 'Roch-Lanouette', '', NULL,
+        1, NULL),
+       (800037, '$2y$10$kyyJCdPSAW8/PxUEL7sZLO7WLsZNH53avloqWJ.10JRjlPxuqoXbG', 'Galit', 'Sandaev',
+        'galit.sandaev@mail.mcgill.ca', NULL, 1, NULL),
+       (800038, '$2y$10$.VNmaXtD649hKiEkUSM3q.hhmLtUT1Vns4i1tXQ2Xeu7CXhpK/eF2', 'Aaruthra', 'Thirumal',
+        'aaru1997@hotmail.com', NULL, 1, NULL),
+       (800039, '$2y$10$T4z8IRGST/7Qg7rMyuWG..U0sunOjswFMeBkWHIWTWd7LiZHhqFGO', 'Maxime', 'Trottier',
+        'max_cod6@live.com', NULL, 1, NULL),
+       (800040, '$2y$10$lJ8NKGbscZUPhmnJ5lZ06uzzCXF3UZLisMHpkuBnZbwUsDsyKxdvu', 'Caroline', 'Turgeon',
+        'turgeon.caroline@hotmail.com', NULL, 1, NULL),
+       (800041, '$2y$10$caasYtET3fOg2CPusQBd6uwVctPeVauzV7HjtawWlnsRS5pHPpiMy', 'Aude', 'Vallerand',
+        'aude.vallerand@gmail.com', NULL, 1, NULL),
+       (800042, '$2y$10$grCa6t6WcG.rAzXirLD/FeP2R88zxLNDeQdOnWc8Mq70Jq6LEFHK.', 'Margaux', 'Willame',
+        'margauxwillame@hotmail.com', NULL, 1, NULL),
+       (800045, '$2y$10$QhVj54EGIwsK9ypRhU6z/OR8uxZShRn4790kNldVHW.Rk6frFDj4e', 'Jonathan', 'Miron', '', NULL, 1, NULL),
+       (800048, '$2y$10$qm9FTAjWCr8axdzAtX.CnO2W0I10ZehjhozbvYlzKlAR0AtqtomiS', 'Jack', 'Allen',
+        'jack.allen15@alumni.loyola.ca', NULL, 1, NULL),
+       (800049, '$2y$10$w4MYMtTirSw3H3JdQB2fHu1Yg/RYPOxZJitWf7mB5TSLwHUfmByXq', 'Maxime', 'Berger',
+        'maxime_berger@hotmail.ca', NULL, 1, NULL),
+       (800054, '$2y$10$4uRrWcbn7YeV6dVLBzP24uJ2f3uiZq1q4uGd0jFcAGwaMH29bPWhq', 'David', 'Do', '', NULL, 1, NULL),
+       (800057, '$2y$10$s5rcJoBMPgAni2bd53wRq.ZvNacLnu0.vdQ8A7wPz5hJ2.DX2ZEhK', 'Alexandre', 'Gagné',
+        'alexandre.gagne7@outlook.com', NULL, 1, NULL),
+       (800059, '$2y$10$EyIUaq7Hjg4xBz8XTVpkWu2dhV4NQm0xIIL9N9WlYTYRetR9hG0Wm', 'Hélène', 'Hoffman-Chrétien',
+        'helene.hoffmanchretien@gmail.com', NULL, 1, NULL),
+       (800062, '$2y$10$IInjuLqVSSUtD9wwFUcsQOioZnCTONsfHvMIyva5qmzUYgmPDhpGq', 'Tiffany', 'Nguyen',
+        'tiffanynguyen2499@gmail.com', NULL, 1, NULL),
+       (800073, '$2y$10$c5l67nIlM23Td.UTQdtjqOcDhg9Tf83HPMA9W0zbFMOs37zlyxYH6', 'Éléanor', 'Chabot',
+        'eleanor.chabot@hotmail.fr', NULL, 1, NULL),
+       (800077, '$2y$10$BXHgzOF6sr6eCtg55XQ/C.yR41KT/UninYfK70rphTONoZVS6RoIC', 'Salma', 'Ayari',
+        'salma.ayarii@hotmail.com', NULL, 1, NULL),
+       (800078, '$2y$10$sWxEFvkK26hrdbs/peI0m.eDsurZVpoyoy38EtCr1b/jESeG7szzO', 'Érik', 'Farkas',
+        'erik.farkas999@gmail.com', NULL, 1, NULL),
+       (800079, '$2y$10$eYG.UtvobDaay4u9YDUR7eVuzGXnrLd5eJEtSKnikqrQJm9KjF9Wi', 'Katerine', 'Landry',
+        'katerinelandry@hotmail.fr', NULL, 1, NULL),
+       (800081, '$2y$10$szX9LIxG9/xK2St2I190x..dOuiO8TjJa2IwaBlzdPuFKBWY9yGPK', 'Charles-Olivier', 'Moreau',
+        'charlot1405@hotmail.com', NULL, 1, NULL),
+       (800083, '$2y$10$x39jtp9xpbsf8/ppMlFT2uTTHzkV.YAMTVjaT97eTSjNQEvGv9Hn.', 'Isabelle', 'Lefebvre',
+        'lefebvre.isabelle999@gmail.com', NULL, 1, NULL),
+       (800086, '$2y$10$G87tE6mlaqYMylJrApQoTeoGNeNQxcaCFVOjHbcM589iTeRVqSC2.', 'Salomë', 'Plourde', '', NULL, 1, NULL),
+       (800088, '$2y$10$2RXIJ6SA8YvFDZbdSiaeyefoVtYJf0gjBEPGRJIoeNFRmpO7EqfFO', 'Florence', 'Peate',
+        'flopeate.99@gmail.com', NULL, 1, NULL),
+       (800089, '$2y$10$mO7/H.NwA8mz7gqAysw2r.tEDoVVD6TbOrhf8B8bN0z04fz61TrMK', 'Roxanne', 'Landry',
+        'roxlandry@hotmail.com', NULL, 1, NULL),
+       (800090, '$2y$10$KU//dpVGFTUIpJqZU3b3JOTAlhvfZXcNAWkwtANGLWMP0tmlhHqha', 'Mario', 'Ivanov',
+        'marioivanov71@gmail.com', NULL, 1, NULL),
+       (800091, '$2y$10$rtXshkhStDvFegZjAIdfs.3RalnJ0q6qEPT70IhRQ47ARE4rVWfSa', 'Claudia', 'Burton',
+        'claudiaburton17@gmail.com', NULL, 1, NULL),
+       (800092, '$2y$10$I2wzjtdj7HSSE.WNDmJE5.DPRVEr/2sw/blwFhkeWPk3p2cvTSWqO', 'Peinda', 'Diop', 'peindadiop@yahoo.fr',
+        NULL, 1, NULL),
+       (800093, '$2y$10$KoV6uMz.grDE7.Rl/DOXReKfKjJ9yhO.uZVKNNs/sYzqJTpZLJIxS', 'Marc-André', 'Gosselin',
+        'ma.gosselin09@gmail.com', NULL, 1, NULL),
+       (800095, '$2y$10$3cTJ85ZI2vydanJIjqixl.PuzFUwujssqwOiYiLjj1akuOQ7/qWZi', 'Célia', 'Kingsbury', '', NULL, 1,
+        NULL),
+       (800097, '$2y$10$025Fte2BOKGfI7sErg2i9OeLf7JV05ukE3DAOBZFXQN79PS2tvsOS', 'Ana Maria', 'Cotocea',
+        'anacoto47@gmail.com', NULL, 1, NULL),
+       (800099, '$2y$10$6t6hSVmuujZA7GpVb6Xl8Ob.e/GSh.LahKcObhgMzY9LQHkB7vSDa', 'William', 'Ducharme',
+        'william.ducharme@hotmail.com', NULL, 1, NULL),
+       (800100, '$2y$10$hOl0HgN7BUURzKbNUgT3DOLyXDaQ3ufNH6OBDI5jCIDPrywh3v0Jm', 'Pascale', 'Fillion',
+        'pascale-fillion@hotmail.com', NULL, 1, NULL),
+       (800101, '$2y$10$CeRzdohlg99v0MgsIdcKAu2e4qfmbOciUG2CY6qW50v88K.KGTNYG', 'Ana Elise', 'Jivan',
+        'anajivan@gmail.com', NULL, 1, NULL),
+       (800104, '$2y$10$rrUnKosKVX4zbwpasJtuQ.rIVdN8F3FKu9Fj.X8jQgnvgP32q.AO2', 'Louis', 'Lafrance-Savard',
+        'louislsavard@gmail.com', NULL, 1, NULL),
+       (800105, '$2y$10$sao5sBr/3SUZn4Azx1ZNR.Gc7OXCSc33llpG7ToPmOOAJzoOhNhXO', 'Mélanie', 'Lefebvre',
+        'lefebvremelanie111@gmail.com', NULL, 1, NULL),
+       (800107, '$2y$10$i2s5xwV57LC9q4N5UxwyNeS/FE.c2NzKAVrFjeIKloXy.QZ61WAre', 'Paula Sofia', 'Loaiza',
+        'popolala2002@gmail.com', NULL, 1, NULL),
+       (800108, '$2y$10$pXh5iqCJsqRagl4nCG8VG.g1CkpdaeAQkGVI8YiQ1pavOjAtfdZ8q', 'Louis-Charles', 'Marquis',
+        'lcmarquis42@gmail.com', NULL, 1, NULL),
+       (800109, '$2y$10$RHlSohHJSRTBU0u6ynSFCO4S5ZwEb9LTnzDDR1gXidxtebsXbCkP.', 'Chaimaa', 'Ouizzane',
+        'chaouiz@hotmail.com', NULL, 1, NULL),
+       (800111, '$2y$10$WM7fafhfWpXliKbqAKMukOqaR/ysQasB5MQBgXx0Qf0q6Of393pG.', 'Vincent', 'Provost',
+        'vincprovost3@gmail.com', NULL, 1, NULL),
+       (800113, '$2y$10$Hp8rfhc7Hgv2hQ.CwjcqX.fEGvKcZ7oTI26qAWipQT/tD3wn3H966', 'Alice', 'Stoica',
+        'stoica.alice2110@gmail.com', NULL, 1, NULL),
+       (800114, '$2y$10$fepPb8h/LuKwEGzWcGfyju29gBf3JDV/nJJJ7keNTgCDlOkeOt14y', 'Laurence', 'Thériault-Lapointe',
+        'lo.310@hotmail.com', NULL, 1, NULL),
+       (800116, '$2y$10$XTJ6jXJhLgABzqDVenEuJ.66qeCzLefqokeAQyrSv6xId1cejyfkG', 'Sandrine', 'Trinh',
+        'sandtrinh@gmail.com', NULL, 1, NULL),
+       (800117, '$2y$10$HJNY9sWSs2GocL191lXXu.hJ440qC.Jh59uP2CL3X2vD3ZU6bxZzm', 'David', 'Van Oordt',
+        'davidvanoordt@gmail.com', NULL, 1, NULL),
+       (800118, '$2y$10$vtnGo8HNS51RIXITW8iHDOmYbKE0.sWKfYbMTvOn2100t3ee6R5n2', 'Ivy', 'Zou', 'ssimivy@gmail.com', NULL,
+        1, NULL),
+       (800120, '$2y$10$fsDc44DPLBkx1LjSGML5GuZ34ZNiW2O5BkkUkZegwyK8wSQGP2viW', 'Rose', 'Zhang', 'zhangrose7@gmail.com',
+        NULL, 1, NULL),
+       (800122, '$2y$10$VG7gYI1SHzanmZfVEcXF6eQqTRCIoUKHEZ8blH6Nt/JHb.UJN5cZ2', 'Audrey', 'Ng Youn Chen',
+        'nathan.ng405@gmail.com', NULL, 1, NULL),
+       (800124, '$2y$10$2UMrXLD2.tEph6PEKL8Y7exxFNwA/HGoOWHDb3.nK5JCZTos3F7Ra', 'Mia', 'Gagné-Vincent',
+        'miagagnevincent@gmail.com', NULL, 1, NULL),
+       (800126, '$2y$10$n6MakROfCHlkJ5x2Hox5euCyVO.md4t9fxPH4a1W.JsAgcOO5LAZC', 'Karel', 'Grégoire',
+        'kgregoire@live.fr', NULL, 1, NULL),
+       (800127, '$2y$10$kiVP.kSHeX8Ah4ARHsOwZ.9IKOp6oN.vkiKDQHdXg//8bC5DAfv8y', 'Gabrielle', 'Lapointe',
+        'gablap@videotron.ca', NULL, 1, NULL),
+       (800128, '$2y$10$ptyRIeh.6zdsTh9iByHG/eIcw0EH8UX5Idq5KIo5hKzKmNx.uKvc6', 'Ariane', 'Lalancette',
+        'arianelalancette.99@gmail.com', NULL, 1, NULL),
+       (800130, '$2y$10$GBOhLLrYpRHt8XslCQf4zO.eYLkJiTZ02XCkHq9foVpBeleQhaFk.', 'William', 'Belbin',
+        'william.belbin2@gmail.com', NULL, 1, NULL),
+       (800131, '$2y$10$niQuacdxmJsKJG6hjdUwbuo38VckUBR48fep9XruJCu3QBzoUJLFG', 'Valentin', 'Cioana',
+        'vcioana@gmail.com', NULL, 1, NULL),
+       (800132, '$2y$10$lTk/jw43Cl/THP6Aei/cRO3A.utZcbKUAUsvxlBMK03J41SFsQ4im', 'Jean-Christophe', 'Bélair',
+        'belair.jc@outlook.com', NULL, 1, NULL),
+       (800133, '$2y$10$pt0RkXeJM72pN3i2QZbz5O7OUFEFYvTHTCcnqUn8RmaaJ1c.ehehm', 'Alexandra', 'Bélec-Sergerie',
+        'alexandrabelec08@gmail.com', NULL, 1, NULL),
+       (800134, '$2y$10$46ql3Ndb/YZbTI7CzrT23uamjEQTSLfWMushgKaG2qcV2w526BUMa', 'Anaïs', 'Berlinger-Lavoie', '', NULL,
+        1, NULL),
+       (800135, '$2y$10$.AejKB00UM/hkg41DfkS0.DdWI.yLgW2qItZ9eGRYExzlru7tCbpq', 'Jannick', 'Bonenfant',
+        'jannick.bonenfant@gmail.com', NULL, 1, NULL),
+       (800136, '$2y$10$T7DaR3ZGqKk1KrA5/wjiku/lpsvsqoCQYpfR5FDgKHffD4bXsxb6i', 'Najee', 'Cadet',
+        'najee1364@hotmail.com', NULL, 1, NULL),
+       (800137, '$2y$10$WPecLfo0SpTLv05nPbtQruCnO8aaJ9peJ4oRAGAXyrEg9krZp7wSO', 'Marie-Rose', 'Chabot',
+        'marierose.chabot@hotmail.com', NULL, 1, NULL),
+       (800139, '$2y$10$yqYoxWl4OTN5J66Pvb28T.QbbzsYNKL.52/2Rn8omsqS71hMdAkZG', 'Patrick', 'Cimpean',
+        'patrick.cimpean@gmail.com', NULL, 1, NULL),
+       (800142, '$2y$10$T8wL4tsieTu0zxA8fKJCJeEBedEIgvR4pGcYtizmrCp8sXMKjoRcC', 'Victoria', 'Derome',
+        'vic.derome@gmail.com', NULL, 1, NULL),
+       (800145, '$2y$10$5Tr9QsBqen4qhzDdqNjM4Oa0lWXAS7s.Zem24afmh7nueXffDQ41q', 'Frédérique', 'Lafontaine',
+        'flafontaine@me.com', NULL, 1, NULL),
+       (800148, '$2y$10$gMC2UAOqzwlFdobD9OYGFehlIscZcZ.lZdUYBi4irtb.MfklUIhiu', 'Horia Cristian', 'Sandu',
+        'horiasandu1@gmail.com', NULL, 1, NULL),
+       (800149, '$2y$10$6rmVXypeJQsYIiYPIra7r.0N.nwZpXXEAt2fvOeqBpNja9Gjsi3OG', 'Nicolas', 'Vu',
+        'nicolasvu2001@yahoo.ca', NULL, 1, NULL),
+       (800151, '$2y$10$xqC7orq4b3B6AcVuO8E19O9Br91z9V0YjntRLiJgxuVpHwtzZJxqK', 'Rayan', 'Achouri',
+        'rayacho29@gmail.com', NULL, 1, NULL),
+       (800152, '$2y$10$nwqVBwGSebYASZ48Yuq/5.FL88rRWYWZgaII4HcHbvByUUgn8DmCy', 'Alexis', 'Côté',
+        'alexiscote3007@gmail.com', NULL, 1, NULL),
+       (800153, '$2y$10$pYenRr3N99nU6omMdwWUc.D5aZDwVYADluNasI6NAYI7g871Q60DO', 'Marc-Antoine', 'Tremblay',
+        'marc.antoine.tremb@gmail.com', NULL, 1, NULL),
+       (800154, '$2y$10$WkttTsN8Ss2HhaS.Pw1THOBMSngdONGLeRJhq8cYgXdiPEq2wG9C6', 'Julian', 'Manotas',
+        'julianmanotas11@gmail.com', NULL, 1, NULL),
+       (800155, '$2y$10$3WlqzuxKL3QlUgxf9YxbbOWPEkbJUQtDzaroYqgq1ARO9p2Qum/yO', 'Antoine', 'Boulanger',
+        'boulanger.antoine@outlook.com', NULL, 1, NULL),
+       (800156, '$2y$10$1QxIaXZlmD/jw3YzqRb1R.Xjh.9e9Hz7eJwgaIN..M/vy965FqoAa', 'David', 'Cioana', 'vcioana@gmail.com',
+        NULL, 1, NULL),
+       (800157, '$2y$10$0fMysEB8ELbhS1A9IgKWmuw90vKJRxhamihLvM3V447FqLEtf2Q0m', 'Nicolas', 'Comsulea',
+        'nicolas.comsulea@gmail.com', NULL, 1, NULL),
+       (800158, '$2y$10$iVUuGnxSjuSg0.6hECm7fuZePqOJp/TNihkYzFNL0Z4ZVfmWbVBMq', 'Clara', 'Dragon',
+        'claradragon@live.fr', NULL, 1, NULL),
+       (800160, '$2y$10$ttzM3bRtlMeSr4zJev.YmOIUDY0XDtYIe8QYW9J6xJvKHuhbeip.W', 'Nikol', 'Georgieva',
+        'nikolpg@gmail.com', NULL, 1, NULL),
+       (800161, '$2y$10$iJ0MU2oplyrdiYIxOC2gfeU6Z6ahYS/qC8Qb6XUsQWSi63R.zpIru', 'Eric Stefan', 'Gojan',
+        'ericstefan1000@gmail.com', NULL, 1, NULL),
+       (800164, '$2y$10$TdFe3G7Z6mJHhKIjSI0vaObdFgYupVqZWw2uw2qe0fTGwMeb3rsge', 'Hubert', 'Provost',
+        'hubertprovost@hotmail.com', NULL, 1, NULL),
+       (800165, '$2y$10$5xCKMYUt8CyQCL5bf7IlvePeHWNFIM22gdculzrj2m8zsQrF.0iui', 'Chloé', 'Prugne', 'prugnec@yahoo.com',
+        NULL, 1, NULL),
+       (800166, '$2y$10$10LlrrCl31p9A7jFH/8OdOhclP3acyadnfAqo/yGhf4HHI9jTYnCa', 'Nina', 'Tan', 'ninatt110@gmail.com',
+        NULL, 1, NULL),
+       (800167, '$2y$10$ICvgyYakYOe2TP5.pn5oBefxlWp9Nk9upvt3z8pP5zT/dm2n7qBxG', 'Alison', 'Vo', 'alison.vo@gmail.com',
+        NULL, 1, NULL),
+       (800168, '$2y$10$toDS/sjL6L0rYaowAssCIuB59DP5kbQO5IBgO9urZ28nP9ZpTYIOG', 'Leila', 'Zaouali',
+        'leila.zaouali_15@hotmail.com', NULL, 1, NULL),
+       (800169, '$2y$10$Gwl43.QosMsFb1/U21BGRuz6jBLyIQBP6U1ym8ny8X917KMUDIEd.', 'Sabrina', 'Chan Fee',
+        'sabrinachanfee@gmail.com', NULL, 1, NULL),
+       (800170, '$2y$10$NQ3xz8TjQVgh.DYeDQ3bfuz4b4NBrUU5vwNng5fJbUOxDz/2kDjh.', 'David', 'Larrivée',
+        'davidlarrivee087@gmail.com', NULL, 1, NULL),
+       (800171, '$2y$10$9DihVI/XEaOwDqrwSW5UpeSW12Gu5SoD8rk9Bfubdyj5eE7ooo/Zq', 'Yan', 'Burton',
+        'yanburton03@gmail.com', NULL, 1, NULL),
+       (900001, '$2y$10$QObZbdWn/4uU/dKJ18QUzOqbcp7ADNP2SiiNxjobabpZNPNkyJJyW', 'Fiana', 'Chang', '', NULL, 1, NULL),
+       (900002, '$2y$10$b.d3.eBMQoW6EpIZ1uGKB.2Er3pQx1xYMfNduQ9OWoXvMdVzpTWzO', 'Jean-Félix', 'Desbiens', '', NULL, 1,
+        NULL),
+       (999999, '$2y$10$.xXZNtZNFKcjMNipMCYvMOzWsgEf75vyIRa1DFdOv/RXeT1OYfoCO', 'Secteur', 'Aquatique',
+        'aquatique@brossard.ca', NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_semester_specs`
+-- Table structure for table `user_semester_avail`
 --
 
-CREATE TABLE `user_semester_specs`
+CREATE TABLE `user_semester_avail`
 (
-    `user_id`      int(7) NOT NULL,
-    `min_hours`    int(2) NOT NULL,
-  `max_hours` int(2) NOT NULL,
-  `max_weekday` int(11) NOT NULL,
-  `max_weekend` int(11) NOT NULL,
-  `comments` varchar(300) DEFAULT NULL,
-  `date_submitted` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    `avail_id`       int(7)      NOT NULL,
+    `user_id`        int(7)      NOT NULL,
+    `sch_id`         int(11)     NOT NULL,
+    `date_submitted` date        NOT NULL,
+    `avail_type`     varchar(30) NOT NULL,
+    `comments`       varchar(300) DEFAULT NULL,
+    `max_hours`      int(2)      NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+--
+-- Dumping data for table `user_semester_avail`
+--
+
+INSERT INTO `user_semester_avail` (`avail_id`, `user_id`, `sch_id`, `date_submitted`, `avail_type`, `comments`,
+                                   `max_hours`)
+VALUES (21, 800148, 2, '2020-02-08', 'avail', 'dfsg', 0),
+       (135, 800148, 1, '2020-02-07', 'avail', 'ms pref', 10);
 
 --
 -- Indexes for dumped tables
@@ -1344,8 +1487,9 @@ ALTER TABLE `article`
 -- Indexes for table `availabilities`
 --
 ALTER TABLE `availabilities`
-    ADD PRIMARY KEY (`shift_id`, `user_id`),
-    ADD KEY `FK_avail_user` (`user_id`);
+    ADD PRIMARY KEY (`block_id`, `user_id`),
+    ADD KEY `FK_avail_user` (`user_id`),
+    ADD KEY `availabilities_schedule_sch_id_fk` (`sch_id`);
 
 --
 -- Indexes for table `availability_blocks`
@@ -1373,7 +1517,7 @@ ALTER TABLE `grade`
 -- Indexes for table `location`
 --
 ALTER TABLE `location`
-  ADD PRIMARY KEY (`location_name`);
+    ADD PRIMARY KEY (`location_name`);
 
 --
 -- Indexes for table `qualification`
@@ -1424,8 +1568,8 @@ ALTER TABLE `schedule`
 -- Indexes for table `seniority`
 --
 ALTER TABLE `seniority`
-  ADD PRIMARY KEY (`seniority_id`),
-  ADD KEY `FK_seniority_user` (`user_id`);
+    ADD PRIMARY KEY (`seniority_id`),
+    ADD KEY `FK_seniority_user` (`user_id`);
 
 --
 -- Indexes for table `shift`
@@ -1435,6 +1579,14 @@ ALTER TABLE `shift`
     ADD KEY `FK_shift_user` (`assigned_user`),
     ADD KEY `FK_shift_qualification` (`required_qual`),
     ADD KEY `FK_shift_schedule` (`schedule_id`);
+
+--
+-- Indexes for table `spec_availabilities`
+--
+ALTER TABLE `spec_availabilities`
+    ADD PRIMARY KEY (`block_id`, `user_id`),
+    ADD KEY `spec_availabilities_schedule_sch_id_fk` (`sch_id`),
+    ADD KEY `spec_availabilities_user_user_id_fk` (`user_id`);
 
 --
 -- Indexes for table `spec_availability_blocks`
@@ -1453,10 +1605,12 @@ ALTER TABLE `user`
     ADD KEY `FK_user_role` (`role_id`);
 
 --
--- Indexes for table `user_semester_specs`
+-- Indexes for table `user_semester_avail`
 --
-ALTER TABLE `user_semester_specs`
-    ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `user_semester_avail`
+    ADD PRIMARY KEY (`avail_id`),
+    ADD KEY `user_semester_avail_user_user_id_fk` (`user_id`),
+    ADD KEY `user_semester_avail_schedule_sch_id_fk` (`sch_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1473,7 +1627,7 @@ ALTER TABLE `article`
 --
 ALTER TABLE `availability_blocks`
     MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT,
-    AUTO_INCREMENT = 995;
+    AUTO_INCREMENT = 1802;
 
 --
 -- AUTO_INCREMENT for table `grade`
@@ -1526,7 +1680,7 @@ ALTER TABLE `shift`
 --
 ALTER TABLE `spec_availability_blocks`
     MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT,
-    AUTO_INCREMENT = 5;
+    AUTO_INCREMENT = 41;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -1534,6 +1688,13 @@ ALTER TABLE `spec_availability_blocks`
 ALTER TABLE `user`
     MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,
     AUTO_INCREMENT = 1000000;
+
+--
+-- AUTO_INCREMENT for table `user_semester_avail`
+--
+ALTER TABLE `user_semester_avail`
+    MODIFY `avail_id` int(7) NOT NULL AUTO_INCREMENT,
+    AUTO_INCREMENT = 136;
 
 --
 -- Constraints for dumped tables
@@ -1549,8 +1710,9 @@ ALTER TABLE `article`
 -- Constraints for table `availabilities`
 --
 ALTER TABLE `availabilities`
-    ADD CONSTRAINT `FK_avail_shift` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`),
-    ADD CONSTRAINT `FK_avail_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+    ADD CONSTRAINT `FK_avail_shift` FOREIGN KEY (`block_id`) REFERENCES `availability_blocks` (`block_id`) ON DELETE CASCADE,
+    ADD CONSTRAINT `FK_avail_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+    ADD CONSTRAINT `availabilities_schedule_sch_id_fk` FOREIGN KEY (`sch_id`) REFERENCES `schedule` (`sch_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `availability_blocks`
@@ -1601,6 +1763,14 @@ ALTER TABLE `shift`
     ADD CONSTRAINT `FK_shift_user` FOREIGN KEY (`assigned_user`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `spec_availabilities`
+--
+ALTER TABLE `spec_availabilities`
+    ADD CONSTRAINT `spec_availabilities_schedule_sch_id_fk` FOREIGN KEY (`sch_id`) REFERENCES `schedule` (`sch_id`) ON DELETE CASCADE,
+    ADD CONSTRAINT `spec_availabilities_spec_availability_blocks_block_id_fk` FOREIGN KEY (`block_id`) REFERENCES `spec_availability_blocks` (`block_id`) ON DELETE CASCADE,
+    ADD CONSTRAINT `spec_availabilities_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `spec_availability_blocks`
 --
 ALTER TABLE `spec_availability_blocks`
@@ -1614,12 +1784,13 @@ ALTER TABLE `user`
     ADD CONSTRAINT `FK_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`);
 
 --
--- Constraints for table `user_semester_specs`
+-- Constraints for table `user_semester_avail`
 --
-ALTER TABLE `user_semester_specs`
-  ADD CONSTRAINT `FK_specs_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+ALTER TABLE `user_semester_avail`
+    ADD CONSTRAINT `user_semester_avail_schedule_sch_id_fk` FOREIGN KEY (`sch_id`) REFERENCES `schedule` (`sch_id`) ON DELETE CASCADE,
+    ADD CONSTRAINT `user_semester_avail_user_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
