@@ -8,7 +8,7 @@ define('DB_DATABASE', 'brossard_intranet');
 */
 
 
-$db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 if ($db->connect_error) {
     echo $my_env_var = getenv('DB_HOST') . getenv('DB_USERNAME') . getenv('DB_PASSWORD') . getenv('DB_DATABASE') . DB_USERNAME . DB_PASSWORD . DB_DATABASE;
