@@ -40,7 +40,7 @@ function block_print_header($class, $preamble)
 function block_print_nav($tabs)
 {
     $user_id = -1;
-    $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
