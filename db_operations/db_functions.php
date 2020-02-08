@@ -47,6 +47,19 @@ function getQualArray($db)
     return $qualArray;
 }
 
+function getQual($db, $qual_id)
+{
+    $current = "";
+
+    $qualArray = getQualArray($db);
+    foreach ($qualArray as $qual) {
+        if ($qual['qualification_id'] == $qual_id) {
+            $current = $qual;
+        }
+    }
+    return $current;
+}
+
 function getEmpNumsArray($db)
 {
     $empArray = getEmpArray($db);
@@ -358,6 +371,28 @@ function getAvailInstructions($db)
     return $instrucArray;
 }
 
+function getUserAvailabilities($db, $user_id, $sch_id)
+{
+    $blocksArray = array();
+    $result = $db->query("SELECT * FROM availabilities WHERE user_id = $user_id AND sch_id = $sch_id");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($blocksArray, $row);
+    }
+
+    return $blocksArray;
+}
+
+function getSpecUserAvailabilities($db, $user_id, $sch_id)
+{
+    $blocksArray = array();
+    $result = $db->query("SELECT * FROM spec_availabilities WHERE user_id = $user_id AND sch_id = $sch_id");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($blocksArray, $row);
+    }
+
+    return $blocksArray;
+}
+
 function getAvailBlocks($db)
 {
     $blocksArray = array();
@@ -367,6 +402,18 @@ function getAvailBlocks($db)
     }
 
     return $blocksArray;
+}
+
+function getAvailBlock($db, $block_id)
+{
+    $current = "";
+    $blockArray = getAvailBlocks($db);
+    foreach ($blockArray as $block) {
+        if ($block_id == $block['block_id']) {
+            $current = $block;
+        }
+    }
+    return $current;
 }
 
 
@@ -381,6 +428,18 @@ function getSpecAvailBlocks($db)
     return $blocksArray;
 }
 
+function getSpecAvailBlock($db, $block_id)
+{
+    $current = "";
+    $blockArray = getSpecAvailBlocks($db);
+    foreach ($blockArray as $block) {
+        if ($block_id == $block['block_id']) {
+            $current = $block;
+        }
+    }
+    return $current;
+}
+
 
 function getSchedules($db)
 {
@@ -392,5 +451,64 @@ function getSchedules($db)
 
     return $scheduleArray;
 }
+
+function getSchedule($db, $sch_id)
+{
+    $current = "";
+    $scheduleArray = getSchedules($db);
+    foreach ($scheduleArray as $schedule) {
+        if ($sch_id == $schedule['sch_id']) {
+            $current = $schedule;
+        }
+    }
+    return $current;
+}
+
+function deleteUserSemAvails($db, $sch_id, $user_id)
+{
+    $db->query("DELETE FROM user_semester_avail WHERE sch_id = $sch_id AND user_id = $user_id");
+}
+
+function insertUserSemAvails($db, $user_id, $sch_id, $date_submitted, $avail_type, $comments, $max_hours)
+{
+
+
+    $stmt = $db->prepare("INSERT INTO user_semester_avail (user_id, sch_id, date_submitted, avail_type, comments, max_hours) VALUES (?,?,?,?,?,?)
+");
+    $stmt->bind_param("iisssi", $user_id, $sch_id, $date_submitted, $avail_type, $comments, $max_hours);
+
+    $stmt->execute();
+}
+
+function deleteUserBlockAvails($db, $sch_id, $user_id)
+{
+    $db->query("DELETE FROM availabilities WHERE sch_id = $sch_id AND user_id = $user_id");
+}
+
+function insertUserBlockAvails($db, $block_id, $user_id, $sch_id)
+{
+    $stmt = $db->prepare("INSERT INTO availabilities (block_id, user_id, sch_id) VALUES (?,?,?)
+
+");
+    $stmt->bind_param("iii", $block_id, $user_id, $sch_id);
+
+    $stmt->execute();
+}
+
+function deleteSpecUserBlockAvails($db, $sch_id, $user_id)
+{
+    $db->query("DELETE FROM spec_availabilities WHERE sch_id = $sch_id AND user_id = $user_id");
+}
+
+function insertSpecUserBlockAvails($db, $block_id, $user_id, $sch_id)
+{
+    $stmt = $db->prepare("INSERT INTO spec_availabilities (block_id, user_id, sch_id) VALUES (?,?,?)
+
+");
+    $stmt->bind_param("iii", $block_id, $user_id, $sch_id);
+
+    $stmt->execute();
+}
+
 
 
