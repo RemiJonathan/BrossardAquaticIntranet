@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2020 at 02:37 AM
+-- Generation Time: Feb 08, 2020 at 03:27 AM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -28,12 +28,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `article`
 --
 
-CREATE TABLE `article` (
-                           `article_id`      int(7)                                     NOT NULL,
-                           `article_date`    date                                       NOT NULL,
-                           `user_id`         int(7)                                     NOT NULL,
-                           `article_title`   varchar(90) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-                           `article_content` mediumtext COLLATE utf8mb4_unicode_520_ci  NOT NULL
+CREATE TABLE `article`
+(
+    `article_id`      int(7)                                     NOT NULL,
+    `article_date`    date                                       NOT NULL,
+    `user_id`         int(7)                                     NOT NULL,
+    `article_title`   varchar(90) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+    `article_content` mediumtext COLLATE utf8mb4_unicode_520_ci  NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_520_ci;
@@ -260,16 +261,16 @@ VALUES (722888, 1, NULL, '2019-06-01', 'EXP DEC 2019', ''),
        (800004, 1, NULL, '2021-06-01', '', ''),
        (800004, 3, '2017-09-01', '2019-09-01', '', NULL),
        (800004, 7, '2015-03-01', '1970-01-01', '', NULL),
-(800009, 1, NULL, '2020-02-01', '', ''),
-(800009, 2, NULL, '2020-12-01', '', ''),
-(800010, 1, NULL, '2019-12-01', '', ''),
-(800010, 2, NULL, '2020-12-01', '', ''),
-(800010, 7, '2015-03-01', '1970-01-01', '', NULL),
-(800014, 1, NULL, '2020-12-01', '', ''),
-(800014, 2, NULL, '2019-12-01', '', ''),
-(800015, 1, NULL, '2020-08-01', '', ''),
-(800015, 2, NULL, '2021-03-01', '', ''),
-(800015, 3, '2018-01-01', '2020-04-01', '', NULL),
+       (800009, 1, NULL, '2020-02-01', '', ''),
+       (800009, 2, NULL, '2020-12-01', '', ''),
+       (800010, 1, NULL, '2019-12-01', '', ''),
+       (800010, 2, NULL, '2020-12-01', '', ''),
+       (800010, 7, '2015-03-01', '1970-01-01', '', NULL),
+       (800014, 1, NULL, '2020-12-01', '', ''),
+       (800014, 2, NULL, '2019-12-01', '', ''),
+       (800015, 1, NULL, '2020-08-01', '', ''),
+       (800015, 2, NULL, '2021-03-01', '', ''),
+       (800015, 3, '2018-01-01', '2020-04-01', '', NULL),
 (800015, 4, '2017-12-01', '2019-12-01', '', NULL),
 (800015, 5, '2019-03-01', '2021-03-01', '', NULL),
 (800017, 1, NULL, '2020-12-01', '', ''),
@@ -486,10 +487,12 @@ CREATE TABLE `quiz` (
 --
 
 CREATE TABLE `response` (
-  `question_id` int(7) NOT NULL,
-  `user_id` int(7) NOT NULL,
-  `question_response` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+                            `question_id`       int(7)     NOT NULL,
+                            `user_id`           int(7)     NOT NULL,
+                            `question_response` tinyint(1) NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
@@ -759,16 +762,16 @@ VALUES (1123, 800017, 'surveillance', 3033.92, '2015-03-02', NULL),
 CREATE TABLE `shift`
 (
     `shift_id`      int(11)     NOT NULL,
-    `schedule_id`   int(11)              DEFAULT NULL,
-    `required_qual` int(11)              DEFAULT NULL,
-    `start_time`    time        NOT NULL DEFAULT curtime(),
+    `schedule_id`   int(11)     DEFAULT NULL,
+    `required_qual` int(11)     DEFAULT NULL,
+    `start_time`    time        NOT NULL,
     `end_time`      time        NOT NULL,
-    `location`      varchar(30)          DEFAULT NULL,
+    `location`      varchar(30) DEFAULT NULL,
     `day`           varchar(10) NOT NULL,
-    `description`   text                 DEFAULT NULL,
+    `description`   text        DEFAULT NULL,
     `start_date`    date        NOT NULL,
     `end_date`      date        NOT NULL,
-    `assigned_user` int(11)              DEFAULT NULL
+    `assigned_user` int(11)     DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
@@ -1523,7 +1526,7 @@ ALTER TABLE `location`
 -- Indexes for table `qualification`
 --
 ALTER TABLE `qualification`
-  ADD PRIMARY KEY (`qualification_id`);
+    ADD PRIMARY KEY (`qualification_id`);
 
 --
 -- Indexes for table `qualified_user`
@@ -1562,7 +1565,7 @@ ALTER TABLE `role`
 -- Indexes for table `schedule`
 --
 ALTER TABLE `schedule`
-  ADD PRIMARY KEY (`sch_id`);
+    ADD PRIMARY KEY (`sch_id`);
 
 --
 -- Indexes for table `seniority`
