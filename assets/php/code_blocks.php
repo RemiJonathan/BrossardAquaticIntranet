@@ -222,7 +222,7 @@ function block_print_scripts($preamble)
 function check_user_permissions($user_id, $permission_level)
 {
 
-    $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $db = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
     $check_permission_sql = $db->query("SELECT role_id FROM user WHERE user.user_id = '$user_id';", MYSQLI_ASSOC);
 
     $user = $check_permission_sql->fetch_array();
