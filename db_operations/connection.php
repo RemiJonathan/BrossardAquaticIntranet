@@ -1,7 +1,8 @@
 <?php
 //UChNLJEjh23vrjWr
-/*
+
 define('DB_SERVER', 'localhost');
+/*
 define('DB_USERNAME', 'regular_user');
 define('DB_PASSWORD', 'UChNLJEjh23vrjWr');
 define('DB_DATABASE', 'brossard_intranet');
