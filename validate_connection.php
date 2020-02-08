@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $currentUrl = $_POST['currentUrl'];
 
     $sql = "SELECT user_id, passphrase FROM user WHERE user_id = '$myusername'";
-
+    $result = $db->query($sql);
 
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -31,8 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: login.php?error=$error");
         }
     }else{
-        echo "count" . $count;
-        $error = utf8_encode("NIE invalsadide$count");
+        $error = utf8_encode("NIE invalide");
         header("Location: login.php?error=$error");
     }
 
