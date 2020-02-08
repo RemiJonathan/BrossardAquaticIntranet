@@ -224,8 +224,8 @@ function check_user_permissions($user_id, $permission_level)
 
     $db = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
     $check_permission_sql = mysqli_query($db, "SELECT role_id FROM user WHERE user.user_id = '$user_id';", MYSQLI_ASSOC);
+    $user = mysqli_fetch_array($check_permission_sql, MYSQLI_ASSOC);
 
-    $user = $check_permission_sql->fetch_array();
 
     return $user['role_id'] == $permission_level;
 }
