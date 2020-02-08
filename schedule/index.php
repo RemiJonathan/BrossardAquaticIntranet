@@ -54,20 +54,16 @@ if (isset($_SESSION['user_id'])) {
             foreach ($locationArray as $location) {
                 if (isset($_GET['location'])) {
                     if ($_GET['location'] == $location) {
-                        echo "<li class=\"nav-item\">
-    <a class=\"nav-link active pool\" href=\"?location=$location\">$location</a></li>";
+                        echo "<li class=\"nav-item\"><a class=\"nav-link active pool\" href=\"?location=$location\">$location</a></li>";
                     } else {
-                        echo "<li class=\"nav-item\">
-    <a class=\"nav-link pool\" href=\"?location=$location\">$location</a></li>";
+                        echo "<li class=\"nav-item\"><a class=\"nav-link pool\" href=\"?location=$location\">$location</a></li>";
                     }
                 } else {
                     if ($counter == 0) {
                         $_GET['location'] = $location;
-                        echo "<li class=\"nav-item\">
-    <a class=\"nav-link pool active\" href=\"?location=$location\">$location</a></li>";
+                        echo "<li class=\"nav-item\"><a class=\"nav-link pool active\" href=\"?location=$location\">$location</a></li>";
                     } else {
-                        echo "<li class=\"nav-item\">
-    <a class=\"nav-link pool\" href=\"?location=$location\">$location</a></li>";
+                        echo "<li class=\"nav-item\"><a class=\"nav-link pool\" href=\"?location=$location\">$location</a></li>";
                     }
                 }
             }
@@ -95,7 +91,6 @@ if (isset($_SESSION['user_id'])) {
                     $currentLocation = $_GET['location'];
                 }
 
-                $schedule = 1;
 
                 echo printWeekDayTable('Dimanche', $schedule, $db, $currentLocation);
 
@@ -149,26 +144,19 @@ if (isset($_SESSION['user_id'])) {
                 echo "<div class=\"col-12\"><input id='enseignement' name=\"seniority_type\" type=\"radio\"><label for=\"enseignement\">Enseignement</label></div>";
                 echo "<div class=\"col-12\"><input id='surveillance' name=\"seniority_type\" type=\"radio\"><label for=\"surveillance\">Surveillance</label></div>";
 
+                echo "<div class=\"col-12\"><span id='selectedHours' style='font-size: small'></span></div>";
+
                 echo "<div class=\"col-12\">";
 
-                echo"<ol class=\"list-group\">";
-
-                echo"<li class='list-group-item list-group-item-action active'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-                echo"<li class='list-group-item list-group-item-action'>Test record</li>";
-
-                echo "</ol>";
+                print_seniority_dropdown('surveillance', $db);
+                print_seniority_dropdown('enseignement', $db);
 
                 echo "</div>";
 
-                echo "</div></div>";
+                echo "<br /><div class=\"col-12\"><form><div id='hiddenInputs'></div><ul class=\"actions\"><li><input style='display: none' type='submit' id='hiddenSave' value='sauvegarder'></li></ul></form></div></div></div>";
 
                 echo "</div>";
-                echo "</div>
-					</section>";
+
             }
         }
     } else {
@@ -183,6 +171,8 @@ if (isset($_SESSION['user_id'])) {
     block_print_main("<h2>D&eacute;sol&eacute;, la session est expir&eacute;e ou inexistante</h2>" . $connection_form);
     session_destroy();
 }
+echo "</div>
+					</section>";
 block_print_copyright();
 echo "    </div>";
 block_print_scripts(PREAMBLE);
@@ -203,58 +193,156 @@ if (isset($_GET['week'])) {
 echo "</script>";
 echo "<script>
 
-var tables = document.getElementsByTagName('table');
+    var tables = document.getElementsByTagName('table');
 
-for (let i = 0; i < tables.length; i++){
-    let table = tables[i];
-function normalizeTable() {
-    var trs = table.getElementsByTagName('tr'), 
-        len = trs.length, max = 0, td;
-    // first we search for the longest table row in terms of # of children 
-    for (var i = len; i--;) {
-        if (trs[i].children.length > max) 
-            max = trs[i].children.length;
-    }
-    // now we can fill the other rows
-    for (var j = len; j--;) {
-        while (trs[j].children.length < max) {
-            td = document.createElement('td');
-            trs[j].appendChild(td);
+    for (let i = 0; i < tables.length; i++) {
+        let table = tables[i];
+
+        function normalizeTable() {
+            var trs = table.getElementsByTagName('tr'),
+                len = trs.length, max = 0, td;
+            // first we search for the longest table row in terms of # of children 
+            for (var i = len; i--;) {
+                if (trs[i].children.length > max)
+                    max = trs[i].children.length;
+            }
+            // now we can fill the other rows
+            for (var j = len; j--;) {
+                while (trs[j].children.length < max) {
+                    td = document.createElement('td');
+                    trs[j].appendChild(td);
+                }
+            }
         }
+
+        normalizeTable();
     }
-}
-normalizeTable();
-}
 
-    
 
-    $('.nav-link.table').click(function() {                            
-        var elementId = $(this).attr('id');                      
-        console.log(elementId+' selected.');                     
-                                                                 
-        $('.nav-link.table').removeClass('active');                    
-        $('#'+elementId).addClass('active');                     
-                                                                 
-        $('div.table').fadeOut(350);                                
-        $('#'+elementId+'T').delay(349).fadeIn(350)           
-    });                                                          
-                                                             
-    $('.nav-link.table').css('font-size','medium');
-    
-    $('td').css('font-size','x-small');
-    $('td').css('padding','5px');
-    
-    $('.nav-link.pool').click(function() {
-           $('div.table').slideUp(350);
-           $('.nav-link.table').removeClass('active');                    
-           $('#WD0').addClass('active');   
+    $('.nav-link.table').click(function () {
+        var elementId = $(this).attr('id');
+        console.log(elementId + ' selected.');
+
+        $('.nav-link.table').removeClass('active');
+        $('#' + elementId).addClass('active');
+
+        $('div.table').fadeOut(350);
+        $('#' + elementId + 'T').delay(349).fadeIn(350)
     });
-    
-    $(document).ready(function() {
-        $('#WD0T').slideDown(350); 
+
+    $('.nav-link.table').css('font-size', 'medium');
+
+    $('td').css('font-size', 'x-small');
+    $('td').css('padding', '5px');
+
+    $('.nav-link.pool').click(function () {
+        $('div.table').slideUp(350);
+        $('.nav-link.table').removeClass('active');
+        $('#WD0').addClass('active');
     });
-    
-  
+
+    $(document).ready(function () {
+        $('#WD0T').slideDown(350);
+        $('#selectedHours').text('0 heures');
+    });
+
+    $('input').click(function () {
+        let elementId = $(this).attr('id');
+        $('.list-group').slideUp(350);
+        $('.list-group-item.list-group-item-action.active').removeClass('active');
+        $('.list-group.' + elementId).delay(349).slideDown(350);
+    });
+
+    $('.list-group-item.list-group-item-action').click(function () {
+
+        $('.list-group-item.list-group-item-action.active').removeClass('active');
+        $(this).addClass('active');
+        var userID = $('.list-group-item.list-group-item-action.active').attr('id');
+        $('.shift.selected').css('background', 'LightGray');
+        $('.' + userID).css('background', '#99FFFF');
+        let hours = 0;
+        $('.' + userID).each(function () {
+            hours += parseInt($(this).attr('rowspan'));
+            if (hours === 0) $('#selectedHours').text('0 heures');
+            $('#selectedHours').text((hours / 12) + ' heures');
+        });
+    });
+    $('.shift.selected').css('background', 'LightGray');
+    $('td.shift').click(function () {
+        var userID = $('.list-group-item.list-group-item-action.active').attr('id');
+        var elementId = $(this).attr('id');
+        let hoursString = '';
+        $(this).removeClass();
+        $(this).addClass('shift');
+        $(this).addClass(userID);
+        if (userID !== undefined){ 
+            $(this).addClass('selected');
+            $('#hiddenInputs').append('<input type=\'hidden\' name=\'shift[]\' value=\''+elementId+'\'/><input type=\'hidden\' name=\'user[]\' value=\''+userID.substring(4)+'\'/>');
+            console.log('Added '+ '<input type=\'hidden\' name=\'shift[]\' value=\''+elementId+'\'/><input type=\'hidden\' name=\'user[]\' value=\''+userID.substring(4)+'\'/>')
+        }
+        console.log('Shift ' + elementId + ' assigned to ' + userID);
+        $('.shift.selected').css('background', 'LightGray');
+        $('.' + userID).css('background', '#FF99FF');
+        
+        let hours = 0;
+        let lowest = new Date('1970-1-1 23:59');
+        let highest = new Date('1970-1-1 00:00');
+        
+        $('table').each(function () {
+            let tableId = $(this).attr('id');
+
+            let start = new Date();
+            let end = new Date();
+
+            $('#' + tableId + ' .' + userID).each(function () {
+
+                start = new Date('1970-1-1 ' + $(this).data('start'));
+                //console.log(start);
+                end = new Date('1970-1-1 ' + $(this).data('end'));
+                //console.log(end);
+
+
+                if (start < lowest) lowest = start;
+                if (end > highest) highest = end;
+
+                //$('.shift[class*=\' end\']\"').class();
+
+                $('#hiddenSave').slideDown();
+
+                //Add the shift to the list to save
+
+            });
+
+
+            hours = ((highest - lowest) / 1000 / 60 / 60);
+
+            //console.log(lowest +'-'+highest+' | '+hours+'h');
+
+            let totalMinutes = (hours * 60);
+
+            let trueHours = Math.floor(totalMinutes / 60);
+            let minutes = Math.floor(totalMinutes % 60);
+
+            
+            if (hours > 0) {
+                
+                console.log($(this).attr('id'));
+                console.log(hoursString);
+                
+                hoursString +='<li>'+tableId+ ': '+ trueHours + ' heures ';    
+            if (minutes !== 0) hoursString += minutes + ' minutes';
+                hoursString +='</li>';
+
+            }
+            lowest = new Date('1970-1-1 23:59');
+            highest = new Date('1970-1-1 00:00');
+        });
+        //TODO: Change the way total time is calculated
+
+        $('#selectedHours').html(hoursString);
+    });
+
+
 </script>";
 echo "	</body>";
 echo "</html>";
