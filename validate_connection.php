@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }else{
         echo "count" . $count;
-        $error = utf8_encode("NIE invalide$count");
+        $error = utf8_encode("NIE invalsadide$count");
         header("Location: login.php?error=$error");
     }
 
