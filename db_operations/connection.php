@@ -1,11 +1,10 @@
 <?php
 //UChNLJEjh23vrjWr
-/*
+
 define('DB_HOST', 'localhost');
 define('DB_USERNAME', 'regular_user');
 define('DB_PASSWORD', 'UChNLJEjh23vrjWr');
 define('DB_DATABASE', 'brossard_intranet');
-*/
 
 
 $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
