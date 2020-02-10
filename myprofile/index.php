@@ -20,6 +20,8 @@ if (isset($_SESSION['user_id'])) {
 
         echo "<div class=\"row gtr-uniform\" style='font-size: small'>";
 
+        if(isset($_GET['error'])) echo "<h3 style='color: rebeccapurple'>Une erreure s'est produite: ".$_GET['error']."</h3>";
+
         echo "<div class=\"col-12\"></span><div class=\"box\">";
 
         echo "<h4>Ma fiche Personnelle</h4>";
@@ -37,13 +39,11 @@ if (isset($_SESSION['user_id'])) {
         echo "<td>Date de Naissance: </td><td colspan='2'><span>".$user["user_dob"]."</span></td>";
         echo "</tr>";
         echo "<tr>";
-        echo "<td>Mot de Passe: </td><td><span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></td><td><ul class=\"actions\"><li><input id='currentPassword' type='password' style='display: none'></li><li><input id='password' type='password' style='display: none'></li><li><input id='passwordConf' type='password' style='display: none'></li><li><button id='pass'>Modifier</button></li></ul></td>";
+        echo "<td>Mot de Passe: </td><td><span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></td><td><form action='change_password.php' method='post'><ul class=\"actions\"><li><input id='currentPassword' name='currentPassword' type='password' style='display: none' required></li><li><input id='password' type='password' name='password' style='display: none' required></li><li><input id='passwordConf' type='password' style='display: none' required></li><li><input class ='button' type='button' id='pass' value='Modifier'></li></ul></form></td>";
         echo "</tr>";
         echo "</table>";
 
         echo "</div></div>";
-
-
 
         echo "</div>";
 
@@ -75,13 +75,32 @@ $('.button').click(function() {
     
     case 'pass':
         $('#currentPassword').toggle('slide');
-        $('#password').toggle('slide');
+        $('#password').toggle('slide', function() {
+            $('#'+elementId).val('sauvegarder');
+        //$('#'+elementId).add('sauvegarder');
+        $('#'+elementId).attr('id', 'changePass');
+        $('#changePass').attr('type','submit');
+        $('#changePass').prop('disabled', true);
+        
+        });
         $('#passwordConf').toggle('slide');
-        $('#'+elementId).text('sauvegarder');
-        $('#'+elementId).add('sauvegarder');
-        $('#'+elementId).attr('id', 'savePassword');
+        
     break;
   }
+});
+
+$('#passwordConf').on('input',function(){
+    let confirmationpass = $(this).val();
+    console.log(confirmationpass);
+    let newPass = $('#password').val();
+    console.log(newPass);
+    if (confirmationpass == newPass){
+        console.log('passwords match');
+        $('#changePass').prop('disabled', false);
+    }else {
+        console.log('passwords don\'t match');
+        $('#changePass').prop('disabled', true);
+    }
 });
 
 </script>";

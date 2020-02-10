@@ -9,7 +9,7 @@ $message = "
 <title>TEST email from ILVO</title>
 </head>
 <body>
-<h1>THIS IS A TEST EMAIL FROM ILVO ?</h1>
+<h1>THIS IS A TEST EMAIL FROM ILVO</h1>
 <p>This email contains HTML Tags!</p>
 <table>
 <tr>
@@ -30,7 +30,7 @@ $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 // More headers
-$headers .= 'From: ILVO Brossard <ilvo@remijonathan.com>' . "\r\n";
+$headers .= 'From: ILVO Brossard <noreply@ilvo.ca>' . "\r\n";
 
 mail($to, $subject, $message, $headers) or die();
 
