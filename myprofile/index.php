@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id'])) {
         echo "<td>Nom Complet: </td><td colspan='2'><span>".$user["user_fname"]." ".$user["user_lname"]."</span></td>";
         echo "</tr>";
         echo "<tr>";
-        echo "<td>Courriel: </td><td><span>" . $user["email"] . "</span></td><td><ul class=\"actions\"><li><input id='email' type='email' style='display: none; font-size: xx-small'></li><li><button id='mail'>Modifier</button></li></ul></td>";
+        echo "<td>Courriel: </td><td><span>" . $user["email"] . "</span></td><td><form action='change_email.php' method='post'><ul class=\"actions\"><li><input id='email' type='email' name='email' style='display: none; font-size: xx-small' required></li><li><input class ='button' type='button' id='mail' value='Modifier'></li></ul></form></td>";
         echo "</tr>";
         echo "<tr>";
         echo "<td>Date de Naissance: </td><td colspan='2'><span>".$user["user_dob"]."</span></td>";
@@ -59,15 +59,18 @@ block_print_copyright();
 echo "    </div>";
 block_print_scripts(PREAMBLE);
 echo "<script>
-$('button').click(function() {
+$('.button').click(function() {
   let elementId = $(this).attr('id');
   
   switch (elementId) {
     case 'mail':
-        $('#email').toggle('slide');
-        $('#'+elementId).text('sauvegarder');
-        $('#'+elementId).add('sauvegarder');
+        $('#email').toggle('slide',function() {
+            $('#'+elementId).val('sauvegarder');
+        //$('#'+elementId).add('sauvegarder');
         $('#'+elementId).attr('id', 'saveEmail');
+        $('#saveEmail').attr('type','submit');
+        });
+        
     break;
     
     case 'pass':

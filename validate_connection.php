@@ -22,6 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if($count == 1){
         if(password_verify($mypassword,$active_passphrase)){
             $_SESSION['user_id'] = $myusername;
+            $_SESSION['password'] = $mypassword;
             if (substr($currentUrl."",-9) == 'login.php')
             header('Location: news_feed.php');
 
@@ -32,8 +33,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: login.php?error=$error");
         }
     }else{
-        echo "count" . $count;
-        $error = utf8_encode("NIE invalsadide$count");
+        //echo "count" . $count;
+        $error = utf8_encode("NIE invalide $count");
         header("Location: login.php?error=$error");
     }
 
