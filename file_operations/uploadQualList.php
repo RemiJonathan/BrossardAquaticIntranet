@@ -42,9 +42,14 @@ if ($uploadOk == 0) {
 } else {
     $newName = $target_dir . 'list_qual.csv';
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $newName)) {
-        $message =  "<p>Le fichier ". basename( $_FILES["fileToUpload"]["name"]). " a &eacute;t&eacute; charg&eacute; avec succ&egrave;s.</p>";
-        $content .=  basename($_FILES["fileToUpload"]["name"]);
-        $content .=  $message .'<br><a href="document_update.php">Retour</a>';
+        $message = "";
+        $content .= "<br>
+<form action='db_update_quals.php' id='updateQual' method='post' enctype='multipart/form-data'>
+    <h5>Mettre &agrave; jour les qualifications des employ&eacute;s</h5>
+
+<input type=\"submit\" value=\"Mettre &agrave; jour\" name=\"submit\">
+</form>";
+        $content .= $message . '<a href="document_update.php">Annuler</a>';
 
     } else {
         $content .=  "Sorry, there was an error uploading your file.";

@@ -42,9 +42,13 @@ if ($uploadOk == 0) {
 } else {
     $newName = $target_dir . 'list_emp.csv';
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $newName)) {
-        $message =  "<p>Le fichier ". basename( $_FILES["fileToUpload"]["name"]). " a &eacute;t&eacute; charg&eacute; avec succ&egrave;s.</p>";
-        $content .=  basename($_FILES["fileToUpload"]["name"]);
-        $content .=  $message .'<br><a href="document_update.php">Retour</a>';
+        $message = "";
+        $content .= "<form action='db_update_emps.php' id='updateUser' method='post' enctype='multipart/form-data'>
+    <h5>Mettre &agrave; jour la base de donn&eacute;es des employ&eacute;s</h5>
+
+<input type=\"submit\" value=\"Mettre &agrave; jour\" name=\"submit\">
+</form> ";
+        $content .= $message . '<a href="document_update.php">Retour</a>';
 
     } else {
         $content .=  "Sorry, there was an error uploading your file.";
