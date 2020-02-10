@@ -60,6 +60,15 @@ function getQual($db, $qual_id)
     return $current;
 }
 
+function getUserQual($db, $user_id, $qual_id)
+{
+    $userQual = "";
+    $result = $db->query("SELECT * FROM qualified_user WHERE user_id = $user_id AND qualification_id = $qual_id");
+    $userQual = mysqli_fetch_assoc($result);
+
+    return $userQual;
+}
+
 function getEmpNumsArray($db)
 {
     $empArray = getEmpArray($db);
