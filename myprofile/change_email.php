@@ -1,14 +1,16 @@
 <?php
-include ("db_operations/connection.php");
+define('PREAMBLE', '../');
+include (PREAMBLE."db_operations/connection.php");
 session_start();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // username and password sent from form
 
-    $myusername = mysqli_real_escape_string($db,$_POST['username']);
-    $mypassword = mysqli_real_escape_string($db,$_POST['password']);
-    $currentUrl = $_POST['currentUrl'];
+    $myusername = mysqli_real_escape_string($db,$_SESSION['user_id']);
+    $mypassword = mysqli_real_escape_string($db,$_SESSION['password']);
+
+
 
     $sql = "SELECT user_id, passphrase FROM user WHERE user_id = '$myusername'";
 
@@ -21,15 +23,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if($count == 1) {
         if (password_verify($mypassword, $active_passphrase)) {
-            $_SESSION['user_id'] = $myusername;
-            $_SESSION['password'] = $mypassword;
+
+            $email = mysqli_real_escape_string($db, $_POST['email']);
+            $db->query("UPDATE user SET email = '$email' WHERE user_id = '$myusername';");
 
 
 
-            if (substr($currentUrl . "", -9) == 'login.php')
-                header('Location: news_feed.php');
-
-            else header('Location: ' . $currentUrl);
+            header('Location: index.php');
         }
     }
 }

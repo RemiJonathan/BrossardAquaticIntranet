@@ -6,8 +6,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // username and password sent from form
 
-    $myusername = mysqli_real_escape_string($db,$_POST['username']);
-    $mypassword = mysqli_real_escape_string($db,$_POST['password']);
+    $myusername = mysqli_real_escape_string($db,$_SESSION['user_id']);
+    $mypassword = mysqli_real_escape_string($db,$_SESSION['password']);
+    $
     $currentUrl = $_POST['currentUrl'];
 
     $sql = "SELECT user_id, passphrase FROM user WHERE user_id = '$myusername'";
