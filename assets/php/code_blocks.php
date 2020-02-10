@@ -89,9 +89,9 @@ function block_print_banner()
     <!-- Banner -->
 					<section id=\"banner\">
 						<div class=\"inner\">
-							<h1>INTRANET DU SECTEUR AQUATIQUE DE BROSSARD</h1>
+							<h1>Ilvo | Secteur Aquatique</h1>
 							<div class=\"content\">
-								<p>Bienvenue sur la page d'accueil de l'intranet, pour continuer appuyer sur le boutton connexion.</p>
+								<p>Bienvenue sur la page d'accueil d'Ilvo. Pour continuer, appuyez sur Connexion.</p>
 								<ul class=\"actions special\">
 									<li><a class=\"button large next\" href=\"login.php\">Connexion</a></li>
 								</ul>
