@@ -19,7 +19,7 @@ function block_print_document_header($title, $preamble)
 		td{
   display:block;
   width:auto;
-margin-bottom:10px;
+padding-bottom:10px;
 }
 
 @media only screen and (min-width: 70em) {
@@ -27,6 +27,8 @@ margin-bottom:10px;
     display:table-cell;
     margin-bottom:0px;
   }
+  
+  
 }
 </style>
 	</head>

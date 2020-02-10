@@ -57,18 +57,19 @@ if (isset($_POST['sch_id'])) {
         $content .= "
         
   
-        <div class='col-12' >
+        <div class='' >
         <form action='db_insert_avails.php' method='post'>
         <input type='hidden' name='sch_id' value=" . $_POST['sch_id'] . ">
         <input type='hidden' name='user_id' value=" . $_SESSION['user_id'] . ">
-        <div class='col-6' style='float:left'><h2>SURVEILLANCE</h2>
+        <div class='container row'>
+        <div class='col-12 col-md-6'><h2>SURVEILLANCE</h2>
         
         <table class='table-striped table-bordered'>
-        <tr>
+        <!--<tr>
         <th style='font-size: 110%'>Jour</th>
         <th style='font-size: 110%'>Heures</th>
         <th style='font-size: 110%'>Qualif. Requise</th>
-        <th style='font-size: 110%'>Cocher</th></tr>";
+        <th style='font-size: 110%'>Cocher</th></tr>-->";
 
         foreach ($availBlocks as $block) {
             if ($block['category'] == "Surveillance") {
@@ -272,14 +273,14 @@ if (isset($_POST['sch_id'])) {
 
         $content .= "</div>";
         $content .= "
-        <div class='col-6' style='float:right'><h2>Enseignement</h2>
+        <div class='col-12 col-md-6'><h2>Enseignement</h2>
 
         <table class='table-striped table-bordered'>
-        <tr>
+        <!--<tr>
         <th style='font-size: 110%'>Jour</th>
         <th style='font-size: 110%'>Heures</th>
         <th style='font-size: 110%'>Qualif. Requise</th>
-        <th style='font-size: 110%'>Cocher</th></tr>";
+        <th style='font-size: 110%'>Cocher</th></tr>-->";
 
         foreach ($availBlocks as $block) {
             if ($block['category'] == "Enseignement") {
@@ -299,7 +300,7 @@ if (isset($_POST['sch_id'])) {
         $content .= "</table></div><br>
 <br><br>
 <input type='submit' style='width:100%' value='Envoyer'>
-
+</div>
 </form></div>";
 
 
