@@ -9,6 +9,7 @@
     <file url="file://$PROJECT_DIR$/file_operations/uploads/list_emp.csv" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/schedule_operations/createSchedule.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/schedule_operations/db_update_shifts.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/templates/template.php" charset="UTF-8" />
     <file url="PROJECT" charset="windows-1252" />
   </component>
 </project>

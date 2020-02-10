@@ -67,7 +67,7 @@ function block_print_nav($tabs)
 
     } else {
         //todo: add all disconnected tabs
-
+        $tabs = "<li><a href=\"" . PREAMBLE . "login.php\">Connexion</a></li>";
     }
     echo "
     <!-- Nav -->
