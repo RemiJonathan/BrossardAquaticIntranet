@@ -11,7 +11,7 @@ block_print_header("", PREAMBLE);
 session_start();
 if(isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    block_print_nav("<li><a href='logout.php'>D&eacute;connexion</a></li>");
+    block_print_nav("");
     $content = "";
     $get_user_data_sql = "SELECT * FROM user WHERE user_id = '".$user_id."'";
     $get_user_data_res = $db->query($get_user_data_sql);

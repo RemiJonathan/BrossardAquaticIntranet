@@ -36,34 +36,89 @@ function updateSession($db, $sch_id, $sch_start_date, $sch_end_date, $title)
 
 }
 
-function getQualArray($db){
+function getQualArray($db)
+{
     $qualArray = array();
     $result = $db->query("SELECT * FROM qualification");
     while ($row = mysqli_fetch_assoc($result)) {
-        array_push($qualArray,$row);
+        array_push($qualArray, $row);
     }
-    
+
     return $qualArray;
 }
 
-function insertNewRegUser($db, $id, $pwd, $fname, $lname){
+function getQual($db, $qual_id)
+{
+    $current = "";
+
+    $qualArray = getQualArray($db);
+    foreach ($qualArray as $qual) {
+        if ($qual['qualification_id'] == $qual_id) {
+            $current = $qual;
+        }
+    }
+    return $current;
+}
+
+function getEmpNumsArray($db)
+{
+    $empArray = getEmpArray($db);
+    $empNumArray = array();
+
+    foreach ($empArray as $emp) {
+        $empNumArray[] = $emp['user_id'];
+    }
+
+    return $empNumArray;
+}
+
+
+function getEmpArray($db)
+{
+    $empArray = array();
+    $result = $db->query("SELECT * FROM user");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($empArray, $row);
+    }
+
+    return $empArray;
+}
+
+function updateUser($db, $id, $pwd, $fname, $lname, $email)
+{
 
     $fname = trim($fname);
     $lname = trim($lname);
-   $stmt = $db -> prepare("INSERT INTO user (user_id, passphrase, user_fname, user_lname) VALUES (?,?,?,?)
-");
-    $stmt->bind_param("isss", $id, $pwd, $fname, $lname);
+    $email = trim($email);
+    $stmt = $db->prepare("UPDATE user SET  passphrase = ?, user_fname = ?, user_lname = ?, email = ? WHERE user_id = ?");
+    $stmt->bind_param("ssssi", $pwd, $fname, $lname, $email, $id);
 
-   $stmt->execute();
+    $stmt->execute();
 
 }
+
+function insertNewRegUser($db, $id, $pwd, $fname, $lname, $email)
+{
+
+    $fname = trim($fname);
+    $lname = trim($lname);
+    $email = trim($email);
+    $stmt = $db->prepare("INSERT INTO user (user_id, passphrase, user_fname, user_lname, email) VALUES (?,?,?,?,?)
+");
+    $stmt->bind_param("issss", $id, $pwd, $fname, $lname, $email);
+
+    $stmt->execute();
+
+}
+
 //insert into qualified_user values  ('800148','1',null,'2008-7-04','test1','test2');
-function insertNewSNQual($db, $user_id,  $qual_expiry, $requalification, $requalification_note){
-    $qualification_id="1";
-    $qual_emitted=null;
+function insertNewSNQual($db, $user_id, $qual_expiry, $requalification, $requalification_note)
+{
+    $qualification_id = "1";
+    $qual_emitted = null;
 
 
-    $stmt = $db -> prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note, notes) VALUES (?,?,?,?,?,?)");
+    $stmt = $db->prepare("INSERT INTO qualified_user (user_id, qualification_id, qual_emitted, qual_expiry,requalification_note, notes) VALUES (?,?,?,?,?,?)");
 
 
     $stmt->bind_param("iissss", $user_id, $qualification_id, $qual_emitted, $qual_expiry, $requalification, $requalification_note);
@@ -305,6 +360,155 @@ function insertSpecAvailBlocks($db, $sch_id, $start_date, $end_date, $start_time
     $stmt->execute();
 }
 
+function getAvailInstructions($db)
+{
+    $instrucArray = array();
+    $result = $db->query("SELECT * FROM availability_instructions");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($instrucArray, $row);
+    }
+
+    return $instrucArray;
+}
+
+function getUserAvailabilities($db, $user_id, $sch_id)
+{
+    $blocksArray = array();
+    $result = $db->query("SELECT * FROM availabilities WHERE user_id = $user_id AND sch_id = $sch_id");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($blocksArray, $row);
+    }
+
+    return $blocksArray;
+}
+
+function getSpecUserAvailabilities($db, $user_id, $sch_id)
+{
+    $blocksArray = array();
+    $result = $db->query("SELECT * FROM spec_availabilities WHERE user_id = $user_id AND sch_id = $sch_id");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($blocksArray, $row);
+    }
+
+    return $blocksArray;
+}
+
+function getAvailBlocks($db)
+{
+    $blocksArray = array();
+    $result = $db->query("SELECT * FROM availability_blocks");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($blocksArray, $row);
+    }
+
+    return $blocksArray;
+}
+
+function getAvailBlock($db, $block_id)
+{
+    $current = "";
+    $blockArray = getAvailBlocks($db);
+    foreach ($blockArray as $block) {
+        if ($block_id == $block['block_id']) {
+            $current = $block;
+        }
+    }
+    return $current;
+}
+
+
+function getSpecAvailBlocks($db)
+{
+    $blocksArray = array();
+    $result = $db->query("SELECT * FROM spec_availability_blocks");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($blocksArray, $row);
+    }
+
+    return $blocksArray;
+}
+
+function getSpecAvailBlock($db, $block_id)
+{
+    $current = "";
+    $blockArray = getSpecAvailBlocks($db);
+    foreach ($blockArray as $block) {
+        if ($block_id == $block['block_id']) {
+            $current = $block;
+        }
+    }
+    return $current;
+}
+
+
+function getSchedules($db)
+{
+    $scheduleArray = array();
+    $result = $db->query("SELECT * FROM schedule");
+    while ($row = mysqli_fetch_assoc($result)) {
+        array_push($scheduleArray, $row);
+    }
+
+    return $scheduleArray;
+}
+
+function getSchedule($db, $sch_id)
+{
+    $current = "";
+    $scheduleArray = getSchedules($db);
+    foreach ($scheduleArray as $schedule) {
+        if ($sch_id == $schedule['sch_id']) {
+            $current = $schedule;
+        }
+    }
+    return $current;
+}
+
+function deleteUserSemAvails($db, $sch_id, $user_id)
+{
+    $db->query("DELETE FROM user_semester_avail WHERE sch_id = $sch_id AND user_id = $user_id");
+}
+
+function insertUserSemAvails($db, $user_id, $sch_id, $date_submitted, $avail_type, $comments, $max_hours)
+{
+
+
+    $stmt = $db->prepare("INSERT INTO user_semester_avail (user_id, sch_id, date_submitted, avail_type, comments, max_hours) VALUES (?,?,?,?,?,?)
+");
+    $stmt->bind_param("iisssi", $user_id, $sch_id, $date_submitted, $avail_type, $comments, $max_hours);
+
+    $stmt->execute();
+}
+
+function deleteUserBlockAvails($db, $sch_id, $user_id)
+{
+    $db->query("DELETE FROM availabilities WHERE sch_id = $sch_id AND user_id = $user_id");
+}
+
+function insertUserBlockAvails($db, $block_id, $user_id, $sch_id)
+{
+    $stmt = $db->prepare("INSERT INTO availabilities (block_id, user_id, sch_id) VALUES (?,?,?)
+
+");
+    $stmt->bind_param("iii", $block_id, $user_id, $sch_id);
+
+    $stmt->execute();
+}
+
+function deleteSpecUserBlockAvails($db, $sch_id, $user_id)
+{
+    $db->query("DELETE FROM spec_availabilities WHERE sch_id = $sch_id AND user_id = $user_id");
+}
+
+function insertSpecUserBlockAvails($db, $block_id, $user_id, $sch_id)
+{
+    $stmt = $db->prepare("INSERT INTO spec_availabilities (block_id, user_id, sch_id) VALUES (?,?,?)
+
+");
+    $stmt->bind_param("iii", $block_id, $user_id, $sch_id);
+
+    $stmt->execute();
+}
 
 
 

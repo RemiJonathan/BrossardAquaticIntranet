@@ -15,6 +15,20 @@ function block_print_document_header($title, $preamble)
 		<link href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\">
 		<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
 		<link rel=\"stylesheet\" href=\"" . $preamble . "assets/css/main.css\" />
+		<style>
+		td{
+  display:block;
+  width:auto;
+margin-bottom:10px;
+}
+
+@media only screen and (min-width: 70em) {
+  td{
+    display:table-cell;
+    margin-bottom:0px;
+  }
+}
+</style>
 	</head>
     ";
 }
@@ -40,7 +54,7 @@ function block_print_header($class, $preamble)
 function block_print_nav($tabs)
 {
     $user_id = -1;
-    $db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
@@ -51,11 +65,14 @@ function block_print_nav($tabs)
 
     if (check_user_permissions($user_id, 1)) {
         //Todo: add all user tabs myprofile
-        $tabs = "<li><a href='" . PREAMBLE . "schedule.php'>Mon horaire</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/availability_operations/user_form.php'>Disponibilit&eacute;s</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "myprofile/'>Mon profil</a></li>" . $tabs;
+
 
     } else if (check_user_permissions($user_id, 2)) {
         //Todo: add all admin tabs
+        $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "qualification/'>Gestion de qualifications</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "file_operations/document_update.php'>base de donn&eacute;es</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "shift/'>Gestion de quart</a></li>" . $tabs;
@@ -64,7 +81,7 @@ function block_print_nav($tabs)
 
     } else {
         //todo: add all disconnected tabs
-
+        $tabs = "<li><a href=\"" . PREAMBLE . "login.php\">Connexion</a></li>";
     }
     echo "
     <!-- Nav -->
@@ -218,10 +235,11 @@ function block_print_scripts($preamble)
  */
 function check_user_permissions($user_id, $permission_level)
 {
-    $db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-    $check_permission_sql = $db->query("SELECT role_id FROM user WHERE user.user_id = '$user_id';", MYSQLI_ASSOC);
 
-    $user = $check_permission_sql->fetch_array();
+    $db = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $check_permission_sql = mysqli_query($db, "SELECT role_id FROM user WHERE user.user_id = '$user_id';", MYSQLI_ASSOC);
+    $user = mysqli_fetch_array($check_permission_sql, MYSQLI_ASSOC);
+
 
     return $user['role_id'] == $permission_level;
 }
