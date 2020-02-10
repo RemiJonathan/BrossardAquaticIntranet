@@ -267,13 +267,13 @@ function printWeekDayTable($selectedWeekDay, $schedule, $db, $location)
 
     switch ($location) {
         case 'LT':
-            $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location REGEXP 'LT|LT-SALLE|PIS-LT' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
+            $this_weeks_shifts_sql = "SELECT * FROM shift LEFT JOIN user on assigned_user = user_id WHERE location REGEXP 'LT|LT-SALLE|PIS-LT' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
             break;
         case 'AB':
-            $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location REGEXP 'AB|AB-SALLE|PIS-AB' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
+            $this_weeks_shifts_sql = "SELECT * FROM shift LEFT JOIN user on assigned_user = user_id WHERE location REGEXP 'AB|AB-SALLE|PIS-AB' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
             break;
         default:
-            $this_weeks_shifts_sql = "SELECT * FROM shift WHERE location = '$location' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
+            $this_weeks_shifts_sql = "SELECT * FROM shift LEFT JOIN user on assigned_user = user_id shift WHERE location = '$location' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
             break;
 
     }
@@ -299,8 +299,11 @@ function printWeekDayTable($selectedWeekDay, $schedule, $db, $location)
 
         $duration = round(abs($end_time - $start_time) / 60, 2);
         $shift_array[$index]['html'] = '<td class="shift';
-        if (!is_null($shift['assigned_user'])) $shift_array[$index]['html'] .= ' user' . $shift['assigned_user'] . ' selected';
-        $shift_array[$index]['html'] .= '" rowspan="' . (($duration / 5)) . '" data-start="'.$shift['start_time'].'" data-end="'.$shift['end_time'].'" id="'.$shift['shift_id'].'">' . $shift['description'];
+        if (!is_null($shift['assigned_user'])) {
+            $shift_array[$index]['html'] .= ' user' . $shift['assigned_user'] . ' selected';
+            $username = '<br />'.$shift['user_fname'].' '.$shift['user_lname'];
+        }else $username='';
+        $shift_array[$index]['html'] .= '" rowspan="' . (($duration / 5)) . '" data-start="' . $shift['start_time'] . '" data-end="' . $shift['end_time'] . '" id="' . $shift['shift_id'] . '">' . $shift['description'].$username;
 
         //if (!is_null($shift['assigned_user'])) echo '<br />' . $shift['assigned_user'];
 
