@@ -2,6 +2,7 @@
 define('PREAMBLE', '../');
 include (PREAMBLE."assets/php/code_blocks.php");
 include (PREAMBLE."db_operations/connection.php");
+include (PREAMBLE."db_operations/db_functions.php");
 
 
 
@@ -30,11 +31,25 @@ if(isset($_SESSION['user_id'])) {
         //Get all qualifications
         $content .= "<div class=\"col-12\"><label for='req_qual'>Qualification requise</label>";
         $content .= "<select name='required_qual' id='req_qual' required>";
-
+        
         $content .= "<option label='' disabled selected>";
         $all_quals_res = $db->query('SELECT * FROM qualification;');
 
         while ($qual = $all_quals_res->fetch_array()) $content .= '<option value="'.$qual['qualification_id'].'">'.$qual['qual_name'].'</option>';
+
+        $content .= "</select></div>";
+        
+        //get locations
+
+        $content .= "<div class=\"col-12\"><label for='loc'>Endroit</label>";
+        $content .= "<select name='location' id='loc' required>";
+
+        $content .= "<option label='' disabled selected>";
+        $locations = getLocations($db);
+
+        foreach ($locations as $location){
+            $content .= '<option value="'.$location.'">'.$location.'</option>';
+        }
 
         $content .= "</select></div>";
 
