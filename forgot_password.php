@@ -13,12 +13,12 @@ block_print_document_header("Mot de passe oubli&eacute;", '');
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 
-echo "<section class=\"wrapper style2\" id=\"main\"><div class=\"inner\">";
+echo "<section class=\"wrapper style2\" id=\"main\"><div class=\"inner\"><h3>Mot de passe oubli&eacute;</h3>";
 
 if(isset($_POST['user_id'])){
     $user_email = $db->query("SELECT email FROM user WHERE user_id = '".$db->real_escape_string($_POST['user_id'])."';")->fetch_array()['email'];
 
-    if (!is_null($user_email['email'])){
+    if (!is_null($user_email)){
         $mypassword = random_str("8");
 
         //Encrypt password
@@ -57,9 +57,9 @@ if(isset($_POST['user_id'])){
 
         echo "<h3>Le mot de passe a &eacute;t&eacute; envoy&eacute; &agrave; votre addresse : <em>$user_email</em></h3>";
     }echo "<h3>Vous n'avez pas d'addresse courriel au dossier, SVP communiquez avec un superviseur afin de r&eacute;gler la situation.</h3>";
+}else {
+    echo "<form method='post'><div class=\"row gtr-uniform\"><div class=\"col-6 col-12-xsmall\"><input type='number' placeholder='NIE' name='user_id'></div><div class=\"col-12\"><ul class=\"actions\"><li><input type=\"submit\" value=\"R&eacute;inisialiser\" /></li><li><input type=\"reset\" value=\"Recommencer\" /></li></ul></div></div></form>";
 }
-echo "<form method='post'><input type='number' name='user_id'><input type='submit'></form>";
-
 echo "</div></section>";
 session_start();
 block_print_header("", PREAMBLE);
