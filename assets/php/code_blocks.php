@@ -266,7 +266,7 @@ function check_user_permissions($user_id, $permission_level)
 function printWeekDayTable($selectedWeekDay, $schedule, $db, $location)
 {
     $content = "";
-    $content .= "<table id='$selectedWeekDay' style='empty-cells: show; table-layout: fixed; width: 100%;' class=\"alt\">
+    $content .= "<table id='$selectedWeekDay' style='empty-cells: show; table-layout: fixed; width: 100%; display: none;' class=\"alt $location\">
     <tbody>
     <tr><th>$selectedWeekDay</th></tr>
         ";
@@ -282,7 +282,7 @@ function printWeekDayTable($selectedWeekDay, $schedule, $db, $location)
             $this_weeks_shifts_sql = "SELECT * FROM shift LEFT JOIN user on assigned_user = user_id WHERE location REGEXP 'AB|AB-SALLE|PIS-AB' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
             break;
         default:
-            $this_weeks_shifts_sql = "SELECT * FROM shift LEFT JOIN user on assigned_user = user_id shift WHERE location = '$location' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
+            $this_weeks_shifts_sql = "SELECT * FROM shift LEFT JOIN user on assigned_user = user_id WHERE location = '$location' AND schedule_id = '$schedule' AND day = '$selectedWeekDay'";
             break;
 
     }
