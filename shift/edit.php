@@ -2,6 +2,7 @@
 define('PREAMBLE', '../');
 include(PREAMBLE . "assets/php/code_blocks.php");
 include(PREAMBLE . "db_operations/connection.php");
+include(PREAMBLE . "db_operations/db_functions.php");
 
 
 $get_shift_sql = "SELECT * FROM shift WHERE shift_id = '" . $db->real_escape_string($_POST['shift_id']) . "';";
@@ -10,6 +11,7 @@ $get_shift_res = $db->query($get_shift_sql);
 $editing_shift = $get_shift_res->fetch_array();
 
 $required_qual = $db->real_escape_string($editing_shift['required_qual']);
+$curLocation = $db->real_escape_string($editing_shift['location']);
 $start_time = $db->real_escape_string($editing_shift['start_time']);
 $end_time = $db->real_escape_string($editing_shift['end_time']);
 $day = $db->real_escape_string($editing_shift['day']);
@@ -53,6 +55,21 @@ if (isset($_SESSION['user_id'])) {
 
         $content .= "</select></div>";
 
+        $content .= "<div class=\"col-12\"><label for='loc'>Endroit</label>";
+        $content .= "<select name='location' id='loc' required>";
+
+        $content .= "<option label='' disabled selected>";
+        $locations = getLocations($db);
+
+        foreach ($locations as $location){
+            if($curLocation == $location){
+                $content .= '<option selected value="'.$location.'">'.$location.'</option>';
+            }else{
+            $content .= '<option value="'.$location.'">'.$location.'</option>';
+                }
+        }
+
+        $content .= "</select></div>";
 
         $content .= "<div class=\"col-6\"><label>Heure de d&eacute;but</label>";
         $content .= "<input type='time' id='start_time' name='start_time' step='300' value='$start_time' required></div>";
