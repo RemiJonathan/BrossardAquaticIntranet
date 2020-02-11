@@ -224,6 +224,7 @@ $('.nav-link').click(function() {
 $('td').css('font-size','x-small');
     $('td').css('padding','5px');
     
+    $('table').slideDown();
    
 </script>";
 echo "	</body>";
