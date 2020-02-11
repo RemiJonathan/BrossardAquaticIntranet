@@ -279,7 +279,8 @@ echo "<script>
             let expiryDate = $('#'+userID).data(qualID+'-exp');
             if (expiryDate != undefined){
                 let diff = monthDiff(new Date(), new Date(expiryDate.toString()));
-                if (diff<1) $(this).css('background-color','red');
+                if(qualID ==='qual-7') $(this).css('background-color','green');  
+                else if (diff<1) $(this).css('background-color','red');
                 else if (diff<4) $(this).css('background-color','yellow');
                 else if (diff>=4) $(this).css('background-color','green');
             console.log(expiryDate + ' ' + monthDiff(new Date(), new Date(expiryDate.toString())));
@@ -450,6 +451,22 @@ $('td.shift').each(function() {
       
       $(this).append('<br/>'+start+'-'+end);
     });
+
+$('td.shift').click(function() {
+    let userID = $('.list-group-item.list-group-item-action.active').attr('id');
+    let shiftID = $(this).attr('id');
+    let weekDay = $(this).closest('table').attr('id');
+    let i = 0;
+    
+    $('#'+weekDay).each(function() {
+      console.log(i);
+      i++;
+    })
+    
+  $('td.shift.user'+userID).each(function() {
+    
+  });
+});
 </script>";
 echo "	</body>";
 echo "</html>";
