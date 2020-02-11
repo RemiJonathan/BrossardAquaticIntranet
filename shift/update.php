@@ -7,7 +7,14 @@ include(PREAMBLE . "db_operations/connection.php");
 //INSERT INTO shift (required_qual, start_time, end_time, day, description, start_date, end_date)
 if (isset($_POST)) {
     //$ = $_POST[''];
+    session_start();
+    //$ = $_POST[''];
+    if (isset ($_SESSION['current_session_schedule'])){
+        $sch_id = $_SESSION['current_session_schedule'];
+    }
+
     $required_qual = $db->real_escape_string($_POST['required_qual']);
+    $location = $db->real_escape_string($_POST['location']);
     $start_time = $db->real_escape_string($_POST['start_time']);
     $end_time = $db->real_escape_string($_POST['end_time']);
     $day = $db->real_escape_string($_POST['weekday']);
@@ -17,7 +24,7 @@ if (isset($_POST)) {
 
         $description = $db->real_escape_string($_POST['description']);
 
-        $insert_shift_sql = "UPDATE shift SET required_qual = '$required_qual', start_time = '$start_time', end_time = '$end_time', day = '$day', description = '$description', start_date = '$start_date', end_date = '$end_date' WHERE shift_id = '$shift_id'";
+        $insert_shift_sql = "UPDATE shift SET schedule_id = '$sch_id', required_qual = '$required_qual', start_time = '$start_time', end_time = '$end_time', location = '$location', day = '$day', description = '$description', start_date = '$start_date', end_date = '$end_date' WHERE shift_id = '$shift_id'";
 
 
     $db->query($insert_shift_sql) or die('Query Error: '.$db->error.'');
