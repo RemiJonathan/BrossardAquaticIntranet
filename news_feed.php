@@ -17,7 +17,7 @@ if(isset($_SESSION['user_id'])) {
     $get_user_data_res = $db->query($get_user_data_sql);
 
 
-    $notifications='';
+    if (check_user_permissions($user_id,2)) $notifications='<form action=\'reset_all_passwords.php\'><input type=\'submit\' value=\'Envoyer un mot de passe temporaire par email &agrave; chaque utilisateur.\'></form>';
 
     while ($user = $get_user_data_res->fetch_array()){
         //todo: implement user object

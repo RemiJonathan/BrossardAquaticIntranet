@@ -476,12 +476,13 @@ WHERE user_id = '$selected_user'
         $block_catJson = json_encode($block_cat);
 
 
-        echo " data-spec-avail-start='$start_dateJson' data-spec-avail-end='$end_dateJson' data-spec-start-timeJson='$start_timeJson' data-spec-start-end_timeJson='$end_timeJson' data-spec-block-cat='$block_catJson'";
+        echo " data-spec-avail-start='$start_dateJson' data-spec-avail-end='$end_dateJson' data-spec-start-timeJson='$start_timeJson' data-spec-start-end-timeJson='$end_timeJson' data-spec-block-cat='$block_catJson'";
 
+        $user_info_res = $db->query("SELECT * FROM user_semester_avail WHERE user_id = '$selected_user' AND sch_id = '$session'")->fetch_array();
 
+        echo " data-comment='".$user_info_res['comments']."' data-avail='".$user_info_res['avail_type']."' data-max-hours='".$user_info_res['max_hours']."' ";
 
-
-        echo "'>";
+        echo ">";
         //echo $user['user_id']."<br />";
         echo $user['user_fname'] . " " . $user['user_lname'];
         echo "<br /><strong>" . $user['hours'] . "</strong>";

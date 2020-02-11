@@ -70,7 +70,7 @@ if (isset($_SESSION['user_id'])) {
             <a id='WD6' class=\"nav-link table\">Samedi</a>
   
 </nav>
-<div class='box' style='position: sticky; top: 150px;' id='extras'></div>
+<div class='box' style='position: sticky; top: 150px;'><p id='extras' style='font-size: small'>&nbsp;</p></div>
 </div>";
                 /*$currentLocation = $locationArray[5];
                 if (isset($_GET['location'])) {
@@ -490,6 +490,32 @@ $('.list-group-item.list-group-item-action').click(function() {
       });
   }
 });
+</script>";
+echo "<script>
+
+$('.list-group-item.list-group-item-action').click(function() {
+    $('#extras').html(' ');
+    let avail_string = '';
+    
+    avail_string += '<strong>Heures Max:</strong> '+$(this).data('max-hours');
+    avail_string += '<br /><strong>Commentaires:</strong> '+$(this).data('comment');
+    avail_string += '<br /><strong>Type:</strong> '+$(this).data('avail')+'<br />';
+    
+    
+    let startDate = $(this).data('spec-avail-start');
+    let endDate = $(this).data('spec-avail-end');
+    let startTime = $(this).data('spec-start-timejson');
+    let endTime = $(this).data('spec-start-end-timejson');
+    let blockCat = $(this).data('spec-block-cat');
+    for (let i = 0; i<startDate.length; i++){
+        avail_string+= '<strong>'+blockCat[i]+'</strong>: '+ startDate[i];
+        if (endDate[i] !== '0000-00-00') avail_string+= '-' + endDate[i];
+        avail_string += ' '+startTime[i]+'-'+endTime[i]+'<br />';
+    }
+    console.log(avail_string);
+    $('#extras').html(avail_string);
+});
+
 </script>";
 echo "	</body>";
 echo "</html>";

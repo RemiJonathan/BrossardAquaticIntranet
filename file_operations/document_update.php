@@ -93,7 +93,10 @@ $form_data_emp_list = "<form action=\"uploadEmployeeList.php\" id='userForm' met
     <input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\">
     <br><br>
     <input type=\"submit\" value=\"Charger\" name=\"submit\">
-</form><br>";
+    
+</form>
+
+<br>";
 
 $form_data_qual_list = "<form action=\"uploadQualList.php\" id='qualForm' method=\"post\" enctype=\"multipart/form-data\">
 
