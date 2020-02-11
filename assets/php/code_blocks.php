@@ -135,11 +135,12 @@ function block_print_main($content)
 $connection_form = "<h3>Connexion</h3><form action=\"" . PREAMBLE . "validate_connection.php\" method=\"post\">
 												<div class=\"row gtr-uniform\">
 													<div class=\"col-12\">
-														<input id=\"username\" name=\"username\" placeholder=\"Name\" type=\"text\" value=\"\" />
+														<input id=\"username\" name=\"username\" placeholder=\"NIE\" type=\"text\" value=\"\" />
 														
 													</div>
 													<div class=\"col-12\">
-														<input id=\"password\" name=\"password\" placeholder=\"Password\" type=\"password\" value=\"\" />
+														<input id=\"password\" name=\"password\" placeholder=\"Mot de passe\" type=\"password\" value=\"\" />
+														
 													</div><input type='hidden' name='currentUrl' id='currentUrl'>
 													
 													<a href=\"" . PREAMBLE . "forgot_password.php\">Mot de passe oublié?</a>
