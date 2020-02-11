@@ -39,7 +39,7 @@ if (isset($_SESSION['user_id'])) {
         echo "<td>Date de Naissance: </td><td colspan='2'><span>".$user["user_dob"]."</span></td>";
         echo "</tr>";
         echo "<tr>";
-        echo "<td>Mot de Passe: </td><td><span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></td><td><form action='change_password.php' method='post'><ul class=\"actions\"><li><input id='currentPassword' name='currentPassword' type='password' style='display: none' required></li><li><input id='password' type='password' name='password' style='display: none' required></li><li><input id='passwordConf' type='password' style='display: none' required></li><li><input class ='button' type='button' id='pass' value='Modifier'></li></ul></form></td>";
+        echo "<td>Mot de Passe: </td><td><span>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></td><td><form action='change_password.php' method='post'><ul class=\"actions\"><li><input id='currentPassword' name='currentPassword' type='password' style='display: none' placeholder='Ancien mot de passe' required></li><li><input id='password' type='password' name='password' style='display: none' placeholder='Nouveau mot de passe' required></li><li><input id='passwordConf' type='password' style='display: none' placeholder='Nouveau mot de passe' required></li><li><input class ='button' type='button' id='pass' value='Modifier'></li></ul></form></td>";
         echo "</tr>";
         echo "</table>";
 
