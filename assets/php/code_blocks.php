@@ -30,6 +30,14 @@ padding-bottom:10px;
   
   
 }
+
+.qual{
+font-size: small;
+padding: 5px;
+    border: black 1px solid;
+    border-radius: 40px;
+    text-align: center;
+}
 </style>
 	</head>
     ";
@@ -302,9 +310,9 @@ function printWeekDayTable($selectedWeekDay, $schedule, $db, $location)
         $shift_array[$index]['html'] = '<td class="shift';
         if (!is_null($shift['assigned_user'])) {
             $shift_array[$index]['html'] .= ' user' . $shift['assigned_user'] . ' selected';
-            $username = '<br />'.$shift['user_fname'].' '.$shift['user_lname'];
-        }else $username='';
-        $shift_array[$index]['html'] .= '" rowspan="' . (($duration / 5)) . '" data-start="' . $shift['start_time'] . '" data-end="' . $shift['end_time'] . '" id="' . $shift['shift_id'] . '">' . $shift['description'].$username;
+            $username = '<br />' . $shift['user_fname'] . ' ' . $shift['user_lname'];
+        } else $username = '';
+        $shift_array[$index]['html'] .= '" rowspan="' . (($duration / 5)) . '" data-start="' . $shift['start_time'] . '" data-end="' . $shift['end_time'] . '" id="' . $shift['shift_id'] . '">' . $shift['description'] . $username;
 
         //if (!is_null($shift['assigned_user'])) echo '<br />' . $shift['assigned_user'];
 
@@ -374,8 +382,46 @@ function print_seniority_dropdown($seniority_type, $db)
     echo "<ol class=\"list-group $seniority_type\" style='max-height: 250px; overflow-y:scroll; display: none'>";
 
     while ($user = $get_seniorty_res->fetch_array(MYSQLI_ASSOC)) {
-        $id = 'user' . $user['user_id'];
-        echo "<li id='$id' class='list-group-item list-group-item-action' style='font-size: small; '>";
+        $selected_user = $user['user_id'];
+        $id = 'user' . $selected_user;
+        echo "<li id='$id' class='list-group-item list-group-item-action' style='font-size: small;' ";
+
+        $get_user_quals = $db->query("SELECT qualification.qualification_id, qual_name, qual_emitted, qual_expiry, requalification_note, notes
+FROM qualified_user,
+     qualification
+WHERE qualification.qualification_id = qualified_user.qualification_id
+  AND user_id = $selected_user
+UNION
+SELECT qualification.qualification_id,
+       qual_name,
+       NULL AS qual_emitted,
+       NULL AS qual_expiry,
+       NULL AS requalification_note,
+       NULL AS notes
+FROM qualified_user,
+     qualification
+WHERE qualification.qualification_id NOT IN (SELECT qualification.qualification_id
+                                             FROM qualified_user,
+                                                  qualification
+                                             WHERE qualification.qualification_id = qualified_user.qualification_id
+                                               AND user_id = $selected_user)
+ORDER BY qualification_id;");
+
+        while ($qual = $get_user_quals->fetch_array()) {
+            $exp = '';
+            $note = '';
+
+            $id = $qual['qualification_id'];
+            $name = $qual['qual_name'];
+            if (isset($qual['qual_expiry'])) $exp = $qual['qual_expiry'];
+            if (isset($qual['note'])) $note = $qual['note'];
+
+            //echo " data-qual-$id-name='$name'";
+            if (isset($qual['qual_expiry'])) echo " data-qual-$id-exp='$exp'";
+            if (isset($qual['note'])) echo " data-qual-$id-note='$note'";
+        }
+
+        echo "'>";
         //echo $user['user_id']."<br />";
         echo $user['user_fname'] . " " . $user['user_lname'];
         echo "<br /><strong>" . $user['hours'] . "</strong>";

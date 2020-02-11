@@ -139,12 +139,26 @@ if (isset($_SESSION['user_id'])) {
                 echo "<div class='col-3'><div id='lifeguard_block' class=\"box\" style='background: rgba(99, 116, 133, 0.075); border-color: rgba(99, 116, 133, 0.25);position: sticky; top: 150px;'>";
 
                 //Put lifeguRD MANAGEMENT HERE
-                echo "<h5>Sauveteur</h5>";
+                //echo "<h5>Sauveteur</h5>";
 
-                echo "<div class=\"col-12\"><input id='enseignement' name=\"seniority_type\" type=\"radio\"><label for=\"enseignement\">Enseignement</label></div>";
-                echo "<div class=\"col-12\"><input id='surveillance' name=\"seniority_type\" type=\"radio\"><label for=\"surveillance\">Surveillance</label></div>";
+                echo "<div class=\"col-12\"><input id='enseignement' name=\"seniority_type\" type=\"radio\"><label for=\"enseignement\" style='font-size: small'>Enseignement</label></div>";
+                echo "<div class=\"col-12\"><input id='surveillance' name=\"seniority_type\" type=\"radio\"><label for=\"surveillance\" style='font-size: small'>Surveillance</label></div>";
 
                 echo "<div class=\"col-12\"><span id='selectedHours' style='font-size: small'></span></div>";
+
+                //Pastilles
+                echo "<div class=\"col-12 container row\" style='margin: auto'>";
+                    echo "<div class='col-3 qual' id='qual-1'>SN</div>&nbsp;&nbsp;";
+
+                echo "<div class='col-3 qual' id='qual-2'>MSA</div>&nbsp;&nbsp;";
+                echo "<div class='col-3 qual' id='qual-3'>MS</div>&nbsp;&nbsp;";
+                echo "<div class='col-3 qual' id='qual-4'>MSU</div>&nbsp;&nbsp;";
+                echo "<div class='col-3 qual' id='qual-5'>MSN</div>&nbsp;&nbsp;";
+                echo "<div class='col-3 qual' id='qual-6'>ISA</div>&nbsp;&nbsp;";
+                echo "<div class='col-3 qual' id='qual-7'>AQF</div>&nbsp;&nbsp;";
+                echo "<div class='col-3 qual' id='qual-8'>MSA + SN</div>&nbsp;&nbsp;";
+                echo "<div class='col-3 qual' id='qual-9'>AQF + SN</div>";
+                echo "</div>";
 
                 echo "<div class=\"col-12\">";
 
@@ -260,6 +274,20 @@ echo "<script>
         var userID = $('.list-group-item.list-group-item-action.active').attr('id');
         $('.shift.selected').css('background', 'LightGray');
         $('.' + userID).css('background', '#99FFFF');
+        
+        $('.qual').each(function() {
+            let qualID = $(this).attr('id');
+            let expiryDate = $('#'+userID).data(qualID+'-exp');
+            if (expiryDate != undefined){
+                let diff = monthDiff(new Date(), new Date(expiryDate.toString()));
+                if (diff<1) $(this).css('background-color','red');
+                else if (diff<4) $(this).css('background-color','yellow');
+                else if (diff>=4) $(this).css('background-color','green');
+            console.log(expiryDate + ' ' + monthDiff(new Date(), new Date(expiryDate.toString())));
+            }else $(this).css('background-color','#00000000');
+        });
+        
+        
         
         let hours = 0;
         let lowest = new Date('1970-1-1 23:59');
@@ -395,7 +423,10 @@ echo "<script>
         $('#selectedHours').html(hoursString);
     });
 
-
+function monthDiff(dateFrom, dateTo) {
+ return dateTo.getMonth() - dateFrom.getMonth() + 
+   (12 * (dateTo.getFullYear() - dateFrom.getFullYear()))
+}
 </script>";
 echo "	</body>";
 echo "</html>";
