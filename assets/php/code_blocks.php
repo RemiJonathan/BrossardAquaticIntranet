@@ -378,7 +378,7 @@ function printWeekDayTable($selectedWeekDay, $schedule, $db, $location)
  * @param $seniority_type
  * @param $db
  */
-function print_seniority_dropdown($seniority_type, $db)
+function print_seniority_dropdown($seniority_type, $db, $session)
 {
     $get_seniority_sql = "SELECT * FROM seniority LEFT OUTER JOIN user u on seniority.user_id = u.user_id WHERE seniority_type = '$seniority_type' ORDER BY hours DESC, continued_service;";
     $get_seniorty_res = $db->query($get_seniority_sql);
@@ -425,7 +425,7 @@ ORDER BY qualification_id;");
             if (isset($qual['note'])) echo " data-qual-$id-note='$note'";
         }
 
-        $get_user_avails = $db->query("SELECT day, start_time, end_time FROM availabilities LEFT OUTER JOIN availability_blocks ab on availabilities.block_id = ab.block_id WHERE user_id = '$selected_user';");
+        $get_user_avails = $db->query("SELECT day, start_time, end_time FROM availabilities LEFT OUTER JOIN availability_blocks ab on availabilities.block_id = ab.block_id WHERE user_id = '$selected_user' AND availabilities.sch_id = '$session';");
 
         $day = array();
         $start = array();
@@ -445,6 +445,41 @@ ORDER BY qualification_id;");
         $endJson = json_encode($end);
 
         echo " data-avail-day='$dayJson' data-avail-start='$startJson' data-avail-end='$endJson' ";
+//spec avail
+        $get_spec_user_avails = $db->query("SELECT start_date, end_date, start_time, end_time, block_cat
+FROM spec_availabilities
+         LEFT OUTER JOIN spec_availability_blocks sab on spec_availabilities.block_id = sab.block_id
+WHERE user_id = '$selected_user'
+  AND sab.sch_id = '$session';");
+
+        $start_date = array();
+        $end_date = array();
+        $start_time = array();
+        $end_time = array();
+        $block_cat = array();
+
+        $i = 0;
+        while ($spec_avail = $get_spec_user_avails->fetch_array()){
+            //print_r($avail);
+            $start_date[$i] = $spec_avail['start_date'];
+            $end_date[$i] = $spec_avail['end_date'];
+            $start_time[$i] = $spec_avail['start_time'];
+            $end_time[$i] = $spec_avail['end_time'];
+            $block_cat[$i] = $spec_avail['block_cat'];
+            $i++;
+        }
+
+        $start_dateJson = json_encode($start_date);
+        $end_dateJson = json_encode($end_date);
+        $start_timeJson = json_encode($start_time);
+        $end_timeJson = json_encode($end_time);
+        $block_catJson = json_encode($block_cat);
+
+
+        echo " data-spec-avail-start='$start_dateJson' data-spec-avail-end='$end_dateJson' data-spec-start-timeJson='$start_timeJson' data-spec-start-end_timeJson='$end_timeJson' data-spec-block-cat='$block_catJson'";
+
+
+
 
         echo "'>";
         //echo $user['user_id']."<br />";

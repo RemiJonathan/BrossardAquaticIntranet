@@ -60,7 +60,7 @@ if (isset($_SESSION['user_id'])) {
             if (isset($_GET['week'])) {
                 //Table for Schedule
                 echo "<br/><br/><div class='row'><div class='col-2'>
-<nav class=\"nav flex-column nav-pills\" style='position: sticky; top: 150px;'>
+<nav class=\"nav flex-column nav-pills\" >
   <a id='WD0' class=\"nav-link table active\">Dimanche</a>
             <a id='WD1' class=\"nav-link table\">Lundi</a>
             <a id='WD2' class=\"nav-link table\">Mardi</a>
@@ -70,6 +70,7 @@ if (isset($_SESSION['user_id'])) {
             <a id='WD6' class=\"nav-link table\">Samedi</a>
   
 </nav>
+<div class='box' style='position: sticky; top: 150px;' id='extras'></div>
 </div>";
                 /*$currentLocation = $locationArray[5];
                 if (isset($_GET['location'])) {
@@ -162,12 +163,14 @@ if (isset($_SESSION['user_id'])) {
 
                 echo "<div class=\"col-12\">";
 
-                print_seniority_dropdown('surveillance', $db);
-                print_seniority_dropdown('enseignement', $db);
+                print_seniority_dropdown('surveillance', $db, $schedule);
+                print_seniority_dropdown('enseignement', $db, $schedule);
 
                 echo "</div>";
 
                 echo "<br /><div class=\"col-12\"><form action='save_schedule.php' method='post'><div id='hiddenInputs'></div><ul class=\"actions\"><li><input style='display: none' type='submit' id='hiddenSave' value='sauvegarder'></li></ul></form></div></div></div>";
+
+                echo "";
 
                 echo "</div>";
 
