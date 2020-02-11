@@ -458,14 +458,34 @@ $('td.shift').click(function() {
     let weekDay = $(this).closest('table').attr('id');
     let i = 0;
     
-    $('#'+weekDay).each(function() {
-      console.log(i);
-      i++;
-    })
+    let lowest = new Date('1970-1-1 23:59');
+    console.log(lowest);
+    let highest = new Date('1970-1-1 00:00');
+    console.log(highest);
     
-  $('td.shift.user'+userID).each(function() {
-    
-  });
+    $('td.shift.user'+userID).each(function() {
+        console.log($(this).attr('id'));
+        if ($(this).closest('table').attr('id') === weekDay){
+            console.log($(this).attr('id'));
+        }
+    });
+  
+});
+
+$('.list-group-item.list-group-item-action').click(function() {
+    $('td.shift').each(function() { 
+        $(this).removeClass('avail');
+      });
+  let day = $(this).data('avail-day');
+  console.log(day);
+  let start = $(this).data('avail-start');
+  let end = $(this).data('avail-end');
+  
+  for(let i = 0; i < day.length; i++){
+      $('#'+day[i]+' td.shift').each(function() {
+        if (new Date('1970-1-1 '+$(this).data('start'))>= new Date('1970-1-1 '+start[i]) && new Date('1970-1-1 '+$(this).data('end'))<= new Date('1970-1-1 '+end[i])) $(this).addClass('avail');
+      });
+  }
 });
 </script>";
 echo "	</body>";

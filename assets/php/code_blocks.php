@@ -38,6 +38,10 @@ padding: 5px;
     border-radius: 40px;
     text-align: center;
 }
+
+.avail{
+    background-color: #8A2BE2;
+}
 </style>
 	</head>
     ";
@@ -266,7 +270,7 @@ function check_user_permissions($user_id, $permission_level)
 function printWeekDayTable($selectedWeekDay, $schedule, $db, $location)
 {
     $content = "";
-    $content .= "<table id='$selectedWeekDay' style='empty-cells: show; table-layout: fixed; width: 100%; display: none;' class=\"alt $location\">
+    $content .= "<table id='$selectedWeekDay' style='empty-cells: show; table-layout: fixed; width: 100%; display: none;' class=\"alt $location $selectedWeekDay\">
     <tbody>
     <tr><th>$selectedWeekDay</th></tr>
         ";
@@ -420,6 +424,27 @@ ORDER BY qualification_id;");
             if (isset($qual['qual_expiry'])) echo " data-qual-$id-exp='$exp'";
             if (isset($qual['note'])) echo " data-qual-$id-note='$note'";
         }
+
+        $get_user_avails = $db->query("SELECT day, start_time, end_time FROM availabilities LEFT OUTER JOIN availability_blocks ab on availabilities.block_id = ab.block_id WHERE user_id = '$selected_user';");
+
+        $day = array();
+        $start = array();
+        $end = array();
+
+        $i = 0;
+        while ($avail = $get_user_avails->fetch_array()){
+            //print_r($avail);
+            $day[$i] = $avail['day'];
+            $start[$i] = $avail['start_time'];
+            $end[$i] = $avail['end_time'];
+            $i++;
+        }
+
+        $dayJson = json_encode($day);
+        $startJson = json_encode($start);
+        $endJson = json_encode($end);
+
+        echo " data-avail-day='$dayJson' data-avail-start='$startJson' data-avail-end='$endJson' ";
 
         echo "'>";
         //echo $user['user_id']."<br />";
