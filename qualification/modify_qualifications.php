@@ -46,17 +46,17 @@ ON DUPLICATE KEY UPDATE
             $aqfQual = getUserQual($db, $save_user_id, '7');
 
 
-            $earliestExpiry = "";
+            $earliestExpiry = $snQual['qual_expiry'];
+            $earliestEmitted="";
 
-
-            if ($snQual['qual_expiry'] < $aqfQual ['qual_expiry']) {
-                $earliestExpiry = $snQual['qual_expiry'];
+            if ($snQual['qual_emitted'] < $aqfQual ['qual_emittes']) {
+                $earliestEmitted = $snQual['qual_emitted'];
             } else {
-                $earliestExpiry = $aqfQual['qual_expiry'];
+                $earliestEmitted = $aqfQual['qual_emitted'];
             }
 
             $db->query("INSERT INTO qualified_user (user_id, qualification_id,  qual_expiry)
-VALUES ('$save_user_id', '8', '$earliestExpiry')
+VALUES ('$save_user_id', '9', '$earliestExpiry')
 ON DUPLICATE KEY UPDATE 
                         qual_expiry         = '" . $earliestExpiry . "';") or die($db->error);
         }
