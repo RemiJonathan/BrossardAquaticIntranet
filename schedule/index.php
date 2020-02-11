@@ -442,7 +442,14 @@ $('.nav-link.pool').click(function() {
   $('table').slideUp(350);
   $('table.'+locationID).delay(350).slideDown(350);
   
-})
+});
+
+$('td.shift').each(function() {
+      let start = $(this).data('start').substr(0,5);
+      let end = $(this).data('end').substr(0,5);
+      
+      $(this).append('<br/>'+start+'-'+end);
+    });
 </script>";
 echo "	</body>";
 echo "</html>";

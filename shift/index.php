@@ -228,6 +228,12 @@ $('td').css('font-size','x-small');
         $('table').slideDown();
     });
    
+    $('td.shift').each(function() {
+      let start = $(this).data('start').substr(0,5);
+      let end = $(this).data('end').substr(0,5);
+      
+      $(this).append('<br/>'+start+'-'+end);
+    });
 </script>";
 echo "	</body>";
 echo "</html>";
