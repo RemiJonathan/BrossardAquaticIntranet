@@ -80,7 +80,7 @@ $content .= "<a href='schedule_creation.php' >Cr&eacute;er Nouvelle Session</a><
 
 
 $content .= "<!DOCTYPE HTML><html>";
-block_print_document_header("Template", PREAMBLE);
+block_print_document_header("Modifier Session", PREAMBLE);
 $content .= "<body class=\"is-preload\">";
 $content .= "<div id=\"page-wrapper\">";
 block_print_header("", "../");

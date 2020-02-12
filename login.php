@@ -4,7 +4,7 @@ include (PREAMBLE."assets/php/code_blocks.php");
 include (PREAMBLE."db_operations/connection.php");
 session_start();
 echo "<!DOCTYPE HTML><html>";
-block_print_document_header("Acceuil", '');
+block_print_document_header("Connexion", '');
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);

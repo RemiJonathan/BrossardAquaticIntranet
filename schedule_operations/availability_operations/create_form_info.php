@@ -68,7 +68,7 @@ $spec_required_qualArray[$i]&nbsp;$spec_block_catArray[$i]<br>";
 }
 $content .= "<br><br><button><a href='../schedule_modification.php'>Retour</a></button>";
 echo "<!DOCTYPE HTML><html>";
-block_print_document_header("Template", PREAMBLE);
+block_print_document_header("TCr&eacute;er Dispo", PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", "../");

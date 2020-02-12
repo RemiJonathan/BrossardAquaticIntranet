@@ -30,7 +30,7 @@ if(isset($_POST['confirm'])){
 
 
 $content.= "<!DOCTYPE HTML><html>";
-block_print_document_header("Template",PREAMBLE);
+block_print_document_header("Supprimer",PREAMBLE);
 $content.= "<body class=\"is-preload\">";
 $content.= "<div id=\"page-wrapper\">";
 block_print_header("","../");

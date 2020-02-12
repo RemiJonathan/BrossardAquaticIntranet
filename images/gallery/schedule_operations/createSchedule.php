@@ -27,7 +27,7 @@ if($_POST["title"] == null || $_POST["sch_start_date"] == null || $_POST["sch_en
     $content .= '<br><a href="schedule_creation.php">Retour</a>';
 }
 
-block_print_document_header("Template", PREAMBLE);
+block_print_document_header("Cr&eacute;er Session", PREAMBLE);
 $content .=  "<body class=\"is-preload\">";
 $content .=  "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);

@@ -92,7 +92,7 @@ $content .= "<br><br><div class=\"alert alert-danger\" role=\"alert\">
 
 
 echo "<!DOCTYPE HTML><html>";
-block_print_document_header("Acceuil", PREAMBLE);
+block_print_document_header("Base de Donn&eacute;es", PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);

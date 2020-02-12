@@ -24,7 +24,7 @@ header("location:schedule_modification.php");
 
 
 $content .= "<!DOCTYPE HTML><html>";
-block_print_document_header("Template", PREAMBLE);
+block_print_document_header("Mettre &agrave; Jour", PREAMBLE);
 $content .= "<body class=\"is-preload\">";
 $content .= "<div id=\"page-wrapper\">";
 block_print_header("", "../");

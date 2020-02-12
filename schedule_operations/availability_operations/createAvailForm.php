@@ -1590,7 +1590,7 @@ $form_data_schedule .= "
 ";
 
 echo "<!DOCTYPE HTML><html>";
-block_print_document_header("Template", PREAMBLE);
+block_print_document_header("Cr&eacute;er Dispo", PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", "../");

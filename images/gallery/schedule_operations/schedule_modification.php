@@ -85,7 +85,7 @@ $content .= "</div></div><br><button><a style='text-decoration:none;' href=\"sch
 
 
 $content.= "<!DOCTYPE HTML><html>";
-block_print_document_header("Template",PREAMBLE);
+block_print_document_header("Modifier Session",PREAMBLE);
 $content.= "<body class=\"is-preload\">";
 $content.= "<div id=\"page-wrapper\">";
 block_print_header("","../");

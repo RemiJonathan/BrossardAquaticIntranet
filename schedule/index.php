@@ -6,7 +6,7 @@ include(PREAMBLE . "db_operations/db_functions.php");
 
 
 echo "<!DOCTYPE HTML><html>";
-block_print_document_header("Acceuil", PREAMBLE);
+block_print_document_header("Session", PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);
