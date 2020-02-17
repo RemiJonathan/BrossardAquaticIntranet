@@ -21,14 +21,29 @@ function block_print_document_header($title, $preamble)
   width:auto;
 padding-bottom:10px;
 }
+th{
+display: none;
+}
 
-@media only screen and (min-width: 70em) {
+@media only screen and (min-width: 25em) {
   td{
     display:table-cell;
     margin-bottom:0px;
   }
   
+  th{
+    display: table-cell;
+  }
   
+}
+
+@media print {
+    body {transform: scale(.9);}
+    table {page-break-inside: avoid;}
+    td{
+    display:table-cell;
+    margin-bottom:0px;
+  }
 }
 
 .qual{
@@ -43,6 +58,7 @@ padding: 5px;
     background-color: #8A2BE2;
 }
 </style>
+<script src=\"https://kit.fontawesome.com/94f2f9ffaa.js\" crossorigin=\"anonymous\"></script>
 	</head>
     ";
 }
@@ -82,6 +98,7 @@ function block_print_nav($tabs)
         $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/availability_operations/user_form.php'>Disponibilit&eacute;s</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "myprofile/'>Mon profil</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>".$tabs;
 
 
     } else if (check_user_permissions($user_id, 2)) {
@@ -92,6 +109,13 @@ function block_print_nav($tabs)
         $tabs = "<li><a href='" . PREAMBLE . "shift/'>Gestion de quart</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/schedule_modification.php'>Sessions</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "schedule/'>Gestion d'horaire</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>".$tabs;
+
+    }else if (check_user_permissions($user_id, 3)) {
+        //Todo: add all admin tabs
+        $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "articles/'>articles</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>".$tabs;
 
     } else {
         //todo: add all disconnected tabs
