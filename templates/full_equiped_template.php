@@ -12,7 +12,7 @@ echo "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);
 session_start();
 if (isset($_SESSION['user_id'])) {
-    if (check_user_permissions($_SESSION['user_id'], 2)) {
+    if (check_user_permissions($_SESSION['user_id'], 4) || check_user_permissions($_SESSION['user_id'], 3) || check_user_permissions($_SESSION['user_id'],2)) {
     } else {
         $content = '<h3>Vous n\'avez pas les permissions requises pour acc&egrave;der a cette page.</h3>';
         block_print_main($content);

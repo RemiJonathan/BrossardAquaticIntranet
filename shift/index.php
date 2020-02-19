@@ -13,7 +13,7 @@ block_print_header("", PREAMBLE);
 session_start();
 if (isset($_SESSION['user_id'])) {
     block_print_nav("");
-    if (check_user_permissions($_SESSION['user_id'], 2)) {
+    if (check_user_permissions($_SESSION['user_id'], 4) || check_user_permissions($_SESSION['user_id'], 3) || check_user_permissions($_SESSION['user_id'],2)) {
 
         echo "<section class=\"wrapper style2\" id=\"main\"><div class=\"inner\">";
 

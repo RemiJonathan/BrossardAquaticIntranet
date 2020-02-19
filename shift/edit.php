@@ -27,7 +27,7 @@ block_print_header("", PREAMBLE);
 session_start();
 if (isset($_SESSION['user_id'])) {
     block_print_nav("");
-    if (check_user_permissions($_SESSION['user_id'], 2)) {
+    if (check_user_permissions($_SESSION['user_id'], 4) || check_user_permissions($_SESSION['user_id'], 3) || check_user_permissions($_SESSION['user_id'],2)) {
         $content = "<h1>Gestion de quart</h1>";
         if (isset($_GET['status_message'])) $content .= '<h3 style="color: #0F0;">' . $_GET['status_message'] . '</h3>';
         $content .= "<h2>modifier un quart</h2>";

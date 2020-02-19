@@ -14,7 +14,7 @@ session_start();
 
 echo "<section class=\"wrapper style2\" id=\"main\"><div class=\"inner\">";
 if (isset($_SESSION['user_id'])) {
-    if (check_user_permissions($_SESSION['user_id'], 3) || check_user_permissions($_SESSION['user_id'],2)) {
+    if (check_user_permissions($_SESSION['user_id'], 4) || check_user_permissions($_SESSION['user_id'], 3) || check_user_permissions($_SESSION['user_id'],2)) {
 
         echo "<div class='col-12'><a href='create.php'><input type='button' value='nouvel article'></a><br /><br />";
 

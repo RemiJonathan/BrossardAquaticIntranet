@@ -12,7 +12,7 @@ echo "<div id=\"page-wrapper\">";
 block_print_header("", PREAMBLE);
 session_start();
 if (isset($_SESSION['user_id'])) {
-    if (check_user_permissions($_SESSION['user_id'], 2)) {
+    if (check_user_permissions($_SESSION['user_id'], 4) || check_user_permissions($_SESSION['user_id'], 3) || check_user_permissions($_SESSION['user_id'],2)) {
 
         if (!isset($_GET['week'])) $_GET['week'] = date('o-\WW');
         $schedule = $_GET['week'][0] . $_GET['week'][1] . $_GET['week'][2] . $_GET['week'][3] . $_GET['week'][5] . $_GET['week'][6] . $_GET['week'][7];

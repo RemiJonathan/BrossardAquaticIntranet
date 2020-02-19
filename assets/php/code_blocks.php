@@ -98,7 +98,7 @@ function block_print_nav($tabs)
         $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/availability_operations/user_form.php'>Disponibilit&eacute;s</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "myprofile/'>Mon profil</a></li>" . $tabs;
-        $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>".$tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>" . $tabs;
 
 
     } else if (check_user_permissions($user_id, 2)) {
@@ -111,15 +111,28 @@ function block_print_nav($tabs)
         $tabs = "<li><a href='" . PREAMBLE . "shift/'>Gestion de quart</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/schedule_modification.php'>Sessions</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "schedule/'>Gestion d'horaire</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "articles/'>articles</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>" . $tabs;
 
 
-    }else if (check_user_permissions($user_id, 3)) {
+    } else if (check_user_permissions($user_id, 3)) {
         //Todo: add all admin tabs
         $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "articles/'>articles</a></li>" . $tabs;
-        $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>".$tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>" . $tabs;
 
+    }
+    if (check_user_permissions($user_id, 4)) {
+        //Todo: add all admin tabs
+        $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/schedule_modification.php'>Sessions</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "schedule/'>Gestion d'horaire</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "reports/ens_snr_report.php'>Liste Enseignement</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "reports/surv_snr_report.php'>Liste Surveillance</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "shift/'>Gestion de quart</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "user/'>Gestion d'usag&eacute;</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "articles/'>articles</a></li>" . $tabs;
+        $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>" . $tabs;
     } else {
         //todo: add all disconnected tabs
         $tabs = "<li><a href=\"" . PREAMBLE . "login.php\">Connexion</a></li>";
@@ -459,7 +472,7 @@ ORDER BY qualification_id;");
         $end = array();
 
         $i = 0;
-        while ($avail = $get_user_avails->fetch_array()){
+        while ($avail = $get_user_avails->fetch_array()) {
             //print_r($avail);
             $day[$i] = $avail['day'];
             $start[$i] = $avail['start_time'];
@@ -486,7 +499,7 @@ WHERE user_id = '$selected_user'
         $block_cat = array();
 
         $i = 0;
-        while ($spec_avail = $get_spec_user_avails->fetch_array()){
+        while ($spec_avail = $get_spec_user_avails->fetch_array()) {
             //print_r($avail);
             $start_date[$i] = $spec_avail['start_date'];
             $end_date[$i] = $spec_avail['end_date'];
@@ -507,7 +520,7 @@ WHERE user_id = '$selected_user'
 
         $user_info_res = $db->query("SELECT * FROM user_semester_avail WHERE user_id = '$selected_user' AND sch_id = '$session'")->fetch_array();
 
-        echo " data-comment='".$user_info_res['comments']."' data-avail='".$user_info_res['avail_type']."' data-max-hours='".$user_info_res['max_hours']."' ";
+        echo " data-comment='" . $user_info_res['comments'] . "' data-avail='" . $user_info_res['avail_type'] . "' data-max-hours='" . $user_info_res['max_hours'] . "' ";
 
         echo ">";
         //echo $user['user_id']."<br />";
