@@ -13,12 +13,24 @@ if (!(file_exists($filename))) {
 }
 // The nested array to hold all the arrays
 $shiftArray = [];
+$sch_id = $_POST['sch_id'];
 
 // Open the file for reading
 if (($h = fopen("{$filename}", "r")) !== FALSE) {
     // Each line in the file is converted into an individual array that we call $data
     // The items of the array are comma separated
+
+    $data = fgetcsv($h, 1000, ",");
+    $message = $data[2];
+    if (strtolower($data[1]) != "gr" || strtolower($data[2]) != "lieu" || strtolower($data[3]) != "descr") {
+
+        header("location:schedule_add_shift.php?sch_id=$sch_id&message=$message");
+        exit;
+    }
+
     while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
+
+
         // Each individual array is being pushed into the nested array
 
         if (current($data) != "") {
@@ -125,6 +137,7 @@ foreach ($shiftArray as $shift) {
     insertNewShift($db, $_POST["sch_id"], $qualId, $shift[5], $shift[6], $shift[2], $shift[4], $shift[0] . " GR-" . $shift[1], $shift[7], $shift[8]);
 
 }
+
 
 //$content.= var_dump($qualArray);
 

@@ -37,7 +37,7 @@ if ($_FILES["fileToUpload"]["size"] > 5000000) {
 if ($uploadOk == 0) {
     $content .= "<SCRIPT type='text/javascript'> 
         alert('Erreur, fichier incorrect');
-        window.location.replace('schedule_creation.php');
+        window.location.replace('schedule_add_shift.php');
     </SCRIPT>";
 // if everything is ok, try to upload file
 } else {
