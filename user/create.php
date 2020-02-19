@@ -27,21 +27,21 @@ if (isset($_SESSION['user_id'])) {
                 echo "
 <h2>publier un user</h2>
                 <form id=\"form1\" name=\"form1\" method=\"post\" action=\"update.php\">
-<label for=\"user_id\">User Id</label><input type=\"text\" name=\"user_id\" id=\"user_id\" required  />
+<label for=\"user_id\">User Id</label><input class='form-control' type=\"text\" name=\"user_id\" id=\"user_id\" value='' required  readonly/>
 
-<label for=\"passphrase\">Passphrase</label><input type=\"text\" name=\"passphrase\" id=\"passphrase\"/>
+<label for=\"passphrase\">Passphrase</label><input class='form-control' type=\"password\" name=\"passphrase\" id=\"passphrase\"/>
 
-<label for=\"user_fname\">User Fname</label><input type=\"text\" name=\"user_fname\" id=\"user_fname\" required  />
+<label for=\"user_fname\">User Fname</label><input class='form-control' type=\"text\" name=\"user_fname\" id=\"user_fname\" value='' required  />
 
-<label for=\"user_lname\">User Lname</label><input type=\"text\" name=\"user_lname\" id=\"user_lname\" required  />
+<label for=\"user_lname\">User Lname</label><input class='form-control' type=\"text\" name=\"user_lname\" id=\"user_lname\" value='' required  />
 
-<label for=\"email\">Email</label><input type=\"text\" name=\"email\" id=\"email\" />
+<label for=\"email\">Email</label><input class='form-control' type=\"email\" name=\"email\" id=\"email\" value=''/>
 
-<label for=\"user_address\">User Address</label><input type=\"text\" name=\"user_address\" id=\"user_address\" />
+<label for=\"user_address\">User Address</label><input class='form-control' type=\"text\" name=\"user_address\" id=\"user_address\" value=''  />
 
-<label for=\"role_id\">Role Id</label><input type=\"text\" name=\"role_id\" id=\"role_id\" required  />
+<label for=\"role_id\">Role Id</label><input class='form-control' type=\"number\" name=\"role_id\" id=\"role_id\" min='1' max='4' value='' required  />
 
-<label for=\"user_dob\">User Dob</label><input type=\"text\" name=\"user_dob\" id=\"user_dob\" />
+<label for=\"user_dob\">User Dob</label><input class='form-control' type=\"date\" name=\"user_dob\" id=\"user_dob\" value='' />
 <input type='submit' value='Mettre &agrave; jour'>
 </form>";
 
