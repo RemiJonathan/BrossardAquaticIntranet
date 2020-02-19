@@ -14,11 +14,19 @@ $gen_info = $_GET['gen_info'];
 $meet_info = $_GET['meet_info'];
 $guidelines = $_GET['guidelines'];
 //info for regular shifts
-$dayArray = $_GET['day'];
-$start_timeArray = $_GET['start_time'];
-$end_timeArray = $_GET['end_time'];
-$required_qualArray = $_GET['required_qual'];
-$block_catArray = $_GET['block_cat'];
+if (!(isset($_GET['day'])) || !(isset($_GET['start_time'])) || !(isset($_GET['end_time'])) || !(isset($_GET['required_qual'])) || !(isset($_GET['block_cat']))) {
+
+    echo "<script>
+alert('Vous devez inclure au moins un quart!');
+window.location.replace('createAvailForm.php?sch_id=$sch_id');
+</script>";
+} else {
+    $dayArray = $_GET['day'];
+    $start_timeArray = $_GET['start_time'];
+    $end_timeArray = $_GET['end_time'];
+    $required_qualArray = $_GET['required_qual'];
+    $block_catArray = $_GET['block_cat'];
+}
 
 //info for special shifts
 if (isset($_GET['spec_start_date'])) {
