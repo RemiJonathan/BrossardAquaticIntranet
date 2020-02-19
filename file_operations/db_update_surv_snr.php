@@ -29,12 +29,15 @@ $snrArray = [];
 // Open the file for reading
 if (($h = fopen("{$filename}", "r")) !== FALSE)
 {
+
     $data = fgetcsv($h, 1000, ",");
     $message = $data[1];
     if (strtolower($data[1]) != "serv_date") {
 
         header("location:document_update.php?message=$message");
         exit;
+    } else {
+        array_push($snrArray, $data);
     }
     // Each line in the file is converted into an individual array that we call $data
     // The items of the array are comma separated

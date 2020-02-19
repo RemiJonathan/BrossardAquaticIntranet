@@ -24,6 +24,8 @@ if (($h = fopen("{$filename}", "r")) !== FALSE)
 
         header("location:document_update.php?message=$message");
         exit;
+    } else {
+        array_push($empArray, $data);
     }
     // Each line in the file is converted into an individual array that we call $data
     // The items of the array are comma separated

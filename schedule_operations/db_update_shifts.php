@@ -26,6 +26,8 @@ if (($h = fopen("{$filename}", "r")) !== FALSE) {
 
         header("location:schedule_add_shift.php?sch_id=$sch_id&message=$message");
         exit;
+    } else {
+        array_push($shiftArray, $data);
     }
 
     while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
