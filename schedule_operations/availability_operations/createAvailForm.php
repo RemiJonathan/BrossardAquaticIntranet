@@ -5,6 +5,7 @@ include(PREAMBLE . "db_operations/connection.php");
 include(PREAMBLE . "db_operations/db_functions.php");
 
 include(PREAMBLE . "assets/php/code_blocks.php");
+session_start();
 block_print_scripts(PREAMBLE);
 $qualArray = getQualArray($db);
 $optionStringForQuals = "";
@@ -1589,13 +1590,13 @@ $form_data_schedule .= "
 
 ";
 
+
 echo "<!DOCTYPE HTML><html>";
 block_print_document_header("Cr&eacute;er Dispo", PREAMBLE);
 echo "<body class=\"is-preload\">";
 echo "<div id=\"page-wrapper\">";
 block_print_header("", "../");
 
-session_start();
 
 if (isset($_SESSION['user_id'])) {
     block_print_nav("");
