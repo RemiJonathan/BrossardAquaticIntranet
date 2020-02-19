@@ -25,7 +25,8 @@ if (isset($_SESSION['user_id'])) {
 
         $content .= '<div class="row">';
 
-        $recent_article_sql = "SELECT * FROM article ORDER BY article_date LIMIT 10";
+        $recent_article_sql = "SELECT * FROM article ORDER BY article_id DESC LIMIT 10";
+
         $articles = $db->query($recent_article_sql);
 
         if ($articles->num_rows > 0) {
@@ -35,10 +36,16 @@ if (isset($_SESSION['user_id'])) {
                 $date = $article['article_date'];
                 $title = $article['article_title'];
                 $contents = $article['article_content'];
+                $user_id = $article['user_id'];
+                $publisher_name_sql = "SELECT user_fname, user_lname FROM user WHERE user_id = '$user_id';";
+                $publisher_rec = $db->query($publisher_name_sql)->fetch_array();
+                $publisher_name = $publisher_rec['user_fname'] . ' ' . $publisher_rec['user_lname'];
+
+
                 $content .= "<div class=\"card bg-light col-12\" style=\"padding-left: 0;margin-bottom: 20px;\">
   <h5 class=\"card-header\">$title</h5>
   <div class=\"card-body\">
-    <div class=\"card-title\"><em>$date</em></div>
+    <div class=\"card-title\">$publisher_name - <em>$date</em></div>
     <p class=\"card-text\">$contents</p>
   </div>
 </div>";
