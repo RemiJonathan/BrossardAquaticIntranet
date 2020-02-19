@@ -26,12 +26,19 @@ $snrArray = [];
 // Open the file for reading
 if (($h = fopen("{$filename}", "r")) !== FALSE)
 {
+    $data = fgetcsv($h, 1000, ",");
+    $message = $data[1];
+    if (strtolower($data[1]) != "serv_date") {
+
+        header("location:document_update.php?message=$message");
+        exit;
+    }
     // Each line in the file is converted into an individual array that we call $data
     // The items of the array are comma separated
     while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {
         // Each individual array is being pushed into the nested array
 
-            array_push($snrArray, $data);
+        array_push($snrArray, $data);
 
     }
     array_shift($snrArray);

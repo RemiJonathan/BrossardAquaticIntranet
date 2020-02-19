@@ -80,12 +80,20 @@ $(\"#ensButton\").click(function() {
      
 
 </script>";
-$nav = "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic example\">
+$nav = "";
+if (isset($_GET['message'])) {
+    $nav .= "<div class=\"alert alert-danger\" role=\"alert\">
+  Attention: Format du fichier invalide: veuillez charger un fichier conforme au guide d'utilisateur
+</div><br>";
+}
+$nav .= "<div class=\"btn-group\" role=\"group\" aria-label=\"Basic example\">
   <button id='userButton' autofocus type=\"button\" class=\"btn btn-secondary\">Employ&eacute;s</button>
   <button id='qualButton' type=\"button\" class=\"btn btn-secondary\">Qualifications</button>
   <button id='survButton' type=\"button\" class=\"btn btn-secondary\">Anciennet&eacute; Surveillance</button>
   <button id='ensButton' type=\"button\" class=\"btn btn-secondary\">Anciennet&eacute; Enseignement</button>
 </div><br><br>";
+
+
 //TODO add veritification to check if the uploaded CSV file is actually the intended CSV
 $form_data_emp_list = "<form action=\"uploadEmployeeList.php\" id='userForm' method=\"post\" enctype=\"multipart/form-data\">
     <h2>S&eacute;lectionner fichier CSV contenant la liste d'employ&eacute;s.</h2>
