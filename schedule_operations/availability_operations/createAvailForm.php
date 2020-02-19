@@ -84,7 +84,7 @@ $form_data_schedule .= "<form action=\"create_form_info.php\" id=\"reg_avail_for
 $form_data_schedule .= "<input type='hidden' name='sch_id' value='$current_sch'>
   
     <h2>R&eacute;gulier</h2>
-    <h5>Titre de l'horaire:</h5> <input placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
+    <h5>Titre du formulaire:</h5> <input placeholder='Disponibilit&eacute;s  (Saison) 20XX' type='text' name='title'><br>
     <h5>Date limite:</h5> <input type='date' name='deadline'><br><br>
     <h5>Information G&eacute;n&eacute;rales </h5>
     <textarea   rows='9'   name='gen_info'>Les cours de natation se d&eacute;rouleront du 6 janvier au 15 mars 2020 (10 sem.). Rel&acirc;che &agrave; LT SEUL. le 1er-2-3 f&eacute;vrier (reprise les 16-21-22 mars)

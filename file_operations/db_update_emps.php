@@ -18,6 +18,15 @@ $empArray = [];
 // Open the file for reading
 if (($h = fopen("{$filename}", "r")) !== FALSE)
 {
+    $data = fgetcsv($h, 1000, ",");
+    $message = $data[0];
+    if (strtolower($data[0]) != "num_emp" || strtolower($data[1]) != "nom") {
+
+        header("location:document_update.php?message=$message");
+        exit;
+    } else {
+        array_push($empArray, $data);
+    }
     // Each line in the file is converted into an individual array that we call $data
     // The items of the array are comma separated
     while (($data = fgetcsv($h, 1000, ",")) !== FALSE) {

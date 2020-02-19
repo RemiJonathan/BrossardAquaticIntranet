@@ -6,6 +6,7 @@ include(PREAMBLE . "assets/php/code_blocks.php");
 $sessionsArray = getSessions($db);
 $form_data_schedule = "";
 $sch_id = $_GET['sch_id'];
+
 //TODO add option to create new semester and add files to it
 
 
@@ -13,6 +14,11 @@ $form_data_shift_list = "<form action=\"uploadShifts.php\" method=\"post\" encty
     <h2>S&eacute;lectionner fichier CSV contenant la liste de cours de la session</h2>
     <p>Ensuite, appuyez sur charger et enfin sur mettre &agrave; jour. ATTENTION: Si des cours existent d&eacute;j&acirc; pour la session choisie, ils seront supprim&eacute;s pour faire place aux nouveaux</p>";
 
+if (isset($_GET['message'])) {
+    $form_data_shift_list .= "<div class=\"alert alert-danger\" role=\"alert\">
+  Attention: Format du fichier invalide: veuillez charger un fichier conforme au guide d'utilisateur
+</div><br>";
+}
 
 $result = $db->query("select sch_id, title from schedule");
 

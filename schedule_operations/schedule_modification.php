@@ -4,27 +4,9 @@ include(PREAMBLE . "db_operations/connection.php");
 include(PREAMBLE . "db_operations/db_functions.php");
 include(PREAMBLE . "assets/php/code_blocks.php");
 $sessionsArray = getSessions($db);
-$content = "<head>
-    <meta charset=\"UTF-8\">
-    <title>Dashboard</title>
+$content = "";
 
-
-    <script type=\"text/javascript\">
-        $(document).ready(function(){
-            $('[data-toggle=\"tooltip\"]').tooltip();   
-        });
-    </script>
-</head>
-<body>
-    <div class=\"wrapper\">
-        <div class=\"container-fluid\">
-            <div class=\"row\">
-                <div class=\"col-md-12\">
-                    <div class=\"page-header clearfix\">
-                        <h2 class=\"pull-left\">Horaires Existants</h2>
-                    </div>";
-
-
+$content .= "<h2>Horaires Existants</h2>";
 // Attempt select query execution
 $sql = 'SELECT * FROM schedule';
 if ($result = $db->query($sql)) {
