@@ -122,7 +122,7 @@ function block_print_nav($tabs)
         $tabs = "<li><a href='" . PREAMBLE . "news_feed.php'>Fil d'actualit&eacute;</a></li>" . $tabs;
 
     }
-    if (check_user_permissions($user_id, 4)) {
+    else if (check_user_permissions($user_id, 4)) {
         //Todo: add all admin tabs
         $tabs = "<li><a href='" . PREAMBLE . "logout.php'>D&eacute;connexion</a></li>" . $tabs;
         $tabs = "<li><a href='" . PREAMBLE . "schedule_operations/schedule_modification.php'>Sessions</a></li>" . $tabs;
@@ -292,7 +292,7 @@ function check_user_permissions($user_id, $permission_level)
 {
 
     $db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-    $check_permission_sql = $db->query("SELECT role_id FROM user WHERE user.user_id = '$user_id';", MYSQLI_ASSOC);
+    $check_permission_sql = $db->query("SELECT role_id FROM user WHERE user.user_id = '$user_id';");
 
     $user = $check_permission_sql->fetch_array();
 
