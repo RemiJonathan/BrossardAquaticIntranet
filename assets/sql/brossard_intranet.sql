@@ -22,7 +22,9 @@ SET time_zone = "+00:00";
 -- Database: `brossard_intranet`
 --
 
--- --------------------------------------------------------
+-- ------------
+-- --BROSSARD--
+-- ------------
 
 --
 -- Table structure for table `article`
