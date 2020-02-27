@@ -315,7 +315,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `passphrase`, `user_fname`, `user_lname`, `email`, `user_address`, `role_id`, `user_dob`) VALUES
-(1, '$2y$10$.xXZNtZNFKcjMNipMCYvMOzWsgEf75vyIRa1DFdOv/RXeT1OYfoCO', 'Admin', 'Istrator', 'changeme@ilvo.ca', NULL, 4, NULL);
+(1, '$2y$10$u7b1rZKVLg1zj.iZlYMw5eQRbd1g5JCd/RNYtshQwC1LqKSuqSmQW', 'Admin', 'Istrator', 'changeme@ilvo.ca', NULL, 4, NULL);
 
 -- --------------------------------------------------------
 
